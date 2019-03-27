@@ -4,3 +4,4 @@
 
 * *unit-testing-plain-spring* - пример тестирования в проектах на чистом Spring
 * *unit-testing-spring-boot* - то же самое, только на Spring Boot
+* *hibernate-fetch-mode-demo* - демонстрация настроек Hibernate, в частности для решения проблемы N+1
