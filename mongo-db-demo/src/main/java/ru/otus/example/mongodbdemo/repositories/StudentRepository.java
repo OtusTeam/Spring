@@ -1,7 +1,7 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import ru.otus.example.mongoDbDemo.model.Student;
+import ru.otus.example.mongodbdemo.model.Student;
 
 
 public interface StudentRepository extends MongoRepository<Student, String>, StudentRepositoryCustom {

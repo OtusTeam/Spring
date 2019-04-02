@@ -1,6 +1,6 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
-import ru.otus.example.mongoDbDemo.model.Knowledge;
+import ru.otus.example.mongodbdemo.model.Knowledge;
 
 import java.util.List;
 

@@ -1,16 +1,14 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@DisplayName("KnowledgeRepository при наличии listener-ов в контексте ")
-@ComponentScan("ru.otus.example.mongoDbDemo.events")
-class KnowledgeRepositoryWithListenerTest extends AbstractRepositoryTest {
+@DisplayName("KnowledgeRepository при отсутствии listener-ов в контексте ")
+class KnowledgeRepositoryWithoutListenerTest extends AbstractRepositoryTest {
 
     @Autowired
     private KnowledgeRepository knowledgeRepository;
@@ -18,9 +16,9 @@ class KnowledgeRepositoryWithListenerTest extends AbstractRepositoryTest {
     @Autowired
     private StudentRepository studentRepository;
 
-    @DisplayName("при удалении Knowledge должен удалить его из опыта студента")
+    @DisplayName("при удалении Knowledge не должен удалять его из опыта студента")
     @Test
-    void shouldRemoveKnowledgeFromStudentExperienceWhenRemovingKnowledge() {
+    void shouldLeaveKnowledgeInStudentExperienceWhenRemovingKnowledge() {
 
         // Загрузка студента и его пе
         val students = studentRepository.findAll();
@@ -30,12 +28,12 @@ class KnowledgeRepositoryWithListenerTest extends AbstractRepositoryTest {
 
         knowledgeRepository.delete(firstKnowledge);
 
-        val expectedExperienceArrayLength = experience.size() - 1;
+        val expectedExperienceArrayLength = experience.size();
         val actualExperienceArrayLength = studentRepository.getExperienceArrayLengthByStudentId(student.getId());
         assertThat(actualExperienceArrayLength).isEqualTo(expectedExperienceArrayLength);
 
         val actualStudentOptional = studentRepository.findById(student.getId());
-        assertThat(actualStudentOptional.get().getExperience().size()).isEqualTo(expectedExperienceArrayLength);
+        assertThat(actualStudentOptional.get().getExperience().size()).isNotEqualTo(expectedExperienceArrayLength);
 
     }
 }

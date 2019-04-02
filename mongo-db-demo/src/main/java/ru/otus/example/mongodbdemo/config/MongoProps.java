@@ -1,4 +1,4 @@
-package ru.otus.example.mongoDbDemo.config;
+package ru.otus.example.mongodbdemo.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

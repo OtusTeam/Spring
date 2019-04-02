@@ -1,12 +1,12 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.MappingException;
-import ru.otus.example.mongoDbDemo.model.Knowledge;
-import ru.otus.example.mongoDbDemo.model.Student;
+import ru.otus.example.mongodbdemo.model.Knowledge;
+import ru.otus.example.mongodbdemo.model.Student;
 
 import static org.assertj.core.api.Assertions.*;
 

@@ -1,11 +1,11 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import ru.otus.example.mongoDbDemo.model.Knowledge;
-import ru.otus.example.mongoDbDemo.model.Teacher;
+import ru.otus.example.mongodbdemo.model.Knowledge;
+import ru.otus.example.mongodbdemo.model.Teacher;
 
 import java.util.List;
 

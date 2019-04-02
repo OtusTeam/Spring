@@ -1,4 +1,4 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
@@ -7,7 +7,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DataMongoTest
 @EnableConfigurationProperties
-@ComponentScan({"ru.otus.example.mongoDbDemo.config", "ru.otus.example.mongoDbDemo.repositories"})
+@ComponentScan({"ru.otus.example.mongodbdemo.config", "ru.otus.example.mongodbdemo.repositories"})
 @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
 abstract class AbstractRepositoryTest {
 }

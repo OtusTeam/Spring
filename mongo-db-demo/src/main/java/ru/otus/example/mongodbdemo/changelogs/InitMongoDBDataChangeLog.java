@@ -1,13 +1,13 @@
-package ru.otus.example.mongoDbDemo.changelogs;
+package ru.otus.example.mongodbdemo.changelogs;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.mongodb.client.MongoDatabase;
 import lombok.val;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import ru.otus.example.mongoDbDemo.model.Knowledge;
-import ru.otus.example.mongoDbDemo.model.Student;
-import ru.otus.example.mongoDbDemo.model.Teacher;
+import ru.otus.example.mongodbdemo.model.Knowledge;
+import ru.otus.example.mongodbdemo.model.Student;
+import ru.otus.example.mongodbdemo.model.Teacher;
 
 @ChangeLog(order = "001")
 public class InitMongoDBDataChangeLog {

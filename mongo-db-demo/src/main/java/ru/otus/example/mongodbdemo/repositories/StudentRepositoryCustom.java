@@ -1,4 +1,4 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
 public interface StudentRepositoryCustom {
     long getExperienceArrayLengthByStudentId(String id);

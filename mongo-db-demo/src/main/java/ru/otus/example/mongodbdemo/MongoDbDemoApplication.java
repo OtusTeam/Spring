@@ -1,4 +1,4 @@
-package ru.otus.example.mongoDbDemo;
+package ru.otus.example.mongodbdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

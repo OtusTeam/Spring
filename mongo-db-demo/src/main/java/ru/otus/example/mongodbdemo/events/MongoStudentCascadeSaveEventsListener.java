@@ -1,12 +1,12 @@
-package ru.otus.example.mongoDbDemo.events;
+package ru.otus.example.mongodbdemo.events;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
-import ru.otus.example.mongoDbDemo.model.Student;
-import ru.otus.example.mongoDbDemo.repositories.KnowledgeRepository;
+import ru.otus.example.mongodbdemo.model.Student;
+import ru.otus.example.mongodbdemo.repositories.KnowledgeRepository;
 
 import java.util.Objects;
 

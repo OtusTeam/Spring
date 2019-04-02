@@ -1,4 +1,4 @@
-package ru.otus.example.mongoDbDemo.repositories;
+package ru.otus.example.mongodbdemo.repositories;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import ru.otus.example.mongoDbDemo.model.Student;
+import ru.otus.example.mongodbdemo.model.Student;
 
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
