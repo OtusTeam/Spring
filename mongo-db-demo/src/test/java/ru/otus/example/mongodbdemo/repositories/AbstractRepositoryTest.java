@@ -8,6 +8,6 @@ import org.springframework.test.annotation.DirtiesContext;
 @DataMongoTest
 @EnableConfigurationProperties
 @ComponentScan({"ru.otus.example.mongodbdemo.config", "ru.otus.example.mongodbdemo.repositories"})
-@DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 abstract class AbstractRepositoryTest {
 }
