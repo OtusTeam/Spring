@@ -1,4 +1,4 @@
-package ru.otus.example.mongodbdemo.repositories;
+package ru.otus.example.mongodbdemo.repositories.withlisteners;
 
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.example.mongodbdemo.model.Knowledge;
 import ru.otus.example.mongodbdemo.model.Student;
+import ru.otus.example.mongodbdemo.repositories.AbstractRepositoryTest;
+import ru.otus.example.mongodbdemo.repositories.StudentRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

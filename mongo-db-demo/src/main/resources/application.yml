@@ -3,4 +3,4 @@ spring:
     mongodb:
       uri: mongodb://localhost
       port: 27017
-      database: test
+      database: awesomeMongo

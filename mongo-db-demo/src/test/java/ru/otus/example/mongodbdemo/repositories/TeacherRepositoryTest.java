@@ -23,7 +23,7 @@ class TeacherRepositoryTest extends AbstractRepositoryTest {
         assertThat(experience).isNotNull().hasSize(3);
 
         val actualExperience = teacherRepository.getTeacherExperienceById(teacher.getId());
-        assertThat(actualExperience).containsExactlyInAnyOrder(experience.toArray(new Knowledge[experience.size()]));
+        assertThat(actualExperience).containsExactlyInAnyOrder(experience.toArray(new Knowledge[0]));
 
     }
 }
