@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Greetings microservice group API-gateway</title>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" th:href="@{favicon.ico}">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" th:href="@{favicon.ico}">
+<!--
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{css/styles.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+-->
+</head>
+<body>
+
+<h3>Greetings microservice group API-gateway</h3>
+<a href="common-api/greetings/simple">common-api/greetings/simple</a><br/>
+<a href="common-api/greetings/from-config-server">common-api/greetings/from-config-server</a><br/>
+<a href="common-api/greetings/from-external-service">common-api/greetings/from-external-service</a><br/>
+<a href="common-api/names/random">common-api/names/random</a><br/>
+<br/><br/>
+
+<div th:text = "'Приветствие от API-gateway: ' + ${greeting}"></div>
+</body>
+</html>

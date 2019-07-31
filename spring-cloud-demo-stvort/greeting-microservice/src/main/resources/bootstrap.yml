@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: greeting-microservice
+  cloud:
+    config:
+      fail-fast: true

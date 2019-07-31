@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    fetch-registry: true
+
+zuul:
+  prefix: "/common-api"
+  strip-prefix: true
+  routes:
+    greetings:
+      serviceId: greeting-microservice
+      strip-prefix: false
+    names:
+      serviceId: names-microservice
+      strip-prefix: false
+
+greeting: А я api-gateway

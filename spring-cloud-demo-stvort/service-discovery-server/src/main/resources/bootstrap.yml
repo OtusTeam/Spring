@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: service-discovery-server
+  cloud:
+    config:
+      fail-fast: true

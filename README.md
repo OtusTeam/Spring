@@ -7,3 +7,4 @@
 * *hibernate-fetch-mode-demo* - демонстрация настроек Hibernate, в частности для решения проблемы N+1
 * *mongo-db-demo* - демонстрация подходов к хранению вложенных сущностенй в MongoDB, работы с MongoEventListener, агрегациями и инструментом миграций Mongock
 * *docker-test-containers* - пример настройки TestContainers для монги
+* *spring-cloud-demo-stvort* - пример работы двух микросевисов с использованием Config server, Eureka, Zuul, Feign client

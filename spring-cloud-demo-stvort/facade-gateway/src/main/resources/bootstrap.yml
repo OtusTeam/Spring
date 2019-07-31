@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: facade-gateway
+  cloud:
+    config:
+      fail-fast: true
