@@ -1,0 +1,15 @@
+server:
+  port: 8090
+spring:
+  h2:
+    console:
+      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - beans
+          - health
+          - metrics
+          - env
