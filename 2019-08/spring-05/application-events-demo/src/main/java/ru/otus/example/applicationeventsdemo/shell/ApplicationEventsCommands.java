@@ -24,8 +24,9 @@ public class ApplicationEventsCommands {
 
     @ShellMethod(value = "Publish event command", key = {"p", "pub", "publish"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
-    public void publishEvent() {
+    public String publishEvent() {
         eventsPublisher.publish();
+        return "Событие опубликовано";
     }
 
     private Availability isPublishEventCommandAvailable() {
