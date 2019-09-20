@@ -16,6 +16,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 public class OtusStudentRepositoryTest {
 
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_PHOTO_URL = "photoUrl";
+    private static final String FIELD_NAME = "name";
+
+    private static final long FIRST_STUDENT_ID = 1L;
+    private static final long FIRST_AVATAR_ID = 1L;
+    private static final String FIRST_STUDENT_NAME = "student_01";
+    private static final String FIRST_AVATAR_URL = "photoUrl_01";
+    private static final String STUDENT_NEW_NAME = "Висусуалий";
+
+    private static final int EXPECTED_NUMBER_OF_STUDENTS = 10;
+    private static final long INSERTED_STUDENT_ID = 11L;
+    private static final int EXPECTED_EMAILS_COUNT = 2;
+    private static final int EXPECTED_COURSES_COUNT = 3;
+
     @Autowired
     private OtusStudentRepository studentRepositoryMyBatis;
 
@@ -23,7 +38,8 @@ public class OtusStudentRepositoryTest {
     @Test
     void shouldReturnCorrectStudentsListWithAllInfo() {
         val students = studentRepositoryMyBatis.findAllWithAllInfo();
-        assertThat(students).isNotNull().hasSize(10).allMatch(s -> !s.getName().equals(""))
+        assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_STUDENTS)
+                .allMatch(s -> !s.getName().equals(""))
                 .allMatch(s -> s.getCourses() != null && s.getCourses().size() > 0)
                 .allMatch(s -> s.getAvatar() != null)
                 .allMatch(s -> s.getEmails() != null && s.getEmails().size() > 0);
@@ -33,52 +49,52 @@ public class OtusStudentRepositoryTest {
     @Test
     void shouldReturnCorrectStudentsCount() {
         long studentsCount = studentRepositoryMyBatis.getStudentsCount();
-        assertThat(studentsCount).isEqualTo(10);
+        assertThat(studentsCount).isEqualTo(EXPECTED_NUMBER_OF_STUDENTS);
     }
 
     @DisplayName(" должен загружать информацию о нужном студенте")
     @Test
     void shouldFindExpectedStudentById(){
-        val actualStudent = studentRepositoryMyBatis.findById(1L);
+        val actualStudent = studentRepositoryMyBatis.findById(FIRST_STUDENT_ID);
 
         assertThat(actualStudent).isNotNull();
-        assertThat(actualStudent.getName()).isEqualTo("student_01");
+        assertThat(actualStudent.getName()).isEqualTo(FIRST_STUDENT_NAME);
         assertThat(actualStudent.getAvatar()).isNotNull()
-                .hasFieldOrPropertyWithValue("id", 1L)
-                .hasFieldOrPropertyWithValue("photoUrl", "photoUrl_01");
-        assertThat(actualStudent.getEmails()).isNotNull().hasSize(2);
-        assertThat(actualStudent.getCourses()).isNotNull().hasSize(3);
+                .hasFieldOrPropertyWithValue(FIELD_ID, FIRST_STUDENT_ID)
+                .hasFieldOrPropertyWithValue(FIELD_PHOTO_URL, FIRST_AVATAR_URL);
+        assertThat(actualStudent.getEmails()).isNotNull().hasSize(EXPECTED_EMAILS_COUNT);
+        assertThat(actualStudent.getCourses()).isNotNull().hasSize(EXPECTED_COURSES_COUNT);
     }
 
     @DisplayName(" должен сохранить, а потом загрузить информацию о нужном студенте")
     @Test
     void shouldSaveAndLoadCorrectStudent() {
         val expectedStudent = new OtusStudent();
-        expectedStudent.setName("Vasya");
-        expectedStudent.setAvatar(new Avatar(1L, "photoUrl_01"));
+        expectedStudent.setName(STUDENT_NEW_NAME);
+        expectedStudent.setAvatar(new Avatar(FIRST_AVATAR_ID, FIRST_AVATAR_URL));
         studentRepositoryMyBatis.insert(expectedStudent);
-        val actualStudent = studentRepositoryMyBatis.findById(11L);
+        val actualStudent = studentRepositoryMyBatis.findById(INSERTED_STUDENT_ID);
 
-        assertThat(actualStudent).isNotNull().isEqualToComparingOnlyGivenFields(expectedStudent, "name");
+        assertThat(actualStudent).isNotNull().isEqualToComparingOnlyGivenFields(expectedStudent, FIELD_NAME);
     }
 
 
     @DisplayName(" должен обновлять имя студента в БД")
     @Test
     void shouldUpdateStudentName() {
-        val student = studentRepositoryMyBatis.findById(1L);
-        student.setName("Висусуалий");
+        val student = studentRepositoryMyBatis.findById(FIRST_STUDENT_ID);
+        student.setName(STUDENT_NEW_NAME);
         studentRepositoryMyBatis.updateName(student);
-        val actualStudent = studentRepositoryMyBatis.findById(1L);
+        val actualStudent = studentRepositoryMyBatis.findById(FIRST_STUDENT_ID);
 
-        assertThat(actualStudent).isNotNull().hasFieldOrPropertyWithValue("name", student.getName());
+        assertThat(actualStudent).isNotNull().hasFieldOrPropertyWithValue(FIELD_NAME, student.getName());
     }
 
     @DisplayName("должен удалять студента из БД по id")
     @Test
     void shouldDeleteStudentFromDbById() {
         val studentsCountBefore = studentRepositoryMyBatis.getStudentsCount();
-        studentRepositoryMyBatis.deleteById(1L);
+        studentRepositoryMyBatis.deleteById(FIRST_STUDENT_ID);
         val studentsCountAfter = studentRepositoryMyBatis.getStudentsCount();
 
         assertThat(studentsCountBefore - studentsCountAfter).isEqualTo(1);

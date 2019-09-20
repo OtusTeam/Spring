@@ -35,8 +35,8 @@ public class OtusStudentV2 {
     @JoinColumn(name = "student_id")
     private List<EMail> emails;
 
-    //@BatchSize(size = 5)
     //@Fetch(FetchMode.SUBSELECT)
+    //@BatchSize(size = 5)
     @ManyToMany(targetEntity = Course.class, fetch = FetchType.LAZY)
     @JoinTable(name = "student_courses", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))

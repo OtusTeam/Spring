@@ -1,4 +1,4 @@
-package ru.otus.example.ormdemo.config;
+package ru.otus.example.replaceormproviderdemo.config;
 
 import org.eclipse.persistence.config.PersistenceUnitProperties;
 import org.springframework.beans.factory.ObjectProvider;

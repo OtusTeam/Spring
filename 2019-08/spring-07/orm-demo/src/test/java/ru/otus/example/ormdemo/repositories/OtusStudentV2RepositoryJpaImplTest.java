@@ -19,9 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Import({OtusStudentV2RepositoryJpaImpl.class})
 class OtusStudentV2RepositoryJpaImplTest {
 
-    private static final int EXPECTED_QUERIES_COUNT = 11;
-    //private static final int EXPECTED_QUERIES_COUNT = 2;
-    //private static final int EXPECTED_QUERIES_COUNT = 3;
+    private static final int EXPECTED_NUMBER_OF_STUDENTS = 10;
+
+    private static final int EXPECTED_QUERIES_COUNT = 11;  // EntityGraph/join fetch
+    //private static final int EXPECTED_QUERIES_COUNT = 2; // EntityGraph/join fetch + @Fetch(FetchMode.SUBSELECT)
+    //private static final int EXPECTED_QUERIES_COUNT = 3; // EntityGraph/join fetch + @BatchSize(size = 5)
 
     @Autowired
     private OtusStudentV2RepositoryJpaImpl repositoryJpa;
@@ -33,7 +35,8 @@ class OtusStudentV2RepositoryJpaImplTest {
 
     @BeforeEach
     void setUp() {
-        sessionFactory = em.getEntityManager().getEntityManagerFactory().unwrap(SessionFactory.class);
+        sessionFactory = em.getEntityManager().getEntityManagerFactory()
+                .unwrap(SessionFactory.class);
         sessionFactory.getStatistics().setStatisticsEnabled(true);
         sessionFactory.getStatistics().clear();
     }
@@ -43,12 +46,14 @@ class OtusStudentV2RepositoryJpaImplTest {
     void usingEntityGraphShouldReturnCorrectStudentsListWithWithAllInfo() {
         System.out.println("\n\n\n\n----------------------------------------------------------------------------------------------------------");
         List<OtusStudentV2> students = repositoryJpa.findAllWithEntityGraph();
-        assertThat(students).isNotNull().hasSize(10).allMatch(s -> !s.getName().equals(""))
+        assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_STUDENTS)
+                .allMatch(s -> !s.getName().equals(""))
                 .allMatch(s -> s.getCourses() != null && s.getCourses().size() > 0)
                 .allMatch(s -> s.getAvatar() != null)
                 .allMatch(s -> s.getEmails() != null && s.getEmails().size() > 0);
         System.out.println("----------------------------------------------------------------------------------------------------------\n\n\n\n");
-        assertThat(sessionFactory.getStatistics().getPrepareStatementCount()).isEqualTo(EXPECTED_QUERIES_COUNT);
+        assertThat(sessionFactory.getStatistics().getPrepareStatementCount())
+                .isEqualTo(EXPECTED_QUERIES_COUNT);
 
     }
 
@@ -57,11 +62,13 @@ class OtusStudentV2RepositoryJpaImplTest {
     void usingJoinFetchShouldReturnCorrectStudentsListWithWithAllInfo() {
         System.out.println("\n\n\n\n----------------------------------------------------------------------------------------------------------");
         List<OtusStudentV2> students = repositoryJpa.findAllWithJoinFetch();
-        assertThat(students).isNotNull().hasSize(10).allMatch(s -> !s.getName().equals(""))
+        assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_STUDENTS)
+                .allMatch(s -> !s.getName().equals(""))
                 .allMatch(s -> s.getCourses() != null && s.getCourses().size() > 0)
                 .allMatch(s -> s.getAvatar() != null)
                 .allMatch(s -> s.getEmails() != null && s.getEmails().size() > 0);
         System.out.println("----------------------------------------------------------------------------------------------------------\n\n\n\n");
-        assertThat(sessionFactory.getStatistics().getPrepareStatementCount()).isEqualTo(EXPECTED_QUERIES_COUNT);
+        assertThat(sessionFactory.getStatistics().getPrepareStatementCount())
+                .isEqualTo(EXPECTED_QUERIES_COUNT);
     }
 }

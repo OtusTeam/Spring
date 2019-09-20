@@ -15,6 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Import({OtusStudentRepositoryJdbcImpl.class, CourseRepositoryJdbcImpl.class})
 class OtusStudentRepositoryJdbcImplTest {
 
+    private static final int EXPECTED_NUMBER_OF_STUDENTS = 10;
+
     @Autowired
     private OtusStudentRepositoryJdbcImpl repositoryJdbc;
 
@@ -22,7 +24,8 @@ class OtusStudentRepositoryJdbcImplTest {
     @Test
     void shouldReturnCorrectStudentsListWithAllInfo() {
         val students = repositoryJdbc.findAllWithAllInfo();
-        assertThat(students).isNotNull().hasSize(10).allMatch(s -> !s.getName().equals(""))
+        assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_STUDENTS)
+                .allMatch(s -> !s.getName().equals(""))
                 .allMatch(s -> s.getCourses() != null && s.getCourses().size() > 0)
                 .allMatch(s -> s.getAvatar() != null)
                 .allMatch(s -> s.getEmails() != null && s.getEmails().size() > 0);
