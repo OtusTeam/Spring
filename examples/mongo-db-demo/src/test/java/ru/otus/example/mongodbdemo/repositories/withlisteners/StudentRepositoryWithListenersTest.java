@@ -10,6 +10,8 @@ import ru.otus.example.mongodbdemo.model.Student;
 import ru.otus.example.mongodbdemo.repositories.AbstractRepositoryTest;
 import ru.otus.example.mongodbdemo.repositories.StudentRepository;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("StudentRepository при наличии listener-ов в контексте ")
@@ -26,6 +28,14 @@ class StudentRepositoryWithListenersTest extends AbstractRepositoryTest {
         val actual = studentRepository.save(student);
         assertThat(actual.getId()).isNotNull();
         assertThat(actual.getName()).isEqualTo(student.getName());
+    }
+
+    @DisplayName("должен возвращать корректный список знаний студента")
+    @Test
+    void shouldReturnCorrectStudentKnowledgeList(){
+        val student = studentRepository.findAll().get(0);
+        List<Knowledge> knowledgeList = studentRepository.getStudentExperienceById(student.getId());
+        assertThat(knowledgeList).containsExactlyInAnyOrderElementsOf(student.getExperience());
     }
 
 }
