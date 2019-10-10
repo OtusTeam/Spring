@@ -3,11 +3,12 @@ package ru.otus.example.mongodbdemo.repositories;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.context.annotation.Import;
+import ru.otus.example.mongodbdemo.utils.RawResultPrinterImpl;
 
 @DataMongoTest
 @EnableConfigurationProperties
 @ComponentScan({"ru.otus.example.mongodbdemo.config", "ru.otus.example.mongodbdemo.repositories"})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Import(RawResultPrinterImpl.class)
 public abstract class AbstractRepositoryTest {
 }

@@ -30,8 +30,7 @@ public class InitMongoDBDataChangeLog {
 
     @ChangeSet(order = "002", id = "initStudents", author = "stvort", runAlways = true)
     public void initStudents(MongoTemplate template){
-        val student = new Student("Student #1", springDataKnowledge, mongockKnowledge);
-        template.save(student);
+        template.save(new Student("Student #1", springDataKnowledge, mongockKnowledge));
     }
 
     @ChangeSet(order = "003", id = "Teacher", author = "stvort", runAlways = true)
