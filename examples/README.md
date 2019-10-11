@@ -8,3 +8,4 @@
 * *mongo-db-demo* - демонстрация подходов к хранению вложенных сущностенй в MongoDB, работы с MongoEventListener, агрегациями и инструментом миграций Mongock
 * *docker-test-containers* - пример настройки TestContainers для монги
 * *spring-cloud-demo-stvort* - пример работы двух микросевисов с использованием Config server, Eureka, Zuul, Feign client
+* *spring-mail-integration-demo* - пример работы с SpringMail через SpringIntegration
