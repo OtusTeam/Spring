@@ -1,0 +1,34 @@
+app:
+  admin-email: ${admin.email}
+  server-email: ${admin.email}
+
+spring:
+  datasource:
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    username: ${email.server.user}
+    password: ${email.server.password}
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, activity-stat
+  endpoint:
+    health:
+      show-details: always
