@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
+import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import ru.otus.spring.domain.Person;
 import ru.otus.spring.repostory.PersonRepository;
@@ -26,9 +27,11 @@ public class Main {
                         .map(Person::new)
         ).subscribe();
 
-        repository.findAll()
+        Disposable flux = repository.findAll()
                 .subscribe(p -> System.out.println(p.getName()));
 
         Thread.sleep(5000);
+
+        flux.dispose();
     }
 }
