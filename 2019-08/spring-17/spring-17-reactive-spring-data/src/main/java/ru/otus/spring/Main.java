@@ -30,7 +30,7 @@ public class Main {
         Disposable flux = repository.findAll()
                 .subscribe(p -> System.out.println(p.getName()));
 
-        Thread.sleep(5000);
+        Thread.sleep(20000);
 
         flux.dispose();
     }
