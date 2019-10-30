@@ -1,5 +1,6 @@
 package ru.otus.spring;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +17,9 @@ import java.util.Arrays;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.queryParam;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 @SpringBootApplication
@@ -36,31 +39,19 @@ public class Main {
 
     @Bean
     public RouterFunction<ServerResponse> composedRoutes(PersonRepository repository) {
-
-        PersonHandler handler = new PersonHandler(repository);
-
-        RouterFunction<ServerResponse> route = route()
-                .GET("/func/person", accept(APPLICATION_JSON), handler::list)
+        return route()
+                .GET("/func/person", queryParam("name", StringUtils::isNotEmpty),
+                        request -> request.queryParam("name")
+                                .map(repository::findAllByLastName)
+                                .map(persons -> ok().body(persons, Person.class))
+                                .orElse(notFound().build())
+                )
+                .GET("/func/person", accept(APPLICATION_JSON),
+                        request -> ok().contentType(APPLICATION_JSON).body(repository.findAll(), Person.class))
                 .GET("/func/person/{id}", accept(APPLICATION_JSON),
                         request -> repository.findById(request.pathVariable("id"))
                                 .flatMap(person -> ok().contentType(APPLICATION_JSON).body(fromObject(person)))
-                )
-                .build();
-
-        return route;
-    }
-
-    static class PersonHandler {
-
-        private PersonRepository repository;
-
-        PersonHandler(PersonRepository repository) {
-            this.repository = repository;
-        }
-
-        Mono<ServerResponse> list(ServerRequest request) {
-            return ok().contentType(APPLICATION_JSON).body(repository.findAll(), Person.class);
-        }
+                ).build();
     }
 }
 
