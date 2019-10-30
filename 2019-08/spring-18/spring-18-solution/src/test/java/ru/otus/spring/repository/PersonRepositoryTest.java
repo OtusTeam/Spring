@@ -28,4 +28,16 @@ public class PersonRepositoryTest {
                 .expectComplete()
                 .verify();
     }
+
+    @Test
+    public void shouldFindByAge() {
+        repository.save(new Person("Pushkin", 18)).subscribe();
+
+        StepVerifier.create(
+                repository.findAllByAge(18)
+        )
+                .expectNextCount(1)
+                .expectComplete()
+                .verify();
+    }
 }
