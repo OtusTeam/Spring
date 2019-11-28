@@ -1,7 +1,7 @@
-package ru.otus.example.HibernateFetchModeDemo.repositories;
+package ru.otus.example.hibernate_fetch_mode_demo.repositories;
 
 import org.springframework.stereotype.Repository;
-import ru.otus.example.HibernateFetchModeDemo.models.Student;
+import ru.otus.example.hibernate_fetch_mode_demo.models.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

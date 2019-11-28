@@ -1,13 +1,13 @@
-package ru.otus.example.HibernateFetchModeDemo.shell;
+package ru.otus.example.hibernate_fetch_mode_demo.shell;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.example.HibernateFetchModeDemo.models.Mentor;
-import ru.otus.example.HibernateFetchModeDemo.models.Student;
-import ru.otus.example.HibernateFetchModeDemo.models.Teacher;
-import ru.otus.example.HibernateFetchModeDemo.repositories.MentorRepository;
-import ru.otus.example.HibernateFetchModeDemo.repositories.StudentRepository;
-import ru.otus.example.HibernateFetchModeDemo.repositories.TeacherRepository;
+import ru.otus.example.hibernate_fetch_mode_demo.models.Mentor;
+import ru.otus.example.hibernate_fetch_mode_demo.models.Student;
+import ru.otus.example.hibernate_fetch_mode_demo.models.Teacher;
+import ru.otus.example.hibernate_fetch_mode_demo.repositories.MentorRepository;
+import ru.otus.example.hibernate_fetch_mode_demo.repositories.StudentRepository;
+import ru.otus.example.hibernate_fetch_mode_demo.repositories.TeacherRepository;
 
 import java.util.stream.Collectors;
 

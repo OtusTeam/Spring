@@ -1,4 +1,4 @@
-package ru.otus.example.HibernateFetchModeDemo;
+package ru.otus.example.hibernate_fetch_mode_demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

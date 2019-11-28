@@ -1,4 +1,4 @@
-package ru.otus.example.HibernateFetchModeDemo.models;
+package ru.otus.example.hibernate_fetch_mode_demo.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

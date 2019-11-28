@@ -1,0 +1,3 @@
+spring:
+  h2.console.enabled: true
+  liquibase.enabled: true
