@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.IntegrationComponentScan;
-import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.messaging.PollableChannel;
+import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.MessageBuilder;
 
 @SpringBootApplication
@@ -19,7 +19,7 @@ public class App {
         ConfigurableApplicationContext ctx = SpringApplication.run(App.class, args);
 
         PollableChannel channel1 = ctx.getBean("channel1", PollableChannel.class);
-        DirectChannel channel2 = ctx.getBean("channel2", DirectChannel.class);
+        SubscribableChannel channel2 = ctx.getBean("channel2", SubscribableChannel.class);
 
         channel2.subscribe(System.out::println);
         new Thread(() -> {
@@ -44,7 +44,7 @@ public class App {
     }
 
     @Bean
-    public DirectChannel channel2() {
+    public SubscribableChannel channel2() {
         return MessageChannels.direct("channel2").get();
     }
 }
