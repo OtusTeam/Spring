@@ -7,8 +7,11 @@ public class PersonServiceImpl implements PersonService {
 
     private PersonDao dao;
 
-    public PersonServiceImpl(PersonDao dao) {
+    public void setDao(PersonDao dao) {
         this.dao = dao;
+    }
+
+    public PersonServiceImpl() {
     }
 
     public Person getByName(String name) {
