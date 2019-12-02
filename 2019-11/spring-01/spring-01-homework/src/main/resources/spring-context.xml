@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="questionRepository" class="ru.otus.spring.repository.QuestionRepositoryImpl">
+        <constructor-arg name="questionFileName" value="questions.csv"/>
+    </bean>
+
+    <bean id="questionService" class="ru.otus.spring.service.QuestionServiceImpl">
+        <constructor-arg name="questionRepository" ref="questionRepository"/>
+    </bean>
+
+    <bean id="questionPresentationService" class="ru.otus.spring.service.QuestionPresentationServiceImpl">
+
+    </bean>
+
+    <bean id="examService" class="ru.otus.spring.service.ExamServiceImpl">
+        <constructor-arg name="questionService" ref="questionService"/>
+        <constructor-arg name="questionPresentationService" ref="questionPresentationService"/>
+    </bean>
+</beans>
