@@ -5,7 +5,13 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- TODO: определите бин класса ru.otus.spring.dao.PersonDaoSimple -->
+    <bean id="personDao" class="ru.otus.spring.dao.PersonDaoSimple">
+        <property name="defaultAge" value="28"/>
+    </bean>
+
 
     <!-- TODO: определите бин класса ru.otus.spring.PersonServiceImpl -->
-
+    <bean id="personService" class="ru.otus.spring.service.PersonServiceImpl">
+        <property name="dao" ref="personDao"/>
+    </bean>
 </beans>
