@@ -15,7 +15,7 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public void proceedExam() {
+    public double proceedExam() {
         List<Question> questionList = questionService.getQuestionList();
         Collections.shuffle(questionList);
 
@@ -29,5 +29,6 @@ public class ExamServiceImpl implements ExamService {
             }
         }
         questionPresentationService.showResult(name, surname, correct, questionList.size());
+        return questionList.isEmpty() ? 1 : correct * 1.0 / questionList.size();
     }
 }
