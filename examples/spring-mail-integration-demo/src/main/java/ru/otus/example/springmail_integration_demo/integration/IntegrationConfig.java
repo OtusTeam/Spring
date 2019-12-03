@@ -69,7 +69,8 @@ public class IntegrationConfig {
                                 .handle(m -> {
                                     val isImportant = m.getHeaders().get(IS_IMPORTANT_MESSAGE, Boolean.class);
                                     if (isImportant != null && isImportant) {
-                                        mailSender.send((SimpleMailMessage) m.getPayload());
+                                        System.out.println("Как будто посылаем письмо: " + m.getPayload());
+                                        //mailSender.send((SimpleMailMessage) m.getPayload());
                                     }
                                 })
                         )

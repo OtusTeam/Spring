@@ -8,22 +8,22 @@ DROP TABLE IF EXISTS knowledge;
 
 CREATE TABLE knowledge (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255)
 );
 
 CREATE TABLE students (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255)
 );
 
 CREATE TABLE mentors (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255)
 );
 
 CREATE TABLE teachers (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255)
 );
 
 CREATE TABLE students_experience (
