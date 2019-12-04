@@ -60,23 +60,12 @@ public class App {
         while ( true ) {
             Thread.sleep( 1000 );
 
-            Collection<OrderItem> items = generateOrderItems();
+            OrderItem items = generateOrderItem();
             System.out.println( "New orderItems: " +
-                    items.stream().map( OrderItem::getItemName )
-                            .collect( Collectors.joining( "," ) ) );
-            Collection<Food> food = cafe.process( items );
-            System.out.println( "Ready food: " + food.stream()
-                    .map( Food::getName )
-                    .collect( Collectors.joining( "," ) ) );
+                    items.getItemName() );
+            Food food = cafe.process( items );
+            System.out.println( "Ready food: " + food.getName() );
         }
-    }
-
-    private static Collection<OrderItem> generateOrderItems() {
-        List<OrderItem> items = new ArrayList<>();
-        for ( int i = 0; i < RandomUtils.nextInt( 1, 5 ); ++ i ) {
-            items.add( generateOrderItem() );
-        }
-        return items;
     }
 
     private static OrderItem generateOrderItem() {
