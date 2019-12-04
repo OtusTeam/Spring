@@ -9,38 +9,41 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.PublishSubscribeChannel;
-import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.dsl.channel.DirectChannelSpec;
 import org.springframework.integration.dsl.channel.MessageChannels;
 import ru.otus.spring.integration.domain.Food;
 import ru.otus.spring.integration.domain.OrderItem;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @IntegrationComponentScan
-@SuppressWarnings({"resource", "Duplicates", "InfiniteLoopStatement"})
+@SuppressWarnings({ "resource", "Duplicates", "InfiniteLoopStatement" })
 @ComponentScan
 @Configuration
 @EnableIntegration
 public class App {
-    private static final String[] MENU = {"coffee", "tea", "smoothie", "whiskey", "beer", "cola", "water"};
+    private static final String[] MENU = { "coffee", "tea", "smoothie", "whiskey", "beer", "cola", "water" };
 
     @Bean
     public DirectChannel itemsChannel() {
-        return MessageChannels.direct().datatype(OrderItem.class).get();
+        return MessageChannels.direct().datatype( OrderItem.class ).get();
     }
 
     @Bean
     public PublishSubscribeChannel foodChannel() {
-        return MessageChannels.publishSubscribe().datatype(Food.class).get();
+        return MessageChannels.publishSubscribe().datatype( Food.class ).get();
     }
 
     // TODO: create default poller
 
     @Bean
     public IntegrationFlow cafeFlow() {
-        return IntegrationFlows.from("itemsChannel")
+        return IntegrationFlows.from( "itemsChannel" )
                 // TODO: cook OrderItem in the kitchen
                 // TODO*: add router and subflows to process iced and usual items
                 // TODO*: add splitter and aggregator
@@ -48,23 +51,35 @@ public class App {
                 .get();
     }
 
-    public static void main(String[] args) throws Exception {
-        AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+    public static void main( String[] args ) throws Exception {
+        AbstractApplicationContext ctx = new AnnotationConfigApplicationContext( App.class );
 
         // here we works with cafe using interface
-        Cafe cafe = ctx.getBean(Cafe.class);
+        Cafe cafe = ctx.getBean( Cafe.class );
 
-        while (true) {
-            Thread.sleep(1000);
+        while ( true ) {
+            Thread.sleep( 1000 );
 
-            OrderItem orderItem = generateOrderItem();
-            System.out.println("New orderItem: " + orderItem.getItemName());
-            Food food = cafe.process(orderItem);
-            System.out.println("Ready food: " + food.getName());
+            Collection<OrderItem> items = generateOrderItems();
+            System.out.println( "New orderItems: " +
+                    items.stream().map( OrderItem::getItemName )
+                            .collect( Collectors.joining( "," ) ) );
+            Collection<Food> food = cafe.process( items );
+            System.out.println( "Ready food: " + food.stream()
+                    .map( Food::getName )
+                    .collect( Collectors.joining( "," ) ) );
         }
     }
 
+    private static Collection<OrderItem> generateOrderItems() {
+        List<OrderItem> items = new ArrayList<>();
+        for ( int i = 0; i < RandomUtils.nextInt( 1, 5 ); ++ i ) {
+            items.add( generateOrderItem() );
+        }
+        return items;
+    }
+
     private static OrderItem generateOrderItem() {
-        return new OrderItem(MENU[RandomUtils.nextInt(0, MENU.length)]);
+        return new OrderItem( MENU[ RandomUtils.nextInt( 0, MENU.length ) ] );
     }
 }
