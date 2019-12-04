@@ -5,7 +5,7 @@ import ru.otus.spring.domain.Person;
 
 public class PersonServiceImpl implements PersonService {
 
-    private PersonDao dao;
+    private final PersonDao dao;
 
     public void setDao(PersonDao dao) {
         this.dao = dao;
