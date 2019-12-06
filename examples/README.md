@@ -10,3 +10,4 @@
 * *spring-cloud-demo-stvort* - пример работы двух микросевисов с использованием Config server, Eureka, Zuul, Feign client
 * *spring-mail-integration-demo* - пример работы с SpringMail через SpringIntegration
 * *liquibase-demo* - пример работы с liquibase
+* *jpql-demo* - пример работы с JPQL
