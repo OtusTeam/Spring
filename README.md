@@ -5,3 +5,4 @@
 
 Занятия.
 1. ```2019-11/spring-01/spring-01-homework/``` - первое занятие по Spring c XML конфигурацией контекста.
+2. ```2019-11/spring-02/spring-02-homework/``` - второе занятие по Spring c конфигурацией контекста Java/annotation based.
