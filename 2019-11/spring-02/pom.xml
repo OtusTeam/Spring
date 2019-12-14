@@ -12,6 +12,7 @@
 
     <modules>
         <module>spring-02-exercise</module>
-        <module>spring-02-solution</module>
+	<module>spring-02-solution</module>
+	<module>spring-02-homework</module>
     </modules>
 </project>
