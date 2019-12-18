@@ -4,6 +4,8 @@
 
 * *unit-testing-plain-spring* - пример тестирования в проектах на чистом Spring
 * *unit-testing-spring-boot* - то же самое, только на Spring Boot
+* *unit-testing-pure-spring-parallel* - пример "не удачного" и "работающего" варианта тестирования IOService в нескольких потоках
+* *ioservice-replacing-example* - пример подмены консольного UI -> Swing UI, с помощью смены реализации IOService 
 * *hibernate-fetch-mode-demo* - демонстрация настроек Hibernate, в частности для решения проблемы N+1
 * *mongo-db-demo* - демонстрация подходов к хранению вложенных сущностенй в MongoDB, работы с MongoEventListener, агрегациями и инструментом миграций Mongock
 * *docker-test-containers* - пример настройки TestContainers для монги
