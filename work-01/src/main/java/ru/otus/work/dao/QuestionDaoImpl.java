@@ -1,6 +1,10 @@
 package ru.otus.work.dao;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import ru.otus.work.domain.Question;
+import ru.otus.work.service.LocalizedMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,19 +12,40 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
+@PropertySource("application.propertioes")
+@Component
 public class QuestionDaoImpl implements QuestionDao {
 
-    private final String resourceName;
+    @Value("${questionsFileName}")
+    private String resourceName;
+
+    @Value("${appLocale}")
+    private String appLocale;
+
+    private final LocalizedMessage localizedMessage;
 
     public List<Question> listQuestions() {
         List<Question> questionList = new ArrayList<>();
 
-        InputStream in = this.getClass().getClassLoader().getResourceAsStream(resourceName);
+        Locale locale = new Locale(appLocale);
+
+        String resourceNameByLocale = String.format("%s_%s.csv", resourceName, appLocale);
+
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream(resourceNameByLocale);
 
         if (in == null) {
-            throw new RuntimeException(String.format("Resource not found: %s", resourceName));
+            in = this.getClass().getClassLoader().getResourceAsStream(resourceName);
+        }
+
+        if (in == null) {
+            throw new RuntimeException(
+                    localizedMessage.getMessage("resourceNotFound",
+                            new String[]{resourceName}
+                    )
+            );
         }
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -60,7 +85,7 @@ public class QuestionDaoImpl implements QuestionDao {
         return questionList;
     }
 
-    public QuestionDaoImpl(String resourceName) {
-        this.resourceName = resourceName;
+    public QuestionDaoImpl(LocalizedMessage localizedMessage) {
+        this.localizedMessage = localizedMessage;
     }
 }

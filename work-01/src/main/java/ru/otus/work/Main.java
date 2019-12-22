@@ -1,48 +1,23 @@
 package ru.otus.work;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.otus.work.domain.Answer;
-import ru.otus.work.domain.Question;
-import ru.otus.work.service.AnswerService;
-import ru.otus.work.service.QuestionService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import ru.otus.work.controller.TestController;
 
-import java.util.Scanner;
+import java.util.Locale;
 
+@ComponentScan
 public class Main {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-        QuestionService questionService = context.getBean(QuestionService.class);
-        AnswerService answerService = context.getBean(AnswerService.class);
 
-        System.out.println("Тест по истории. Введите ваши фамилия и имя.");
+        // Дефолтная локаль
+        Locale.setDefault(Locale.US);
 
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
-        for (Question question : questionService.listQuestions()) {
-            System.out.println(question.getText());
+        TestController testController = context.getBean(TestController.class);
 
-            Answer answer = new Answer();
-            answer.setQuestion(question.getText());
-
-            scanner = new Scanner(System.in);
-            String answerFromKeyboard = scanner.nextLine();
-            answer.setAnswer(answerFromKeyboard);
-
-            answerService.saveAnswer(answer);
-        }
-
-        System.out.println(String.format("Ответы на тест студента '%s'\n", name));
-
-        for (Answer answer : answerService.listAnswers()) {
-            System.out.println(String.format("Вопрос: %s ответ: %s", answer.getQuestion(), answer.getAnswer()));
-        }
-
-        System.out.println("\nПравильные ответы:\n");
-
-        for (Question question : questionService.listQuestions()) {
-            System.out.println(String.format("%s ответ: %s", question.getText(), question.getAnswer()));
-        }
+        testController.runTest();
     }
 }
