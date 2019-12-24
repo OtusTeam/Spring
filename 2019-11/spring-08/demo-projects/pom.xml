@@ -5,15 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.otus</groupId>
-    <artifactId>jpql-class-work</artifactId>
+    <artifactId>demo-projects</artifactId>
     <version>1.0</version>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>jpql-exercise</module>
-        <module>jpql-solution-01</module>
-        <module>jpql-solution-02</module>
-        <module>jpql-solution-final</module>
+        <module>spring-jdbc-demo</module>
+        <module>mybatis-demo</module>
     </modules>
 </project>
