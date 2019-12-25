@@ -9,6 +9,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import ru.otus.example.ormdemo.models.OtusStudent;
+import ru.otus.example.ormdemo.models.Avatar;
+import ru.otus.example.ormdemo.models.Course;
+import ru.otus.example.ormdemo.models.EMail;
+
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +26,7 @@ class OtusStudentRepositoryJpaImplTest {
     private static final int EXPECTED_NUMBER_OF_STUDENTS = 10;
     private static final long FIRST_STUDENT_ID = 1L;
 
-    private static final int EXPECTED_QUERIES_COUNT = 3;
+    private static final int EXPECTED_QUERIES_COUNT = 11;
 
     @Autowired
     private OtusStudentRepositoryJpaImpl repositoryJpa;

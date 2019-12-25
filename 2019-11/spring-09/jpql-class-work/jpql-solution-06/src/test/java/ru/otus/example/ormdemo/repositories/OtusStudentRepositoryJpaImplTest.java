@@ -20,7 +20,7 @@ class OtusStudentRepositoryJpaImplTest {
     private static final int EXPECTED_NUMBER_OF_STUDENTS = 10;
     private static final long FIRST_STUDENT_ID = 1L;
 
-    private static final int EXPECTED_QUERIES_COUNT = 3;
+    private static final int EXPECTED_QUERIES_COUNT = 2;
 
     @Autowired
     private OtusStudentRepositoryJpaImpl repositoryJpa;

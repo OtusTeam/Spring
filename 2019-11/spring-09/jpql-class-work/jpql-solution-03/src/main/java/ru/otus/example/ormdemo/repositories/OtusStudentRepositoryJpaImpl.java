@@ -3,7 +3,10 @@ package ru.otus.example.ormdemo.repositories;
 import org.springframework.stereotype.Repository;
 import ru.otus.example.ormdemo.models.OtusStudent;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,10 +33,8 @@ public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
 
     @Override
     public List<OtusStudent> findAll() {
-        EntityGraph<?> entityGraph = em.getEntityGraph("otus-student-avatars-entity-graph");
-        TypedQuery<OtusStudent> query = em.createQuery("select s from OtusStudent s join fetch s.emails", OtusStudent.class);
-        query.setHint("javax.persistence.fetchgraph", entityGraph);
-        return query.getResultList();
+        return em.createQuery("select s from OtusStudent s", OtusStudent.class)
+                .getResultList();
     }
 
     @Override

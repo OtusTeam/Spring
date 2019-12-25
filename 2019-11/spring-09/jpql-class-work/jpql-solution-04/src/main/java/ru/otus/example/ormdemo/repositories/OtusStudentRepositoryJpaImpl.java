@@ -31,7 +31,7 @@ public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
     @Override
     public List<OtusStudent> findAll() {
         EntityGraph<?> entityGraph = em.getEntityGraph("otus-student-avatars-entity-graph");
-        TypedQuery<OtusStudent> query = em.createQuery("select s from OtusStudent s join fetch s.emails", OtusStudent.class);
+        TypedQuery<OtusStudent> query = em.createQuery("select s from OtusStudent s", OtusStudent.class);
         query.setHint("javax.persistence.fetchgraph", entityGraph);
         return query.getResultList();
     }

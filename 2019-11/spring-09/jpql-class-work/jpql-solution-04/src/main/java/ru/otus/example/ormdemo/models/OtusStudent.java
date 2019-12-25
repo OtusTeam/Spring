@@ -1,11 +1,6 @@
 package ru.otus.example.ormdemo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity // Указывает, что данный класс является сущностью
 @Table(name = "otus_students") // Задает имя таблицы, на которую будет отображаться сущность
+// Позволяет указать какие связи родительской сущности загружать в одном с ней запросе
 @NamedEntityGraph(name = "otus-student-avatars-entity-graph",
         attributeNodes = {@NamedAttributeNode("avatar")})
 public class OtusStudent {
@@ -37,8 +33,6 @@ public class OtusStudent {
     @JoinColumn(name = "student_id")
     private List<EMail> emails;
 
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 5)
     // Указывает на связь между таблицами "многие ко многим"
     @ManyToMany(targetEntity = Course.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     // Задает таблицу связей между таблицами для хранения родительской и связанной сущностью
