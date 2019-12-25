@@ -5,6 +5,7 @@ import ru.otus.spring.domain.Person;
 import ru.otus.spring.service.PersonService;
 
 @Configuration
+@EnableAspectJAutoProxy
 @ComponentScan
 public class Main {
 
