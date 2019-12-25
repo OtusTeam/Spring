@@ -11,11 +11,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>jpql-demo-exercise</module>
-        <module>jpql-demo-solution-step-1</module>
-        <module>jpql-demo-solution-step-2</module>
-        <module>jpql-demo-solution-step-3</module>
-        <module>jpql-demo-solution-step-4</module>
-        <module>jpql-demo-solution-step-final</module>
+        <module>jpql-exercise</module>
+        <module>jpql-solution-01</module>
+        <module>jpql-solution-02</module>
+        <module>jpql-solution-final</module>
     </modules>
 </project>

@@ -11,9 +11,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>spring-jdbc-demo</module>
-        <module>orm-demo</module>
-		<module>replace-orm-provider-demo</module>
-        <module>mybatis-demo</module>
+        <module>orm-exercise</module>
+        <module>orm-solution-01</module>
+        <module>orm-solution-02</module>
+        <module>orm-solution-03</module>
+        <module>orm-solution-04</module>
+        <module>orm-solution-05</module>
+        <module>orm-solution-final</module>
     </modules>
 </project>
