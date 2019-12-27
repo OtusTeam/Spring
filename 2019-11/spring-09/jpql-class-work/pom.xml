@@ -14,6 +14,10 @@
         <module>jpql-exercise</module>
         <module>jpql-solution-01</module>
         <module>jpql-solution-02</module>
+        <module>jpql-solution-03</module>
+        <module>jpql-solution-04</module>
+        <module>jpql-solution-05</module>
+        <module>jpql-solution-06</module>
         <module>jpql-solution-final</module>
     </modules>
 </project>
