@@ -1,0 +1,11 @@
+spring:
+  messages:
+    basename: bundle
+  shell:
+    interactive:
+      enabled: false
+
+application:
+  version: 1.0
+  locale: en_EN
+  questionsFileName: i18n/questions
