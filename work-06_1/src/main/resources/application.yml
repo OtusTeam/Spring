@@ -1,0 +1,10 @@
+spring:
+  messages:
+    basename: bundle
+  shell:
+    interactive:
+      enabled: true
+
+application:
+  version: 1.0
+  locale: en_EN
