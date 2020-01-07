@@ -1,6 +1,7 @@
 package ru.otus.example.ormdemo.repositories;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.example.ormdemo.models.OtusStudent;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Repository
 public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
 
