@@ -3,7 +3,9 @@ package ru.otus.work.dao;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.work.domain.Author;
 
@@ -18,7 +20,6 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     private final JdbcOperations jdbc;
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
-    private static AtomicLong genId = new AtomicLong(1000);
 
     public AuthorDaoJdbc(JdbcOperations jdbc, NamedParameterJdbcOperations namedParameterJdbcOperations) {
         this.jdbc = jdbc;
@@ -32,15 +33,14 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public Author insert(Author author) {
-        long id = genId.incrementAndGet();
-        Map<String, Object> params = new HashMap<>(4);
-        params.put("ID", id);
-        params.put("NAME", author.getName());
-        params.put("BIRTH_YAR", author.getBirthYar());
-        params.put("DESCRIPTION", author.getDescription());
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("NAME", author.getName());
+        params.addValue("BIRTH_YAR", author.getBirthYar());
+        params.addValue("DESCRIPTION", author.getDescription());
 
-        namedParameterJdbcOperations.update("insert into AUTHORS (ID, NAME, BIRTH_YAR, DESCRIPTION) values (:ID, :NAME, :BIRTH_YAR, :DESCRIPTION)", params);
-        author.setId(id);
+        namedParameterJdbcOperations.update("insert into AUTHORS (NAME, BIRTH_YAR, DESCRIPTION) values (:NAME, :BIRTH_YAR, :DESCRIPTION)", params, generatedKeyHolder);
+        author.setId(generatedKeyHolder.getKey().longValue());
         return author;
     }
 
@@ -60,7 +60,7 @@ public class AuthorDaoJdbc implements AuthorDao {
         Map<String, Object> params = Collections.singletonMap("id", id);
         try {
             return namedParameterJdbcOperations.queryForObject(
-                    "select * from authors where id = :id", params, new AuthorMapper()
+                    "select ID, NAME, BIRTH_YAR, DESCRIPTION from authors where id = :id", params, new AuthorMapper()
             );
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -72,7 +72,7 @@ public class AuthorDaoJdbc implements AuthorDao {
         Map<String, Object> params = Collections.singletonMap("name", name);
         try {
             return namedParameterJdbcOperations.queryForObject(
-                    "select * from authors where name = :name", params, new AuthorMapper()
+                    "select ID, NAME, BIRTH_YAR, DESCRIPTION from authors where name = :name", params, new AuthorMapper()
             );
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -81,7 +81,7 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public List<Author> getAll() {
-        return jdbc.query("select * from authors", new AuthorMapper());
+        return jdbc.query("select ID, NAME, BIRTH_YAR, DESCRIPTION from authors", new AuthorMapper());
     }
 
     @Override
@@ -100,7 +100,12 @@ public class AuthorDaoJdbc implements AuthorDao {
             String name = resultSet.getString("name");
             Date birthYar = resultSet.getDate("birth_yar");
             String description = resultSet.getString("description");
-            return new Author(id, name, birthYar, description);
+            return Author.builder()
+                    .id(id)
+                    .name(name)
+                    .birthYar(birthYar)
+                    .description(description)
+                    .build();
         }
     }
 }

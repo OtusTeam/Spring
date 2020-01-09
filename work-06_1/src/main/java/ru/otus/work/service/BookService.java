@@ -5,7 +5,6 @@ import ru.otus.work.domain.Book;
 
 import java.util.List;
 
-@Service
 public interface BookService {
     void save(String name,
               String authorStr,

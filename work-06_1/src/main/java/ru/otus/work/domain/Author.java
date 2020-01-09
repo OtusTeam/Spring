@@ -4,9 +4,8 @@ import lombok.*;
 
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Author {
     private Long id;

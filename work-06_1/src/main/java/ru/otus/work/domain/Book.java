@@ -2,9 +2,8 @@ package ru.otus.work.domain;
 
 import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Book {
     private Long id;

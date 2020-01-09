@@ -3,7 +3,9 @@ package ru.otus.work.dao;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.work.domain.Book;
 
@@ -22,7 +24,6 @@ public class BookDaoJdbc implements BookDao {
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
     private final AuthorDao authorDao;
     private final GenreDao genreDao;
-    private static AtomicLong genId = new AtomicLong(1000);
 
     public BookDaoJdbc(JdbcOperations jdbc, NamedParameterJdbcOperations namedParameterJdbcOperations, AuthorDao authorDao, GenreDao genreDao) {
         this.jdbc = jdbc;
@@ -38,17 +39,15 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public Long insert(Book book) {
-        long id = book.getId() == null ? genId.incrementAndGet() : book.getId();
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("NAME", book.getName());
+        params.addValue("DESCRIPTION", book.getDescription());
+        params.addValue("AUTHOR_ID", book.getAuthor() != null ? book.getAuthor().getId() : null);
+        params.addValue("GENRE_ID", book.getGenre() != null ? book.getGenre().getId() : null);
 
-        Map<String, Object> params = new HashMap<>(5);
-        params.put("ID", id);
-        params.put("NAME", book.getName());
-        params.put("DESCRIPTION", book.getDescription());
-        params.put("AUTHOR_ID", book.getAuthor() != null ? book.getAuthor().getId() : null);
-        params.put("GENRE_ID", book.getGenre() != null ? book.getGenre().getId() : null);
-
-        namedParameterJdbcOperations.update("insert into BOOKS (ID, NAME, DESCRIPTION, AUTHOR_ID, GENRE_ID) values (:ID, :NAME, :DESCRIPTION, :AUTHOR_ID, :GENRE_ID)", params);
-        return id;
+        namedParameterJdbcOperations.update("insert into BOOKS (NAME, DESCRIPTION, AUTHOR_ID, GENRE_ID) values (:NAME, :DESCRIPTION, :AUTHOR_ID, :GENRE_ID)", params, generatedKeyHolder);
+        return generatedKeyHolder.getKey().longValue();
     }
 
     @Override
@@ -68,7 +67,7 @@ public class BookDaoJdbc implements BookDao {
         try {
             Map<String, Object> params = Collections.singletonMap("id", id);
             return namedParameterJdbcOperations.queryForObject(
-                    "select * from books where id = :id", params, new BookDaoJdbc.BookMapper()
+                    "select ID, NAME, DESCRIPTION, AUTHOR_ID, GENRE_ID from books where id = :id", params, new BookDaoJdbc.BookMapper()
             );
         } catch (
                 EmptyResultDataAccessException e) {
@@ -78,7 +77,7 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public List<Book> getAll() {
-        return jdbc.query("select * from books", new BookDaoJdbc.BookMapper());
+        return jdbc.query("select ID, NAME, DESCRIPTION, AUTHOR_ID, GENRE_ID from books", new BookDaoJdbc.BookMapper());
     }
 
     @Override
@@ -98,7 +97,13 @@ public class BookDaoJdbc implements BookDao {
             String description = resultSet.getString("description");
             long authorId = resultSet.getLong("author_id");
             long genreId = resultSet.getLong("genre_id");
-            return new Book(id, name, description, authorDao.getById(authorId), genreDao.getById(genreId));
+            return Book.builder()
+                    .id(id)
+                    .name(name)
+                    .description(description)
+                    .author(authorDao.getById(authorId))
+                    .genre(genreDao.getById(genreId))
+                    .build();
         }
     }
 }

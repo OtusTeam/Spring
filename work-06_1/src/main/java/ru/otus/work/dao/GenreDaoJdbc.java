@@ -3,7 +3,9 @@ package ru.otus.work.dao;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.work.domain.Genre;
 
@@ -35,13 +37,12 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public Genre insert(Genre genre) {
-        long id = genId.incrementAndGet();
-        Map<String, Object> params = new HashMap<>(2);
-        params.put("ID", id);
-        params.put("NAME", genre.getName());
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("NAME", genre.getName());
 
-        namedParameterJdbcOperations.update("insert into genres (ID, NAME) values (:ID, :NAME)", params);
-        genre.setId(id);
+        namedParameterJdbcOperations.update("insert into genres (NAME) values (:NAME)", params, generatedKeyHolder);
+        genre.setId(generatedKeyHolder.getKey().longValue());
         return genre;
     }
 
@@ -59,7 +60,7 @@ public class GenreDaoJdbc implements GenreDao {
         Map<String, Object> params = Collections.singletonMap("id", id);
         try {
             return namedParameterJdbcOperations.queryForObject(
-                    "select * from genres where id = :id", params, new GenreDaoJdbc.GenreMapper()
+                    "select ID, NAME from genres where id = :id", params, new GenreDaoJdbc.GenreMapper()
             );
         } catch (
                 EmptyResultDataAccessException e) {
@@ -72,7 +73,7 @@ public class GenreDaoJdbc implements GenreDao {
         Map<String, Object> params = Collections.singletonMap("name", name);
         try {
             return namedParameterJdbcOperations.queryForObject(
-                    "select * from genres where name = :name", params, new GenreDaoJdbc.GenreMapper()
+                    "select ID, NAME from genres where name = :name", params, new GenreDaoJdbc.GenreMapper()
             );
         } catch (
                 EmptyResultDataAccessException e) {
@@ -82,7 +83,7 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public List<Genre> getAll() {
-        return jdbc.query("select * from genres", new GenreDaoJdbc.GenreMapper());
+        return jdbc.query("select ID, NAME from genres", new GenreDaoJdbc.GenreMapper());
     }
 
     @Override
@@ -99,7 +100,10 @@ public class GenreDaoJdbc implements GenreDao {
         public Genre mapRow(ResultSet resultSet, int i) throws SQLException {
             long id = resultSet.getLong("id");
             String name = resultSet.getString("name");
-            return new Genre(id, name);
+            return Genre.builder()
+                    .id(id)
+                    .name(name)
+                    .build();
         }
     }
 }
