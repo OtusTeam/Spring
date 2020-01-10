@@ -7,7 +7,3 @@ question:
 exam:
   totalquestioncount: 3
   passquestioncount: 2
-#spring:
-#  messages:
-#    basename: /i18n/messages
-#    encoding: UTF-8
