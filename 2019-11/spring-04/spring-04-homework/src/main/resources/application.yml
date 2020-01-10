@@ -1,0 +1,13 @@
+application:
+  locale: en
+  #locale: ru
+question:
+  filename: questions.csv
+  #filename: questions_ru.csv
+exam:
+  totalquestioncount: 3
+  passquestioncount: 2
+#spring:
+#  messages:
+#    basename: /i18n/messages
+#    encoding: UTF-8
