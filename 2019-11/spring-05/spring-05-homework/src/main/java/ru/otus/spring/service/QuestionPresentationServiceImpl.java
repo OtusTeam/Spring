@@ -3,7 +3,6 @@ package ru.otus.spring.service;
 import java.util.Scanner;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.Question;
 

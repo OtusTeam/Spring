@@ -1,4 +1,4 @@
-package ru.otus.spring.repositorytest;
+package ru.otus.spring.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.spring.domain.Question;
-import ru.otus.spring.repository.QuestionRepository;
-import ru.otus.spring.repository.QuestionRepositoryImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
