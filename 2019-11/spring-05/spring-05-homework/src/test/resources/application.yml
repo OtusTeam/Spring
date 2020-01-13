@@ -1,0 +1,18 @@
+spring:
+  shell:
+    interactive:
+      enabled: false
+
+logging:
+  level:
+    root: ERROR
+
+application:
+  locale: en
+  #locale: ru
+question:
+  filename: questions.csv
+  #filename: questions_ru.csv
+exam:
+  totalquestioncount: 3
+  passquestioncount: 2
