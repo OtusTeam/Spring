@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.shell.Shell;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.work.domain.Book;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Тест команды изменение")
+    @Transactional
     public void shellModifyTest() {
         shell.evaluate(() -> "all");
 
@@ -86,6 +88,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Тест команды добавления комментария")
+    @Transactional
     public void shellAddCommentTest() {
         shell.evaluate(() -> "all");
         List<Book> books = bookService.listAll();
@@ -112,6 +115,6 @@ public class BookServiceTest {
         Book bookFind = bookService.findById(book.getId());
 
         assertThat(bookFind).isNotNull();
-        assertThat(bookFind.getCommentBooks().size()).isGreaterThan(3);
+        assertThat(bookFind.getCommentBooks().size()).isGreaterThanOrEqualTo(1);
     }
 }

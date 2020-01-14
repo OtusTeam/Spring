@@ -17,6 +17,7 @@ public class CommentBookJpaImpl implements CommentBookJpa {
     private EntityManager em;
 
     @Override
+    @Transactional
     public CommentBook save(CommentBook commentBook) {
         if (commentBook.getId() == null) {
             em.persist(commentBook);

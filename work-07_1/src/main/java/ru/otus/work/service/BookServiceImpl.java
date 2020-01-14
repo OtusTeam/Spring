@@ -1,6 +1,7 @@
 package ru.otus.work.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.work.domain.Author;
 import ru.otus.work.domain.Book;
 import ru.otus.work.domain.CommentBook;

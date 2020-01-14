@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
@@ -26,17 +25,17 @@ public class Book {
     @Column(name = "description")
     private String description;
 
-    @Fetch(FetchMode.JOIN)
-    @OneToOne(targetEntity = Author.class, cascade = CascadeType.DETACH)
+    @Fetch(FetchMode.SELECT)
+    @OneToOne(targetEntity = Author.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     private Author author;
 
-    @Fetch(FetchMode.JOIN)
-    @OneToOne(targetEntity = Genre.class, cascade = CascadeType.DETACH)
+    @Fetch(FetchMode.SELECT)
+    @OneToOne(targetEntity = Genre.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     private Genre genre;
 
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 30)
-    @OneToMany(targetEntity = CommentBook.class, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @OneToMany(targetEntity = CommentBook.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "book_id")
     private List<CommentBook> commentBooks;
 }

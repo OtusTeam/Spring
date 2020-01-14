@@ -11,7 +11,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public class BookJpaImpl implements BookJpa {
 
@@ -19,6 +18,7 @@ public class BookJpaImpl implements BookJpa {
     private EntityManager em;
 
     @Override
+    @Transactional
     public Book save(Book book) {
         if (book.getId() == null) {
             em.persist(book);
@@ -40,6 +40,7 @@ public class BookJpaImpl implements BookJpa {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         Query query = em.createQuery("delete from Book where id = :id");
         query.setParameter("id", id);

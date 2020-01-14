@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public class GenreJpaImpl implements GenreJpa {
 
@@ -20,6 +19,7 @@ public class GenreJpaImpl implements GenreJpa {
     private EntityManager em;
 
     @Override
+    @Transactional
     public Genre save(Genre genre) {
         if (genre.getId() == null) {
             em.persist(genre);
@@ -45,6 +45,7 @@ public class GenreJpaImpl implements GenreJpa {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         Query query = em.createQuery("delete from Genre where id = :id");
         query.setParameter("id", id);

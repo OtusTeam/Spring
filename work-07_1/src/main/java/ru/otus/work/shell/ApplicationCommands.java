@@ -5,6 +5,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.work.domain.Book;
 import ru.otus.work.service.AuthorService;
 import ru.otus.work.service.BookService;
@@ -113,6 +114,7 @@ public class ApplicationCommands {
 
     }
 
+    @Transactional
     private void printAllBooks() {
         System.out.println(
                 localizedMessage.getMessage(

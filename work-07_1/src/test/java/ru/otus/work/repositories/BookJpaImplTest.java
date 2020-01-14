@@ -11,6 +11,8 @@ import ru.otus.work.domain.Author;
 import ru.otus.work.domain.Book;
 import ru.otus.work.domain.Genre;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
@@ -102,5 +104,12 @@ public class BookJpaImplTest {
         assertThat(bookById).isNotNull();
         assertThat(bookById.getName()).isEqualTo(name);
         assertThat(bookById.getDescription()).isEqualTo(description);
+    }
+
+    @Test
+    @DisplayName("Проверка sql запроса")
+    public void findAllTest() {
+        List<Book> books = bookJpa.getAll();
+        assertThat(books.size()).isGreaterThan(0);
     }
 }
