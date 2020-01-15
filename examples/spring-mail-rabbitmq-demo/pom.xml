@@ -12,7 +12,7 @@
 
     <modules>
         <module>user-activity-models</module>
-        <module>user-activity-emiter-microservice</module>
+        <module>user-activity-emitter-microservice</module>
         <module>user-activity-processor-microservice</module>
     </modules>
 </project>
