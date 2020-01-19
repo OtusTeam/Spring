@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -27,6 +30,11 @@ public class Author {
 
     @Column(name = "description")
     private String description;
+
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(targetEntity = Book.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "author_id")
+    private List<Book> books;
 
     public Author() {
     }

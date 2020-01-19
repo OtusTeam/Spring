@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.shell.Shell;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.work.domain.Book;
 
@@ -42,7 +43,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Тест команды изменение")
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void shellModifyTest() {
         shell.evaluate(() -> "all");
 
@@ -88,7 +89,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Тест команды добавления комментария")
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void shellAddCommentTest() {
         shell.evaluate(() -> "all");
         List<Book> books = bookService.listAll();
@@ -116,5 +117,14 @@ public class BookServiceTest {
 
         assertThat(bookFind).isNotNull();
         assertThat(bookFind.getCommentBooks().size()).isGreaterThanOrEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("Тест команды - все книги автора")
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void shellAllBooksAuthorTest() {
+        shell.evaluate(() -> "s book author genre description");
+
+        shell.evaluate(() -> "ab author");
     }
 }

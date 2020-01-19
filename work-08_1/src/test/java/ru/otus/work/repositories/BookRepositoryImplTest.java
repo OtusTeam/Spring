@@ -1,5 +1,6 @@
 package ru.otus.work.repositories;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.work.domain.Author;
 import ru.otus.work.domain.Book;
 import ru.otus.work.domain.Genre;
@@ -23,22 +25,27 @@ public class BookRepositoryImplTest {
 
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    AuthorRepository authorRepository;
+    @Autowired
+    GenreRepository genreRepository;
 
     public static final String NAME = "name";
     public static final String DESCRIPTION = "description";
     public static final Long AUTHOR_ID = 1L;
     public static final Long GENRE_ID = 1L;
-    public static final Author author = Author
-            .builder()
-            .id(AUTHOR_ID)
-            .build();
-    public static final Genre genre = Genre
-            .builder()
-            .id(GENRE_ID)
-            .build();
+    public Author author;
+    public Genre genre;
+
+    @BeforeEach
+    public void setUp() {
+        author = authorRepository.findById(AUTHOR_ID).orElse(null);
+        genre = genreRepository.findById(GENRE_ID).orElse(null);
+    }
 
     @Test
     @DisplayName("Проверка добавления")
+    @Transactional
     public void insertTest() {
         Book book = Book
                 .builder()
@@ -60,6 +67,7 @@ public class BookRepositoryImplTest {
 
     @Test
     @DisplayName("Проверка удаления")
+    @Transactional
     public void deleteTest() {
         Book book = Book
                 .builder()
@@ -71,7 +79,7 @@ public class BookRepositoryImplTest {
 
         Long id = bookRepository.save(book).getId();
         Book bookById = bookRepository.findById(id).orElse(null);
-        assertThat(bookRepository).isNotNull();
+        assertThat(bookById).isNotNull();
 
         bookRepository.deleteById(id);
         Book bookByIdFind = bookRepository.findById(id).orElse(null);
@@ -80,6 +88,7 @@ public class BookRepositoryImplTest {
 
     @Test
     @DisplayName("Проверка обновления")
+    @Transactional
     public void updateTest() {
         Book book = Book
                 .builder()

@@ -29,11 +29,11 @@ public class Book {
     private String description;
 
     @Fetch(FetchMode.SELECT)
-    @OneToOne(targetEntity = Author.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(targetEntity = Author.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Author author;
 
     @Fetch(FetchMode.SELECT)
-    @OneToOne(targetEntity = Genre.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(targetEntity = Genre.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Genre genre;
 
     @Fetch(FetchMode.SELECT)

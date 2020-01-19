@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.otus.work.domain.Author;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,6 +26,9 @@ public class AuthorServiceTest {
 
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private BookService bookService;
 
     @Test
     @DisplayName("Проверка поиска и добавление если нет")
@@ -62,5 +65,41 @@ public class AuthorServiceTest {
         oldId = authorSave.getId();
         authorSave = authorService.save(authorSave);
         assertThat(oldId).isEqualTo(authorSave.getId());
+    }
+
+    @Test
+    @DisplayName("Показать все книги авторов по всем книгам")
+    public void findAllBooks() {
+        bookService.save(
+                "name",
+                "author",
+                "genre",
+                "description"
+        );
+
+        bookService.listAll().forEach(book -> {
+            int booksCount = authorService.findAllBooksByAuthor(book.getAuthor()).size();
+            assertThat(booksCount).isGreaterThanOrEqualTo(1);
+        });
+    }
+
+    @Test
+    @DisplayName("Показать все книги автора")
+    public void findAllBooksByAuthorId() {
+
+        String authorName = "author";
+
+        bookService.save(
+                "name",
+                authorName,
+                "genre",
+                "description"
+        );
+
+        List<Author> authors = authorService.findByName(authorName);
+
+        assertThat(authors.size()).isGreaterThanOrEqualTo(1);
+        int booksCount = authors.get(0).getBooks().size();
+        assertThat(booksCount).isGreaterThanOrEqualTo(1);
     }
 }

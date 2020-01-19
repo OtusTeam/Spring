@@ -1,6 +1,8 @@
 package ru.otus.work.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.work.domain.Author;
 import ru.otus.work.domain.Book;
 import ru.otus.work.domain.CommentBook;
@@ -25,22 +27,33 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void save(String name,
                      String authorStr,
                      String genreStr,
                      String description) {
         Author author = null;
         if (authorStr != null && authorStr.length() > 0) {
-            author = Author.builder()
-                    .name(authorStr)
-                    .build();
+            List<Author> authors = authorService.findByName(authorStr);
+            if (authors.isEmpty()) {
+                author = Author.builder()
+                        .name(authorStr)
+                        .build();
+            } else {
+                author = authors.get(0);
+            }
         }
 
         Genre genre = null;
         if (genreStr != null && genreStr.length() > 0) {
-            genre = Genre.builder()
-                    .name(genreStr)
-                    .build();
+            List<Genre> genres = genreService.findByName(genreStr);
+            if (genres.isEmpty()) {
+                genre = Genre.builder()
+                        .name(genreStr)
+                        .build();
+            } else {
+                genre = genres.get(0);
+            }
         }
 
         Book book = Book.builder()
@@ -50,8 +63,6 @@ public class BookServiceImpl implements BookService {
                 .description(description)
                 .build();
 
-        authorService.save(book.getAuthor());
-        genreService.save(book.getGenre());
         bookRepository.save(book);
     }
 
@@ -63,9 +74,16 @@ public class BookServiceImpl implements BookService {
                        String description) {
         Author author = null;
         if (authorStr != null && authorStr.length() > 0) {
-            author = Author.builder()
-                    .name(authorStr)
-                    .build();
+
+            List<Author> authors = authorService.findByName(authorStr);
+
+            if (authors.isEmpty()) {
+                author = Author.builder()
+                        .name(authorStr)
+                        .build();
+            } else {
+                author = authors.get(0);
+            }
         }
 
         Genre genre = null;
@@ -83,7 +101,7 @@ public class BookServiceImpl implements BookService {
                 .description(description)
                 .build();
 
-        book.setAuthor(authorService.save(book.getAuthor()));
+        //book.setAuthor(authorService.save(book.getAuthor()));
         book.setGenre(genreService.save(book.getGenre()));
         bookRepository.save(book);
     }
