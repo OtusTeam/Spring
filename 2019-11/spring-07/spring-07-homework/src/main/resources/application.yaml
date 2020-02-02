@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+    username: otus
+    password: 123456
+    url: jdbc:mysql://localhost:3306/otus?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useLegacyDatetimeCode=false
+    schema: schema.sql
+    data: data.sql
+
