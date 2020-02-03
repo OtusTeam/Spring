@@ -4,15 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.otus.example</groupId>
-    <artifactId>spring-mail-rabbitmq-demo</artifactId>
+    <groupId>ru.otus</groupId>
+    <artifactId>spring-mvc-class-work</artifactId>
     <version>1.0</version>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>user-activity-models</module>
-        <module>user-activity-emitter-microservice</module>
-        <module>user-activity-processor-microservice</module>
+        <module>spring-mvc-exercise</module>
+        <module>spring-mvc-solution</module>
     </modules>
 </project>
