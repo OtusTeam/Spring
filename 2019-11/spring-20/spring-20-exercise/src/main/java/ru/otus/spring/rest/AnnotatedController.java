@@ -13,21 +13,21 @@ public class AnnotatedController {
 
     @GetMapping("/flux/one")
     public Mono<String> one() {
-        return Mono.just("one");
+        return Mono.just( "one" );
     }
 
     @GetMapping("/flux/ten")
     public Flux<Integer> list() {
-        return Flux.range(1, 10);
+        return Flux.range( 1, 10 ).delayElements( Duration.ofSeconds( 1 ) );
     }
 
     @GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> stream() {
-        return Flux.generate(() -> 0, (state, emitter) -> {
-            emitter.next(state);
+        return Flux.generate( () -> 0, ( state, emitter ) -> {
+            emitter.next( state );
             return state + 1;
-        })
-                .delayElements(Duration.ofSeconds(1L))
-                .map(i -> "" + i);
+        } )
+                .delayElements( Duration.ofSeconds( 1L ) )
+                .map( i -> "" + i );
     }
 }

@@ -29,4 +29,9 @@ public class PersonController {
     public Mono<Person> save(@RequestBody Mono<Person> dto) {
         return repository.save(dto);
     }
+
+    @GetMapping("/person/find")
+    public Flux<Person> byName(@RequestParam("name") String name){
+        return repository.findAllByLastName( name );
+    }
 }
