@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="message" th:content="${message}"/>
+    <title>List of all books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books, .books td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+        .buttons {
+        text-align: left;
+        }
+
+        .button {
+        position: absolute;
+        top: 50%;
+        }
+
+
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1 th:text="#{bookAll}">Books:</h1>
+
+<table class="books">
+    <thead>
+    <tr>
+        <th th:text="#{bookNumber}">ID</th>
+        <th th:text="#{bookNameInTable}">Name</th>
+        <th th:text="#{bookAuthorInTable}">Author</th>
+        <th th:text="#{bookGenreInTable}">Genre</th>
+        <th th:text="#{bookDescriptionInTable}">Description</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.name}">Name</td>
+        <td th:text="${book.author}">Author</td>
+        <td th:text="${book.genre}">Genre</td>
+        <td th:text="${book.description}">Description</td>
+        <td>
+            <a th:href="@{/books(id=${book.id})}" th:text="#{bookEditInTable}" href="edit.html">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/deletebooks(id=${book.id})}" th:text="#{bookDeleteInTable}" href="books.html">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="buttons">
+    <button type="button">
+        <a href="edit.html" th:text="#{bookAddButton}">Add</a>
+    </button>
+</div>
+</body>
+</html>
