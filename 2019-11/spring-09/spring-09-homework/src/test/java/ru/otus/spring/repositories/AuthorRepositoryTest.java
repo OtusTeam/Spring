@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы со авторами ")
 @DataJpaTest
-@Import({AuthorRepositoryJpaImpl.class})
+@Import({AuthorRepository.class})
 class AuthorRepositoryJpaImplTest {
 
     private static final int EXPECTED_NUMBER_OF_AUTHORS = 3;
@@ -24,7 +24,7 @@ class AuthorRepositoryJpaImplTest {
     private static final String UPDATED_AUTHOR_NAME = "Каганов";
 
     @Autowired
-    AuthorRepositoryJpaImpl repositoryJpa;
+    AuthorRepository repositoryJpa;
 
     @Autowired
     private TestEntityManager em;
