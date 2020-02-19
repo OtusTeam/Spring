@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
+import ru.otus.spring.models.Author;
 import ru.otus.spring.models.Book;
+import ru.otus.spring.models.Genre;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,19 +35,23 @@ class BookRepositoryTest {
     @DisplayName(" должен корректно сохранять всю информацию о книге")
     @Test
     void save() {
-//        List<Author> authors = List.of(new Author(0, AUTHOR_NAME));
-//        List<Genre> genres = List.of(new Genre(0, GENRE_NAME));
-//
-//
-//        val book = new Book(0, "Лучшее", authors, genres);
-//
-//        repositoryJpa.save(book);
-//        assertThat(book.getId()).isGreaterThan(0);
-//
-//        val actualBook = em.find(Book.class, book.getId());
-//        assertThat(actualBook).isNotNull().matches(b -> !b.getCaption().equals(""))
-//                .matches(b -> b.getAuthors() != null && b.getAuthors().size() > 0 && b.getAuthors().get(0).getId() > 0)
-//                .matches(b -> b.getGenres() != null && b.getGenres().size() > 0 && b.getGenres().get(0).getId() > 0);
+        List<Author> authors = List.of(new Author(0, AUTHOR_NAME));
+        List<Genre> genres = List.of(new Genre(0, GENRE_NAME));
+
+
+        val book = new Book();
+        book.setId(0L);
+        book.setCaption("Book");
+        book.setAuthors(authors);
+        book.setGenres(genres);
+
+        repositoryJpa.save(book);
+        assertThat(book.getId()).isGreaterThan(0);
+
+        val actualBook = em.find(Book.class, book.getId());
+        assertThat(actualBook).isNotNull().matches(b -> !b.getCaption().equals(""))
+                .matches(b -> b.getAuthors() != null && b.getAuthors().size() > 0 && b.getAuthors().get(0).getId() > 0)
+                .matches(b -> b.getGenres() != null && b.getGenres().size() > 0 && b.getGenres().get(0).getId() > 0);
     }
 
     @DisplayName(" должен загружать информацию о нужной книге по id")
