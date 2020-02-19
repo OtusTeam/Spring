@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий на основе Jpa для работы со авторами ")
 @DataJpaTest
 @Import({AuthorRepository.class})
-class AuthorRepositoryJpaImplTest {
+class AuthorRepositoryTest {
 
     private static final int EXPECTED_NUMBER_OF_AUTHORS = 3;
     private static final long FIRST_AUTHOR_ID = 1;

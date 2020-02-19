@@ -13,7 +13,7 @@ import ru.otus.spring.repositories.GenreRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class Spring08HomeworkApplicationTests {
+class Spring09HomeworkApplicationTests {
 	@Autowired
 	private ApplicationContext applicationContext;
 

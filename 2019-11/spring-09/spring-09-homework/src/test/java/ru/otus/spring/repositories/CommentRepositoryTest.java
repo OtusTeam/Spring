@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий на основе Jpa для работы с комментариями ")
 @DataJpaTest
 @Import({CommentRepository.class})
-class CommentRepositoryJpaImplTest {
+class CommentRepositoryTest {
     private static final int EXPECTED_NUMBER_OF_COMMENTS = 4;
     private static final long FIRST_COMMENT_ID = 1;
     private static final long FIRST_BOOK_ID = 1;
