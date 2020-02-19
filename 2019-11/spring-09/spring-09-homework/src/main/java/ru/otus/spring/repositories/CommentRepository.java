@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -28,23 +27,26 @@ public class CommentRepositoryJpaImpl implements AbstractEntityRepository<Commen
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Comment> findById(long id) {
         return Optional.ofNullable(em.find(Comment.class, id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Comment> findAll() {
-        TypedQuery<Comment> query = em.createQuery("select c from Comment c", Comment.class);
-        return query.getResultList();
+        return em.createQuery("select c from Comment c", Comment.class).getResultList();
     }
 
+    @Transactional(readOnly = true)
     public List<Comment> findByBookId(long bookId) {
         TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.book.id = :id", Comment.class);
         query.setParameter("id", bookId);
         return query.getResultList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Comment> findByName(String comment) {
         TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.comment = :comment", Comment.class);
@@ -53,17 +55,18 @@ public class CommentRepositoryJpaImpl implements AbstractEntityRepository<Commen
     }
 
     @Override
-    public void updateNameById(long id, String comment) {
-        Query query = em.createQuery("update Comment c set c.comment = :comment where c.id = :id");
-        query.setParameter("id", id);
-        query.setParameter("comment", comment);
-        query.executeUpdate();
+    public void updateNameById(long id, String commentText) {
+        Comment comment = em.find(Comment.class, id);
+        if (comment != null) {
+            comment.setComment(commentText);
+        }
     }
 
     @Override
     public void deleteById(long id) {
-        Query query = em.createQuery("delete from Comment c where c.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        Comment comment = em.find(Comment.class, id);
+        if (comment != null) {
+            em.remove(comment);
+        }
     }
 }

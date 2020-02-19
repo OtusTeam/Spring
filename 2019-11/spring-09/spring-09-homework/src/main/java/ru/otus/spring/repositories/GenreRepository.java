@@ -28,17 +28,19 @@ public class GenreRepositoryJpaImpl implements AbstractEntityRepository<Genre> {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Genre> findById(long id) {
         return Optional.ofNullable(em.find(Genre.class, id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Genre> findAll() {
-        TypedQuery<Genre> query = em.createQuery("select g from Genre g", Genre.class);
-        return query.getResultList();
+        return em.createQuery("select g from Genre g", Genre.class).getResultList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Genre> findByName(String name) {
         TypedQuery<Genre> query = em.createQuery("select g from Genre g where g.name = :name", Genre.class);
@@ -48,16 +50,17 @@ public class GenreRepositoryJpaImpl implements AbstractEntityRepository<Genre> {
 
     @Override
     public void updateNameById(long id, String name) {
-        Query query = em.createQuery("update Genre g set g.name = :name where g.id = :id");
-        query.setParameter("id", id);
-        query.setParameter("name", name);
-        query.executeUpdate();
+        Genre genre = em.find(Genre.class, id);
+        if (genre != null) {
+            genre.setName(name);
+        }
     }
 
     @Override
     public void deleteById(long id) {
-        Query query = em.createQuery("delete from Genre g where g.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        Genre genre = em.find(Genre.class, id);
+        if (genre != null) {
+            em.remove(genre);
+        }
     }
 }
