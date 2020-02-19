@@ -13,11 +13,10 @@ import ru.otus.spring.models.Comment;
 
 @Transactional
 @Repository
-public class CommentRepositoryJpaImpl implements AbstractEntityRepository<Comment> {
+public class CommentRepository {
     @PersistenceContext
     private EntityManager em;
 
-    @Override
     public Comment save(Comment comment) {
         if (comment.getId() == 0) {
             em.persist(comment);
@@ -28,13 +27,11 @@ public class CommentRepositoryJpaImpl implements AbstractEntityRepository<Commen
     }
 
     @Transactional(readOnly = true)
-    @Override
     public Optional<Comment> findById(long id) {
         return Optional.ofNullable(em.find(Comment.class, id));
     }
 
     @Transactional(readOnly = true)
-    @Override
     public List<Comment> findAll() {
         return em.createQuery("select c from Comment c", Comment.class).getResultList();
     }
@@ -47,14 +44,12 @@ public class CommentRepositoryJpaImpl implements AbstractEntityRepository<Commen
     }
 
     @Transactional(readOnly = true)
-    @Override
     public List<Comment> findByName(String comment) {
         TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.comment = :comment", Comment.class);
         query.setParameter("comment", comment);
         return query.getResultList();
     }
 
-    @Override
     public void updateNameById(long id, String commentText) {
         Comment comment = em.find(Comment.class, id);
         if (comment != null) {
@@ -62,7 +57,6 @@ public class CommentRepositoryJpaImpl implements AbstractEntityRepository<Commen
         }
     }
 
-    @Override
     public void deleteById(long id) {
         Comment comment = em.find(Comment.class, id);
         if (comment != null) {

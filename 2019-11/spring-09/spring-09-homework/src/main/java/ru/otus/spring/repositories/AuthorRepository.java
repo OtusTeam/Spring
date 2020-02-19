@@ -13,7 +13,7 @@ import ru.otus.spring.models.Author;
 
 @Transactional
 @Repository
-public class AuthorRepositoryJpaImpl {
+public class AuthorRepository {
     @PersistenceContext
     private EntityManager em;
 

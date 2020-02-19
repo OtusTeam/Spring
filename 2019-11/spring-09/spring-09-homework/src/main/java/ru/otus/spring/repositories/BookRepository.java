@@ -13,7 +13,7 @@ import ru.otus.spring.models.Book;
 
 @Transactional
 @Repository
-public class BookRepositoryJpaImpl {
+public class BookRepository {
     @PersistenceContext
     private EntityManager em;
 
