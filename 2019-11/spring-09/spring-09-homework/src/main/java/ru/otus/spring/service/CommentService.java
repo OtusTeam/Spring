@@ -24,7 +24,7 @@ public class CommentService {
 
     public List<String> getAll() {
         return commentRepository.findAll().stream()
-                .map(c -> String.format("%s - %s", c.getId(), c.getComment()))
+                .map(c -> String.format("Id: %s, BookId: %s - %s", c.getId(), c.getBook().getId(), c.getComment()))
                 .collect(Collectors.toList());
     }
 
@@ -36,13 +36,5 @@ public class CommentService {
 
     public void deleteById(long id) {
         commentRepository.deleteById(id);
-    }
-
-    @Transactional(readOnly = true)
-    public List<String> getBookComments(long bookId) {
-        Book book = bookRepository.findById(bookId).orElseThrow();
-        return book.getComments().stream()
-                .map(c -> String.format("%s - %s", c.getId(), c.getComment()))
-                .collect(Collectors.toList());
     }
 }

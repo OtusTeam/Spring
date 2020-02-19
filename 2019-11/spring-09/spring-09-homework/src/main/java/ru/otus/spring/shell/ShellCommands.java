@@ -102,11 +102,6 @@ public class ShellCommands {
         return commentService.getAll();
     }
 
-    @ShellMethod(value = "get book comment list (bookId)", key = {"cb"})
-    public List<String> getBookComments(@ShellOption() long bookId) {
-        return commentService.getBookComments(bookId);
-    }
-
     @ShellMethod(value = "add comment (bookId, text)", key = {"ca"})
     public void addComment(@ShellOption() long bookId, @ShellOption() String text) {
         commentService.add(bookId, text);

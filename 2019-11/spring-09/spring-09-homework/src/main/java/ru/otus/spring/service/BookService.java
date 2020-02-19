@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.models.Author;
 import ru.otus.spring.models.Book;
+import ru.otus.spring.models.Comment;
 import ru.otus.spring.models.Genre;
 import ru.otus.spring.repositories.BookRepository;
 
@@ -16,15 +17,12 @@ public class BookService {
     private BookRepository bookRepository;
     private AuthorService authorService;
     private GenreService genreService;
-    private CommentService commentService;
 
     @Autowired
-    public BookService(BookRepository bookRepository, AuthorService authorService, GenreService genreService,
-                       CommentService commentService) {
+    public BookService(BookRepository bookRepository, AuthorService authorService, GenreService genreService) {
         this.bookRepository = bookRepository;
         this.authorService = authorService;
         this.genreService = genreService;
-        this.commentService = commentService;
     }
 
     @Transactional
@@ -41,22 +39,27 @@ public class BookService {
         if (book == null) {
             return "";
         }
-        List<String> comments = commentService.getBookComments(id);
+        List<Comment> comments = book.getComments();
         List<Author> authors = book.getAuthors();
         List<Genre> genres = book.getGenres();
         StringBuilder sb = new StringBuilder();
         sb.append(book.getId()).append(" - ")
                 .append(book.getCaption());
         if (authors != null && !authors.isEmpty()) {
-            sb.append(", ").append(book.getAuthors().stream().map(Author::getName).collect(Collectors.joining(", ")));
+            sb.append(", ")
+                    .append(
+                            authors.stream().map(Author::getName).collect(Collectors.joining(", "))
+                    );
         }
         sb.append(". ");
         if (genres != null && !genres.isEmpty()) {
-            sb.append(book.getGenres().stream().map(Genre::getName).collect(Collectors.joining(", ")));
+            sb.append(genres.stream().map(Genre::getName).collect(Collectors.joining(", ")));
         }
         if (comments != null && !comments.isEmpty()) {
             sb.append("\nBook comments:\n")
-                    .append(String.join("\n", comments));
+                    .append(
+                            comments.stream().map(Comment::getComment).collect(Collectors.joining("\n"))
+                    );
         }
         return sb.toString();
     }

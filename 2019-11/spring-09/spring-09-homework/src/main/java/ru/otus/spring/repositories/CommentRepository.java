@@ -37,13 +37,6 @@ public class CommentRepository {
     }
 
     @Transactional(readOnly = true)
-    public List<Comment> findByBookId(long bookId) {
-        TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.book.id = :id", Comment.class);
-        query.setParameter("id", bookId);
-        return query.getResultList();
-    }
-
-    @Transactional(readOnly = true)
     public List<Comment> findByName(String comment) {
         TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.comment = :comment", Comment.class);
         query.setParameter("comment", comment);
