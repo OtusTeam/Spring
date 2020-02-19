@@ -61,12 +61,6 @@ class CommentRepositoryTest {
         assertThat(comments).isNotNull().hasSize(EXPECTED_NUMBER_OF_COMMENTS);
     }
 
-    @Test
-    void findByBookId() {
-        List<Comment> comments = repositoryJpa.findByBookId(FIRST_BOOK_ID);
-        assertThat(comments).hasSize(1);
-    }
-
     @DisplayName(" должен загружать информацию о нужном комментарии по его имени")
     @Test
     void findByName() {
