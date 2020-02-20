@@ -27,7 +27,7 @@ class OtusStudentRepositoryJpaImplTest {
     private static final long FIRST_STUDENT_ID = 1L;
     private static final String FIRST_STUDENT_NAME = "student_01";
 
-    private static final int EXPECTED_QUERIES_COUNT = 31;
+    private static final int EXPECTED_QUERIES_COUNT = 3;
 
     private static final String STUDENT_AVATAR_URL = "где-то там";
     private static final String STUDENT_EMAIL = "any@mail.com";
