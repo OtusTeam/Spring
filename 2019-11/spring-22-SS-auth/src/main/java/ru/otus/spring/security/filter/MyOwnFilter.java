@@ -10,8 +10,7 @@ import java.io.IOException;
 
 public class MyOwnFilter extends GenericFilterBean {
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        servletRequest.getParameterMap().put("SpecialValue", new String[]{"My dirty secret"});
-
+    public void doFilter( ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain ) throws IOException, ServletException {
+        servletRequest.getParameterMap().put( "SpecialValue", new String[]{ "My dirty secret" } );
     }
 }

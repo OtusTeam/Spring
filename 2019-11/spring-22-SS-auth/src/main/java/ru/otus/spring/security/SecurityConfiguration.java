@@ -10,30 +10,28 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.session.ConcurrentSessionFilter;
-import ru.otus.spring.security.filter.MyOwnFilter;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/");
+    public void configure( WebSecurity web ) {
+        web.ignoring().antMatchers( "/" );
     }
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    public void configure( HttpSecurity http ) throws Exception {
         http.csrf().disable()
                 // По умолчанию SecurityContext хранится в сессии
                 // Это необходимо, чтобы он нигде не хранился
                 // и данные приходили каждый раз с запросом
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
                 .and()
-                .authorizeRequests().antMatchers("/public").anonymous()
+                .authorizeRequests().antMatchers( "/public" ).anonymous()
                 .and()
-                .authorizeRequests().antMatchers("/authenticated", "/success").authenticated()
-                .and().anonymous().authorities("ROLE_ANONYMOUS").principal("ya")
+                .authorizeRequests().antMatchers( "/authenticated", "/success" ).authenticated()
+                .and().anonymous().authorities( "ROLE_ANONYMOUS" ).principal( "ya" )
                 .and()
                 // Включает Form-based аутентификацию
 //
@@ -43,9 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         ;
         http.rememberMe()
-                .key("MyDirtySecret")
-                .tokenValiditySeconds(50000)
-                ;
+                .key( "MyDirtySecret" )
+                .tokenValiditySeconds( 50000 )
+        ;
     }
 
     @SuppressWarnings("deprecation")
@@ -55,8 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    public void configure( AuthenticationManagerBuilder auth ) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin").password("password").roles("ADMIN");
+                .withUser( "admin" ).password( "password" ).roles( "ADMIN" );
     }
 }
