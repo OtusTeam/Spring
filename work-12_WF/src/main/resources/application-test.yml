@@ -1,0 +1,19 @@
+spring:
+  messages:
+    basename: bundle
+
+  data:
+    mongodb:
+      port: 0
+      database: books
+#        uri: mongodb://localhost
+#        port: 27017
+#        database: books
+
+application:
+  version: 1.0
+  locale: en_EN
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG

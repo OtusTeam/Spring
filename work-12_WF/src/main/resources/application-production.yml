@@ -1,0 +1,13 @@
+spring:
+  messages:
+    basename: bundle
+
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 27017
+      database: books
+
+application:
+  version: 1.0
+  locale: en_EN
