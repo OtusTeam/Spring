@@ -1,7 +1,13 @@
 package ru.otus.spring.domain;
 
-public class Email {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Email {
+    @Id
+    @GeneratedValue
     private int id;
 
     private String email;
@@ -24,5 +30,14 @@ public class Email {
     public Email(int id, String email) {
         this.id = id;
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Email{");
+        sb.append("id=").append(id);
+        sb.append(", email='").append(email).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
