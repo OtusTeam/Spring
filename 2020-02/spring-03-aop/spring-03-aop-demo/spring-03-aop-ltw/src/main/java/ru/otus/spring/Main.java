@@ -14,12 +14,8 @@ import ru.otus.spring.service.PersonService;
        Пример: "-javaagent:c:\Users\MyUserName\.m2\repository\org\aspectj\aspectjweaver\1.9.5\aspectjweaver-1.9.5.jar".
        Кавычки не вносим)
     3. Запускаем Main
-
-    -javaagent:c:\Users\StVort\.m2\repository\org\aspectj\aspectjweaver\1.9.5\aspectjweaver-1.9.5.jar
-    -javaagent:c:\Users\StVort\.m2\repository\org\springframework\spring-instrument\5.2.1.RELEASE\spring-instrument-5.2.1.RELEASE.jar
 */
 
-//@EnableLoadTimeWeaving
 @Configuration
 @ComponentScan
 public class Main {
