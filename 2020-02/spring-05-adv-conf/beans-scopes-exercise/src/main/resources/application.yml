@@ -1,0 +1,8 @@
+greetings:
+  first-greeting: Привет
+  re-greeting: Рад снова тебя видеть
+
+
+logging:
+  level:
+    root: ERROR
