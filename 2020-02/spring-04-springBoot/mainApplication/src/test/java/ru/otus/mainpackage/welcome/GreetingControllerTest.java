@@ -28,7 +28,7 @@ public class GreetingControllerTest {
     private TestRestTemplate testRestTemplate; //call remote REST services
 
     @MockBean
-    private GreetingController greetingController;
+    private GreetingControllerRstyle greetingController;
 
     @Test
     public void sayHelloTest() {

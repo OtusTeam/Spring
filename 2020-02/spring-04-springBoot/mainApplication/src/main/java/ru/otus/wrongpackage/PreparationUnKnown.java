@@ -1,4 +1,4 @@
-package ru.otus.wrongPackage;
+package ru.otus.wrongpackage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

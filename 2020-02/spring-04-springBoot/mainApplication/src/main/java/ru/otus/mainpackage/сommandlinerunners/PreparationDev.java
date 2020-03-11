@@ -1,4 +1,4 @@
-package ru.otus.mainpackage.сommandLineRunners;
+package ru.otus.mainpackage.сommandlinerunners;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
