@@ -2,7 +2,6 @@ logging:
   level:
     root: ERROR
 
-spring:
-  shell:
-    interactive:
-      enabled: false
+lifecycle:
+  print:
+    enabled: true

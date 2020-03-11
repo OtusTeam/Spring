@@ -17,7 +17,7 @@ public class ApplicationEventsCommands {
     private String userName;
 
     @ShellMethod(value = "Login command", key = {"l", "login"})
-    public String login(@ShellOption(defaultValue = "stvort") String userName) {
+    public String login(@ShellOption(defaultValue = "AnyUser") String userName) {
         this.userName = userName;
         return String.format("Добро пожаловать: %s", userName);
     }

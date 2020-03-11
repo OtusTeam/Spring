@@ -19,7 +19,7 @@ public class LifeCycleConfig {
         return new CustomBeanPostProcessor();
     }
 
-    @ConditionalOnProperty(name = "spring.shell.interactive.enabled", havingValue = "false")
+    @ConditionalOnProperty(name = "lifecycle.print.enabled", havingValue = "true")
     @Bean(initMethod = "customInitMethod", destroyMethod = "customDestroyMethod")
     public CustomLifeCycleBean customLifeCycleBean() {
         return new CustomLifeCycleBean();
