@@ -1,0 +1,145 @@
+package ru.otus.spring.shell;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellOption;
+import ru.otus.spring.exception.AuthorDeleteException;
+import ru.otus.spring.exception.GenreDeleteException;
+import ru.otus.spring.models.Author;
+import ru.otus.spring.models.Book;
+import ru.otus.spring.models.Comment;
+import ru.otus.spring.models.Genre;
+import ru.otus.spring.service.AuthorService;
+import ru.otus.spring.service.BookService;
+import ru.otus.spring.service.CommentService;
+import ru.otus.spring.service.GenreService;
+
+@ShellComponent
+public class ShellCommands {
+    private final AuthorService authorService;
+    private final BookService bookService;
+    private final CommentService commentService;
+    private final GenreService genreService;
+
+    @Autowired
+    public ShellCommands(AuthorService authorService, BookService bookService,
+                         CommentService commentService, GenreService genreService) {
+        this.authorService = authorService;
+        this.bookService = bookService;
+        this.commentService = commentService;
+        this.genreService = genreService;
+    }
+
+    @ShellMethod(value = "get books list (no args)", key = {"b"})
+    public List<String> getBooks() {
+        List<Book> books = bookService.getAll();
+        return books.stream()
+                .map(Book::getCaption)
+                .collect(Collectors.toList());
+    }
+
+    @ShellMethod(value = "add book (caption)", key = {"ba"})
+    public void addBook(@ShellOption() String caption) {
+        bookService.add(caption);
+    }
+
+    @ShellMethod(value = "delete book by caption like (caption)", key = {"bd"})
+    public void deleteBook(@ShellOption() String caption) {
+        bookService.deleteBookByCaption(caption);
+    }
+
+    @ShellMethod(value = "get book info by caption (caption)", key = {"bi"})
+    public String bookInfo(@ShellOption() String caption) {
+        List<Book> books = bookService.findByCaption(caption);
+        return books.stream()
+                .map(Book::toFormattedString)
+                .collect(Collectors.joining("\n"));
+    }
+
+    @ShellMethod(value = "add book's author (bookCaption, authorName)", key = {"baa"})
+    public void bookAuthorAdd(@ShellOption() String bookCaption, @ShellOption() String authorName) {
+        bookService.bookAuthorAdd(bookCaption, authorName);
+    }
+
+    @ShellMethod(value = "delete book's author (bookCaption, authorName)", key = {"bad"})
+    public void bookAuthorDelete(@ShellOption() String bookCaption, @ShellOption() String authorName) {
+        bookService.bookAuthorDelete(bookCaption, authorName);
+    }
+
+    @ShellMethod(value = "add book's genre (bookCaption, genreName)", key = {"bga"})
+    public void bookGenreAdd(@ShellOption() String bookCaption, @ShellOption() String genreName) {
+        bookService.bookGenreAdd(bookCaption, genreName);
+    }
+
+    @ShellMethod(value = "delete book's genre (bookCaption, genreName)", key = {"bgd"})
+    public void bookGenreDelete(@ShellOption() String bookCaption, @ShellOption() String genreName) {
+        bookService.bookGenreDelete(bookCaption, genreName);
+    }
+
+    @ShellMethod(value = "get authors list", key = {"a"})
+    public List<String> getAuthors() {
+        List<Author> authors = authorService.getAll();
+        return authors.stream()
+                .map(Author::getName)
+                .collect(Collectors.toList());
+    }
+
+    @ShellMethod(value = "add author (name)", key = {"aa"})
+    public void addAuthor(@ShellOption() String name) {
+        authorService.add(name);
+    }
+
+    @ShellMethod(value = "delete author by name (authorName)", key = {"ad"})
+    public void deleteAuthor(@ShellOption() String authorName) {
+        try {
+            authorService.deleteAuthorsByName(authorName);
+        } catch (AuthorDeleteException e) {
+            System.out.println("Сначала удалите книги с этими авторами");
+        }
+    }
+
+    @ShellMethod(value = "get genres list", key = {"g"})
+    public List<String> getGenres() {
+        List<Genre> genres = genreService.getAll();
+        return genres.stream()
+                .map(Genre::getName)
+                .collect(Collectors.toList());
+    }
+
+    @ShellMethod(value = "add genre (name)", key = {"ga"})
+    public void addGenre(@ShellOption() String name) {
+        genreService.add(name);
+    }
+
+    @ShellMethod(value = "delete genre by name (genreName)", key = {"gd"})
+    public void deleteGenre(@ShellOption() String genreName) {
+        try {
+            genreService.deleteGenresByName(genreName);
+        } catch (GenreDeleteException e) {
+            System.out.println("Сначала удалите книги с этими жанрами");
+        }
+    }
+
+    @ShellMethod(value = "get all comment list", key = {"c"})
+    public List<String> getComments() {
+        List<Comment> comments = commentService.getAll();
+        return comments.stream()
+                .map(c -> String.format("Id: %s, Book: %s - %s", c.getId(), c.getBook().getCaption(),
+                        c.getCommentText()))
+                .collect(Collectors.toList());
+    }
+
+    @ShellMethod(value = "add comment (bookCaption, commentText)", key = {"ca"})
+    public void addComment(@ShellOption() String bookCaption, @ShellOption() String commentText) {
+        commentService.add(bookCaption, commentText);
+    }
+
+    @ShellMethod(value = "delete comment by id (commentId)", key = {"cd"})
+    public void deleteComment(@ShellOption() String commentId) {
+        commentService.deleteById(commentId);
+    }
+}
