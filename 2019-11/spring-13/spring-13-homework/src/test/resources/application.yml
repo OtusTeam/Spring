@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+      database: otus
+
+  shell:
+    interactive:
+      enabled: false
+
+logging:
+  level:
+    ROOT: ERROR
+
