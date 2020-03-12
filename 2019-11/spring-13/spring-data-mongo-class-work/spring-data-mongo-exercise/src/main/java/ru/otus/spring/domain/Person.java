@@ -1,7 +1,11 @@
 package ru.otus.spring.domain;
 
-public class Person {
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
+@Document
+public class Person {
+    @MongoId
     private String id;
     private String name;
 
