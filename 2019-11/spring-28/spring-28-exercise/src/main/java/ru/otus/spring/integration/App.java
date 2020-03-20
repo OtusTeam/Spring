@@ -29,12 +29,12 @@ public class App {
 
     @Bean
     public QueueChannel itemsChannel() {
-        return MessageChannels.queue(10).datatype(OrderItem.class).get();
+        return MessageChannels.queue(10).get();
     }
 
     @Bean
     public PublishSubscribeChannel foodChannel() {
-        return MessageChannels.publishSubscribe().datatype(Food.class).get();
+        return MessageChannels.publishSubscribe().get();
     }
 
     // TODO: create default poller
