@@ -83,7 +83,7 @@ DevOps](https://www.oreilly.com/library/view/the-art-of/9780134031408/)
 ### DevOps
 * [Effective DevOps](https://www.oreilly.com/library/view/effective-devops/9781491926291/)
 
-# Design
+### Design
 * [Designing Data-Intensive Applications, 1st Edition](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
 * [Growing Object-Oriented Software, Guided by Tests](https://www.oreilly.com/library/view/growing-object-oriented-software/9780321574442/)
 * [Implementing Domain-Driven Design](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/)
