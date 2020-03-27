@@ -36,7 +36,7 @@
 * [REST in Practice](https://www.oreilly.com/library/view/rest-in-practice/9781449383312/)
 
 ### Java
-* [Брайан Гетц и др. | Java Concurrency на практике (2020)](http://nnmclub.to/forum/viewtopic.php?t=1364599&sid=b28e409e821c69896d438b7d3df0c7a4)
+* [Брайан Гетц и др. | Java Concurrency на практике (2020)](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
 * [xUnit Test Patterns: Refactoring Test Code](https://www.oreilly.com/library/view/xunit-test-patterns/9780131495050/)
 
 ### Spring
