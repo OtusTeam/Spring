@@ -1,0 +1,19 @@
+spring:
+  messages:
+    basename: bundle
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+application:
+  version: 1.0
+  locale: en_EN
