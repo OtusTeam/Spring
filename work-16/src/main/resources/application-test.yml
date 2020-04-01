@@ -1,0 +1,6 @@
+spring:
+
+application:
+  version: 1.0
+
+debug: false
