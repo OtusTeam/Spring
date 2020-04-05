@@ -9,4 +9,6 @@
 3. ```2019-11/spring-04/spring-04-homework/``` - занятие #4. Использование Spring Boot.
 4. ```2019-11/spring-05/spring-05-homework/``` - занятие #5. Использование Spring Shell.
 5. ```2019-11/spring-07/spring-07-homework/``` - занятие #7. DAO на Spring JDBC.
-4. ```2019-11/spring-09/spring-09-homework/``` - занятие #9. JPQL, Spring ORM, DAO на основе Spring ORM + JPA
+6. ```2019-11/spring-09/spring-09-homework/``` - занятие #9. JPQL, Spring ORM, DAO на основе Spring ORM + JPA
+7. ```2019-11/spring-11/spring-11-homework/``` - занятие #11. Spring Data JPA
+8. ```2019-11/spring-13/spring-13-homework/``` - занятие #13. Spring Data MongoDB
