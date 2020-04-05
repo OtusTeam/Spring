@@ -25,17 +25,17 @@
 <body>
 
 <!-- Person edition -->
-<form id="edit-form" action="edit.html">
+<form id="edit-form" th:action="@{/edit(id=${person.id})}" action="edit.html" th:object="${person}">
     <h1>Person Info:</h1>
 
     <div class="row">
         <label>ID:&nbsp;</label>
-        <span>1</span>
+        <span th:text="*{id}">1</span>
     </div>
 
     <div class="row">
         <label>Name:&nbsp;</label>
-        <span>John Doe</span>
+        <span th:text="*{name}">John Doe</span>
     </div>
 
     <div class="row">
