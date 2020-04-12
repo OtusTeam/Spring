@@ -1,0 +1,40 @@
+spring:
+  messages:
+    basename: bundle
+  data:
+    rest:
+      basePath: /datarest
+
+application:
+  version: 1.0
+  locale: en_EN
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    initialization-mode: always
+
+jpa:
+  generate-ddl: false
+  hibernate:
+    ddl-auto: none
+  show-sql: false
+  properties:
+    hibernate.format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    ru.otus.work.service: DEBUG
+    ru.otus.work.controller: DEBUG
+  file: /logs/application-debug.log

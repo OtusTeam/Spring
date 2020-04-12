@@ -1,0 +1,27 @@
+spring:
+  messages:
+    basename: bundle
+  data:
+    rest:
+      basePath: /datarest
+
+application:
+  version: 1.0
+  locale: en_EN
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    ru.otus.work.service: DEBUG
+  file:/logs/application-debug.log
