@@ -34,4 +34,14 @@ public class PersonController {
         model.addAttribute("person", person);
         return "edit";
     }
+    
+    @PostMapping("/edit")
+    public String savePerson(
+            Person person,
+            Model model
+                            ) {
+        Person saved = repository.save(person);
+        model.addAttribute(saved);
+        return "edit";
+    }
 }
