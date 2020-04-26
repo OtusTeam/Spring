@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book info</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .book, .book td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Book info</h1>
+
+<table class="book">
+    <tbody>
+    <tr>
+        <td>ID</td><td th:text="${book.id}">1</td>
+    </tr>
+    <tr>
+        <td>Caption</td><td th:text="${book.caption}">Caption</td>
+    </tr>
+    <tr>
+        <td>Authors</td>
+    </tr>
+    <tr th:each="author : ${book.authors}">
+        <td>-</td><td th:text="${author.name}"></td>
+    </tr>
+    <tr>
+        <td>Genres</td>
+    </tr>
+    <tr th:each="genre : ${book.genres}">
+        <td>-</td><td th:text="${genre.name}"></td>
+    </tr>
+    <tr>
+        <td>Comments</td>
+    </tr>
+    <tr th:each="comment : ${book.comments}">
+        <td>-</td><td th:text="${comment.comment}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/}" href="bookIndex.html">Back</a>
+</body>
+</html>name

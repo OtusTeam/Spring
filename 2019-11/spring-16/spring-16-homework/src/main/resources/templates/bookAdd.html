@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Book addition -->
+<!--/*@thymesVar id="book" type="ru.otus.spring.model.Book"*/-->
+<form id="add-form"
+      th:action="@{/add}"
+      th:object="${book}"
+      th:method="post"
+      action="#">
+    <h1>Book Info:</h1>
+
+    <div class="row">
+        <label for="holder-input">Caption:</label>
+        <input id="holder-input" name="name" type="text" th:field="*{caption}" placeholder="Caption" value="Empty"/>
+    </div>
+
+    <div class="row">
+        <button type="submit">Add book</button>
+    </div>
+</form>
+
+</body>
+</html>

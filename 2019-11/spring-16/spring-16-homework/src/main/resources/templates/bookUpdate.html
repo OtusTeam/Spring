@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Book edition -->
+<form id="edit-form"
+      th:action="@{/update/{id}(id=${book.id})}"
+      th:object="${book}"
+      th:method="post"
+      action="#">
+    <h1>Book Info:</h1>
+
+    <div class="row">
+        <label for="id-input">ID:</label>
+        <input id="id-input" type="text" readonly="readonly" th:field="*{id}" placeholder="Id" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">Caption:</label>
+        <input id="holder-input" name="name" type="text" th:field="*{caption}" placeholder="Caption" value="Empty"/>
+    </div>
+
+    <div class="row">
+        <button type="submit">Update book</button>
+    </div>
+</form>
+
+</body>
+</html>
