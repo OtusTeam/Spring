@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: work-18
+  messages:
+    basename: bundle
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+
+application:
+  version: 1.0
+  locale: en_EN
+
+feign:
+  weather:
+    url: https://samples.openweathermap.org/data/2.5/
+
+debug: false
