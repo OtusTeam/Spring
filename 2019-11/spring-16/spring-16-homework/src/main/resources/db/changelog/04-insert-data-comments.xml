@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+<changeSet id="04" author="evmaksimenko">
+    <insert tableName="comments">
+        <column name="book_id" valueNumeric="1"/>
+        <column name="comment" value="Вообще непонимаю"/>
+    </insert>
+    <insert tableName="comments">
+        <column name="book_id" valueNumeric="3"/>
+        <column name="comment" value="Понял на 5 раз"/>
+    </insert>
+    <insert tableName="comments">
+        <column name="book_id" valueNumeric="3"/>
+        <column name="comment" value="Морпехи вперёд"/>
+    </insert>
+    <insert tableName="comments">
+        <column name="book_id" valueNumeric="4"/>
+        <column name="comment" value="Ну и закрутил"/>
+    </insert>
+</changeSet>
+</databaseChangeLog>

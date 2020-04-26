@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+<changeSet id="03" author="evmaksimenko">
+    <insert tableName="books">
+        <column name="id" valueNumeric="1"/>
+        <column name="caption" value="ППППП"/>
+    </insert>
+    <insert tableName="books">
+        <column name="id" valueNumeric="2"/>
+        <column name="caption" value="iFuk"/>
+    </insert>
+    <insert tableName="books">
+        <column name="id" valueNumeric="3"/>
+        <column name="caption" value="Криптономикон"/>
+    </insert>
+    <insert tableName="books">
+        <column name="id" valueNumeric="4"/>
+        <column name="caption" value="Reamde"/>
+    </insert>
+    <insert tableName="books">
+        <column name="id" valueNumeric="5"/>
+        <column name="caption" value="Алгоритмы и структуры данных"/>
+    </insert>
+</changeSet>
+</databaseChangeLog>
