@@ -12,6 +12,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+// @Transactional должна стоять на методе сервиса.
+// Причем, если метод не подразумевает изменения данных в БД то категорически желательно
+// выставить у аннотации параметр readOnly в true.
+// Но это только упражнение и транзакции мы пока не проходили.
+// Поэтому, для упрощения, пока вешаем над классом репозитория
 @Transactional
 @Repository
 public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
