@@ -8,13 +8,14 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
 
     @PersistenceContext
     private EntityManager em;
 
+    // @Transactional должна стоять на методе сервиса, но это только упражнение
+    @Transactional
     @Override
     public OtusStudent save(OtusStudent student) {
         if (student.getId() <= 0) {
@@ -25,11 +26,14 @@ public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
         }
     }
 
+    // @Transactional должна стоять на методе сервиса, но это только упражнение
+    @Transactional(readOnly = true)
     @Override
     public Optional<OtusStudent> findById(long id) {
         return Optional.ofNullable(em.find(OtusStudent.class, id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<OtusStudent> findAll() {
         EntityGraph<?> entityGraph = em.getEntityGraph("otus-student-avatars-entity-graph");
@@ -38,6 +42,7 @@ public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
         return query.getResultList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<OtusStudent> findByName(String name) {
         TypedQuery<OtusStudent> query = em.createQuery("select s " +
@@ -48,6 +53,7 @@ public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
         return query.getResultList();
     }
 
+    @Transactional
     @Override
     public void updateNameById(long id, String name) {
         Query query = em.createQuery("update OtusStudent s " +
@@ -58,6 +64,7 @@ public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
         query.executeUpdate();
     }
 
+    @Transactional
     @Override
     public void deleteById(long id) {
         Query query = em.createQuery("delete " +

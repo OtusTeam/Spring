@@ -12,13 +12,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
 
     @PersistenceContext
     private EntityManager em;
 
+    // @Transactional должна стоять на методе сервиса, но это только упражнение
+    @Transactional
     @Override
     public OtusStudent save(OtusStudent student) {
         if (student.getId() <= 0) {
@@ -29,26 +30,32 @@ public class OtusStudentRepositoryJpaImpl implements OtusStudentRepositoryJpa {
         }
     }
 
+    // @Transactional должна стоять на методе сервиса, но это только упражнение
+    @Transactional(readOnly = true)
     @Override
     public Optional<OtusStudent> findById(long id) {
         return Optional.ofNullable(em.find(OtusStudent.class, id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<OtusStudent> findAll() {
         return Collections.emptyList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<OtusStudent> findByName(String name) {
         return Collections.emptyList();
     }
 
+    @Transactional
     @Override
     public void updateNameById(long id, String name) {
 
     }
 
+    @Transactional
     @Override
     public void deleteById(long id) {
 
