@@ -1,0 +1,35 @@
+version: '3'
+services:
+  # БД mysql
+  server:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: db_work
+      MYSQL_USER: work
+      MYSQL_PASSWORD: 123
+
+  # Консоль администратора БД mysql
+  phpmyadmin:
+    depends_on:
+      - server
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8088:80
+    environment:
+      PMA_HOST: server
+      MYSQL_ROOT_PASSWORD: 123456
+
+  # Приложение
+  client:
+    depends_on:
+      - server
+    build: .
+    command: java -jar -Dspring.profiles.active=dock /target/work-17-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8086:8086"

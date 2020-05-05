@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: work-17
+  messages:
+    basename: bundle
+server:
+  port: 8086
+
+  datasource:
+    initialization-mode: always
+
+db:
+  driverClassName: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://192.168.99.101:3306/db_work
+  username: work
+  password: 123
+
+  jpa:
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+
+application:
+  version: 1.0
+  locale: en_EN
+
+feign:
+  weather:
+    url: https://samples.openweathermap.org/data/2.5/
+
+debug: false

@@ -1,0 +1,4 @@
+insert into authors (id, name, birth_yar, description) values (1, 'harry harrison', '1925-03-12','harry harrison is the pseudonym of henry maxwell dempsey, a famous american science fiction writer and editor. born march 12, 1925 in stamford');
+insert into genres (id, name) values(1, 'fantasy');
+insert into books (id, name, description, author_id, genre_id) values (1, 'the birth of steel rat','the magnificent jim dee gris - a famous interstellar criminal - received for his ingenuity and determination a well-known nickname stainless steel rat', 1, 1);
+insert into comments (id, book_id, text) values(1, 1, 'text');
