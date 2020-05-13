@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 public class CreateExamples {
 
     public static void main(String[] args) {
-        final Observable<String> obs = deferExample();
+        Observable<String> obs = justExample();
         obs.forEach(System.out::println);
         obs.forEach(System.out::println);
     }
