@@ -24,7 +24,7 @@ public class OperatorsExample {
             new Person("John", "Dow", "male", LocalDate.of(1992, 3, 12)),
             new Person("Jane", "Dow", "female", LocalDate.of(2001, 6, 23)),
             new Person("Howard", "Lovecraft", "male", LocalDate.of(1890, 8, 20)),
-            new Person("Joanne", "Rowling", "female", LocalDate.of(1965, 6, 31)));
+            new Person("Joanne", "Rowling", "female", LocalDate.of(1965, 6, 30)));
 
         Observable.fromIterable(persons)
             .filter(
