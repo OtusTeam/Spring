@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all checkLists</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+            background-color: #FFF8DC;
+        }
+
+        .CheckLists, .CheckLists td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+        .buttons {
+        text-align: left;
+        }
+
+        .button {
+        position: absolute;
+        top: 50%;
+        }
+
+         TABLE {
+          width: 600px; /* Ширина таблицы */
+          border: 1px solid yellow; /* Рамка вокруг таблицы */
+         }
+
+         TD, TH {
+          padding: 3px; /* Поля вокруг содержимого ячеек */
+         }
+
+         TH {
+          text-align: center; /* Выравнивание по левому краю */
+          background: #B0E0E6; /* Цвет фона */
+          color: black; /* Цвет текста */
+         }
+
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1 th:text="#{CheckLists}">CheckLists:</h1>
+
+<table class="CheckLists">
+    <thead>
+    <tr>
+        <th th:text="#{checkListInTableDay}">Day</th>
+        <th th:text="#{checkListInTableNonsymptoms}">Nonsymptoms</th>
+        <th th:text="#{checkListInTableFever}">Fever</th>
+        <th th:text="#{checkListInTableSorethroat}">Sorethroat</th>
+        <th th:text="#{checkListInTableCough}">Cough</th>
+        <th th:text="#{checkListInTableRunnynose}">Runnynose</th>
+        <th th:text="#{checkListInTableDyspnea}">Dyspnea</th>
+        <th th:text="#{checkListInTableOthersymptoms}">Othersymptoms</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="checkList : ${checkLists}">
+        <td th:text="${checkList.daynumber}">Daynumber</td>
+        <td><input type="checkbox" onclick="return false;" name="checkbox" th:checked="${checkList.nonsymptoms}"/></td>
+        <td><input type="checkbox" onclick="return false;" name="checkbox1" th:checked="${checkList.fever}"/></td>
+        <td><input type="checkbox" onclick="return false;" name="checkbox2" th:checked="${checkList.sorethroat}"/></td>
+        <td><input type="checkbox" onclick="return false;" name="checkbox3" th:checked="${checkList.cough}"/></td>
+        <td><input type="checkbox" onclick="return false;" name="checkbox4" th:checked="${checkList.runnynose}"/></td>
+        <td><input type="checkbox" onclick="return false;" name="checkbox5" th:checked="${checkList.dyspnea}"/></td>
+        <td th:text="${checkList.othersymptoms}">Othersymptoms</td>
+        <td>
+            <a th:href="@{/deletecheckList(id=${checkList.id}, userid=${checkList.userid})}" th:text="#{userDeleteInTable}" href="checkList.html">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="buttons">
+    <button type="button">
+        <a th:href="@{/addCheckList(userid=${userid})}" th:text="#{userAddButton}" href="editCheckList.html">Add</a>
+    </button>
+</div>
+</body>
+</html>

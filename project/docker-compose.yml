@@ -1,0 +1,27 @@
+version: '3'
+services:
+  # БД postgres
+  server_db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=patients_db
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  # Приложение
+  client:
+    depends_on:
+      - server
+    build: .
+    command: java -jar -Dspring.profiles.active=dock /target/project-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8086:8086"

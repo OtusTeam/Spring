@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Edit user</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+            background-color: #FFF8DC;
+        }
+
+        label {
+            display: inline-block;
+            width: 70px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        form {
+            margin: 0 auto;
+            width:250px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- User edition -->
+<form id="edit-form" th:action="@{/userSave}" th:method="POST" th:object="${user}" action="#">
+    <h1 th:text="#{editHeader}">User:</h1>
+
+    <div class="row">
+        <input id="id-input" name="id" type="hidden" th:field="*{id}" readonly="readonly" th:value="${user.id}"
+               value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="username-input" th:text="#{usernameInTable}">Username:</label>
+        <input id="username-input" name="username" type="text" th:value="${user.username}" value="Username" required/>
+    </div>
+
+    <div class="row">
+        <label for="password-input" th:text="#{passwordInTable}">Password:</label>
+        <input id="password-input" name="password" type="password" th:value="${user.password}" value="Password" required/>
+    </div>
+
+    <div class="row">
+        <label for="name-input" th:text="#{nameInTable}">Name:</label>
+        <input id="name-input" name="name" type="text" th:value="${user.name}" value="Name" required/>
+    </div>
+
+    <div class="row">
+        <label for="authority-input" th:text="#{authorityInTable}">Authority:</label>
+        <select id="authority-input"  th:field="*{authority}">
+            <option th:each="authority : ${authorities}"
+                    th:value="${authority}"
+                    th:utext="${authority}"/>
+        </select>
+    </div>
+
+    <div class="row">
+        <label for="description-input" th:text="#{userDescriptionInTable}">Description:</label>
+        <input id="description-input" name="description" type="text" th:value="${user.description}" value="Description"/>
+    </div>
+
+    <div class="row">
+        <label for="email-input" th:text="#{userEmailInTable}">Email:</label>
+        <input id="email-input" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" type="email" th:value="${user.email}" value="Email" required />
+    </div>
+
+    <div class="row">
+        <label for="tel-input" th:text="#{userTelInTable}">Tel:</label>
+        <input id="tel-input" name="tel" pattern="[0-9]{7,}" type="tel" th:value="${user.tel}" value="Tel"/>
+    </div>
+
+    <div class="row">
+        <button type="submit" th:text="#{editButton}">OK</button>
+    </div>
+</form>
+</body>
+</html>

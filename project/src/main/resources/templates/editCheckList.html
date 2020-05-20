@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Edit list</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+            background-color: #FFF8DC;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        form {
+            margin: 0 auto;
+            width:250px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="edit-form" th:action="@{/checkListSave}" th:method="POST" th:object="${checkList}" action="#">
+    <h1 th:text="#{ListHeader}">List:</h1>
+
+    <div class="row">
+        <input id="id-input" name="id" type="hidden" th:field="*{id}" readonly="readonly" th:value="${checkList.id}"
+               value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="daynumber-input" th:text="#{daynumberInTable}">daynumber:</label>
+        <input id="daynumber-input" name="daynumber" type="text" th:value="${checkList.daynumber}" value="Daynumber"
+               required/>
+    </div>
+
+    <div class="row">
+        <label for="nonsymptoms-input" th:text="#{nonsymptomsInTable}">nonsymptoms:</label>
+        <input id="nonsymptoms-input" name="nonsymptoms" type="checkbox" th:checked="${checkList.nonsymptoms}"/>
+    </div>
+
+    <div class="row">
+        <label for="fever-input" th:text="#{feverInTable}">fever:</label>
+        <input id="fever-input" name="fever" type="checkbox" th:checked="${checkList.fever}"/>
+    </div>
+
+    <div class="row">
+        <label for="sorethroat-input" th:text="#{sorethroatInTable}">sorethroat:</label>
+        <input id="sorethroat-input" name="sorethroat" type="checkbox" th:checked="${checkList.sorethroat}"/>
+    </div>
+
+    <div class="row">
+        <label for="cough-input" th:text="#{coughInTable}">cough:</label>
+        <input id="cough-input" name="cough" type="checkbox" th:checked="${checkList.cough}"/>
+    </div>
+
+    <div class="row">
+        <label for="runnynose-input" th:text="#{runnynoseInTable}">runnynose:</label>
+        <input id="runnynose-input" name="runnynoseInTable" type="checkbox" th:checked="${checkList.runnynose}"/>
+    </div>
+
+    <div class="row">
+        <label for="dyspnea-input" th:text="#{dyspneaInTable}">dyspnea:</label>
+        <input id="dyspnea-input" name="dyspnea" type="checkbox" th:checked="${checkList.dyspnea}"/>
+    </div>
+
+    <div class="row">
+        <label for="othersymptoms-input" th:text="#{othersymptomsInTable}">othersymptoms:</label>
+        <input id="othersymptoms-input" name="othersymptoms" type="text" th:value="${checkList.othersymptoms}"
+               value="Othersymptoms"/>
+    </div>
+
+    <div class="row">
+        <button type="submit" th:text="#{editButton}">OK</button>
+    </div>
+
+    <input type="hidden" id="userid-input" name="userid" th:value="${checkList.userid}"/>
+</form>
+
+</body>
+</html>

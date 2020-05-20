@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all users</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+            background-color: #FFF8DC;
+        }
+
+        .users, .users td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+        .buttons {
+        text-align: left;
+        }
+
+        .button {
+        position: absolute;
+        top: 50%;
+        }
+
+         TABLE {
+          width: 300px; /* Ширина таблицы */
+          border: 1px solid yellow; /* Рамка вокруг таблицы */
+         }
+
+         TD, TH {
+          padding: 3px; /* Поля вокруг содержимого ячеек */
+         }
+
+         TH {
+          text-align: left; /* Выравнивание по левому краю */
+          background: #B0E0E6; /* Цвет фона */
+          color: black; /* Цвет текста */
+         }
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1 th:text="#{users}">Users:</h1>
+
+<table class="users">
+    <thead>
+    <tr>
+        <th th:text="#{usernameInTable}">Username</th>
+        <th th:text="#{nameInTable}">Name</th>
+        <th th:text="#{authorityInTable}">Authority</th>
+        <th th:text="#{userDescriptionInTable}">Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}">Username</td>
+        <td th:text="${user.name}">Name</td>
+        <td th:text="${user.authority}">Authority</td>
+        <td th:text="${user.description}">Description</td>
+        <td>
+            <a th:href="@{/users(id=${user.id})}" th:text="#{userEditInTable}" href="editUser.html">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/deleteusers(id=${user.id})}" th:text="#{userDeleteInTable}" href="users.html">Delete</a>
+        </td>
+        <td>
+            <a th:href="@{/checkLists(userid=${user.id})}" th:text="#{CheckLists}" href="checkLists.html">CheckList</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="buttons">
+    <button type="button">
+        <a href="editUser.html" th:text="#{userAddButton}">Add</a>
+    </button>
+</div>
+</body>
+</html>
