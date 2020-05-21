@@ -22,7 +22,7 @@ application:
   security: false
 
 mail:
-  username: mr.mag@bk.ru
-  password: 23Mrmag17
+  username: g@bk.ru
+  password: pass
   host: smtp.mail.ru
   port: 465
