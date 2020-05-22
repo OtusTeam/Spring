@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="smigunov" id="1590158877268-1">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(100)"/>
+            <column name="nonexpired" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nonlocked" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="credentialsnonexpired" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="enabled" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="tel" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="smigunov" id="1590158877268-2">
+        <createTable tableName="checklist">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="daynumber" type="INTEGER"/>
+            <column name="nonsymptoms" type="INTEGER"/>
+            <column name="fever" type="INTEGER"/>
+            <column name="sorethroat" type="INTEGER"/>
+            <column name="cough" type="INTEGER"/>
+            <column name="runnynose" type="INTEGER"/>
+            <column name="dyspnea" type="INTEGER"/>
+            <column name="othersymptoms" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="smigunov" id="1590158877268-3">
+        <createTable tableName="user_authorities">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

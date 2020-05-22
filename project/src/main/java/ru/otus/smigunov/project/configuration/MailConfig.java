@@ -1,5 +1,6 @@
 package ru.otus.smigunov.project.configuration;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,19 +10,23 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
+@Getter
 public class MailConfig {
 
-    @Value("${mail.username}")
+    @Value("${mail.username:empty}")
     private String username;
 
-    @Value("${mail.password}")
+    @Value("${mail.password:empty}")
     private String password;
 
-    @Value("${mail.host}")
+    @Value("${mail.host:empty}")
     private String host;
 
-    @Value("${mail.port}")
+    @Value("${mail.port:empty}")
     private int port;
+
+    @Value("${server.port:empty}")
+    private String serverPort;
 
     @Bean
     @Primary

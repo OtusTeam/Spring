@@ -1,0 +1,36 @@
+spring:
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
+
+  liquibase:
+    change-log: classpath:db/changelog/structure.xml
+
+  messages:
+    basename: bundle
+
+server:
+  port: ${SERVICE_PORT:8086}
+
+  jpa:
+    generate-ddl: false
+    database-platform: ${DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+
+application:
+  name: project
+  version: 1.0
+  locale: ${APPLICATION_LOCALE:ru_RU}
+
+mail:
+  username: ${MAIL_USERNAME}
+  password: ${MAIL_PASSWORD}
+  host: ${MAIL_SMTPHOST:smtp.mail.ru}
+  port: ${MAIL_SMTPPORT:465}

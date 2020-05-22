@@ -1,5 +1,8 @@
 spring:
 
+  liquibase:
+    change-log: classpath:db/changelog/structure.xml
+
   datasource:
     url: jdbc:postgresql://192.168.99.100/patients_db
     username: admin
@@ -27,8 +30,8 @@ application:
   locale: ru_RU
 
 mail:
-  username: mr.mag@bk.ru
-  password: 23Mrmag17
+  username:
+  password:
   host: smtp.mail.ru
   port: 465
 

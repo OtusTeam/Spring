@@ -3,7 +3,9 @@ spring:
   datasource:
     url: jdbc:h2:mem:testdb
     initialization-mode: always
-#    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: classpath:db/changelog/structure.xml
 
   messages:
     basename: bundle
@@ -22,7 +24,7 @@ application:
   security: false
 
 mail:
-  username: g@bk.ru
-  password: pass
+  username: none
+  password: none
   host: smtp.mail.ru
   port: 465
