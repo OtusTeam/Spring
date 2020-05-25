@@ -1,13 +1,14 @@
 databaseChangeLog:
 - changeSet:
-    id: 2018-01-11--0001--user
+    id: 2019-01-11--0001--user
     author: ydvorzhetskiy
     createTable:
-      tableName: user
+      tableName: users
       columns:
       - column:
           name: id
-          type: varchar(32)
+          type: bigint
+          autoIncrement: true
           constraints:
             nullable: false
             primaryKey: true

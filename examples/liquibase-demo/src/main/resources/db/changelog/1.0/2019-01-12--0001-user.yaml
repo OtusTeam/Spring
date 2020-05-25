@@ -1,0 +1,12 @@
+databaseChangeLog:
+- changeSet:
+    id: 2019-01-12--0001--user
+    author: stvort
+    addColumn:
+      tableName: users
+      columns:
+      - column:
+          name: full_name
+          type: varchar(255)
+          constraints:
+            nullable: false
