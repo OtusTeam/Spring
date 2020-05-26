@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2020-05-25--001-courses" author="stvort">
+    <changeSet id="2020-05-25--003-courses" author="stvort">
         <createTable tableName="courses">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -14,7 +14,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="2020-05-25--001-users_courses" author="stvort">
+    <changeSet id="2020-05-25--003-users_courses" author="stvort">
         <createTable tableName="users_courses">
             <column name="user_id" type="bigint">
                 <constraints nullable="false"

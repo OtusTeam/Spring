@@ -21,7 +21,7 @@ databaseChangeLog:
     runOnChange: true
     loadUpdateData:
       primaryKey: id
-      file: data/2020-05-25--0002-users.csv
+      file: data/2020-05-25--0002-users-avatars.csv
       relativeToChangelogFile: true
       separator: ;
       quotChar: '"'

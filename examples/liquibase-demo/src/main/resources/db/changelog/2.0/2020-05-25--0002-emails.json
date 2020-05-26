@@ -2,7 +2,7 @@
   "databaseChangeLog": [
     {
       "changeSet": {
-        "id": "2020-05-25--003-emails",
+        "id": "2020-05-25--002-emails",
         "author": "stvort",
         "changes": [
           {
@@ -16,8 +16,7 @@
                     "autoIncrement": true,
                     "constraints": {
                       "primaryKey": true,
-                      "nullable": false,
-                      "deleteCascade": true
+                      "nullable": false
                     }
                   }
                 },
@@ -28,7 +27,8 @@
                     "constraints": {
                       "nullable": false,
                       "foreignKeyName": "fk_emails_users",
-                      "references": "users(id)"
+                      "references": "users(id)",
+                      "deleteCascade": true
                     }
                   }
                 },
