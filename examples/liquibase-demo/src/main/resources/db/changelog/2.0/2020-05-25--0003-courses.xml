@@ -1,0 +1,34 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2020-05-25--003-courses" author="stvort">
+        <createTable tableName="courses">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2020-05-25--003-users_courses" author="stvort">
+        <createTable tableName="users_courses">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_user_courses_users"
+                             references="users(id)"
+                             deleteCascade="true"/>
+            </column>
+            <column name="course_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_user_courses_courses"
+                             references="courses(id)"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

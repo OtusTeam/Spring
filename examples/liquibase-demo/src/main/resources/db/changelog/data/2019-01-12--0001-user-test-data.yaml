@@ -1,15 +1,15 @@
 databaseChangeLog:
 - changeSet:
-    id: 0001-user-test-data
+    id: 2019-01-12--0001-user-test-data
     author: ydvorzhetskiy
     context: test
     runOnChange: true
     loadUpdateData:
       primaryKey: id
-      file: data/user.csv
+      file: data/2019-01-12--0001-users.csv
       relativeToChangelogFile: true
       separator: ;
       quotChar: '"'
       seperator: ';'
       encoding: UTF-8
-      tableName: user
+      tableName: users

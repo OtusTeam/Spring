@@ -1,0 +1,51 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "2020-05-25--002-emails",
+        "author": "stvort",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "emails",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "user_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false,
+                      "foreignKeyName": "fk_emails_users",
+                      "references": "users(id)",
+                      "deleteCascade": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "email",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

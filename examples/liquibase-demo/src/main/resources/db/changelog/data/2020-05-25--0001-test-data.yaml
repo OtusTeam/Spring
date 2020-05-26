@@ -1,0 +1,46 @@
+databaseChangeLog:
+- changeSet:
+    id: 2020-05-25--0001-test-data-avatars
+    author: stvort
+    context: test
+    runOnChange: true
+    loadUpdateData:
+      primaryKey: id
+      file: data/2020-05-25--0001-avatars.csv
+      relativeToChangelogFile: true
+      separator: ;
+      quotChar: '"'
+      seperator: ';'
+      encoding: UTF-8
+      tableName: avatars
+
+- changeSet:
+    id: 2020-05-25--0001-test-data-users
+    author: stvort
+    context: test
+    runOnChange: true
+    loadUpdateData:
+      primaryKey: id
+      file: data/2020-05-25--0002-users-avatars.csv
+      relativeToChangelogFile: true
+      separator: ;
+      quotChar: '"'
+      seperator: ';'
+      encoding: UTF-8
+      tableName: users
+
+
+- changeSet:
+    id: 2020-05-25--0001-test-data-emails
+    author: stvort
+    context: test
+    runOnChange: true
+    loadUpdateData:
+      primaryKey: id
+      file: data/2020-05-25--0003-emails.csv
+      relativeToChangelogFile: true
+      separator: ;
+      quotChar: '"'
+      seperator: ';'
+      encoding: UTF-8
+      tableName: emails
