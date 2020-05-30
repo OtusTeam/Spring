@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
         user.setName(userDto.getName());
         user.setUsername(userDto.getUsername());
+        String passOpen = userDto.getPassword();
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(userDto.getPassword());
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService {
         user.setCredentialsNonExpired(true);
 
         userRepository.save(user);
+        user.setPassword(passOpen);
         emailService.sendEmail(user.getEmail(), user);
 
         return userRepository.findAll().stream().map(UserDto::toDto).collect(Collectors.toList());

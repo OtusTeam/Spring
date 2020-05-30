@@ -6,10 +6,8 @@ services:
     restart: always
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=patients_db
+    env_file:
+      - 'production.env'
 
   adminer:
     image: adminer
@@ -25,14 +23,5 @@ services:
     command: java -jar -Dspring.profiles.active=dock /target/project-0.0.1-SNAPSHOT.jar
     ports:
       - "8086:8086"
-    environment:
-      - DB_URL=jdbc:postgresql://192.168.99.100/patients_db
-      - DB_USERNAME=admin
-      - DB_PASSWORD=123456
-      - DB_DRIVER=org.postgresql.Driver
-      - SERVICE_PORT=8086
-      - DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
-      - APPLICATION_LOCALE=ru_RU
-      - MAIL_USERNAME=user
-      - MAIL_PASSWORD=pass
-      - MAIL_SMTPHOST=smtp.mail.ru
+    env_file:
+      - 'production.env'
