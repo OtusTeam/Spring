@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PersonDaoImpl implements PersonDao {
 
-    // TODO: добавить поле - список Person-ов
+    // здесь будет поле - список Person-ов
 
     @Override
     public Person getByName(String name) throws PersonNotFoundException {
