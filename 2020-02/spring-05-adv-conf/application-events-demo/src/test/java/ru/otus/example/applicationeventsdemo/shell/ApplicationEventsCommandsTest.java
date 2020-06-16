@@ -26,7 +26,7 @@ class ApplicationEventsCommandsTest {
     private Shell shell;
 
     private static final String GREETING_PATTERN = "Добро пожаловать: %s";
-    private static final String DEFAULT_LOGIN = "stvort";
+    private static final String DEFAULT_LOGIN = "AnyUser";
     private static final String CUSTOM_LOGIN = "Вася";
     private static final String COMMAND_LOGIN = "login";
     private static final String COMMAND_LOGIN_SHORT = "l";
