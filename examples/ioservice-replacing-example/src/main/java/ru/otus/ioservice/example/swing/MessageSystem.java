@@ -1,11 +1,12 @@
 package ru.otus.ioservice.example.swing;
 
-import lombok.Data;
 import lombok.SneakyThrows;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+@ConditionalOnBean(SwingIOService.class)
 @Service
 public class MessageSystem {
     private final LinkedBlockingQueue<String> pollQueue;

@@ -20,7 +20,6 @@ class OpenedIOServiceTest {
     private static final String TEXT_TO_PRINT2 = "Все дозволено";
 
     private ByteArrayOutputStream bos;
-    private ConsoleContext consoleContext;
     private IOService ioService;
 
     @BeforeEach
@@ -28,8 +27,7 @@ class OpenedIOServiceTest {
         System.out.println(Thread.currentThread().getName());
 
         bos = new ByteArrayOutputStream();
-        consoleContext = new ConsoleContext(new PrintStream(bos), System.in);
-        ioService = new OpenedConsoleIOService(consoleContext);
+        ioService = new OpenedConsoleIOService(System.in, new PrintStream(bos));
     }
 
     @DisplayName("должно печатать \"" + TEXT_TO_PRINT1 + "\"")
