@@ -3,7 +3,8 @@
 
 create table avatars (
     id bigserial,
-    photo_url varchar(255)
+    photo_url varchar(255),
+    primary key (id)
 );
 
 alter table users
