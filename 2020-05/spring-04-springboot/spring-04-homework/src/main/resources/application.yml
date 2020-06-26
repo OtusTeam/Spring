@@ -1,0 +1,7 @@
+application:
+  locale: ru_RU
+
+exam:
+  totalquestioncount: 3
+  passquestioncount: 2
+  source: "questions_en.csv"
