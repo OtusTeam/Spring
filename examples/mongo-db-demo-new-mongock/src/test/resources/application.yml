@@ -1,0 +1,18 @@
+spring:
+  data:
+    mongodb:
+      port: 0
+      database: test
+      #uri: mongodb://localhost
+      #port: 27017
+      #database: awesomeMongo
+
+
+
+  mongock:
+    change-logs-scan-package:
+      - ru.otus.example.mongodbdemo.changelogs
+
+logging:
+  level:
+    root: ERROR

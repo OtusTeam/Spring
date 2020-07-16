@@ -257,6 +257,7 @@ class EmployeeRepositoryImplTest {
         BigDecimal newSalary = oldSalary.multiply(new BigDecimal(2));
         em.detach(employee3);
         employeeRepository.doubleEmployeesSalary(oldSalary);
+        //em.refresh(employee3);
 
         employee3 = em.find(Employee.class, THIRD_EMPLOYEE_ID);
         assertThat(employee3.getSalary()).isEqualTo(newSalary);
@@ -271,7 +272,7 @@ class EmployeeRepositoryImplTest {
         assertThat(employee8).isNotNull();
         employeeRepository.deleteEmployeesWithoutDepartment();
 
-        em.clear();
+        em.flush();
 
         employee2 = em.find(Employee.class, SECOND_EMPLOYEE_ID);
         employee8 = em.find(Employee.class, EIGTH_EMPLOYEE_ID);

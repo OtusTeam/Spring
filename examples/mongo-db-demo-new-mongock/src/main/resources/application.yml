@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 27017
+      database: awesomeMongo
+logging:
+  level:
+    root: ERROR

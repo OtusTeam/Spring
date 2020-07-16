@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
+        <version>2.3.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -20,7 +20,7 @@
         <java.version>11</java.version>
         <maven.compiler.sourcre>11</maven.compiler.sourcre>
         <maven.compiler.target>11</maven.compiler.target>
-        <mongock.version>3.2.8</mongock.version>
+        <mongock.version>4.1.2.BETA</mongock.version>
     </properties>
 
     <dependencies>
@@ -37,11 +37,20 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.github.cloudyrock.mongock/mongock-spring-v5 -->
         <dependency>
             <groupId>com.github.cloudyrock.mongock</groupId>
-            <artifactId>mongock-spring</artifactId>
+            <artifactId>mongock-spring-v5</artifactId>
             <version>${mongock.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.cloudyrock.mongock</groupId>
+            <artifactId>mongodb-springdata-v3-driver</artifactId>
+            <version>${mongock.version}</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
