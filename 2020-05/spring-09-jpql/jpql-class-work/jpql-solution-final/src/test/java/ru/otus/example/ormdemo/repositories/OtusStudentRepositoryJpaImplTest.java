@@ -47,8 +47,6 @@ class OtusStudentRepositoryJpaImplTest {
 
         System.out.println("\n\n\n\n----------------------------------------------------------------------------------------------------------");
         val students = repositoryJpa.findAll();
-        val student = repositoryJpa.findById(1L);
-
         assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_STUDENTS)
                 .allMatch(s -> !s.getName().equals(""))
                 .allMatch(s -> s.getCourses() != null && s.getCourses().size() > 0)
