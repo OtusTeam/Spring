@@ -12,7 +12,9 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
+import ru.otus.spring.domain.Account;
 import ru.otus.spring.domain.Person;
+import ru.otus.spring.repostory.AccountRepository;
 import ru.otus.spring.repostory.PersonRepository;
 
 @SpringBootApplication
@@ -22,14 +24,7 @@ public class Main {
         ApplicationContext context = SpringApplication.run(Main.class);
 
         PersonRepository repository = context.getBean(PersonRepository.class);
-
-        repository.saveAll(
-                Flux.fromArray(new String[]{"Pushkin", "Lermontov"})
-                        .map(Person::new)
-        ).subscribe();
-
-        Disposable flux = repository.findAll()
-                .subscribe(p -> System.out.println(p.getName()));
+        AccountRepository accountRepository = context.getBean(AccountRepository.class);
 
         Thread.sleep(20000);
 
