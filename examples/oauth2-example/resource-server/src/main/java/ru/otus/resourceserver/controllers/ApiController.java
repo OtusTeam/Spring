@@ -12,6 +12,7 @@ import ru.otus.resourceserver.models.CurrentUserRequestResult;
 
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 @RequiredArgsConstructor
 @RestController
 public class ApiController {
