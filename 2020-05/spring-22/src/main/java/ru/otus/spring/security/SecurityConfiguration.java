@@ -30,19 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers( "/public" ).anonymous()
                 .and()
                 .authorizeRequests().antMatchers( "/authenticated", "/success" ).authenticated()
-                .and().anonymous().authorities( "ROLE_ANONYMOUS" ).principal( "ya" )
+
                 .and()
                 // Включает Form-based аутентификацию
 //
-                .formLogin()
+                .formLogin();
 
-//                .and().rememberMe()
-
-        ;
-//        http.rememberMe()
-//                .key( "MyDirtySecret" )
-//                .tokenValiditySeconds( 50000 )
-//        ;
+//                ;
     }
 
     @SuppressWarnings("deprecation")
