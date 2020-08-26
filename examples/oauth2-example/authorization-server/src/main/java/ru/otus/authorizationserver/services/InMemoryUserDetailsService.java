@@ -1,7 +1,6 @@
 package ru.otus.authorizationserver.services;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +15,7 @@ import java.util.Optional;
 @Service
 public class InMemoryUserDetailsService implements UserDetailsService {
 
-    private final Map<String, User> userMap;
+    private final Map<String, CustomUser> userMap;
 
     public InMemoryUserDetailsService(PasswordEncoder passwordEncoder) {
         userMap = Map.of(
@@ -34,7 +33,7 @@ public class InMemoryUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       return Optional.ofNullable(userMap.get(username))
+       return Optional.ofNullable(userMap.get(username)).map(CustomUser::new)
                .orElseThrow(() -> new UsernameNotFoundException(String.format("User %s not found", username)));
     }
 }
