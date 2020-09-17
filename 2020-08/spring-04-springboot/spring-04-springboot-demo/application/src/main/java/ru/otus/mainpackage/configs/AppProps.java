@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.Locale;
 
 @ConfigurationProperties(prefix = "application")
-public class YamlProps {
+public class AppProps {
 
     private String message;
     private Locale locale;

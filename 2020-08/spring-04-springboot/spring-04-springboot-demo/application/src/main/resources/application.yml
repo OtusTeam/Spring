@@ -8,8 +8,8 @@ management:
         include: info, health, beans
 
 application:
-  message: "Test Props msg"
-  locale: ru_RU
+  message: "Test Props msg@@@"
+  locale: en
 
 messager:
   message: "Hello from Messager"

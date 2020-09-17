@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 @Configuration
-public class Localization {
+public class LocalizationConfig {
     @Bean
     public MessageSource messageSource() {
         var ms = new ReloadableResourceBundleMessageSource();

@@ -24,7 +24,7 @@ public class GreetingControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private Greeting greeting;
+    private GreetingService greetingService;
 
     @Test
     public void sayHelloTest() throws Exception {
@@ -33,12 +33,12 @@ public class GreetingControllerTest {
         map.put(name, "Hello, " + name);
         String expectedResult = "{\"Mr.Test\":\"Hello, Mr.Test\"}";
 
-        when(greeting.sayHello(name)).thenReturn(map);
+        when(greetingService.sayHello(name)).thenReturn(map);
         MockHttpServletResponse result = mockMvc.perform(get(String.format("/hello?name=%s", name)))
                 .andReturn()
                 .getResponse();
 
-        verify(greeting, times(1)).sayHello(name);
+        verify(greetingService, times(1)).sayHello(name);
         System.out.println();
         assertThat(result.getContentAsString()).isEqualTo(expectedResult);
     }
@@ -50,12 +50,12 @@ public class GreetingControllerTest {
         map.put(name, "Hello, " + name);
         String expectedResult = "{\"Mr.Test\":\"Hello, Mr.Test\"}";
 
-        when(greeting.sayHello(name)).thenReturn(map);
+        when(greetingService.sayHello(name)).thenReturn(map);
         MockHttpServletResponse result = mockMvc.perform(get(String.format("/hello/%s", name)))
                 .andReturn()
                 .getResponse();
 
-        verify(greeting, times(1)).sayHello(name);
+        verify(greetingService, times(1)).sayHello(name);
         System.out.println();
         assertThat(result.getContentAsString()).isEqualTo(expectedResult);
     }

@@ -12,16 +12,16 @@ import java.util.Map;
 public class GreetingControllerRstyle {
     private static final Logger logger = LoggerFactory.getLogger(GreetingControllerRstyle.class);
 
-    private final Greeting greeting;
+    private final GreetingService greetingService;
 
-    public GreetingControllerRstyle(Greeting greeting) {
+    public GreetingControllerRstyle(GreetingService greetingService) {
         logger.info("Я НАСТОЯЩИЙ БИН!!!");
-        this.greeting = greeting;
+        this.greetingService = greetingService;
     }
 
     //http://localhost:8080/hello/jone
     @GetMapping(value="/hello/{name}")
     public Map<String, String> sayHello(@PathVariable("name") String name) {
-        return this.greeting.sayHello(name);
+        return this.greetingService.sayHello(name);
     }
 }
