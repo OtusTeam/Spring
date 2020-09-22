@@ -1,0 +1,21 @@
+version: "3"
+services:
+  keycloak-container:
+    image: quay.io/keycloak/keycloak:11.0.0
+    
+    command: 
+    
+      -Djboss.socket.binding.port-offset=2
+      
+    restart: always
+    
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /tmp/realm.json
+      
+    ports:
+      - 8082:8082
+      
+    volumes:
+      - ./realm.json:/tmp/realm.json
