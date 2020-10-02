@@ -13,3 +13,4 @@
 * *spring-mail-integration-demo* - пример работы с SpringMail через SpringIntegration
 * *spring-mail-rabbitmq-demo* - пример взаимодействия приложений через RabbitMQ
 * *liquibase-demo* - пример работы с liquibase
+* keycloak-example - пример аутентификации/авторизации с помощью сервера keycloak
