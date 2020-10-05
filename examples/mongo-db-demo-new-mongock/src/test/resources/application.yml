@@ -9,9 +9,11 @@ spring:
 
 
 
-  mongock:
-    change-logs-scan-package:
-      - ru.otus.example.mongodbdemo.changelogs
+mongock:
+  runner-type: "ApplicationRunner" # default
+  #runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.example.mongodbdemo.changelogs
 
 logging:
   level:
