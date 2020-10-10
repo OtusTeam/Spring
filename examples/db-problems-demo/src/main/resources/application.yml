@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    #url: jdbc:h2:mem:testdb
+    url: jdbc:postgresql://localhost:5432/problems
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: never
+  h2:
+    console:
+      enabled: true
+  flyway:
+    enabled: true
