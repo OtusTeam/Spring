@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import ru.otus.example.mongodbdemo.model.Student;
 import ru.otus.example.mongodbdemo.repositories.AbstractRepositoryTest;
 import ru.otus.example.mongodbdemo.repositories.KnowledgeRepository;
 import ru.otus.example.mongodbdemo.repositories.StudentRepository;
@@ -36,12 +37,11 @@ class KnowledgeRepositoryWithListenerTest extends AbstractRepositoryTest {
 
         // Загружаем студента заново и проверяем, что знание действительно удалено (размер стал меньше на 1)
         val expectedExperienceArrayLength = experience.size() - 1;
-        val actualStudentOptional = studentRepository.findById(student.getId());
-        assertThat(actualStudentOptional)
-                .isNotEmpty().get()
-                .matches(s -> s.getExperience() != null && s.getExperience().size() == expectedExperienceArrayLength);
+        assertThat(studentRepository.findById(student.getId())).isNotEmpty()
+                .get().extracting(Student::getExperience).asList()
+                .hasSize(expectedExperienceArrayLength);
 
-        // Загружаем размер массива с помощью аггрегаций и проверяем, что размер массива в БД тоже изменился
+        // Загружаем размер массива с помощью агрегаций и проверяем, что размер массива в БД тоже изменился
         val actualExperienceArrayLength = studentRepository.getExperienceArrayLengthByStudentId(student.getId());
         assertThat(actualExperienceArrayLength).isEqualTo(expectedExperienceArrayLength);
 

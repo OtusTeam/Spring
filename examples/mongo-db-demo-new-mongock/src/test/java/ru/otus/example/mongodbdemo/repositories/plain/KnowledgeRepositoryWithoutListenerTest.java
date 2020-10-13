@@ -42,13 +42,11 @@ class KnowledgeRepositoryWithoutListenerTest extends AbstractRepositoryTest {
 
         // Загружаем студента заново и проверяем, что знание действительно удалено (размер стал меньше на 1)
         val expectedExperienceArrayLength = experience.size() - 1;
-        val actualStudentOptional = studentRepository.findById(student.getId());
-        assertThat(actualStudentOptional)
-                .isNotEmpty().get()
-                .matches(s -> s.getExperience() != null && s.getExperience().size() == expectedExperienceArrayLength);
+        assertThat(studentRepository.findById(student.getId())).isNotEmpty()
+                .get().extracting(Student::getExperience).asList()
+                .hasSize(expectedExperienceArrayLength);
 
-
-        // Загружаем размер массива с помощью аггрегаций и проверяем, что на самом деле размер массива в БД не изменился
+        // Загружаем размер массива с помощью агрегаций и проверяем, что на самом деле размер массива в БД не изменился
         val actualExperienceArrayLength = studentRepository.getExperienceArrayLengthByStudentId(student.getId());
         assertThat(actualExperienceArrayLength).isNotEqualTo(expectedExperienceArrayLength);
 

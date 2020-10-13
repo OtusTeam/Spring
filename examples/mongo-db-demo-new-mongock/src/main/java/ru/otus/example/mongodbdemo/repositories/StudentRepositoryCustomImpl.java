@@ -55,7 +55,8 @@ public class StudentRepositoryCustomImpl implements StudentRepositoryCustom {
                 match(where("id").is(studentId)),
                 project().andExclude("_id").and("experience").size().as("size"));
 
-        val arraySizeProjection = mongoTemplate.aggregate(aggregation, Student.class, ArraySizeProjection.class).getUniqueMappedResult();
+        val arraySizeProjection =
+                mongoTemplate.aggregate(aggregation, Student.class, ArraySizeProjection.class).getUniqueMappedResult();
         return arraySizeProjection == null ? 0 : arraySizeProjection.getSize();
     }
 
