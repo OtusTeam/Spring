@@ -65,7 +65,7 @@ public class PersonController {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handleNotEnoughFunds(NotFoundException ex) {
+    public ResponseEntity<String> handleNotFound(NotFoundException ex) {
         return ResponseEntity.badRequest().body("Not found");
     }
 }
