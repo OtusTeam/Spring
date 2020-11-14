@@ -6,10 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
+import org.springframework.retry.annotation.EnableRetry;
 import ru.otus.spring.dto.Country;
 import ru.otus.spring.service.CountryService;
 
+import java.util.List;
+
 @EnableCaching
+@EnableRetry
 @SpringBootApplication
 public class Main {
 
@@ -22,5 +26,28 @@ public class Main {
         Country country = service.getCountry("col");
 
         log.info(country.getName());
+
+        country = service.getCountry("col");
+
+        log.info(country.getName());
+
+        country = service.getCountry("ru");
+
+        log.info(country.getName());
+
+        country = service.getCountry("col");
+
+        log.info(country.getName());
+
+        country = service.getCountry("ru");
+
+        log.info(country.getName());
+
+        service.getCountries();
+
+        country = service.getCountry("col");
+
+        log.info(country.getName());
+
     }
 }
