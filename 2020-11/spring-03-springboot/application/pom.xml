@@ -48,7 +48,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- эффект стартера
+        <!-- эффект стартера  MongoDataAutoConfiguration
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
