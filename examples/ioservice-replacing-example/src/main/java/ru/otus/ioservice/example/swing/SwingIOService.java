@@ -15,12 +15,12 @@ public class SwingIOService implements IOService {
     @SneakyThrows
     @Override
     public void out(String message) {
-        ms.putToUiQueue(message);
+        ms.putToOutputQueue(message);
     }
 
     @SneakyThrows
     @Override
     public String readString() {
-        return ms.takeFromPollQueue();
+        return ms.takeFromInputQueue();
     }
 }

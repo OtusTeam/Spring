@@ -11,7 +11,7 @@ public class PollService {
     private final IOService ioService;
 
     public void poll() {
-        System.out.println("Началось!");
+        ioService.out("Началось!");
 
         ioService.out("Как вас зовут?");
         String name = ioService.readString();

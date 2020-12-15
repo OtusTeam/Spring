@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @RequiredArgsConstructor
 public class PollMainForm extends JFrame {
 
+    private static final int MESSAGE_DISPLAY_DURATION = 1500;
+
     private final JPanel contentPane;
     private final JLabel inLabel;
     private final JTextField outTextField;
@@ -51,7 +53,7 @@ public class PollMainForm extends JFrame {
         contentPane.add(outTextField);
 
         outBtn = new JButton("Ответить");
-        outBtn.addActionListener(e -> ms.putToPollQueue(outTextField.getText()));
+        outBtn.addActionListener(e -> ms.putToInputQueue(outTextField.getText()));
         contentPane.add(outBtn);
         setOnCloseHandler();
         setSize(450, 180);
@@ -67,11 +69,11 @@ public class PollMainForm extends JFrame {
         uiFlow.execute(() -> {
             while (runFlag.get()) {
                 try {
-                    String msg = ms.takeFromUiQueue();
+                    String msg = ms.takeFromOutputQueue();
                     synchronized (inLabel) {
                         inLabel.setText(msg);
                     }
-                    Thread.sleep(1000);
+                    Thread.sleep(MESSAGE_DISPLAY_DURATION);
                 } catch (InterruptedException e) {
                     return;
                 }
@@ -85,7 +87,7 @@ public class PollMainForm extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 runFlag.set(false);
-                ms.putToUiQueue("exit");
+                ms.putToOutputQueue("exit");
                 uiFlow.shutdown();
                 e.getWindow().dispose();
             }

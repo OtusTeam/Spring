@@ -1,9 +1,11 @@
 package ru.otus.ioservice.example.console;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import ru.otus.ioservice.example.api.IOService;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -14,9 +16,10 @@ public class ConsoleIOService implements IOService {
     private final Scanner sc;
 
 
-    public ConsoleIOService() {
-        this.out = System.out;
-        this.sc = new Scanner(System.in);
+    public ConsoleIOService(@Value("#{T(java.lang.System).out}") PrintStream out,
+                            @Value("#{T(java.lang.System).in}")InputStream in) {
+        this.out = out;
+        this.sc = new Scanner(in);
     }
 
     @Override

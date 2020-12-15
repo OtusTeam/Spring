@@ -9,31 +9,31 @@ import java.util.concurrent.LinkedBlockingQueue;
 @ConditionalOnBean(SwingIOService.class)
 @Service
 public class MessageSystem {
-    private final LinkedBlockingQueue<String> pollQueue;
-    private final LinkedBlockingQueue<String> uiQueue;
+    private final LinkedBlockingQueue<String> inputQueue;
+    private final LinkedBlockingQueue<String> outputQueue;
 
     public MessageSystem() {
-        pollQueue = new LinkedBlockingQueue<>();
-        uiQueue = new LinkedBlockingQueue<>();
+        inputQueue = new LinkedBlockingQueue<>();
+        outputQueue = new LinkedBlockingQueue<>();
     }
 
     @SneakyThrows
-    public void putToPollQueue(String message) {
-        pollQueue.put(message);
+    public void putToInputQueue(String message) {
+        inputQueue.put(message);
     }
 
     @SneakyThrows
-    public void putToUiQueue(String message) {
-        uiQueue.put(message);
+    public void putToOutputQueue(String message) {
+        outputQueue.put(message);
     }
 
     @SneakyThrows
-    public String takeFromPollQueue() {
-        return pollQueue.take();
+    public String takeFromInputQueue() {
+        return inputQueue.take();
     }
 
     @SneakyThrows
-    public String takeFromUiQueue() {
-        return uiQueue.take();
+    public String takeFromOutputQueue() {
+        return outputQueue.take();
     }
 }
