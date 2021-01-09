@@ -1,9 +1,0 @@
-.idea/
-*.iml
-
-target/
-node/
-
-/node_modules
-/output
-package-lock.json

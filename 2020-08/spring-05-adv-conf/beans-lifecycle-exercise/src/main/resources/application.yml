@@ -4,4 +4,4 @@ logging:
 
 lifecycle:
   print:
-    enabled: true
+    enabled: false

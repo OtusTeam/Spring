@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://mongo_user_mank_1:12345@cluster0.tsbgv.mongodb.net/company?retryWrites=true&w=majority
+      username: mongo_user_mank_1
+      password: 12345
+      database: company

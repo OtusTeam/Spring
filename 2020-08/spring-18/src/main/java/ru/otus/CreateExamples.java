@@ -11,7 +11,7 @@ public class CreateExamples {
         obs.forEach(System.out::println);
     }
     
-    public static Observable<String> justExample() {
+    public static final Observable<String> justExample() {
         return Observable.just("one", "two", "three");
     }
     

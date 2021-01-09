@@ -1,7 +1,11 @@
 package ru.otus.spring.domain;
 
-public class Email {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.keyvalue.annotation.KeySpace;
 
+@KeySpace("email")
+public class Email {
+    @Id
     private int id;
 
     private String email;

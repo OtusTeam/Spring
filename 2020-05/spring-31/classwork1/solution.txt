@@ -1,8 +1,0 @@
-docker image ls
-docker pull hello-world
-docker image ls
-docker image rm hello-world
-docker ps
-docker run hello-world
-docker ps
-docker run -d hello-world

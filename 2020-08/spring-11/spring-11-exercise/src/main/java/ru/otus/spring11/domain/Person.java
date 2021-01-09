@@ -12,6 +12,20 @@ public class Person {
     private long id;
     private String name;
 
+
+
+    public Person() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Person(String name) {
         this.name = name;
     }

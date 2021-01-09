@@ -18,6 +18,6 @@ public class Main {
 
         System.out.println("All count " + dao.count());
 
-        Console.main(args);
+//        Console.main(args);
     }
 }

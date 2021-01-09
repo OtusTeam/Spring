@@ -21,6 +21,11 @@ public class ReactorController {
         return Flux.range(1, 10);
     }
 
+    @GetMapping("/flux/three")
+    public Flux<Integer> listThree() {
+        return list().filter(x -> x%3==0).limitRate(3).map(x1 -> x1*300).delayElements(Duration.ofMillis(1000));
+    }
+
     @GetMapping(path = "/flux/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> stream() {
         return Flux.generate(() -> 0, (state, emitter) -> {

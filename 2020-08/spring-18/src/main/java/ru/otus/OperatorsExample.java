@@ -15,8 +15,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class OperatorsExample {
     public static void main(String[] args) throws Exception {
-        simpleExample();
+//        simpleExample();
+        Observable<Person> person = getPerson();
+        Thread.sleep(3000);
+        getPerson().subscribe(OperatorsExample::getData);
+        Thread.sleep(3000);
+        getPerson().subscribe(OperatorsExample::getData);
+
+        publisherExample();
+        System.out.println("person = " + person.firstElement().blockingGet().getFirstName());
+
         System.in.read();
+    }
+
+    public static void getData(Person person){
+        System.out.println("Income data:" + person);
     }
 
     public static void simpleExample() throws Exception {
@@ -31,8 +44,25 @@ public class OperatorsExample {
                 person -> person.getBirth().isAfter(LocalDate.of(1990, 1, 1))
             )
             .map(p -> p.getFirstName() + " " + p.getLastName())
+//            .compose(filterAndUpperCase()).toList()
             .toList()
             .subscribe(System.out::println);
+    }
+
+    public static Observable<Person> getPerson() throws Exception {
+        List<Person> persons = ImmutableList.of(
+            new Person("John", "Dow", "male", LocalDate.of(1992, 3, 12)),
+            new Person("Jane", "Dow", "female", LocalDate.of(2001, 6, 23)),
+            new Person("Howard", "Lovecraft", "male", LocalDate.of(1890, 8, 20)),
+            new Person("Joanne", "Rowling", "female", LocalDate.of(1965, 6, 30)));
+
+        return Observable.fromIterable(persons)
+            .filter(
+                person -> person.getBirth().isAfter(LocalDate.of(1990, 1, 1))
+            )
+//            .map(p -> p.getFirstName() + " " + p.getLastName())
+            .firstElement().toObservable();
+//            .subscribe();
     }
 
     public static void publisherExample() throws Exception {

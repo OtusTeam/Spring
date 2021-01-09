@@ -7,6 +7,7 @@ import ru.otus.example.beanslifecycledemo.domain.Phone;
 
 import java.lang.reflect.Field;
 
+
 public class CustomBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -23,7 +24,7 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
         }
 
         if (bean.getClass().isAssignableFrom(Phone.class)) {
-            //updateGreeting(bean);
+            updateGreeting(bean);
         }
         return bean;
     }

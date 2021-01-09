@@ -18,7 +18,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public List<Employee> findAll() {
-        return em.createQuery("select e from Employee e", Employee.class).getResultList();
+        EntityGraph<?> entityGraph = em.getEntityGraph("employees-entity-graph");
+        TypedQuery<Employee> select_e_from_employee_e = em.createQuery("select e from Employee e", Employee.class);
+        select_e_from_employee_e.setHint("java.persistence.fetchgraph", entityGraph);
+
+        return select_e_from_employee_e.getResultList();
+
+//        return em.createQuery("select e from Employee e", Employee.class).getResultList();
     }
 
     @Override

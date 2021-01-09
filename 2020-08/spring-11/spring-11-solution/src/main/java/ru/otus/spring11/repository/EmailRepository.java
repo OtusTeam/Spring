@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EmailRepository extends JpaRepository<Email, Integer> {
 
-    List<Email> findAll();
+    List<Email> findAllById();
 
     @Query("select e from Email e where e.email = :email")
     Email findByEmail(@Param("email") String email);
