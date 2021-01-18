@@ -7,7 +7,7 @@ import ru.otus.spring11.domain.Email;
 
 import java.util.List;
 
-public interface EmailRepository extends JpaRepository<Email, Integer> {
+public interface EmailRepository extends JpaRepository<Email, Long> {
 
     List<Email> findAll();
 
