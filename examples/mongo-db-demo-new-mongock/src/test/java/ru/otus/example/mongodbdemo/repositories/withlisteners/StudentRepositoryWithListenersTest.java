@@ -4,7 +4,10 @@ import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
+import ru.otus.example.mongodbdemo.events.MongoStudentCascadeSaveEventsListener;
 import ru.otus.example.mongodbdemo.model.Knowledge;
 import ru.otus.example.mongodbdemo.model.Student;
 import ru.otus.example.mongodbdemo.repositories.AbstractRepositoryTest;
@@ -15,7 +18,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("StudentRepository при наличии listener-ов в контексте ")
-@ComponentScan("ru.otus.example.mongodbdemo.events")
+@Import(MongoStudentCascadeSaveEventsListener.class)
 class StudentRepositoryWithListenersTest extends AbstractRepositoryTest {
 
     @Autowired

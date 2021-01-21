@@ -4,7 +4,10 @@ import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
+import ru.otus.example.mongodbdemo.events.MongoKnowledgeCascadeDeleteEventsListener;
 import ru.otus.example.mongodbdemo.model.Student;
 import ru.otus.example.mongodbdemo.repositories.AbstractRepositoryTest;
 import ru.otus.example.mongodbdemo.repositories.KnowledgeRepository;
@@ -13,7 +16,7 @@ import ru.otus.example.mongodbdemo.repositories.StudentRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("KnowledgeRepository при наличии listener-ов в контексте ")
-@ComponentScan("ru.otus.example.mongodbdemo.events")
+@Import(MongoKnowledgeCascadeDeleteEventsListener.class)
 class KnowledgeRepositoryWithListenerTest extends AbstractRepositoryTest {
 
     @Autowired
