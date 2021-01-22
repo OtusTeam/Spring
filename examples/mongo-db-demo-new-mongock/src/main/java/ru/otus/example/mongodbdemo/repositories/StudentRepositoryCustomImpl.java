@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -41,6 +42,7 @@ public class StudentRepositoryCustomImpl implements StudentRepositoryCustom {
                 , project().and("experience_map").arrayElementAt(1).as("experience_id_map")
                 , project().and("experience_id_map.v").as("experience_id")
                 , lookup("knowledge", "experience_id", "_id", "experience")
+                , unwind("experience")
                 , project().and("experience._id").as("_id").and("experience.name").as("name")
         );
 
@@ -67,4 +69,72 @@ public class StudentRepositoryCustomImpl implements StudentRepositoryCustom {
         mongoTemplate.updateMulti(new Query(), update, Student.class);
     }
 
+    @Override
+    public void printGetStudentExperienceByIdAggregationResultForStage(String studentId, int stage) {
+        System.out.printf("Stage: %d\n\n", stage);
+
+        AggregationOperation[] operations = new AggregationOperation[]{
+                unwind("experience")
+                , project().andExclude("_id").and(valueOfToArray("experience")).as("experience_map")
+                , project().and("experience_map").arrayElementAt(1).as("experience_id_map")
+                , project().and("experience_id_map.v").as("experience_id")
+                , lookup("knowledge", "experience_id", "_id", "experience")
+                , unwind("experience")
+                , project().and("experience._id").as("_id").and("experience.name").as("name")
+        };
+
+        String[] operationsAsStr = new String[]{
+                "unwind(\"experience\")"
+                , "project().andExclude(\"_id\").and(valueOfToArray(\"experience\")).as(\"experience_map\")"
+                , "project().and(\"experience_map\").arrayElementAt(1).as(\"experience_id_map\")"
+                , "project().and(\"experience_id_map.v\").as(\"experience_id\")"
+                , "lookup(\"knowledge\", \"experience_id\", \"_id\", \"experience\")"
+                , "unwind(\"experience\")"
+                , "project().and(\"experience._id\").as(\"_id\").and(\"experience.name\").as(\"name\")"
+        };
+
+        Aggregation aggregation = newAggregation(match(Criteria.where("id").is(studentId)));
+        System.out.println("match(Criteria.where(\"id\").is(studentId)");
+        for (int i = 1; i <= stage; i++) {
+            System.out.println(operationsAsStr[i - 1]);
+            aggregation.getPipeline().add(operations[i - 1]);
+        }
+        System.out.println();
+        Document rawResults = mongoTemplate.aggregate(aggregation, Student.class, Knowledge.class).getRawResults();
+        rawResultPrinter.prettyPrintRawResult(rawResults);
+    }
+/*
+    @Override
+    public void printGetStudentExperienceByIdAggregationResultForStage(String studentId, int stage) {
+        System.out.printf("Stage: %d\n\n", stage);
+
+        AggregationOperation[] operations = new AggregationOperation[]{
+                unwind("experience")
+                , project().andExclude("_id").and(valueOfToArray("experience")).as("experience_map")
+                , project().and("experience_map").arrayElementAt(1).as("experience_id_map")
+                , project().and("experience_id_map.v").as("experience_id")
+                , lookup("knowledge", "experience_id", "_id", "experience")
+                , project().and("experience._id").as("_id").and("experience.name").as("name")
+        };
+
+        String[] operationsAsStr = new String[]{
+                "unwind(\"experience\")"
+                , "project().andExclude(\"_id\").and(valueOfToArray(\"experience\")).as(\"experience_map\")"
+                , "project().and(\"experience_map\").arrayElementAt(1).as(\"experience_id_map\")"
+                , "project().and(\"experience_id_map.v\").as(\"experience_id\")"
+                , "lookup(\"knowledge\", \"experience_id\", \"_id\", \"experience\")"
+                , "project().and(\"experience._id\").as(\"_id\").and(\"experience.name\").as(\"name\")"
+        };
+
+        Aggregation aggregation = newAggregation(match(Criteria.where("id").is(studentId)));
+        System.out.println("match(Criteria.where(\"id\").is(studentId)");
+        for (int i = 1; i <= stage; i++) {
+            System.out.println(operationsAsStr[i - 1]);
+            aggregation.getPipeline().add(operations[i - 1]);
+        }
+        System.out.println();
+        Document rawResults = mongoTemplate.aggregate(aggregation, Student.class, Knowledge.class).getRawResults();
+        rawResultPrinter.prettyPrintRawResult(rawResults);
+    }
+*/
 }

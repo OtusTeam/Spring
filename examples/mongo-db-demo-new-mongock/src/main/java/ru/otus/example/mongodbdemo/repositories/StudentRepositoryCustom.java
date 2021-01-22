@@ -9,4 +9,6 @@ public interface StudentRepositoryCustom {
 
     long getExperienceArrayLengthByStudentId(String id);
     void removeExperienceArrayElementsById(String id);
+
+    void printGetStudentExperienceByIdAggregationResultForStage(String studentId, int stage);
 }

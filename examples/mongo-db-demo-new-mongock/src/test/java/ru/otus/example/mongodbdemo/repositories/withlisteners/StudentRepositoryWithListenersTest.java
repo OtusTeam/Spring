@@ -41,4 +41,14 @@ class StudentRepositoryWithListenersTest extends AbstractRepositoryTest {
         assertThat(knowledgeList).containsExactlyInAnyOrderElementsOf(student.getExperience());
     }
 
+    @DisplayName("напечатать все стадии агрегации для getStudentExperienceById")
+    @Test
+    void shouldPrintAggregationStagesForHetStudentExperienceByIdMethod (){
+        val student = studentRepository.findAll().get(0);
+        for (int i = 0; i <= 7; i++) {
+            studentRepository.printGetStudentExperienceByIdAggregationResultForStage(student.getId(), i);
+            System.out.println("\n\n");
+        }
+    }
+
 }
