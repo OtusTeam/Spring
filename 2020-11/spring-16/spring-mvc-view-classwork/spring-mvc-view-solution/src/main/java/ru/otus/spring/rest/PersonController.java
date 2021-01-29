@@ -3,12 +3,16 @@ package ru.otus.spring.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.otus.spring.domain.Person;
 import ru.otus.spring.repostory.PersonRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -42,6 +46,7 @@ public class PersonController {
                             ) {
         Person saved = repository.save(person);
         model.addAttribute(saved);
+        //Ошибка! Нужен редирект!
         return "edit";
     }
 }
