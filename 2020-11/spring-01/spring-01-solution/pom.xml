@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        `<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>`
     </properties>
 
     <dependencies>
