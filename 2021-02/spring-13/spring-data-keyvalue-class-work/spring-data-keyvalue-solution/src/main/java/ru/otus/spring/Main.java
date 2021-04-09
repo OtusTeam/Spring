@@ -33,7 +33,7 @@ public class Main {
         System.out.println(repository.findAll());
 
         emailRepository.save(new Email(1, "alex@pushkin.com"));
-        emailRepository.save(new Email(2, "micha@lermontov.com"));
+        emailRepository.save(new Email(2, "micha@pushkin.com"));
         System.out.println(emailRepository.findAll());
     }
 }

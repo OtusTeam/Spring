@@ -15,6 +15,10 @@ public class Email {
         this.email = email;
     }
 
+    public Email(String email) {
+        this.email = email;
+    }
+
     public int getId() {
         return id;
     }

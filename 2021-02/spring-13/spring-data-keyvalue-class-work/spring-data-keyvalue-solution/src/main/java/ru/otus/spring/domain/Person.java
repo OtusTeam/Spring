@@ -3,13 +3,19 @@ package ru.otus.spring.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.keyvalue.annotation.KeySpace;
 
+@KeySpace("person")
 public class Person {
 
+    @Id
     private int id;
     private String name;
 
     public Person(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public Person(String name) {
         this.name = name;
     }
 
@@ -27,5 +33,13 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

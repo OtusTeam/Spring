@@ -6,6 +6,10 @@ public class Email {
 
     private String email;
 
+    public Email(String email) {
+        this.email = email;
+    }
+
     public Email(int id, String email) {
         this.id = id;
         this.email = email;
