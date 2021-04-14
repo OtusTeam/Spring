@@ -6,6 +6,7 @@ import org.assertj.core.api.AbstractOptionalAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.example.mongodbdemo.model.Knowledge;
 import ru.otus.example.mongodbdemo.model.Student;
 import ru.otus.example.mongodbdemo.repositories.AbstractRepositoryTest;
@@ -27,6 +28,7 @@ class KnowledgeRepositoryWithoutListenerTest extends AbstractRepositoryTest {
     @Autowired
     private StudentRepository studentRepository;
 
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     @DisplayName("при удалении Knowledge не должен удалять его из опыта студента")
     @Test
     void shouldLeaveKnowledgeInStudentExperienceWhenRemovingKnowledge() {
