@@ -11,7 +11,7 @@ import ru.otus.spring.service.PersonService;
     1. cd aop-demo/aop-ctw/
     2. mvn clean package
     3. cd target
-    4. java -jar spring-03-aop-ctw-1.0-jar-with-dependencies.jar
+    4. java -jar aop-ctw-1.0-jar-with-dependencies.jar
  */
 
 @Configuration
