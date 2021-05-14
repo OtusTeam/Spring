@@ -22,20 +22,26 @@ public class Main {
         Email emailL = new Email("michail@lermontov.ru");
         emailL = emailRepository.save(emailL);
 
-        personRepository.save(new Person("Pushkin", emailP));
-        personRepository.save(new Person("Lermontov",emailL));
+        Person pushkin = personRepository.save(new Person("Pushkin", emailP));
+        Person lermontov = personRepository.save(new Person("Lermontov",emailL));
+
+        System.out.println("\n\nИщем всех пёрсонов");
+        System.out.println(personRepository.findAll());
 
         System.out.println("\n\nИщем Пушкина");
         personRepository.findByName("Pushkin").ifPresent(System.out::println);
 
-        System.out.println("\n\nИщем всех пёрсонов");
+        System.out.println("\n\nИщем все почты");
         System.out.println(emailRepository.findAll());
 
         System.out.println("\n\nИщем Пушкина по его почте");
         personRepository.findByEmailAddress("alex@pushkin.ru").ifPresent(System.out::println);
 
-        System.out.println("\n\nИщем почту Пушкина");
+        System.out.println("\n\nИщем почту Пушкина по ее адресу");
         emailRepository.findByEmailAddress("alex@pushkin.ru").ifPresent(System.out::println);
+
+        System.out.println("\n\nИщем почту Лермонтова по его (Лермонтова) id");
+        emailRepository.findByPersonId(lermontov.getId()).ifPresent(System.out::println);
 
         System.out.println("\n\nОбновляем почту Лермонтову");
         System.out.println("До обновления: " + emailL);

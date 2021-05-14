@@ -9,7 +9,7 @@ import ru.otus.springdata.domain.Email;
 
 import java.util.Optional;
 
-public interface EmailRepository extends JpaRepository<Email, Long> {
+public interface EmailRepository extends JpaRepository<Email, Long>, EmailRepositoryCustom {
 
     @Query("select e from Email e where e.address = :address")
     Optional<Email> findByEmailAddress(@Param("address") String email);
