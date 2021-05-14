@@ -3,6 +3,8 @@ package ru.otus.springdata;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import ru.otus.springdata.domain.Email;
 import ru.otus.springdata.domain.Person;
 import ru.otus.springdata.repository.EmailRepository;
@@ -23,7 +25,8 @@ public class Main {
         emailL = emailRepository.save(emailL);
 
         Person pushkin = personRepository.save(new Person("Pushkin", emailP));
-        Person lermontov = personRepository.save(new Person("Lermontov",emailL));
+        Person lermontov = personRepository.save(new Person("Lermontov", emailL));
+
 
         System.out.println("\n\nИщем всех пёрсонов");
         System.out.println(personRepository.findAll());
@@ -47,6 +50,16 @@ public class Main {
         System.out.println("До обновления: " + emailL);
         emailRepository.updateEmailById(emailL.getId(), "michail1984@lermontov.ru");
         emailRepository.findById(emailL.getId()).ifPresent(e -> System.out.println("После обновления: " + e));
+
+
+        System.out.println("\n\nИщем все почты по вхождению \".ru\"");
+        ExampleMatcher ignoringExampleMatcher = ExampleMatcher.matchingAny()
+                .withMatcher("address", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withIgnorePaths("id");
+
+        Example<Email> example = Example.of(new Email(1, ".ru"), ignoringExampleMatcher);
+
+        System.out.println(emailRepository.findAll(example));
 
         System.out.println("\n\n");
 
