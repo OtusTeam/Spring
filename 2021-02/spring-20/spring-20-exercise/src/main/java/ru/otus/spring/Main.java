@@ -1,5 +1,6 @@
 package ru.otus.spring;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -15,9 +16,11 @@ import java.util.Arrays;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
+import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.queryParam;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+import static org.springframework.web.reactive.function.server.ServerResponse.*;
 
 @SpringBootApplication
 public class Main {
@@ -36,43 +39,29 @@ public class Main {
 
     @Bean
     public RouterFunction<ServerResponse> composedRoutes(PersonRepository repository) {
-
-        PersonHandler handler = new PersonHandler(repository);
-
-        RouterFunction<ServerResponse> route = route()
-                .GET("/func/person", accept(APPLICATION_JSON), handler::list)
+        return route()
+                // Обратите внимание на использование хэндлера
+                .GET("/func/person", accept(APPLICATION_JSON), new PersonHandler(repository)::list)
+                // Обратите внимание на использование pathVariable
                 .GET("/func/person/{id}", accept(APPLICATION_JSON),
                         request -> repository.findById(request.pathVariable("id"))
-                                .flatMap(person -> ok().contentType(APPLICATION_JSON).body(fromObject(person)))
-                )
-                .GET("/func/person/age/{age}", accept(APPLICATION_JSON),
-                        serverRequest -> ok().contentType(APPLICATION_JSON)
-                                .body(repository.findAllByAge(Integer.valueOf(serverRequest.pathVariable("age"))), Person.class))
-                .GET("/func/person/find", accept(APPLICATION_JSON),
-                        serverRequest -> ok().contentType(APPLICATION_JSON)
-                                .body(repository.findAllByAge(Integer.valueOf(serverRequest.queryParam("age").get())), Person.class))
-                .build();
-
-        return route;
+                                .flatMap(person -> ok().contentType(APPLICATION_JSON).body(fromValue(person)))
+                                .switchIfEmpty(notFound().build())
+                ).build();
     }
 
-
+    // Это пример хэндлера, который даже не бин
     static class PersonHandler {
 
-        private PersonRepository repository;
+        private final PersonRepository repository;
 
         PersonHandler(PersonRepository repository) {
             this.repository = repository;
         }
 
         Mono<ServerResponse> list(ServerRequest request) {
+            // Обратите внимание на пример другого порядка создания response от Flux
             return ok().contentType(APPLICATION_JSON).body(repository.findAll(), Person.class);
-        }
-
-        Mono<ServerResponse> listAge(ServerRequest request) {
-            System.out.println("I'm here");
-            return ok().contentType(APPLICATION_JSON)
-                    .body(repository.findAllByAge(Integer.valueOf(request.queryParam("age").get())), Person.class);
         }
     }
 }
