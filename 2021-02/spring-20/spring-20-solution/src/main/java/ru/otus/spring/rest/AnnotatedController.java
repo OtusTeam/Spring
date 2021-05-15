@@ -13,7 +13,8 @@ public class AnnotatedController {
 
     @GetMapping("/flux/one")
     public Mono<String> one() {
-        return Mono.just("one");
+        return Mono.just("one")
+                .map(String::toUpperCase);
     }
 
     @GetMapping("/flux/ten")
