@@ -31,7 +31,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/find")
-    public Flux<Person> byName(@RequestParam("name") String name){
-        return repository.findAllByLastName( name );
+    public Flux<Person> byName(@RequestParam("name") String name) {
+        return repository.findAllByLastName(name);
     }
 }

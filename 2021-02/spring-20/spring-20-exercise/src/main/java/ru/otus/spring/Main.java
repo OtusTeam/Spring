@@ -22,35 +22,35 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 @SpringBootApplication
 public class Main {
 
-    public static void main( String[] args ) {
-        ApplicationContext context = SpringApplication.run( Main.class );
-        PersonRepository repository = context.getBean( PersonRepository.class );
+    public static void main(String[] args) {
+        ApplicationContext context = SpringApplication.run(Main.class);
+        PersonRepository repository = context.getBean(PersonRepository.class);
 
-        repository.saveAll( Arrays.asList(
-                new Person( "Pushkin", 22 ),
-                new Person( "Lermontov", 22 ),
-                new Person( "Tolstoy", 60 )
-        ) ).subscribe( p -> System.out.println( p.getLastName() ) );
+        repository.saveAll(Arrays.asList(
+                new Person("Pushkin", 22),
+                new Person("Lermontov", 22),
+                new Person("Tolstoy", 60)
+        )).subscribe(p -> System.out.println(p.getLastName()));
 
     }
 
     @Bean
-    public RouterFunction<ServerResponse> composedRoutes( PersonRepository repository ) {
+    public RouterFunction<ServerResponse> composedRoutes(PersonRepository repository) {
 
-        PersonHandler handler = new PersonHandler( repository );
+        PersonHandler handler = new PersonHandler(repository);
 
         RouterFunction<ServerResponse> route = route()
-                .GET( "/func/person", accept( APPLICATION_JSON ), handler::list )
-                .GET( "/func/person/{id}", accept( APPLICATION_JSON ),
-                        request -> repository.findById( request.pathVariable( "id" ) )
-                                .flatMap( person -> ok().contentType( APPLICATION_JSON ).body( fromObject( person ) ) )
+                .GET("/func/person", accept(APPLICATION_JSON), handler::list)
+                .GET("/func/person/{id}", accept(APPLICATION_JSON),
+                        request -> repository.findById(request.pathVariable("id"))
+                                .flatMap(person -> ok().contentType(APPLICATION_JSON).body(fromObject(person)))
                 )
-                .GET( "/func/person/age/{age}", accept( APPLICATION_JSON ),
-                        serverRequest -> ok().contentType( APPLICATION_JSON )
-                                .body( repository.findAllByAge( Integer.valueOf( serverRequest.pathVariable( "age" ) ) ), Person.class ) )
-                .GET( "/func/person/find", accept( APPLICATION_JSON ),
-                        serverRequest -> ok().contentType( APPLICATION_JSON )
-                                .body( repository.findAllByAge( Integer.valueOf( serverRequest.queryParam( "age" ).get() ) ), Person.class ) )
+                .GET("/func/person/age/{age}", accept(APPLICATION_JSON),
+                        serverRequest -> ok().contentType(APPLICATION_JSON)
+                                .body(repository.findAllByAge(Integer.valueOf(serverRequest.pathVariable("age"))), Person.class))
+                .GET("/func/person/find", accept(APPLICATION_JSON),
+                        serverRequest -> ok().contentType(APPLICATION_JSON)
+                                .body(repository.findAllByAge(Integer.valueOf(serverRequest.queryParam("age").get())), Person.class))
                 .build();
 
         return route;
@@ -61,18 +61,18 @@ public class Main {
 
         private PersonRepository repository;
 
-        PersonHandler( PersonRepository repository ) {
+        PersonHandler(PersonRepository repository) {
             this.repository = repository;
         }
 
-        Mono<ServerResponse> list( ServerRequest request ) {
-            return ok().contentType( APPLICATION_JSON ).body( repository.findAll(), Person.class );
+        Mono<ServerResponse> list(ServerRequest request) {
+            return ok().contentType(APPLICATION_JSON).body(repository.findAll(), Person.class);
         }
 
-        Mono<ServerResponse> listAge( ServerRequest request ) {
-            System.out.println( "I'm here" );
-            return ok().contentType( APPLICATION_JSON )
-                    .body( repository.findAllByAge( Integer.valueOf( request.queryParam( "age" ).get() ) ), Person.class );
+        Mono<ServerResponse> listAge(ServerRequest request) {
+            System.out.println("I'm here");
+            return ok().contentType(APPLICATION_JSON)
+                    .body(repository.findAllByAge(Integer.valueOf(request.queryParam("age").get())), Person.class);
         }
     }
 }
