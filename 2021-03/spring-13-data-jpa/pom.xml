@@ -11,7 +11,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>spring-13-exercise</module>
-        <module>spring-13-solution</module>
+        <module>exercise</module>
+        <module>solution-01</module>
+        <module>solution-02</module>
+        <module>solution-03</module>
+        <module>solution-04</module>
+        <module>demo</module>
     </modules>
 </project>
