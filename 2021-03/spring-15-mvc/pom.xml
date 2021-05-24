@@ -15,6 +15,6 @@
         <module>spring-mvc-solution-1</module>
         <module>spring-mvc-solution-2</module>
         <module>spring-mvc-solution-3</module>
-        <module>spring-mvc-solution-4</module>
+        <module>spring-mvc-demo</module>
     </modules>
 </project>
