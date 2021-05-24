@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.otus</groupId>
-    <artifactId>spring-mvc-solution-4</artifactId>
+    <artifactId>spring-mvc-demo</artifactId>
     <version>1.0</version>
 
     <parent>
