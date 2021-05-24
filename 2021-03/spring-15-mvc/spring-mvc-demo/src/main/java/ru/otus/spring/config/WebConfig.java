@@ -13,10 +13,10 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
-    private SystemInfoService systemInfoService;
+    private SystemInfoMethodArgumentResolver systemInfoMethodArgumentResolver;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new SystemInfoMethodArgumentResolver(systemInfoService));
+        resolvers.add(systemInfoMethodArgumentResolver);
     }
 }

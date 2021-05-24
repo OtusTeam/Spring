@@ -1,6 +1,7 @@
 package ru.otus.spring.rest;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -8,6 +9,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import ru.otus.spring.domain.SystemInfo;
 import ru.otus.spring.service.SystemInfoService;
 
+@Component
 public class SystemInfoMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final SystemInfoService systemInfoService;
