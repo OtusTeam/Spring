@@ -17,7 +17,7 @@ public class PersonController {
         this.repository = repository;
     }
 
-    @RequestMapping(value = "/persons/all", method = RequestMethod.GET, params = {})
+    @RequestMapping(value = "/persons/all", method = RequestMethod.GET)
     public List<PersonDto> getAllPersons() {
         return repository.findAll().stream()
                 .map(PersonDto::toDto)
@@ -43,7 +43,7 @@ public class PersonController {
         return PersonDto.toDto(savedPerson);
     }
 
-    @PutMapping("/persons/{id}/name")
+    @PatchMapping("/persons/{id}/name")
     public PersonDto updateNameById(@PathVariable("id") long id, @RequestParam("name") String name) {
         Person person = repository.findById(id).orElseThrow(NotFoundException::new);
         person.setName(name);

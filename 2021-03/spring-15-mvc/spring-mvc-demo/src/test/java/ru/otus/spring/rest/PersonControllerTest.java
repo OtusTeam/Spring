@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.domain.Person;
 import ru.otus.spring.repostory.PersonRepository;
+import ru.otus.spring.service.SystemInfoService;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,9 @@ class PersonControllerTest {
 
     @MockBean
     private PersonRepository repository;
+
+    @MockBean
+    private SystemInfoService systemInfoService;
 
     @Test
     void shouldReturnCorrectPersonsList() throws Exception {
@@ -105,7 +109,7 @@ class PersonControllerTest {
         Person expectedPerson = new Person(1, "Person2");
         String expectedResult = mapper.writeValueAsString(PersonDto.toDto(expectedPerson));
 
-        mvc.perform(put("/persons/{id}/name", 1).param("name", expectedPerson.getName())
+        mvc.perform(patch("/persons/{id}/name", 1).param("name", expectedPerson.getName())
                 .content(expectedResult))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedResult));

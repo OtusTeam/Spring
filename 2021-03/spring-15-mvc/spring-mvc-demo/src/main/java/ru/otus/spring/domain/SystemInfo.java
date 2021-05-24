@@ -16,4 +16,16 @@ public class SystemInfo {
     public String getOsName() {
         return osName;
     }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public String getOsArch() {
+        return osArch;
+    }
+
+    public int getProcessorsCount() {
+        return processorsCount;
+    }
 }
