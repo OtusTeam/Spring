@@ -1,0 +1,84 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Технологии JS для отправки запросов</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    
+    
+    <script>
+        function getDataByXmlHttpRequest() {
+            const dataContainer = document.getElementById("dataContainer")
+            
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+                if(xhr.readyState === 4 && xhr.status === 200) {
+                    // Вот здесь придёт ответ
+                    const json = JSON.parse(xhr.responseText)
+                    dataContainer.innerHTML = JSON.stringify(json, undefined, 4)
+                }
+            } 
+            // Вот здесь запрос отправляется
+            xhr.open('GET', 'https://restcountries.eu/rest/v2/alpha/al')
+            xhr.send()
+        }
+    </script>
+        
+        
+    <script>
+        function getDataByJQuery() {
+            const dataContainer = document.getElementById("dataContainer")
+            $.ajax({
+                type: 'GET',
+                url: 'https://restcountries.eu/rest/v2/alpha/aw',
+                success: (json) => {
+                  // Вот здесь пришёл ответ
+                  dataContainer.innerHTML = JSON.stringify(json, undefined, 4)
+                }
+              })
+        }
+    </script>
+        
+    <script>
+        function getDataByAxios() {
+            const dataContainer = document.getElementById("dataContainer")
+            
+            axios.get('https://restcountries.eu/rest/v2/alpha/pl')
+                .then(json => dataContainer.innerHTML = JSON.stringify(json, undefined, 4))
+        }
+    </script>
+        
+    <script>
+        function getDataByFetch() {
+            const dataContainer = document.getElementById("dataContainer")
+            fetch('https://restcountries.eu/rest/v2/alpha/co')    
+                .then(response => response.json())
+                .then(json => dataContainer.innerHTML = JSON.stringify(json, undefined, 4))
+        }
+    </script>
+</head>
+    <button onclick = "getDataByXmlHttpRequest()">Получить данные об Албании с помощью XMLHttpRequest</button><br/><br/>
+    <button onclick = "getDataByJQuery()">Получить данные об Арубе с помощью JQuery</button><br/><br/>
+    <button onclick = "getDataByAxios()">Получить данные о Польше с помощью Axios</button><br/><br/>
+    <button onclick = "getDataByFetch()">Получить данные о Колмбии с помощью Fetch</button><br/><br/>
+    <pre id = "dataContainer"></pre>
+<body>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
