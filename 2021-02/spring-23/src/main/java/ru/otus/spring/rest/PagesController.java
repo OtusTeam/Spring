@@ -26,9 +26,9 @@ public class PagesController {
     @GetMapping("/authenticated")
     public String authenticatedPage() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getDetails();
-        System.out.println(userDetails.getUsername());
+//        Authentication authentication = securityContext.getAuthentication();
+//        UserDetails userDetails = (UserDetails) authentication.getDetails();
+//        System.out.println(userDetails.getUsername());
         return "authenticated";
     }
 

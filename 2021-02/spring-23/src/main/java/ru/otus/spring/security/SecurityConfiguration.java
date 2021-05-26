@@ -25,16 +25,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // По умолчанию SecurityContext хранится в сессии
                 // Это необходимо, чтобы он нигде не хранился
                 // и данные приходили каждый раз с запросом
-                .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
-                .and()
+//                .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
+//                .and()
                 .authorizeRequests().antMatchers( "/public" ).anonymous()
                 .and()
                 .authorizeRequests().antMatchers( "/authenticated", "/success" ).authenticated()
 
                 .and()
                 // Включает Form-based аутентификацию
-//
-                .formLogin();
+                .formLogin()
+                    .passwordParameter( "vk_pass" )
+        .successForwardUrl( "/success" );
 
 //                ;
     }
