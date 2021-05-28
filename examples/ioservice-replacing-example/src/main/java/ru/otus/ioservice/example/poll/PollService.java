@@ -25,5 +25,4 @@ public class PollService {
         }
         ioService.out(String.format("До свидания %s", name));
     }
-
 }
