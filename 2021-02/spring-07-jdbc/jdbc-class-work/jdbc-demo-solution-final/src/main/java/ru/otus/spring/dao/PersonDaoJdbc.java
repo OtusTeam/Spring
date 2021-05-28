@@ -21,7 +21,6 @@ public class PersonDaoJdbc implements PersonDao {
 
     public PersonDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations)
     {
-        // Это просто оставили, чтобы не переписывать код
         // В идеале всё должно быть на NamedParameterJdbcOperations
         this.jdbc = namedParameterJdbcOperations.getJdbcOperations();
         this.namedParameterJdbcOperations = namedParameterJdbcOperations;
