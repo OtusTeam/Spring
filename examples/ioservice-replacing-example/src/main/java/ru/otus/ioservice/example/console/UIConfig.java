@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.ioservice.example.poll.PollService;
 
-@ConditionalOnProperty(name = "use.swing", havingValue = "false")
+@ConditionalOnProperty(name = "use.console", havingValue = "true")
 @Configuration
 public class UIConfig {
 

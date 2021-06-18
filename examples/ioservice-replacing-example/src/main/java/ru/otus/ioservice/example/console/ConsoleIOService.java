@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-@ConditionalOnProperty(name = "use.swing", havingValue = "false")
+@ConditionalOnProperty(name = "use.console", havingValue = "true")
 @Service
 public class ConsoleIOService implements IOService {
     private final PrintStream out;
@@ -17,7 +17,7 @@ public class ConsoleIOService implements IOService {
 
 
     public ConsoleIOService(@Value("#{T(java.lang.System).out}") PrintStream out,
-                            @Value("#{T(java.lang.System).in}")InputStream in) {
+                            @Value("#{T(java.lang.System).in}") InputStream in) {
         this.out = out;
         this.sc = new Scanner(in);
     }

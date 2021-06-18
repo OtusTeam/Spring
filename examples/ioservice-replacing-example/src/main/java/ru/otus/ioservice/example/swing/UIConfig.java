@@ -8,7 +8,7 @@ import ru.otus.ioservice.example.poll.PollService;
 
 import java.awt.*;
 
-@ConditionalOnProperty(name = "use.swing", havingValue = "true")
+@ConditionalOnProperty(name = "use.console", havingValue = "false")
 @Configuration
 public class UIConfig {
 

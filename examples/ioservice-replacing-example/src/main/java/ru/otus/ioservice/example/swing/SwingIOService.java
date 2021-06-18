@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import ru.otus.ioservice.example.api.IOService;
 
-@ConditionalOnProperty(name = "use.swing", havingValue = "true")
+@ConditionalOnProperty(name = "use.console", havingValue = "false")
 @RequiredArgsConstructor
 @Service
 public class SwingIOService implements IOService {
