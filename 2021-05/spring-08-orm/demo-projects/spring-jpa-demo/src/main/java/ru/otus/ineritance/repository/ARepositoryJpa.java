@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.ineritance.model.A;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ARepositoryJpa implements ARepository {
 
+    @PersistenceContext
     private final EntityManager em;
 
     @Transactional(readOnly = true) // Только для примера. Лучше вешать на методы сервисов

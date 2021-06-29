@@ -12,13 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jdbc для работы со студентами ")
 @JdbcTest
-@Import({OtusStudentRepositoryJdbcImpl.class, CourseRepositoryJdbcImpl.class})
-class OtusStudentRepositoryJdbcImplTest {
+@Import({OtusStudentRepositoryJdbc.class, CourseRepositoryJdbc.class})
+class OtusStudentRepositoryJdbcTest {
 
     private static final int EXPECTED_NUMBER_OF_STUDENTS = 10;
 
     @Autowired
-    private OtusStudentRepositoryJdbcImpl repositoryJdbc;
+    private OtusStudentRepositoryJdbc repositoryJdbc;
 
     @DisplayName("должен загружать список всех студентов с полной информацией о них")
     @Test
