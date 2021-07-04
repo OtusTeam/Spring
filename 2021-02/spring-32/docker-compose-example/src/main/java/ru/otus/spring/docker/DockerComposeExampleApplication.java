@@ -15,8 +15,8 @@ public class DockerComposeExampleApplication {
 		//Код для примера, делать так конечно нельзя :)
 		ApplicationContext context = SpringApplication.run(DockerComposeExampleApplication.class, args);
 		PersonRepository repository = context.getBean(PersonRepository.class);
-		repository.save(new Person(1, "Ivan", "Ivanov"));
-		System.out.println(repository.findById(1));
+		repository.save(new Person("Ivan", "Ivanov"));
+		System.out.println(repository.findAll());
 	}
 
 }

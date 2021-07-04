@@ -7,15 +7,16 @@ services:
     privileged: true
     ports:
       - "8080:8080"
+    # Эти свойства перегружают соответствующие в application.yml
     environment:
-      - DB_DRIVER=org.postgresql.Driver
-      - DB_URL=jdbc:postgresql://postgres:5432/db
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=postgres
-      - WAIT_FOR=postgres:5432
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
     networks:
       - nw
   postgres:
+    # В идеале должна быть ещё и версия image
     image: "postgres"
     ports:
       - "5432:5432"
