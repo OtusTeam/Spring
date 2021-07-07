@@ -3,7 +3,7 @@ spring:
     # Эти свойства будут перегружены свойствами в docker-compose.yml
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/db
-    username: postgre
+    username: postgres
     password: postgres
   jpa:
     generate-ddl: true
