@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:constant id = "in" static-field="java.lang.System.in"/>
+    <util:constant id = "out" static-field="java.lang.System.out"/>
+
+    <bean id="ioService" class="ru.otus.services.IOServiceStreams">
+        <constructor-arg name="in" ref="in" />
+        <constructor-arg name="out" ref="out" />
+    </bean>
+
+    <bean id="equationPreparer" class="ru.otus.services.EquationPreparerImpl" />
+
+    <bean id="playerService" class="ru.otus.services.PlayerServiceImpl">
+        <constructor-arg name="ioService" ref="ioService"/>
+    </bean>
+
+    <bean id="gameProcessor" class="ru.otus.services.GameProcessorImpl">
+        <constructor-arg name="ioService" ref="ioService"/>
+        <constructor-arg name="equationPreparer" ref="equationPreparer"/>
+        <constructor-arg name="playerService" ref="playerService"/>
+    </bean>
+
+</beans>
