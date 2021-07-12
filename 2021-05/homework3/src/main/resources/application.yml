@@ -1,0 +1,7 @@
+server:
+  port: 8081
+spring:
+  output.ansi.enabled: ALWAYS
+application:
+  threshold: 2
+
