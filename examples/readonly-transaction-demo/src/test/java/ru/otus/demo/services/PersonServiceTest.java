@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.otus.demo.model.Email;
 import ru.otus.demo.model.Person;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -23,7 +24,7 @@ class PersonServiceTest {
 
     @BeforeEach
     void setUp() {
-        personService.save(new Person(0, "Igor"));
+        personService.save(new Person(0, "Igor", new Email(0, "noname@nomail.ru")));
     }
 
     @Test
@@ -36,6 +37,13 @@ class PersonServiceTest {
     @Test
     void updateWithReadonlyTran() {
         personService.updateWithReadonlyTran(1, "Vasya");
+        Person actualPerson = personService.findById(1);
+        assertThat(actualPerson).extracting(Person::getName).isEqualTo("Igor");
+    }
+
+    @Test
+    void updateWithoutTran() {
+        personService.updateWithoutTran(1, "Vasya");
         Person actualPerson = personService.findById(1);
         assertThat(actualPerson).extracting(Person::getName).isEqualTo("Igor");
     }

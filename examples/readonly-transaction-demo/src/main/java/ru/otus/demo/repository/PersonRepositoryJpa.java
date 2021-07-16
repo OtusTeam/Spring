@@ -19,7 +19,7 @@ public class PersonRepositoryJpa implements PersonRepository {
     @Override
     public Person save(Person person) {
         if (person.getId() == 0) {
-            Person savedPerson = new Person(person.getId(), person.getName());
+            Person savedPerson = new Person(person.getId(), person.getName(), person.getEmail());
             em.persist(savedPerson);
             return savedPerson;
 

@@ -22,6 +22,11 @@ public class PersonService {
         personRepository.save(person);
     }
 
+    public void updateWithoutTran(long id, String name) {
+        Person person = personRepository.findById(id);
+        person.setName(name);
+    }
+
     @Transactional
     public void updateWithNormalTran(long id, String name) {
         Person person = personRepository.findById(id);
