@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    #url: jdbc:postgresql://localhost:5432/persons
+    #username: postgres
+    #password: postgres
+
+    url: jdbc:h2:mem:testdb
+
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+    properties:
+      hibernate:
+      #format_sql: true
