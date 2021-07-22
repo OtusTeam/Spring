@@ -4,4 +4,8 @@ spring:
   output.ansi.enabled: ALWAYS
 application:
   threshold: 2
+  quiz-file: quiz.csv
+  quiz-file-ru: quiz-ru.csv
+  locale: ru-RU
+
 
