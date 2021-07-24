@@ -1,6 +1,7 @@
 package ru.otus.demo.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import ru.otus.demo.model.Person;
 
@@ -35,9 +36,13 @@ public class PersonRepositoryJpa implements PersonRepository {
 
     @Override
     public Person findById(long id) {
+        System.out.println("FlushMode: " + em.unwrap(Session.class).getHibernateFlushMode());
+        return em.find(Person.class, id);
+/*
         TypedQuery<Person> query = em.createQuery("select p from Person p where p.id = :id", Person.class);
         query.setParameter("id", id);
         return query.getSingleResult();
+*/
 
     }
 }

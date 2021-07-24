@@ -28,7 +28,7 @@ public class RabbitMqListener {
 
         val userActivity = objectMapper.readValue(message, UserActivity.class);
         val mailMessage = messageTransformer.transform(userActivity);
-        //System.out.println("Как будто посылаем письмо: " + mailMessage);
+        System.out.println("Как будто посылаем письмо: " + mailMessage);
         //mailSender.send(mailMessage);
     }
 
@@ -46,7 +46,7 @@ public class RabbitMqListener {
 
     @RabbitListener(queues = "stat-calc-commands-queue")
     public void processStatCalcCommandsMessages(String message) {
-        //System.out.println("RECEIVED FROM stat-calc-commands-queue: " + message);
+        System.out.println("RECEIVED FROM stat-calc-commands-queue: " + message);
 
         activityStatRepository.deleteAll();
         val activityStat = activityStatRepository.calcActivityStat();
