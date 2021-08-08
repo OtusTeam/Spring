@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings({"SqlNoDataSourceInspection", "ConstantConditions", "SqlDialectInspection"})
+//@SuppressWarnings({"SqlNoDataSourceInspection", "ConstantConditions", "SqlDialectInspection"})
 @Repository
 public class PersonDaoJdbc implements PersonDao {
 
