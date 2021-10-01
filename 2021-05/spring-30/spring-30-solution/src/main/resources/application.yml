@@ -9,3 +9,12 @@ management:
   health:
     defaults:
       enabled: true
+  info:
+    git:
+      mode: full
+
+info:
+  version: @project.version@
+  author: dkogan
+  descriptiion: THis is SPring Bot example
+
