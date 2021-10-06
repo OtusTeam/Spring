@@ -17,6 +17,6 @@ public class CountryServiceRest implements CountryService {
     @Override
     public Country getCountry( String id ) {
         log.info( "Request" );
-        return rest.getForObject( "http://restcountries.eu/rest/v2/alpha/" + id, Country.class );
+        return rest.getForObject( "http://api.countrylayer.com/v2/alpha/" + id + "?access_key=[ваш ключ]", Country.class );
     }
 }
