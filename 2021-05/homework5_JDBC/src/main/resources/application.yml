@@ -8,3 +8,4 @@ spring:
     schema: schema.sql
     data: data.sql
 
+
