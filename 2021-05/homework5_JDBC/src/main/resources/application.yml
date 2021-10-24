@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/otus_books
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+    schema: schema.sql
+    data: data.sql
+
