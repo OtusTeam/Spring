@@ -17,9 +17,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "book_id")
-//    private Book book;
+    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
+    private Book book;
 
     @Column(name = "text", nullable = false)
     private String text;
@@ -28,7 +28,7 @@ public class Comment {
     private String userName;
 
     public Comment(Book book, String text, String userName) {
-    //    this.book = book;
+        this.book = book;
         this.text = text;
         this.userName = userName;
 

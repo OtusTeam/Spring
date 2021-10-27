@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>homework5_JDBC</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>homework5_JDBC</name>
-    <description>homework5_JDBC</description>
+    <name>homework6_JPA</name>
+    <description>homework6_JPA</description>
     <properties>
         <java.version>11</java.version>
     </properties>

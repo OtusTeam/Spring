@@ -41,14 +41,17 @@ public class GenreDaoJPA implements GenreDao {
 
     @Override
     public void deleteById(long id) {
-        Query query = em.createQuery("delete from Genre g where g.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
-
+        Genre genre = em.find(Genre.class, id);
+        em.remove(genre);
     }
 
     @Override
     public void save(Genre genre) {
+        if(genre.getId()<=0) {
+            em.persist(genre);
+        } else {
+            em.merge(genre);
+        }
 
     }
 }

@@ -3,10 +3,12 @@ package com.example.homework6_jpa.dao.JPA;
 import com.example.homework6_jpa.dao.BookDao;
 import com.example.homework6_jpa.domain.Author;
 import com.example.homework6_jpa.domain.Book;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
@@ -41,9 +43,8 @@ public class BookDaoJPA implements BookDao {
 
     @Override
     public void deleteById(long id) {
-        Query query = em.createQuery("delete from Book b where b.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        Book book= em.find(Book.class, id);
+        em.remove(book);
     }
 
     @Override
@@ -58,11 +59,14 @@ public class BookDaoJPA implements BookDao {
 
     @Override
     public void updateTitleById(long id, String title ) {
-        Query query = em.createQuery("update Book b " +
-                "set b.title = :title " +
-                "where b.id = :id");
-        query.setParameter("title", title);
-        query.setParameter("id", id);
-        query.executeUpdate();
+//        Query query = em.createQuery("update Book b " +
+//                "set b.title = :title " +
+//                "where b.id = :id");
+//        query.setParameter("title", title);
+//        query.setParameter("id", id);
+//        query.executeUpdate();
+        Book book = em.find(Book.class, id);
+        book.setTitle(title);
+        em.merge(book);
     }
 }

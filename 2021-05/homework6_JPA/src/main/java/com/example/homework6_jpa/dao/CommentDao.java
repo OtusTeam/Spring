@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface CommentDao {
     List<Comment> findAll();
     Optional<Comment> findById(long id);
-    List<Comment> findByBook(long bookId);
     void deleteById(long id);
     Comment save(Comment comment);
 }
