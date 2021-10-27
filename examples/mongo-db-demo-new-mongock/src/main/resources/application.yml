@@ -1,9 +1,20 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost
+      host: localhost
       port: 27017
       database: awesomeMongo
+
+mongock:
+  runner-type: "ApplicationRunner" # default
+  #runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.example.mongodbdemo.changelogs
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
+
 logging:
   level:
     root: ERROR

@@ -11,7 +11,6 @@ import ru.otus.spring.microservice.repostory.PersonRepository;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@EnableWebMvc
 public class App {
 
     @Autowired
