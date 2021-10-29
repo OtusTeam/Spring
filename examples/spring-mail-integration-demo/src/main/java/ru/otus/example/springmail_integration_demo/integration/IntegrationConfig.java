@@ -9,12 +9,15 @@ import org.springframework.integration.dsl.IntegrationFlowDefinition;
 import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.scheduling.PollerMetadata;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.PollableChannel;
 import ru.otus.example.springmail_integration_demo.repositories.ActivityRepository;
 import ru.otus.example.springmail_integration_demo.repositories.ActivityStatRepository;
 import ru.otus.example.springmail_integration_demo.services.UserActivityToEmailTransformer;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 @Configuration
@@ -42,6 +45,8 @@ public class IntegrationConfig {
     @Autowired
     private JavaMailSender mailSender;
 
+    private AtomicBoolean messageWasSandedOnceFlag = new AtomicBoolean(false);
+
     @Bean
     public PollableChannel appUserActivityInChanel() {
         return MessageChannels.queue("appUserActivityInChanel", DEFAULT_QUEUE_CAPACITY).get();
@@ -66,7 +71,12 @@ public class IntegrationConfig {
                                 .transform(messageTransformer, TRANSFORM_METHOD_NAME)
                                 .handle(m -> {
                                     System.out.println("Как будто посылаем письмо: " + m.getPayload());
-                                    //mailSender.send((SimpleMailMessage) m.getPayload());
+/*
+                                    if (!messageWasSandedOnceFlag.get()) {
+                                        mailSender.send((SimpleMailMessage) m.getPayload());
+                                        messageWasSandedOnceFlag.set(true);
+                                    }
+*/
                                 })
                         )
                         .subFlowMapping(false, IntegrationFlowDefinition::nullChannel)
