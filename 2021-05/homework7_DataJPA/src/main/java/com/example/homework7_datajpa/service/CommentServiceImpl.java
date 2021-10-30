@@ -4,6 +4,7 @@ import com.example.homework7_datajpa.model.Book;
 import com.example.homework7_datajpa.model.Comment;
 import com.example.homework7_datajpa.repository.BookRepository;
 import com.example.homework7_datajpa.repository.CommentRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,8 +37,8 @@ public class CommentServiceImpl implements CommentService{
     @Override
     @Transactional(readOnly = true)
     public List<Comment> getByBook(long bookId) {
-        Optional<Book> book = bookRepository.findById(bookId);
-        return repository.findByBook_Id(book);
+        Book book = bookRepository.findById(bookId).orElseThrow();
+        return book.getComments();
     }
 
     @Override

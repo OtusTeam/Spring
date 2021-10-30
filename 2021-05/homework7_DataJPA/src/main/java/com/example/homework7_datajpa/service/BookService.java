@@ -11,7 +11,6 @@ public interface BookService {
     List<Book> getAll();
     Optional<Book> get(long id);
 
-    @Transactional(readOnly = true)
     Optional<Book> getByName(String name);
 
     void delete(long id);

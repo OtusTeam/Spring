@@ -1,7 +1,9 @@
 package com.example.homework7_datajpa.service;
 
 import com.example.homework7_datajpa.model.Book;
+import com.example.homework7_datajpa.repository.AuthorRepository;
 import com.example.homework7_datajpa.repository.BookRepository;
+import com.example.homework7_datajpa.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +15,13 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository repository;
+    private final AuthorRepository authorRepository;
+    private final GenreRepository genreRepository;
 
-    public BookServiceImpl(@Autowired BookRepository repository) {
+    public BookServiceImpl(@Autowired BookRepository repository, AuthorRepository authorRepository, GenreRepository genreRepository) {
         this.repository = repository;
+        this.authorRepository = authorRepository;
+        this.genreRepository = genreRepository;
     }
 
     @Override
@@ -45,11 +51,10 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public String save(String name, long authorId, long genreId) {
-        //TODO:
-//        Book book = new Book(name, authorDao.findById(authorId).orElse(null), genreDao.findById(genreId).orElse(null));
-//        repository.save(book);
-//        return book.toString();
-        return null;
+
+        Book book = new Book(name, authorRepository.findById(authorId).orElse(null), genreRepository.findById(genreId).orElse(null));
+        repository.save(book);
+        return book.toString();
     }
 
 }
