@@ -45,6 +45,15 @@ public class Book {
         this.author = author;
         this.genre = genre;
     }
+
+    public Book(String title, Author author, Genre genre, List<Comment> comments) {
+
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.comments = comments;
+    }
+
     public Book(long id, String title, Author author, Genre genre) {
 
         this.id = id;

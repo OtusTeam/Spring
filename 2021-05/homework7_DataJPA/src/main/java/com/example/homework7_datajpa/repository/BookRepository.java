@@ -10,11 +10,11 @@ import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Optional<Book> findByName(String name);
+    Optional<Book> findByTitle(String name);
 
-    @Modifying
-    @Query("update Book b set b.title = :name where b.id = :id")
-    void updateNameById(@Param("id") long id,
-                        @Param("name") String name);
+//    @Modifying
+//    @Query("update Book b set b.title = :name where b.id = :id")
+//    void updateNameById(@Param("id") long id,
+//                        @Param("name") String name);
 
 }

@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public Optional<Book> getByName(String name) {
-        return repository.findByName(name);
+        return repository.findByTitle(name);
     }
 
     @Override
@@ -55,6 +55,14 @@ public class BookServiceImpl implements BookService {
         Book book = new Book(name, authorRepository.findById(authorId).orElse(null), genreRepository.findById(genreId).orElse(null));
         repository.save(book);
         return book.toString();
+    }
+
+    @Override
+    public Book updateTitleById(long id, String title) {
+        Book book = repository.findById(id).orElseThrow();
+        book.setTitle(title);
+        repository.save(book);
+        return book;
     }
 
 }

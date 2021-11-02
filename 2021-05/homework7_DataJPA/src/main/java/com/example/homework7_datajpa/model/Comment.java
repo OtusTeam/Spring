@@ -15,10 +15,6 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-//Todo: сделать двунаправленную связь
-//    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "book_id")
-//    private Book book;
 
     @Column(name = "text", nullable = false)
     private String text;
@@ -27,7 +23,6 @@ public class Comment {
     private String userName;
 
     public Comment(String text, String userName) {
-    //    this.book = book;
         this.text = text;
         this.userName = userName;
 

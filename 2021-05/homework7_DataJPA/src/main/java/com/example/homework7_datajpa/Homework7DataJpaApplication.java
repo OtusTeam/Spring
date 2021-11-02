@@ -9,8 +9,5 @@ public class Homework7DataJpaApplication {
     public static void main(String[] args) {
         SpringApplication.run(Homework7DataJpaApplication.class, args);
     }
-//TODO:
-//sql
-// application.properties
-//tests
+
 }

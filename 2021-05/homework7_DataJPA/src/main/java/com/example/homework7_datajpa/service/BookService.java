@@ -15,5 +15,6 @@ public interface BookService {
 
     void delete(long id);
     String save(String name, long authorId, long genreId);
+    Book updateTitleById(long id, String title);
 
 }
