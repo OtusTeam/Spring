@@ -25,19 +25,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Book> getAll() {
         return repository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Book> get(long id) {
         return repository.findById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Book> getByName(String name) {
         return repository.findByTitle(name);
     }
