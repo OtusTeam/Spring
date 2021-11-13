@@ -1,8 +1,9 @@
-package ru.otus.spring.reactor;
+package ru.otus.spring.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.otus.spring.reactor.Message;
 
 @Service
 public class NonFluxService {

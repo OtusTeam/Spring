@@ -25,7 +25,7 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
-        <!-- работает и без неё, но нужна нам, для RxJava методов -->
+        <!-- работает и без неё, но нужна для RxJava контроллера -->
         <dependency>
             <groupId>io.reactivex.rxjava2</groupId>
             <artifactId>rxjava</artifactId>
