@@ -36,7 +36,7 @@ public class OperatorsExample {
     }
 
     public static void publisherExample() throws Exception {
-        final Observable<String> ob = magicPublisher();
+        Observable<String> ob = magicPublisher();
         System.out.println("First subscribed");
         ob.subscribe(System.out::println);
         Thread.sleep(5000);
@@ -47,10 +47,12 @@ public class OperatorsExample {
     public static Observable<String> magicPublisher() {
         Random r = new Random(1);
         AtomicInteger i = new AtomicInteger();
-        final Observable<String> obs = Observable.<String>generate(emitter ->
-            emitter.onNext("" + i.incrementAndGet()))
-            .concatMap(s -> Observable.just(s).delay(r.nextInt(1000), TimeUnit.MILLISECONDS))
-            .subscribeOn(Schedulers.newThread());
+        Observable<String> obs = Observable.<String>generate(
+                emitter -> {
+                    emitter.onNext("" + i.incrementAndGet());
+                    Thread.sleep(1000);
+                })
+                .subscribeOn(Schedulers.newThread());
         PublishSubject<String> subject = PublishSubject.create();
 
 //        BehaviorSubject<String> subject = BehaviorSubject.create();
