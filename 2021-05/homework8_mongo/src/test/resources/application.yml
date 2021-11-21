@@ -1,0 +1,20 @@
+#Local MongoDB config
+spring:
+  data:
+    mongodb:
+      database: book_db
+      port: 0
+      host: localhost
+mongock:
+  runner-type: "ApplicationRunner" # default
+  #runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - com.otus.homework.homework8_mongo.mongock.changelog
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
+
+logging:
+  level:
+    root: ERROR
