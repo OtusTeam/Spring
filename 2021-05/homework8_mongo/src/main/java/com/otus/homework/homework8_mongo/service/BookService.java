@@ -12,9 +12,5 @@ public interface BookService {
     List<Book> getByTitle(String name);
     List<Book> getByAuthor(Author author);
     void delete(String id);
- //   Book saveWithConstraints(Book book);
- //   Book updateTitleById(String id, String title) throws NotFoundException;
- //   long countAttachedComments(String bookId) throws NotFoundException;
-    void removeBookWithComments(String bookId);
 
 }

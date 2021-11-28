@@ -21,14 +21,11 @@ public class Comment {
     @Field(name = "user_name")
     private String userName;
 
-    private Book book;
-
     private long rate;
 
     public Comment(String text, String userName, Book book, long rate) {
         this.text = text;
         this.userName = userName;
-        this.book = book;
         this.rate = rate;
 
     }

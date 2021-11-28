@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorRepositoryCustomImpl implements AuthorRepositoryCustom{
 
-    private final MongoTemplate mongoTemplate;;
+    private final MongoTemplate mongoTemplate;
 
     @Override
     public long getCountAuthorsBooks(String authorId) {
@@ -23,5 +23,19 @@ public class AuthorRepositoryCustomImpl implements AuthorRepositoryCustom{
         val query = Query.query(Criteria.where("author").is(author));
         List<Book> books = mongoTemplate.find(query, Book.class);
         return books.size();
+    }
+
+    @Override
+    public Author saveWithBooks(Author author) {
+        val query = Query.query(Criteria.where("author.id").is(author.getId()));
+        List<Book> books = mongoTemplate.find(query, Book.class);
+
+        for (Book book : books) {
+            book.setAuthor(author);
+            mongoTemplate.save(book);
+        }
+        mongoTemplate.save(author);
+
+        return author;
     }
 }

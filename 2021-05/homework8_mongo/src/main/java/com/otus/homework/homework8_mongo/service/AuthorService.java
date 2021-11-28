@@ -13,5 +13,5 @@ public interface AuthorService {
     Author getByBook(Book book);
     void delete(String id);
     void save(Author author);
-
+    long countAuthorBooks(String authorId);
 }
