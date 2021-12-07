@@ -42,6 +42,8 @@ public class CustomBeanDefinitionRegistrar implements ImportBeanDefinitionRegist
     private void registerCustomLifeCycleBean(BeanDefinitionRegistry registry) {
         GenericBeanDefinition gbd = new GenericBeanDefinition();
         gbd.setBeanClass(CustomLifeCycleBean.class);
+        gbd.setInitMethodName("customInitMethod");
+        gbd.setDestroyMethodName("customDestroyMethod");
         registry.registerBeanDefinition("customLifeCycleBean", gbd);
     }
 
