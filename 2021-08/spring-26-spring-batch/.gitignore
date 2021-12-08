@@ -1,0 +1,8 @@
+.idea/
+*.iml
+
+target/
+
+output.csv
+*.log
+*.dat
