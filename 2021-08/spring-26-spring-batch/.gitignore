@@ -5,4 +5,5 @@ target/
 
 output.csv
 *.log
-*.dat
+output*.dat
+test-output.dat
