@@ -25,17 +25,17 @@
 <body>
 
 <!-- Person edition -->
-<form id="edit-form" action="edit.html">
+<form id="edit-form" th:action="@{/edit(id=${person.id})}" th:method="post" th:object="${person}" action="edit.html">
     <h1>Person Info:</h1>
 
     <div class="row">
         <label for="id-input">ID:</label>
-        <input id="id-input" type="text" readonly="readonly" value="1"/>
+        <input id="id-input" type="text" readonly="readonly" th:value="*{id}" value="1"/>
     </div>
 
     <div class="row">
         <label for="holder-input">Name:</label>
-        <input id="holder-input" name="name" type="text" value="John Doe"/>
+        <input id="holder-input" name="name" type="text" th:value="*{name}" value="John Doe"/>
     </div>
 
     <div class="row">
