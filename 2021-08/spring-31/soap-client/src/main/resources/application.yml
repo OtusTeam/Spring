@@ -1,0 +1,6 @@
+logging:
+  level:
+    hello: INFO
+    org:
+      springframework:
+        ws: DEBUG
