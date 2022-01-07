@@ -19,17 +19,6 @@ public class TestAppSimple implements TestApp{
         questionNumber = 0;
     }
 
-    private SimpleQuestion getQuestion(int questionNumber) {
-        SimpleQuestion question;
-        try {
-            question = questionDao.getByNumber(questionNumber);
-        } catch (PersistentException e) {
-            return null;
-        }
-        return question;
-    }
-
-
     @Override
     public SimpleQuestion getNextQuestion() {
         try {
