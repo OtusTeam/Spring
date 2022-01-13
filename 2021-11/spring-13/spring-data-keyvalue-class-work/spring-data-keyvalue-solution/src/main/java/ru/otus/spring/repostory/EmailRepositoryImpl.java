@@ -11,17 +11,17 @@ public class EmailRepositoryImpl implements EmailRepository {
 
     final private KeyValueOperations keyValueTemplate;
 
-    public EmailRepositoryImpl(KeyValueOperations keyValueTemplate) {
+    public EmailRepositoryImpl( KeyValueOperations keyValueTemplate ) {
         this.keyValueTemplate = keyValueTemplate;
     }
 
     @Override
     public List<Email> findAll() {
-        return (List<Email>) keyValueTemplate.findAll(Email.class);
+        return (List<Email>) keyValueTemplate.findAll( Email.class );
     }
 
     @Override
-    public Email save(Email email) {
-        return keyValueTemplate.insert(email);
+    public Email save( Email email ) {
+        return keyValueTemplate.insert( email );
     }
 }
