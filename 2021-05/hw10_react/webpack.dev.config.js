@@ -17,7 +17,7 @@ module.exports = {
         host: 'localhost',
         open: true,
         before: (app) => {
-            app.get('/api/persons', (req, res) => res.send([
+            app.get('/api/words', (req, res) => res.send([
                 {id: '1', name: 'Привяу'}
             ]));
         }

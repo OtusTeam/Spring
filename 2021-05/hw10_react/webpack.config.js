@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
+    mode: 'development',
     entry: './src/ui/index.js',
     output: {
         path: path.resolve(__dirname, 'target/classes/public/'),
