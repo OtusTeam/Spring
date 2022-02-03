@@ -48,6 +48,7 @@ public class WordRestController {
         word.setExample(newWord.getExample());
         word.setDictionary(newWord.getDictionary());
         word.setState(WordState.NEW);
+        word = repository.save(word);
 
         return ResponseEntity.ok(word);
     }
