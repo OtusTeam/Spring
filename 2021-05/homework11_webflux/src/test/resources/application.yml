@@ -2,14 +2,14 @@
 spring:
   data:
     mongodb:
-      #authentication-database: admin
-      database: books
+      database: book
       port: 0
       host: localhost
 mongock:
   runner-type: "ApplicationRunner" # default
+  #runner-type: "InitializingBean"
   change-logs-scan-package:
-    - com.otus.homework.homework8_mongo.changelog
+    - com.otus.homework.homework8_mongo.mongock.changelog
   mongo-db:
     write-concern:
       journal: false
@@ -18,4 +18,3 @@ mongock:
 logging:
   level:
     root: ERROR
-

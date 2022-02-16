@@ -1,15 +1,15 @@
-#Local MongoDB config
 spring:
   data:
     mongodb:
-      #authentication-database: admin
-      database: books
       port: 0
-      host: localhost
+      database: words
+      embedded:
+        version: 4.0.21
+
 mongock:
   runner-type: "ApplicationRunner" # default
   change-logs-scan-package:
-    - com.otus.homework.homework8_mongo.changelog
+    - com.example.homework11_webflux.mongock.changelog
   mongo-db:
     write-concern:
       journal: false
@@ -18,4 +18,3 @@ mongock:
 logging:
   level:
     root: ERROR
-
