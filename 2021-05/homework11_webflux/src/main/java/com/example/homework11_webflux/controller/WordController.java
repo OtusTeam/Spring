@@ -17,23 +17,23 @@ public class WordController {
         this.repository = repository;
     }
 
-    @GetMapping("/api/words")
+    @GetMapping("/words")
     public Flux<Word> getAllWords() {
         return repository.findAll();
     }
 
-    @PostMapping("/api/words")
+    @PostMapping("/words")
     public Mono<Word> createWord(@RequestBody Mono<Word> word) {
         return repository.save(word);
     }
 
-    @DeleteMapping("/api/words/{id}")
+    @DeleteMapping("/words/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public Mono<Void> deleteWord(@PathVariable String id) {
         return repository.deleteById(id);
     }
 
-    @PutMapping("/api/words/{id}")
+    @PutMapping("/words/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Mono<Word> updateWord(@PathVariable String id, @RequestBody Mono<Word> newWord){
         return repository.findById(id).
