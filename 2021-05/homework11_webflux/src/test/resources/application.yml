@@ -6,7 +6,6 @@ spring:
     mongodb:
       port: 27017
       database: words
-      host: localhost
 
 mongock:
   runner-type: "InitializingBean"
@@ -16,5 +15,8 @@ mongock:
     write-concern:
       journal: false
     read-concern: local
+  enabled: false
 
-
+logging:
+  level:
+    root: ERROR

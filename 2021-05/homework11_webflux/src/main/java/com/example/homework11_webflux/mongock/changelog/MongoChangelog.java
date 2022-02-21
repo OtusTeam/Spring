@@ -10,7 +10,7 @@ import com.example.homework11_webflux.repository.UserRepository;
 import com.example.homework11_webflux.repository.WordRepository;
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
-import com.mongodb.reactivestreams.client.MongoDatabase;
+import com.mongodb.client.MongoDatabase;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
@@ -40,7 +40,7 @@ public class MongoChangelog {
 //    }
 
     //добавляем слова в словарь
-    @ChangeSet(author = "lenu", id = "initBooks", order = "004", runAlways = true)
+    @ChangeSet(author = "lenu", id = "initBooks", order = "001", runAlways = true)
     public void insertWords(WordRepository repository, DictionaryRepository dictRepository, UserRepository userRepository) {
         Mono<Word> word1 = repository.save(new Word("0", "tenacious", "упорный, упрямый", "merriam-webster",
                 "The tenacious king salmon will likely be coming back for many, many autumns to come.",

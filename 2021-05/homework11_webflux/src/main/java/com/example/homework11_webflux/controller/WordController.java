@@ -22,6 +22,11 @@ public class WordController {
         return repository.findAll();
     }
 
+    @GetMapping("/words/{id}")
+    public Mono<Word> getById(@PathVariable String id) {
+        return repository.findById(id);
+    }
+
     @PostMapping("/words")
     public Mono<Word> createWord(@RequestBody Mono<Word> word) {
         return repository.save(word);

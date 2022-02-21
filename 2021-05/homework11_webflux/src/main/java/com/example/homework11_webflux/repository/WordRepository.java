@@ -10,4 +10,7 @@ import reactor.core.publisher.Mono;
 public interface WordRepository extends ReactiveMongoRepository<Word, String> {
     Flux<Word> findAll();
     Mono<Word> save(Mono<Word> word);
+
+    Mono<Word> findAllById(String id);
+
 }
