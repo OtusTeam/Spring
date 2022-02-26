@@ -37,24 +37,35 @@ public class Main {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> orders() {
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> composedRoutes(PersonRepository repository) {
         return route()
                 // эта функция должна стоять раньше findAll - порядок следования роутов - важен
-                .GET("/func/person", queryParam("name", StringUtils::isNotEmpty),
+                .GET("/func/person",
+                        queryParam("name", StringUtils::isNotEmpty),
                         request -> request.queryParam("name")
                                 .map(repository::findAllByLastName)
                                 .map(persons -> ok().body(persons, Person.class))
                                 .orElse(badRequest().build())
                 )
                 // пример другой реализации - начиная с запроса репозитория
-                .GET("/func/person", queryParam("age", StringUtils::isNotEmpty),
-                        req -> repository.findAllByLastName(
-                                req.queryParam("age").orElseThrow(IllegalArgumentException::new)
-                        )
-                                .collectList()
-                                .flatMap(persons -> ok().body(persons, Person.class)))
+                .GET("/func/person",
+                        queryParam("age", StringUtils::isNotEmpty)
+                            .and(queryParam("name", StringUtils::isNotEmpty)),
+                        req -> req.queryParam("age")
+                            .map(age -> Integer.parseInt(age))
+                            .map(age -> repository.findAllByAge(age))
+                                .orElseThrow(RuntimeException::new)
+                            .collectList()
+                            .flatMap(persons -> ServerResponse.ok().body(persons, Person.class))
+                            .
+                )
                 // Обратите внимание на использование хэндлера
-                .GET("/func/person", accept(APPLICATION_JSON), new PersonHandler(repository)::list)
+                .GET("/func/person", accept(APPLICATION_JSON), personGetAllHandler::handle)
+                .GET("/func/person", accept(APPLICATION_JSON), personHandler::post)
                 // Обратите внимание на использование pathVariable
                 .GET("/func/person/{id}", accept(APPLICATION_JSON),
                         request -> repository.findById(request.pathVariable("id"))
@@ -73,8 +84,13 @@ public class Main {
         }
 
         Mono<ServerResponse> list(ServerRequest request) {
+            String name = request.queryParam("name").orElseThrow();
+            Integer age = request.queryParam("age")
+                    .map(Integer::parseInt)
+                    .orElseThrow();
             // Обратите внимание на пример другого порядка создания response от Flux
-            return ok().contentType(APPLICATION_JSON).body(repository.findAll(), Person.class);
+            return ok().contentType(APPLICATION_JSON)
+                    .body(repository.findAll(), Person.class);
         }
     }
 }

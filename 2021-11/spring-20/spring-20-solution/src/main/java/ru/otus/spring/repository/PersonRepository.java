@@ -8,6 +8,7 @@ import ru.otus.spring.domain.Person;
 public interface PersonRepository
         extends ReactiveMongoRepository<Person, String> {
 
+    // ---000--000--0|-----
     Flux<Person> findAll();
 
     Mono<Person> findById(String id);

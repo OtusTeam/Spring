@@ -22,6 +22,8 @@ public class PersonRepositoryTest {
         StepVerifier
                 .create(personMono)
                 .assertNext(person -> assertNotNull(person.getId()))
+                .assertNext(person -> assertNotNull(person.getId()))
+                .assertNext(person -> assertNotNull(person.getId()))
                 .expectComplete()
                 .verify();
     }
