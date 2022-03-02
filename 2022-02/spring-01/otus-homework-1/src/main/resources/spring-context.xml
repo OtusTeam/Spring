@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="csvFileReaderService" class="ru.otus.spring.service.impl.CsvFileReaderServiceImpl">
+        <property name="dao" ref="csvFileReaderDao"/>
+    </bean>
+
+    <bean id="csvFileReaderDao" class="ru.otus.spring.dao.CsvFileReaderDaoSimple">
+        <property name="fileReader">
+            <bean id="csvFileReader" class="java.io.FileReader">
+                <constructor-arg name="fileName" value="/home/kirill/IdeaProjects/otus/homework/otus-homework/src/main/resources/tasks.csv"/>
+            </bean>
+        </property>
+    </bean>
+
+
+</beans>
