@@ -13,5 +13,6 @@
     <modules>
         <module>spring-01-exercise</module>
         <module>spring-01-solution</module>
+        <module>otus-homework-1</module>
     </modules>
 </project>
