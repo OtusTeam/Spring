@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title.add}">Add word</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+
+</head>
+<body>
+<div class="container">
+    <h3 th:text="#{title.create}">Create word:</h3>
+    <hr/>
+
+<form id="add-form" th:action="@{/words/addWord(dictId=${dictionary.id})}" th:method="post" modelAttribute = "wordForm" action="add.html">
+
+
+    <div class="row">
+        <label for="name-input" class="col-sm-2 col-form-label" th:text="#{field.word(':')}">WORD:</label>
+        <input id="name-input" name="name" type="text" th:value="${wordForm.name}"
+               class="form-control col-10 mb-2" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="translate-input" class="col-sm-2 col-form-label" th:text="#{field.translate(':')}">TRANSLATE:</label>
+        <input id="translate-input" name="translation" type="text" th:value="${wordForm.translation}"
+               class="form-control col-10 mb-2" value="упорный"/>
+    </div>
+
+    <div class="row">
+        <label for="context-input" class="col-sm-2 col-form-label" th:text="#{field.context(':')}">CONTEXT:</label>
+        <input id="context-input" name="context" type="text" th:value="${wordForm.context}"
+               class="form-control col-10 mb-2" value="merriam-webster"/>
+    </div>
+
+    <div class="row">
+        <label for="example-input" class="col-sm-2 col-form-label" th:text="#{field.example(':')}">EXAMPLE:</label>
+        <input id="example-input" name="example" type="text" size="100" th:value="${wordForm.example}"
+               class="form-control col-10 mb-2"
+               value="The tenacious king salmon will likely be coming back for many, many autumns to come."/>
+    </div>
+
+        <input id="dictionary-input" name="dictionary" type="hidden" th:value="${wordForm.dictionary}" value="Main"/>
+
+
+    <div class="row">
+        <button type="submit" class="btn btn-primary col-2" th:text="#{command.save}">Save</button>
+    </div>
+</form>
+</div>
+</body>
+</html>
