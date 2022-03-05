@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class WordController {
@@ -51,11 +51,9 @@ public class WordController {
     @GetMapping("/words/addWord")
     public String editNewPage(@RequestParam("id") long dictId, Model model) {
         NewWordDto wordForm = new NewWordDto();
-//        wordForm.setAddedDate(LocalDate.now());
-//        wordForm.setState(WordState.NEW);
+
         Dictionary dictionary = dictRepository.findById(dictId).orElseThrow(NotFoundException::new);
-//        wordForm.setLearntPercent(0);
-//        wordForm.setDictionary(dictionary);
+
         model.addAttribute("wordForm", wordForm);
         model.addAttribute("dictionary", dictionary);
         return "add";

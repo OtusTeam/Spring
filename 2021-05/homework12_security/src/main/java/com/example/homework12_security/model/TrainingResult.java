@@ -20,9 +20,9 @@ public class TrainingResult {
     @JoinColumn(name = "training_id", nullable = false)
     private Training training;
 
-    @ManyToOne(targetEntity = com.example.homework9_springmvc.model.Word.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Word.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "word_id", nullable = false)
-    private com.example.homework9_springmvc.model.Word word;
+    private Word word;
 
     @Column(name = "success", nullable = false)
     private boolean success;
