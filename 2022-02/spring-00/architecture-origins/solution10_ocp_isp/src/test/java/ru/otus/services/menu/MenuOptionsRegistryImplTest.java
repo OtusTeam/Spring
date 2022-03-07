@@ -30,6 +30,7 @@ class MenuOptionsRegistryImplTest {
                 .containsExactlyInAnyOrderElementsOf(options);
     }
 
+    // Обратить внимание на работу с Optional
     @DisplayName("должен корректно возвращать опцию меню по ее идентификатору ")
     @Test
     void shouldReturnExpectedMenuOptionById() {

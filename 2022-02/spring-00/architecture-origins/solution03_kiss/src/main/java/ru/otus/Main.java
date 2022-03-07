@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-// Вынос печати меню, чтения пункта меню и выполнения команд в методы
+// Вынос печати меню, чтения пункта меню и выполнения команд в методы.
+// - Убрали один уровень вложенности
+// - Отделили что делает приложение от того, как оно это делает
 public class Main {
 
     private static final int MENU_OPTION_SHOW_ALL_NOTES = 1;

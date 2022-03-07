@@ -49,7 +49,6 @@ class AddNewNoteSingleCommandProcessorTest {
         verify(notesService).save(captor.capture());
         var actualNote = captor.getValue();
         assertThat(actualNote).extracting(Note::getText).isEqualTo(expectedNoteText);
-
     }
 
     @DisplayName("должен возвращает ожидаемый тип обрабатываемой команды")
