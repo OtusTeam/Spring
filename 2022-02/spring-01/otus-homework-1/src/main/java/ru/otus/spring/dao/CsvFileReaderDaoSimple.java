@@ -3,25 +3,34 @@ package ru.otus.spring.dao;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Repository;
 import ru.otus.spring.domain.Task;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Data
-@NoArgsConstructor
+@Repository
+@RequiredArgsConstructor
+@PropertySource("classpath:application.properties")
 public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
 
-    private FileReader fileReader;
+    @Value("${resource.csv.file}")
+    private String csvFilePath;
+
+    private InputStreamReader fileReader;
 
     @Override
     public List<Task> getTaskList() {
         List<Task> taskList;
         try {
+            fileReader = new InputStreamReader(Objects.requireNonNull(this.getClass().getResourceAsStream(csvFilePath)));
             CSVReader csvReader = new CSVReader(fileReader);
             taskList = getTaskList(csvReader.readAll());
             fileReader.close();
@@ -33,7 +42,7 @@ public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
         return taskList;
     }
 
-    public static List<Task> getTaskList(List<String[]> list) {
+    private List<Task> getTaskList(List<String[]> list) {
         List<Task> taskList = new ArrayList<>();
         if (!list.isEmpty()) {
             list.forEach(l -> {
