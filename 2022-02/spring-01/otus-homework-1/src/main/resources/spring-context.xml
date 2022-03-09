@@ -4,17 +4,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="csvFileReaderService" class="ru.otus.spring.service.impl.CsvFileReaderServiceImpl">
+<!--    <bean id="csvFileReaderService" class="ru.otus.spring.service.impl.TaskServiceImpl">
         <property name="dao" ref="csvFileReaderDao"/>
-    </bean>
+    </bean>-->
 
-    <bean id="csvFileReaderDao" class="ru.otus.spring.dao.CsvFileReaderDaoSimple">
+<!--    <bean id="csvFileReaderDao" class="ru.otus.spring.dao.CsvFileReaderDaoSimple">
         <property name="fileReader">
             <bean id="csvFileReader" class="java.io.FileReader">
                 <constructor-arg name="fileName" value="/home/kirill/IdeaProjects/otus/homework/otus-homework/src/main/resources/tasks.csv"/>
             </bean>
         </property>
-    </bean>
+    </bean>-->
 
 
 </beans>

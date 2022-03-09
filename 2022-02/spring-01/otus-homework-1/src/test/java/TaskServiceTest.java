@@ -1,22 +1,25 @@
 import com.opencsv.CSVReader;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.otus.spring.dao.CsvFileReaderDaoSimple;
+import ru.otus.spring.Main;
 import ru.otus.spring.domain.Task;
 
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public class CsvFileReaderTest {
+public class TaskServiceTest {
 
     private static final String CSV_PATH = "/tasks.csv";
 
     private static final String CONTEXT = "/spring-context.xml";
+
+    private static final Integer PASS_SCORE = 3;
 
     @Test
     public void getTaskListTest() throws Exception {
@@ -40,10 +43,18 @@ public class CsvFileReaderTest {
     }
 
     @Test
+    public void checkPassTest() {
+        assertFalse(PASS_SCORE.compareTo(2) <= 0);
+        assertTrue(PASS_SCORE.compareTo(3) <= 0);
+        assertTrue(PASS_SCORE.compareTo(4) <= 0);
+    }
+
+    @Test
     public void getContext() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT);
-        assertEquals(context.getBeanFactory().getBeanDefinitionCount(), 2);
-        assertTrue(List.of(context.getBeanFactory().getBeanDefinitionNames()).contains("csvFileReaderService"));
-        assertTrue(List.of(context.getBeanFactory().getBeanDefinitionNames()).contains("csvFileReaderDao"));
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
+        assertEquals(context.getBeanFactory().getBeanDefinitionCount(), 7);
+        assertTrue(List.of(context.getBeanFactory().getBeanDefinitionNames()).contains("taskServiceImpl"));
+        assertTrue(List.of(context.getBeanFactory().getBeanDefinitionNames()).contains("csvFileReaderDaoSimple"));
     }
 }

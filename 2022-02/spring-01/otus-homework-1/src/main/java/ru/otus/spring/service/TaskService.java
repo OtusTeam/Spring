@@ -4,7 +4,9 @@ import ru.otus.spring.domain.Task;
 
 import java.util.List;
 
-public interface CsvFileReaderService {
+public interface TaskService {
 
     List<Task> getTaskList();
+
+    boolean checkPass(Integer passCount);
 }
