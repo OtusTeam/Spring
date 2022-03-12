@@ -13,6 +13,7 @@
     <modules>
         <module>aop-ctw</module>
         <module>aop-ctw-plain</module>
+        <module>aop-custom</module>
         <module>aop-ltw</module>
 		<module>aop-native</module>
     </modules>
