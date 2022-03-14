@@ -12,29 +12,22 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 @PropertySource("classpath:application.properties")
+@RequiredArgsConstructor
 public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
 
-    @Value("${resource.csv.file}")
-    private String csvFilePath;
-
-    private InputStreamReader fileReader;
-
-    private CSVReader csvReader;
+    private final InputStreamReaderBean inputStreamReaderBean;
+    private final CsvReaderBean csvReaderBean;
 
     @Override
     public List<Task> getTaskList() {
         List<Task> taskList;
         try {
-            fileReader = getInputStreamReader(csvFilePath);
-            csvReader = getCsvReader(fileReader);
-            taskList = getTaskList(csvReader.readAll());
-            fileReader.close();
-            csvReader.close();
+            taskList = getTaskList(csvReaderBean.readAll());
+            inputStreamReaderBean.closeReader();
+            csvReaderBean.closeReader();
         } catch (IOException | CsvException e) {
             return Collections.emptyList();
         }
@@ -58,13 +51,5 @@ public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
         }
 
         return taskList;
-    }
-
-    private InputStreamReader getInputStreamReader(String csvFilePath) {
-        return new InputStreamReader(Objects.requireNonNull(this.getClass().getResourceAsStream(csvFilePath)));
-    }
-
-    private CSVReader getCsvReader(InputStreamReader reader) {
-        return new CSVReader(reader);
     }
 }
