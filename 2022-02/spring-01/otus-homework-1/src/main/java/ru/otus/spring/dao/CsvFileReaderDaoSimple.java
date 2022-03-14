@@ -21,16 +21,14 @@ public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
 
     @Override
     public List<Task> getTaskList() {
-        List<Task> taskList;
         try {
-            taskList = getTaskList(csvReaderDao.readAll());
+            List<Task> taskList = getTaskList(csvReaderDao.readAll());
             inputStreamReaderDao.closeReader();
             csvReaderDao.closeReader();
+            return taskList;
         } catch (IOException | CsvException e) {
             return Collections.emptyList();
         }
-
-        return taskList;
     }
 
     private List<Task> getTaskList(List<String[]> list) {
