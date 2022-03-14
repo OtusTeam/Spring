@@ -1,29 +1,10 @@
 package ru.otus.spring.dao;
 
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Objects;
 
-@Getter
-@Service
-public class InputStreamReaderDao {
+public interface InputStreamReaderDao {
 
-    @Value("${resource.csv.file}")
-    private String csvFilePath;
+    void initReader();
 
-    private InputStreamReader reader;
-
-    @PostConstruct
-    public void init() {
-        this.reader = new InputStreamReader(Objects.requireNonNull(this.getClass().getResourceAsStream(csvFilePath)));
-    }
-
-    public void closeReader() throws IOException {
-        this.reader.close();
-    }
+    void closeReader() throws IOException;
 }

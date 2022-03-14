@@ -48,7 +48,7 @@ public class TaskServiceTest {
     }
 
     @Test
-    public void getContext() {
+    public void getContextTest() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         assertEquals(context.getBeanFactory().getBeanDefinitionCount(), 10);
         assertTrue(List.of(context.getBeanFactory().getBeanDefinitionNames()).contains("taskServiceImpl"));

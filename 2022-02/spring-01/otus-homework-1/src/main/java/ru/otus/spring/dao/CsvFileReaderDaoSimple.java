@@ -6,6 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.Task;
 
+import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,9 +23,9 @@ public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
     @Override
     public List<Task> getTaskList() {
         try {
+            initReaders();
             List<Task> taskList = getTaskList(csvReaderDao.readAll());
-            inputStreamReaderDao.closeReader();
-            csvReaderDao.closeReader();
+            closeReaders();
             return taskList;
         } catch (IOException | CsvException e) {
             return Collections.emptyList();
@@ -47,5 +48,15 @@ public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
         }
 
         return taskList;
+    }
+
+    private void initReaders() {
+        inputStreamReaderDao.initReader();
+        csvReaderDao.initReader();
+    }
+
+    private void closeReaders() throws IOException {
+        inputStreamReaderDao.closeReader();
+        csvReaderDao.closeReader();
     }
 }
