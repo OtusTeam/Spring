@@ -1,9 +1,7 @@
 package ru.otus.spring.dao;
 
-import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.Task;
@@ -18,16 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CsvFileReaderDaoSimple implements CsvFileReaderDao {
 
-    private final InputStreamReaderBean inputStreamReaderBean;
-    private final CsvReaderBean csvReaderBean;
+    private final InputStreamReaderDao inputStreamReaderDao;
+    private final CsvReaderDao csvReaderDao;
 
     @Override
     public List<Task> getTaskList() {
         List<Task> taskList;
         try {
-            taskList = getTaskList(csvReaderBean.readAll());
-            inputStreamReaderBean.closeReader();
-            csvReaderBean.closeReader();
+            taskList = getTaskList(csvReaderDao.readAll());
+            inputStreamReaderDao.closeReader();
+            csvReaderDao.closeReader();
         } catch (IOException | CsvException e) {
             return Collections.emptyList();
         }

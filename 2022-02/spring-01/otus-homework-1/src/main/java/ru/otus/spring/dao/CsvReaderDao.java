@@ -11,14 +11,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CsvReaderBean {
+public class CsvReaderDao {
 
-    private final InputStreamReaderBean fileReader;
+    private final InputStreamReaderDao inputStreamReaderDao;
     private CSVReader reader;
 
     @PostConstruct
     public void init() {
-        this.reader = new CSVReader(fileReader.getReader());
+        this.reader = new CSVReader(inputStreamReaderDao.getReader());
     }
 
     public List<String[]> readAll() throws IOException, CsvException {

@@ -17,8 +17,6 @@ public class TaskServiceTest {
 
     private static final String CSV_PATH = "/tasks.csv";
 
-    private static final String CONTEXT = "/spring-context.xml";
-
     private static final Integer PASS_SCORE = 3;
 
     @Test
@@ -51,9 +49,8 @@ public class TaskServiceTest {
 
     @Test
     public void getContext() {
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT);
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-        assertEquals(context.getBeanFactory().getBeanDefinitionCount(), 7);
+        assertEquals(context.getBeanFactory().getBeanDefinitionCount(), 10);
         assertTrue(List.of(context.getBeanFactory().getBeanDefinitionNames()).contains("taskServiceImpl"));
         assertTrue(List.of(context.getBeanFactory().getBeanDefinitionNames()).contains("csvFileReaderDaoSimple"));
     }

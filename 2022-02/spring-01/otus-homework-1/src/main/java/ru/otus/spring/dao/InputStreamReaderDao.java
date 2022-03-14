@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Getter
 @Service
-public class InputStreamReaderBean {
+public class InputStreamReaderDao {
 
     @Value("${resource.csv.file}")
     private String csvFilePath;
