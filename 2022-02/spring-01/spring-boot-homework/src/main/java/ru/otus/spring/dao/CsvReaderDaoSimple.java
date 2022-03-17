@@ -5,6 +5,7 @@ import com.opencsv.exceptions.CsvException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class CsvReaderDaoSimple implements CsvReaderDao {
     private final InputStreamReaderDaoSimple inputStreamReaderDao;
     private CSVReader reader;
 
-    @Override
+    @PostConstruct
     public void initReader() {
         this.reader = new CSVReader(inputStreamReaderDao.getReader());
     }
@@ -23,10 +24,5 @@ public class CsvReaderDaoSimple implements CsvReaderDao {
     @Override
     public List<String[]> readAll() throws IOException, CsvException {
         return reader.readAll();
-    }
-
-    @Override
-    public void closeReader() throws IOException {
-        this.reader.close();
     }
 }

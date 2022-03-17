@@ -22,8 +22,6 @@ class ApplicationTests {
 	@Autowired
 	private MessageSource messageSource;
 	@Autowired
-	private InputStreamReaderDao inputStreamReaderDao;
-	@Autowired
 	private CsvReaderDao csvReaderDao;
 	@Autowired
 	private CsvFileReaderDao csvFileReaderDao;
@@ -39,12 +37,8 @@ class ApplicationTests {
 
 	@Test
 	public void readAllTest() throws Exception {
-		inputStreamReaderDao.initReader();
-		csvReaderDao.initReader();
 		List<String[]> list = csvReaderDao.readAll();
 		assertEquals(list.size(), 4);
-		inputStreamReaderDao.closeReader();
-		csvReaderDao.closeReader();
 
 	}
 

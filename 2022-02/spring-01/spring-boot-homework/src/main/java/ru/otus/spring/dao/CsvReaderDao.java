@@ -7,9 +7,5 @@ import java.util.List;
 
 public interface CsvReaderDao {
 
-    void initReader();
-
     List<String[]> readAll() throws IOException, CsvException;
-
-    void closeReader() throws IOException;
 }
