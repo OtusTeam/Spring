@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  info:
+    # Включает информацию о приложении из application.yml
+    env:
+      enabled: true
+    # Включает информацию о git, собранную плагином
+    git:
+      mode: "full"
+
+info:
+  app:
+    version: @project.version@
+    author: otus
+    description: This is an example description
