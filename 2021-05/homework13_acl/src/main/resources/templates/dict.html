@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.ord">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${dictionary.name}">Dictionary</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+
+</head>
+<body>
+
+<div class="btn-group" role="group">
+    <a th:href="@{/words/all(lang=en_EN)}" class="btn btn-primary" type="radio" href="dict.html">en</a>
+    <a th:href="@{/words/all(lang=ru_RU)}" class="btn btn-danger" type="radio" href="dict.html">ru</a>
+</div>
+<br/><br/>
+<div class="container">
+    <h1 th:text="${dictionary.name}">Dictionary:</h1>
+    <a th:href="@{/words/addWord(id=${dictionary.id})}" class="btn btn-primary" href="add.html" th:text="#{title.add}">Add word</a>
+    <br/><br/>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th th:text="#{field.word('')}">WORD</th>
+            <th th:text="#{field.translate('')}">TRANSLATION</th>
+            <th th:text="#{field.context('')}">CONTEXT</th>
+            <th th:text="#{field.example('')}">EXAMPLE</th>
+            <th th:text="#{field.state('')}">STATE</th>
+            <th th:text="#{field.percent('')}">PERCENT</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="word : ${words}">
+            <td th:text="${word.id}">1</td>
+            <td th:text="${word.name}">invariably</td>
+            <td th:text="${word.translation}">неизменно</td>
+            <td th:text="${word.context}">merriam-webster</td>
+            <td th:text="${word.example}">Their slacker son invariably gives the same response to the question about his
+                career plans
+            </td>
+            <td th:text="${word.state}">NEW</td>
+            <td th:text="${word.learntPercent}">0</td>
+            <td>
+                <a th:href="@{/words/edit(id=${word.id})}" class="btn btn-info" href="edit.html" th:text="#{command.edit}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/words/delete(id=${word.id})}" class="btn btn-danger ml-2"
+                   th:text="#{command.delete}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

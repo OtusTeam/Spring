@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.ord">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Dictionaries">Dictionaries</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+
+</head>
+<body>
+
+<div class="btn-group" role="group">
+    <a th:href="@{/dicts/all(lang=en_EN)}" class="btn btn-primary" type="radio" href="dictList.html">en</a>
+    <a th:href="@{/dicts/all(lang=ru_RU)}" class="btn btn-danger" type="radio" href="dictList.html">ru</a>
+</div>
+<br/><br/>
+<div class="container">
+    <h1 th:text="#{title.dictionaries}">Dictionaries:</h1>
+<!--    <a th:href="@{/words/addWord(id=${dictionary.id})}" class="btn btn-primary" href="add.html" th:text="#{title.add}">Add word</a>-->
+    <br/><br/>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th th:text="#{field.name('')}">WORD</th>
+            <th th:text="#{field.createDate('')}">CREATION DATE</th>
+            <th th:text="#{field.owner('')}">OWNER</th>
+            <th th:text="#{field.description('')}">DESCRIPTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dict : ${dicts}">
+            <td th:text="${dict.id}">1</td>
+            <td th:text="${dict.name}">animals</td>
+            <td th:text="${dict.creationDate}">01.01.2022</td>
+            <td th:text="${dict.owner}">lenu</td>
+            <td th:text="${dict.description}">Words about animals</td>
+
+<!--            <td>-->
+<!--                <a th:href="@{/words/edit(id=${word.id})}" class="btn btn-info" href="edit.html" th:text="#{command.edit}">Edit</a>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <a th:href="@{/words/delete(id=${word.id})}" class="btn btn-danger ml-2"-->
+<!--                   th:text="#{command.delete}">Delete</a>-->
+<!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

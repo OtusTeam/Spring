@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.ord">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Users">Users</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+
+</head>
+<body>
+
+<div class="btn-group" role="group">
+    <a th:href="@{/users/all(lang=en_EN)}" class="btn btn-primary" type="radio" href="users.html">en</a>
+    <a th:href="@{/users/all(lang=ru_RU)}" class="btn btn-danger" type="radio" href="users.html">ru</a>
+</div>
+<br/><br/>
+<div class="container">
+    <h1 th:text="#{title.users}">Users:</h1>
+    <a th:href="@{/users/addUser}" class="btn btn-primary" href="addUser.html" th:text="#{title.addUser}">Add user</a>
+    <br/><br/>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th th:text="#{field.name(':')}">LOGIN</th>
+            <th th:text="#{field.password(':')}">PASSWORD</th>
+            <th th:text="#{field.role(':')}">ROLE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">1</td>
+            <td th:text="${user.name}">login</td>
+            <td th:text="${user.password}">password</td>
+            <td th:text="${user.role}">user</td>
+            <td>
+                <a th:href="@{/users/edit(id=${user.id})}" class="btn btn-info" href="editUser.html" th:text="#{command.edit}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/users/delete(id=${user.id})}" class="btn btn-danger ml-2"
+                   th:text="#{command.delete}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title.add}">Add user</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+
+</head>
+<body>
+<div class="container">
+    <h3 th:text="#{title.create}">Create user:</h3>
+    <hr/>
+
+<form id="add-form" th:action="@{/users/addUser}" th:method="post" modelAttribute = "userForm" action="addUser.html">
+
+
+    <div class="row">
+        <label for="name-input" class="col-sm-2 col-form-label" th:text="#{field.name(':')}">NAME:</label>
+        <input id="name-input" name="name" type="text" th:value="${userForm.name}"
+               class="form-control col-10 mb-2" value="user"/>
+    </div>
+
+    <div class="row">
+        <label for="password-input" class="col-sm-2 col-form-label" th:text="#{field.password(':')}">PASSWORD:</label>
+        <input id="password-input" name="password" type="text" th:value="${userForm.password}"
+               class="form-control col-10 mb-2" value="12345"/>
+    </div>
+
+    <div class="row">
+        <label for="role-input" class="col-sm-2 col-form-label" th:text="#{field.role(':')}">ROLE:</label>
+        <input id="role-input" name="role" type="text" th:value="${userForm.role}"
+               class="form-control col-10 mb-2" value="admin"/>
+    </div>
+
+
+<!--        <input id="dictionary-input" name="dictionary" type="hidden" th:value="${wordForm.dictionary}" value="Main"/>-->
+
+
+    <div class="row">
+        <button type="submit" class="btn btn-primary col-2" th:text="#{command.save}">Save</button>
+    </div>
+</form>
+</div>
+</body>
+</html>

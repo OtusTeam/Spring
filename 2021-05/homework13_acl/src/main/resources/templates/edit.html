@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${word.name}">Edit word</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+
+</head>
+<body>
+<div class="container">
+    <h3 th:text="${word.name}">Word info:</h3>
+    <hr/>
+
+<form id="edit-form" th:action="@{/words/edit(id=${word.id})}" th:method="post" action="edit.html">
+
+    <input id="id-input" type="hidden" th:field="${word.id}" value="1"/>
+
+    <div class="row">
+        <label for="translate-input" class="col-sm-2 col-form-label" th:text="#{field.translate(':')}">TRANSLATE:</label>
+        <input id="translate-input" name="translation" type="text" th:field="${word.translation}" value="упорный" class="form-control col-4 mb-2"/>
+    </div>
+
+    <div class="row">
+        <label for="context-input" class="col-sm-2 col-form-label" th:text="#{field.context(':')}">CONTEXT:</label>
+        <input id="context-input" name="context" type="text" th:field="${word.context}" value="merriam-webster" class="form-control col-4 mb-2"/>
+    </div>
+
+    <div class="row">
+        <label for="example-input" class="col-sm-2 col-form-label" th:text="#{field.example(':')}">EXAMPLE:</label>
+        <input id="example-input" name="example" type="text" size="100" th:value="${word.example}" class="form-control col-10 mb-2"
+                value="The tenacious king salmon will likely be coming back for many, many autumns to come."/>
+    </div>
+
+    <div class="row">
+        <label for="added-input" class="col-sm-2 col-form-label" th:text="#{field.added}">ADDED:</label>
+        <input id="added-input" type="date-local" readonly th:field="${word.addedDate}" class="form-control-plaintext col-4"
+                value="2021-12-9"/>
+    </div>
+
+    <div class="row">
+        <label for="state-input" class="col-sm-2 col-form-label" th:text="#{field.state(':')}">STATE:</label>
+        <input id="state-input" type="text" readonly th:value="${word.state}" class="form-control-plaintext col-4"
+                value="NEW"/>
+    </div>
+
+    <div class="row">
+        <label for="percent-input" class="col-sm-2 col-form-label" th:text="#{field.percent(':')}">PERCENT:</label>
+        <input id="percent-input" type="text" readonly th:value="${word.learntPercent}" class="form-control-plaintext col-4"
+                value="0%"/>
+    </div>
+
+    <div class="row">
+        <label for="dictionary-input" class="col-sm-2 col-form-label" th:text="#{field.dict}">DICTIONARY:</label>
+        <input id="dictionary-input" type="text" readonly th:value="${word.dictionary.name}" class="form-control-plaintext col-4"
+                value="Main"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary col-2" th:text="#{command.save}">Save</button>
+
+</form>
+</div>
+</body>
+</html>
