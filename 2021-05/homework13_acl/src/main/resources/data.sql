@@ -52,7 +52,7 @@ INSERT INTO acl_sid (id, principal, sid) VALUES
 
 
 INSERT INTO acl_class (id, class) VALUES
-(1, 'com.example.homework13_acl.model.Dictionary.java');
+(1, 'com.example.homework13_acl.model.Dictionary');
 
 INSERT INTO acl_object_identity (id, object_id_class, object_id_identity, parent_object, owner_sid, entries_inheriting) VALUES
 (1, 1, 1, NULL, 1, 0),
