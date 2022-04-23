@@ -1,14 +1,17 @@
 package ru.otus.spring.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.keyvalue.annotation.KeySpace;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-@KeySpace("person")
+@Entity
 public class Person {
 
     @Id
     private long id;
     private String name;
+
+    public Person() {
+    }
 
     public Person(String name) {
         this.name = name;
