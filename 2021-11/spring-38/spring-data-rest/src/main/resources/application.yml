@@ -1,0 +1,4 @@
+spring:
+  data:
+    rest:
+      basePath: /api
