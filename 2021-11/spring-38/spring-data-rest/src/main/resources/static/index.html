@@ -50,10 +50,10 @@
         }
 
         function getEntryPointHref() {
-            return fetch("api/profile")
+            return fetch("api/")
                 .then(data => data.json())
                 .then(data => data._links.persons)
-                .then(data => data.href.replace("/profile", ""))
+                .then(data => data.href.substr(0, data.href.indexOf("{")))
         }
 
         function addPerson(entryPointHref) {
