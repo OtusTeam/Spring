@@ -44,7 +44,7 @@ public class LibraryComponent {
 
     @ShellMethod(value = "Add new Book", key = {"n", "new", "newBook", "addNewBook"})
     @ShellMethodAvailability(value = "isUserNameExist")
-    public void getBookByName(@ShellOption(value = "-b") String bookName, @ShellOption(value = "-a") String authorName, @ShellOption(value = "-g") String genreName) {
+    public void addNewBook(@ShellOption(value = "-b") String bookName, @ShellOption(value = "-a") String authorName, @ShellOption(value = "-g") String genreName) {
         out.printf("Успешно добавлена книга: %s%n", libraryService.addNewBook(bookName, authorName, genreName));
     }
 
