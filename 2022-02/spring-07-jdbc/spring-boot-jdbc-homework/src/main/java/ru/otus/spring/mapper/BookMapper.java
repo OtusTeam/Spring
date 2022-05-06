@@ -6,7 +6,6 @@ import ru.otus.spring.domain.Book;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 @Component
 public class BookMapper implements RowMapper<Book> {

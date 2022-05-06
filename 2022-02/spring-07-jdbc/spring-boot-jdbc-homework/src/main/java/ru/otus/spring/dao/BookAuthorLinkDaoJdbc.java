@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @Repository

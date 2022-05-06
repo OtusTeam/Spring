@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
 import ru.otus.spring.dao.BookDao;
 import ru.otus.spring.dao.BookDaoJdbc;
-import ru.otus.spring.domain.Book;
 import ru.otus.spring.mapper.BookMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;

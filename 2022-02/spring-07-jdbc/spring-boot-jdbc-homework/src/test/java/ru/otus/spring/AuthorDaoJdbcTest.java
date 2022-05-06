@@ -32,7 +32,7 @@ class AuthorDaoJdbcTest {
 
     @DisplayName("Добавляет автора в БД")
     @Test
-    void shouldInsertBook() {
+    void shouldInsertAuthor() {
         dao.insert(EXPECTED_INSERT_AUTHOR_NAME);
         assertThat(dao.getByName(EXPECTED_INSERT_AUTHOR_NAME).getName()).isEqualTo(EXPECTED_INSERT_AUTHOR_NAME);
     }
@@ -40,7 +40,6 @@ class AuthorDaoJdbcTest {
     @DisplayName("Возвращает всех авторов по ID книги")
     @Test
     void shouldReturnExpectedAuthorListByBookId() {
-        var actualAuthorList = dao.getAllByBookId(EXPECTED_BOOK_ID);
-        assertThat(actualAuthorList.stream().map(Author::getName).toList()).contains(EXPECTED_AUTHOR_NAME);
+        assertThat(dao.getAllByBookId(EXPECTED_BOOK_ID).stream().map(Author::getName).toList()).contains(EXPECTED_AUTHOR_NAME);
     }
 }

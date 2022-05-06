@@ -32,15 +32,14 @@ class GenreDaoJdbcTest {
 
     @DisplayName("Добавляет жанр в БД")
     @Test
-    void shouldInsertBook() {
+    void shouldInsertGenre() {
         dao.insert(EXPECTED_INSERT_GENRE_NAME);
         assertThat(dao.getByName(EXPECTED_INSERT_GENRE_NAME).getName()).isEqualTo(EXPECTED_INSERT_GENRE_NAME);
     }
 
     @DisplayName("Возвращает все жанры по ID книги")
     @Test
-    void shouldReturnExpectedAuthorListByBookId() {
-        var actualAuthorList = dao.getAllByBookId(EXPECTED_BOOK_ID);
-        assertThat(actualAuthorList.stream().map(Genre::getName).toList()).contains(EXPECTED_GENRE_NAME);
+    void shouldReturnExpectedGenreListByBookId() {
+        assertThat(dao.getAllByBookId(EXPECTED_BOOK_ID).stream().map(Genre::getName).toList()).contains(EXPECTED_GENRE_NAME);
     }
 }
