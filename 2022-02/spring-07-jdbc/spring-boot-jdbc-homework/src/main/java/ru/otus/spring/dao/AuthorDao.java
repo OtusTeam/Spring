@@ -6,13 +6,9 @@ import java.util.List;
 
 public interface AuthorDao {
 
-    List<Author> getAll();
-
-    Author getById(long id);
-
     Author getByName(String name);
 
     void insert(String name);
 
-    void deleteById(long id);
+    List<Author> getAllByBookId(long bookId);
 }

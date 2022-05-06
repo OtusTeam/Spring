@@ -17,20 +17,6 @@ public class AuthorDaoJdbc implements AuthorDao {
     private final AuthorMapper authorMapper;
 
     @Override
-    public List<Author> getAll() {
-        return jdbc.query("select id, name from author", authorMapper);
-    }
-
-    @Override
-    public Author getById(long id) {
-        try {
-            return jdbc.queryForObject("select id, name from author where id = :id", Collections.singletonMap("id", id), authorMapper);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    @Override
     public Author getByName(String name) {
         try {
             return jdbc.queryForObject("select id, name from author where name = :name", Collections.singletonMap("name", name), authorMapper);
@@ -45,8 +31,9 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public void deleteById(long id) {
-        jdbc.update("delete from author where id = :id", Collections.singletonMap("id", id));
+    public List<Author> getAllByBookId(long bookId) {
+        return jdbc.query("select a.id, a.name from author a " +
+                "join book_author_link bal on a.id = bal.author_id " +
+                "where bal.book_id = :bookId", Collections.singletonMap("bookId", bookId), authorMapper);
     }
-
 }

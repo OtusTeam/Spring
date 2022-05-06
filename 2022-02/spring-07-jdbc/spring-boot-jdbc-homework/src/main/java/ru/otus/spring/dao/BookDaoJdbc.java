@@ -21,6 +21,8 @@ public class BookDaoJdbc implements BookDao {
         return jdbc.query("select id, name from book", bookMapper);
     }
 
+
+
     @Override
     public Book getById(long id) {
         try {

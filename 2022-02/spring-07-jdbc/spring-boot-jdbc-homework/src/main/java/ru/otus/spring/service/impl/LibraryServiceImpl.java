@@ -99,22 +99,16 @@ public class LibraryServiceImpl implements LibraryService {
             dto = new BookDto();
             dto.setId(book.getId());
             dto.setName(book.getName());
-            List<Author> authorList = new ArrayList<>();
-            bookAuthorLinkDao.getAllByBookId(book.getId()).forEach(bookAuthorLink -> authorList.add(authorDao.getById(bookAuthorLink.getAuthorId())));
-            dto.setAuthorList(authorList);
-            List<Genre> genreList = new ArrayList<>();
-            bookGenreLinkDao.getAllByBookId(book.getId()).forEach(bookGenreLink -> genreList.add(genreDao.getById(bookGenreLink.getGenreId())));
-            dto.setGenreList(genreList);
+            dto.setAuthorList(authorDao.getAllByBookId(book.getId()));
+            dto.setGenreList(genreDao.getAllByBookId(book.getId()));
         }
 
         return dto;
     }
 
     private void deleteBook(Book book) {
-        List<BookAuthorLink> bookAuthorLinkList = bookAuthorLinkDao.getAllByBookId(book.getId());
-        bookAuthorLinkList.forEach(bookAuthorLink -> bookAuthorLinkDao.deleteById(bookAuthorLink.getId()));
-        List<BookGenreLink> bookGenreLinkList = bookGenreLinkDao.getAllByBookId(book.getId());
-        bookGenreLinkList.forEach(bookGenreLink -> bookGenreLinkDao.deleteById(bookGenreLink.getId()));
+        bookAuthorLinkDao.deleteAllByBookId(book.getId());
+        bookGenreLinkDao.deleteAllByBookId(book.getId());
         bookDao.deleteById(book.getId());
     }
 

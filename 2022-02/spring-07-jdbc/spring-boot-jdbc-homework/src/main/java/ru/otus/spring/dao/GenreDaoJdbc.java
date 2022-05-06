@@ -17,20 +17,6 @@ public class GenreDaoJdbc implements GenreDao {
     private final GenreMapper genreMapper;
 
     @Override
-    public List<Genre> getAll() {
-        return jdbc.query("select id, name from genre", genreMapper);
-    }
-
-    @Override
-    public Genre getById(long id) {
-        try {
-            return jdbc.queryForObject("select id, name from genre where id = :id", Collections.singletonMap("id", id), genreMapper);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    @Override
     public Genre getByName(String name) {
         try {
             return jdbc.queryForObject("select id, name from genre where name = :name", Collections.singletonMap("name", name), genreMapper);
@@ -45,7 +31,9 @@ public class GenreDaoJdbc implements GenreDao {
     }
 
     @Override
-    public void deleteById(long id) {
-        jdbc.update("delete from genre where id = :id", Collections.singletonMap("id", id));
+    public List<Genre> getAllByBookId(long bookId) {
+        return jdbc.query("select g.id, g.name from genre g " +
+                "join book_genre_link bgl on g.id = bgl.genre_id " +
+                "where bgl.book_id = :bookId", Collections.singletonMap("bookId", bookId), genreMapper);
     }
 }
