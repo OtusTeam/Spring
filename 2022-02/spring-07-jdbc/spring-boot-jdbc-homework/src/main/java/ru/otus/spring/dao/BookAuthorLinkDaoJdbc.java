@@ -20,7 +20,7 @@ public class BookAuthorLinkDaoJdbc implements BookAuthorLinkDao {
 
     @Override
     public void deleteAllByBookId(long bookId) {
-        jdbc.update("delete from book_author_link where book_id = (select id from book where id = :bookId)", Collections.singletonMap("bookId", bookId));
+        jdbc.update("delete from book_author_link where book_id = :bookId)", Collections.singletonMap("bookId", bookId));
     }
 
 }
