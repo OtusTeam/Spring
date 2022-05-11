@@ -1,18 +1,18 @@
 package ru.otus.spring.service;
 
-import ru.otus.spring.dto.BookDto;
+import ru.otus.spring.domain.FullBookInfo;
 
 import java.util.List;
 
 public interface LibraryService {
 
-    List<BookDto> getAllBooks();
+    List<FullBookInfo> getAllBooks();
 
-    BookDto getBookById(long id);
+    FullBookInfo getBookById(long id);
 
-    BookDto getBookByName(String name);
+    FullBookInfo getBookByName(String name);
 
-    BookDto addNewBook(String bookName, String authorName, String genreName);
+    FullBookInfo addNewBook(String bookName, String authorName, String genreName);
 
     void deleteBookById(long id);
 

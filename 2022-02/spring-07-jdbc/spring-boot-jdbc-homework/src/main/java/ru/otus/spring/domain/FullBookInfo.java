@@ -1,13 +1,15 @@
-package ru.otus.spring.dto;
+package ru.otus.spring.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.otus.spring.domain.Author;
-import ru.otus.spring.domain.Genre;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-public class BookDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class FullBookInfo {
 
     private long id;
     private String name;

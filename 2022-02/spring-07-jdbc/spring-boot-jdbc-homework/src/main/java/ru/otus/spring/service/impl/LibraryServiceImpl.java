@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.*;
-import ru.otus.spring.dto.BookDto;
+import ru.otus.spring.domain.FullBookInfo;
 import ru.otus.spring.dao.*;
 import ru.otus.spring.service.LibraryService;
 
@@ -19,6 +19,7 @@ import static java.lang.System.out;
 @PropertySource(value = {"classpath:application.yml"})
 public class LibraryServiceImpl implements LibraryService {
 
+    private final FullBookInfoDao fullBookInfoDao;
     private final BookDao bookDao;
     private final AuthorDao authorDao;
     private final GenreDao genreDao;
@@ -26,27 +27,26 @@ public class LibraryServiceImpl implements LibraryService {
     private final BookGenreLinkDao bookGenreLinkDao;
 
     @Override
-    public List<BookDto> getAllBooks() {
-        List<BookDto> result = new ArrayList<>();
-        bookDao.getAll().forEach(book -> result.add(createBookDto(book)));
-        return result;
+    public List<FullBookInfo> getAllBooks() {
+        return fullBookInfoDao.getAll();
     }
 
     @Override
-    public BookDto getBookById(long id) {
-        return createBookDto(bookDao.getById(id));
+    public FullBookInfo getBookById(long id) {
+        return fullBookInfoDao.getById(id);
     }
 
     @Override
-    public BookDto getBookByName(String name) {
-        return createBookDto(bookDao.getByName(name));
+    public FullBookInfo getBookByName(String name) {
+        return fullBookInfoDao.getByName(name);
     }
 
     @Override
-    public BookDto addNewBook(String bookName, String authorName, String genreName) {
+    public FullBookInfo addNewBook(String bookName, String authorName, String genreName) {
         bookDao.insert(bookName);
         Book book = bookDao.getByName(bookName);
         String[] authorArray = authorName.split("\\,");
+        List<Author> authorList = new ArrayList<>();
         Arrays.stream(authorArray).forEach(a -> {
             Author author = authorDao.getByName(a);
             if (author == null) {
@@ -54,10 +54,12 @@ public class LibraryServiceImpl implements LibraryService {
                 author = authorDao.getByName(a);
             }
 
+            authorList.add(author);
             bookAuthorLinkDao.insert(book.getId(), author.getId());
         });
 
         String[] genreArray = authorName.split("\\,");
+        List<Genre> genreList = new ArrayList<>();
         Arrays.stream(genreArray).forEach(g -> {
             Genre genre = genreDao.getByName(g);
             if (genre == null) {
@@ -65,10 +67,11 @@ public class LibraryServiceImpl implements LibraryService {
                 genre = genreDao.getByName(g);
             }
 
+            genreList.add(genre);
             bookGenreLinkDao.insert(book.getId(), genre.getId());
         });
 
-        return createBookDto(book);
+        return new FullBookInfo(book.getId(), book.getName(), authorList, genreList);
     }
 
     @Override
@@ -91,19 +94,6 @@ public class LibraryServiceImpl implements LibraryService {
         } else {
             out.println("Книга c name=" + name + " не найдена!");
         }
-    }
-
-    private BookDto createBookDto(Book book) {
-        BookDto dto = null;
-        if (book != null) {
-            dto = new BookDto();
-            dto.setId(book.getId());
-            dto.setName(book.getName());
-            dto.setAuthorList(authorDao.getAllByBookId(book.getId()));
-            dto.setGenreList(genreDao.getAllByBookId(book.getId()));
-        }
-
-        return dto;
     }
 
     private void deleteBook(Book book) {
