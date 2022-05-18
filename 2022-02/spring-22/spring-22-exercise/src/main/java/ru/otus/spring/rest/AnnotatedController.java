@@ -1,4 +1,4 @@
-package ru.otus.spring;
+package ru.otus.spring.rest;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 
 @RestController
-public class ReactorController {
+public class AnnotatedController {
 
     @GetMapping("/flux/one")
     public Mono<String> one() {
@@ -18,17 +18,16 @@ public class ReactorController {
 
     @GetMapping("/flux/ten")
     public Flux<Integer> list() {
-        return repository.findAll()
-            .map();
+        return Flux.range(1, 10).delayElements(Duration.ofSeconds(1));
     }
 
-    @GetMapping(path = "/flux/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> stream() {
         return Flux.generate(() -> 0, (state, emitter) -> {
             emitter.next(state);
             return state + 1;
         })
                 .delayElements(Duration.ofSeconds(1L))
-                .map(Object::toString);
+                .map(i -> "" + i);
     }
 }
