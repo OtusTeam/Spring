@@ -43,6 +43,9 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres = new HashSet<>();
 
+    public Book(String name) {
+        this.name = name;
+    }
 
     public Book(String name, Set<Comment> comments, Set<Author> authors, Set<Genre> genres) {
         this.name = name;
