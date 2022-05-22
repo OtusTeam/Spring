@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий на основе Jpa для работы с жанрами")
 @DataJpaTest
 @Import(GenreRepositoryJpa.class)
-public class GenreRepositoryJpaTest {
+class GenreRepositoryJpaTest {
 
     private static final String EXPECTED_NEW_GENRE_NAME = "Новый жанр";
     private static final String FIRST_GENRE_NAME = "Фэнтези";

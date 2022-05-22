@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий на основе Jpa для работы с комментариями")
 @DataJpaTest
 @Import(CommentRepositoryJpa.class)
-public class CommentRepositoryJpaTest {
+class CommentRepositoryJpaTest {
 
     private static final String EXPECTED_NEW_COMMENT_TEXT = "Новый комментарий";
-    private static final long FIRST_COMMENT_ID = 1L;
+    private static final long THIRD_COMMENT_ID = 3L;
 
     @Autowired
     private CommentRepository commentRepository;
@@ -31,7 +31,7 @@ public class CommentRepositoryJpaTest {
     @Test
     void shouldSaveNewComment() {
         val actualNewComment = commentRepository.save(new Comment(EXPECTED_NEW_COMMENT_TEXT));
-        val expectedNewComment = em.find(Comment.class, FIRST_COMMENT_ID);
+        val expectedNewComment = em.find(Comment.class, THIRD_COMMENT_ID);
         assertThat(actualNewComment).isNotNull()
                 .usingRecursiveComparison().isEqualTo(expectedNewComment);
     }

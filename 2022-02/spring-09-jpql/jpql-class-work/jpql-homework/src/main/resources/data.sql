@@ -61,6 +61,11 @@ insert into book(`name`) values ('Почти идеальные люди');
 insert into book(`name`) values ('Краткая история времени');
 insert into book(`name`) values ('Унесенные ветром');
 
+--Комментарии
+insert into comment(book_id, `text`) values ((select id from book where name = 'Сильмариллион'),'Комментарий 1 к книге Сильмариллион');
+insert into comment(book_id, `text`) values ((select id from book where name = 'Сильмариллион'),'Комментарий 2 к книге Сильмариллион');
+
+
 --Связь книг с авторами
 insert into book_author_link(book_id, author_id) values ((select id from book where name = 'Сильмариллион'), (select id from author where name = 'Джон Р.Р. Толкин'));
 insert into book_author_link(book_id, author_id) values ((select id from book where name = 'Властелин Колец'), (select id from author where name = 'Джон Р.Р. Толкин'));

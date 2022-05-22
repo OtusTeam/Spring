@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий на основе Jpa для работы с книгами")
 @DataJpaTest
 @Import(BookRepositoryJpa.class)
-public class BookRepositoryJpaTest {
+class BookRepositoryJpaTest {
 
     private static final int EXPECTED_NUMBER_OF_BOOKS = 20;
     private static final String EXPECTED_NEW_BOOK_NAME = "Новое название книги";
@@ -39,7 +39,7 @@ public class BookRepositoryJpaTest {
         val actualNewBook = bookRepository.save(new Book(EXPECTED_NEW_BOOK_NAME));
         val expectedNewBook = findByName(EXPECTED_NEW_BOOK_NAME);
         assertThat(actualNewBook).isNotNull()
-                .usingRecursiveComparison().isEqualTo(actualNewBook);
+                .usingRecursiveComparison().isEqualTo(expectedNewBook);
     }
 
     @DisplayName("Должен загружать список всех книг с полной информацией о них")

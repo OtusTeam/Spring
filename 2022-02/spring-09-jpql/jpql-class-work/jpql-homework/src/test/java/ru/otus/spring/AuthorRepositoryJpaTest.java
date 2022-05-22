@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий на основе Jpa для работы с авторами")
 @DataJpaTest
 @Import(AuthorRepositoryJpa.class)
-public class AuthorRepositoryJpaTest {
+class AuthorRepositoryJpaTest {
 
     private static final String EXPECTED_NEW_AUTHOR_NAME = "Новое название автора";
     private static final String FIRST_AUTHOR_NAME = "Джон Р.Р. Толкин";
