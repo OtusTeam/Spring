@@ -30,7 +30,7 @@ public class LibraryComponent {
         out.println(libraryService.getAllBooks());
     }
 
-    @ShellMethod(value = "Get all only name books", key = {"names", ""})
+    @ShellMethod(value = "Get all only name books", key = {"names", "onlyBookNames"})
     @ShellMethodAvailability(value = "isUserNameExist")
     public void getAllOnlyBooksName() {
         out.println(libraryService.getAllBookName());
