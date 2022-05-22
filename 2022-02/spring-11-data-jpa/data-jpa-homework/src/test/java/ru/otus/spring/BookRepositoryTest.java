@@ -22,7 +22,7 @@ class BookRepositoryTest {
     private static final int EXPECTED_NUMBER_OF_BOOKS = 20;
     private static final String EXPECTED_NEW_BOOK_NAME = "Новое название книги";
     private static final long FIRST_BOOK_ID = 1L;
-    private static final String FIRST_BOOK_NAME = "Сильмариллион2";
+    private static final String FIRST_BOOK_NAME = "Сильмариллион";
 
     @Autowired
     private BookRepository bookRepository;
