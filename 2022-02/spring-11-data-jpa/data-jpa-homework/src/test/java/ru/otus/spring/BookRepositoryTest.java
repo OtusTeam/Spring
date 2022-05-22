@@ -22,7 +22,7 @@ class BookRepositoryTest {
     private static final int EXPECTED_NUMBER_OF_BOOKS = 20;
     private static final String EXPECTED_NEW_BOOK_NAME = "Новое название книги";
     private static final long FIRST_BOOK_ID = 1L;
-    private static final String FIRST_BOOK_NAME = "Сильмариллион";
+    private static final String FIRST_BOOK_NAME = "Сильмариллион2";
 
     @Autowired
     private BookRepository bookRepository;
@@ -62,7 +62,7 @@ class BookRepositoryTest {
     @DisplayName("Должен загружать информацию о нужной книге по названию")
     @Test
     void shouldFindExpectedBookByName() {
-        val actualBook = bookRepository.findByName(FIRST_BOOK_NAME).orElse(null);
+        val actualBook = bookRepository.findByName(FIRST_BOOK_NAME);
         val expectedBook = findByName(FIRST_BOOK_NAME);
         assertThat(actualBook).isNotNull()
                 .usingRecursiveComparison().isEqualTo(expectedBook);

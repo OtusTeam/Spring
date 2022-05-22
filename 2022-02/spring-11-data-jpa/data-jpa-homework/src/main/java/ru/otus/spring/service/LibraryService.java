@@ -1,6 +1,5 @@
 package ru.otus.spring.service;
 
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.dto.BookDto;
 
 import java.util.List;

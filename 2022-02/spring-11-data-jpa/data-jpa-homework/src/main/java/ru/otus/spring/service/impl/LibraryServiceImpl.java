@@ -62,7 +62,7 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     @Transactional(readOnly = true)
     public BookDto getBookByName(String name) {
-        Book book = bookRepository.findByName(name).orElse(null);
+        Book book = bookRepository.findByName(name);
         if (book != null) {
             return new BookDto(book);
         } else {
@@ -74,7 +74,7 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     @Transactional
     public BookDto addNewBook(String bookName, String authorName, String genreName, String commentText) {
-        Book book = bookRepository.findByName(bookName).orElse(null);
+        Book book = bookRepository.findByName(bookName);
         if (book == null) {
             Author author = authorRepository.findByName(authorName);
             if (author == null) {
