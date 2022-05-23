@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
@@ -23,7 +24,7 @@ class BookRepositoryTest {
     @Autowired
     private BookRepository bookRepository;
 
-    private static final int EXPECTED_NUMBER_OF_BOOKS = 21;
+    private static final int EXPECTED_NUMBER_OF_BOOKS = 20;
     private static final String EXPECTED_NEW_BOOK_NAME = "Новое название книги";
     private static final String EXPECTED_NEW_BOOK_COMMENT_TEXT = "Новый комментарий к книге";
     private static final String EXPECTED_NEW_BOOK_AUTHOR_NAME = "Новый автор";
@@ -31,6 +32,7 @@ class BookRepositoryTest {
     private static final String FIRST_BOOK_NAME = "Сильмариллион";
 
 
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     @DisplayName("Должен сохранять новую книгу")
     @Test
     void shouldSaveNewBook() {
@@ -68,6 +70,7 @@ class BookRepositoryTest {
         assertEquals(expectedBook.getName(), FIRST_BOOK_NAME);
     }
 
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     @DisplayName("Должен удалять книгу по идентификатору")
     @Test
     void shouldDeleteBookById() {
@@ -76,6 +79,7 @@ class BookRepositoryTest {
         assertThat(expectedBook).isNull();
     }
 
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     @DisplayName("Должен удалять книгу по названию")
     @Test
     void shouldDeleteBookByName() {
