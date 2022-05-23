@@ -69,7 +69,7 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public void updateBookNameById(String id, String name) {
         Book book = bookRepository.findById(id);
-        if (book == null) {
+        if (book != null) {
             book.setName(name);
             bookRepository.save(book);
             out.println("Успешно изменено название книги!");
