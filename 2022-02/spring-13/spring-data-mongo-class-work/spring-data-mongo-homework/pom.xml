@@ -17,9 +17,6 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mongock.version>4.3.8</mongock.version>
 	</properties>
 

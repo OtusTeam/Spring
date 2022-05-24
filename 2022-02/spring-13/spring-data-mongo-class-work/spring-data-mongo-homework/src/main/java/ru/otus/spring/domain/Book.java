@@ -1,15 +1,16 @@
 package ru.otus.spring.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(of = "id")
 @Document(collection = "books")
-public class Book implements Serializable {
+public class Book {
 
     @Id
     private String id;
