@@ -64,7 +64,7 @@ class BookRepositoryTest {
     void shouldFindExpectedBookByName() {
         val actualBook = bookRepository.findByName(FIRST_BOOK_NAME);
         val expectedBook = findByName(FIRST_BOOK_NAME);
-        assertThat(actualBook).isNotNull()
+        assertThat(actualBook).isPresent().get()
                 .usingRecursiveComparison().isEqualTo(expectedBook);
     }
 

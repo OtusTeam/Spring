@@ -29,7 +29,7 @@ class CommentRepositoryTest {
     void shouldSaveNewComment() {
         val actualNewComment = commentRepository.save(new Comment(EXPECTED_NEW_COMMENT_TEXT));
         val expectedNewComment = em.find(Comment.class, THIRD_COMMENT_ID);
-        assertThat(actualNewComment).isNotNull()
+        assertThat(actualNewComment)
                 .usingRecursiveComparison().isEqualTo(expectedNewComment);
     }
 }

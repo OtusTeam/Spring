@@ -40,7 +40,7 @@ class AuthorRepositoryTest {
     void shouldFindExpectedAuthorByName() {
         val actualAuthor = authorRepository.findByName(FIRST_AUTHOR_NAME);
         val expectedAuthor = findByName(FIRST_AUTHOR_NAME);
-        assertThat(actualAuthor).isNotNull()
+        assertThat(actualAuthor).isPresent().get()
                 .usingRecursiveComparison().isEqualTo(expectedAuthor);
     }
 

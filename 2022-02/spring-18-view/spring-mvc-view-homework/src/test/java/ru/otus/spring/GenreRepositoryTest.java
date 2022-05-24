@@ -40,7 +40,7 @@ class GenreRepositoryTest {
     void shouldFindExpectedGenreByName() {
         val actualGenre = genreRepository.findByName(FIRST_GENRE_NAME);
         val expectedGenre = findByName(FIRST_GENRE_NAME);
-        assertThat(actualGenre).isNotNull()
+        assertThat(actualGenre).isPresent().get()
                 .usingRecursiveComparison().isEqualTo(expectedGenre);
     }
 
