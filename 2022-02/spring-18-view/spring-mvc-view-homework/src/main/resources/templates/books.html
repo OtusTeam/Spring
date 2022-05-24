@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{books-title}">Список книг</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books {
+            border: 1px solid steelblue;
+            width: 1100px;
+            border-collapse: collapse;
+        }
+
+        .books tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .books td:last-child {
+            width: 100px;
+        }
+
+        h3 {
+            background-image: url("../static/book-stack.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/book-stack.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div><a href="#" th:href="@{/(lang=en)}" th:text="#{en-lang-switch-button-caption}">Language - EN</a></div>
+<div><a href="#" th:href="@{/(lang=ru)}" th:text="#{ru-lang-switch-button-caption}">Language - RU</a></div>
+
+<h3 th:text="#{books-table-header}">Книги:</h3>
+<h4>
+    <a th:href="@{/book/addNew}" href="addNewBook.html" th:text="#{add-new-book-link}">Добавить новую книгу</a>
+</h4>
+<table class="books">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th th:text="#{book-name-header}">#{book-name-header}</th>
+        <th th:text="#{book-comments-header}">Комментарии</th>
+        <th th:text="#{book-authors-header}">Авторы</th>
+        <th th:text="#{book-genres-header}">Жанры</th>
+        <th th:text="#{book-change-header}">Изменить</th>
+        <th th:text="#{book-delete-header}">Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.name}">Сильмариллион</td>
+        <td>
+            <div th:if="${not #lists.isEmpty(book.comments)}">
+                <a th:href="@{/book/comments(id=${book.id})}" href="bookComments.html" th:text="#{comments-look-link}">Перейти к комментариям</a>
+            </div>
+        </td>
+        <td>
+            <div th:if="${not #lists.isEmpty(book.authors)}">
+                <a th:href="@{/book/authors(id=${book.id})}" href="bookAuthors.html" th:text="#{authors-look-link}">Перейти к авторам</a>
+            </div>
+        </td>
+        <td>
+            <div th:if="${not #lists.isEmpty(book.genres)}">
+                <a th:href="@{/book/genres(id=${book.id})}" href="bookGenres.html" th:text="#{genres-look-link}">Перейти к жанрам</a>
+            </div>
+        </td>
+        <td>
+            <a th:href="@{/book/edit(id=${book.id})}" href="editBook.html" th:text="#{edit-book-name-link}">Изменить название книги</a>
+        </td>
+        <td>
+            <a th:href="@{/book/delete/(id=${book.id})}" th:text="#{delete-book-name-link}">Удалить книгу</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
