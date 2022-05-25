@@ -45,18 +45,67 @@ GET http://localhost:8080/actuator/metrics/process.cpu.usage
 ### Используемая JVM память
 GET http://localhost:8080/actuator/metrics/jvm.memory.used
 
-### А вот это метрики
+### Получение данных о запросах
+# Дополнительно можно настроить SLA, персентили и т.д.
+# причём для отдельных запросов
+GET http://localhost:8080/actuator/metrics/http.server.requests
 
+### А вот все метрики для Promehteus
 GET http://localhost:8080/actuator/prometheus
 
-### Нажми меня)
 
-GET http://localhost:8080/counter
+### Смотрим начальное значение counter.example
+GET http://localhost:8080/actuator/metrics/counter.example
 
-### Нажми меня)
+### Увеличиваем counter.example
+POST http://localhost:8080/counter
 
-GET http://localhost:8080/gauge
+### Действительно, counter поменялся
+GET http://localhost:8080/actuator/metrics/counter.example
 
-### А вот эт REST
 
+### Смотрим начальное значение gauge.example
+GET http://localhost:8080/actuator/metrics/gauge.example
+
+### Добавляем событие в связанный список
+POST http://localhost:8080/gauge
+
+### При запросе Gauge пересчитывается
+GET http://localhost:8080/actuator/metrics/gauge.example
+
+
+### Смотрим начальное значение distribution.example
+GET http://localhost:8080/actuator/metrics/distribution.example
+
+### Добавляем случайную величину в распределение
+POST http://localhost:8080/distribution
+
+### Смотрим изменение распределения distribution.example
+GET http://localhost:8080/actuator/metrics/distribution.example
+
+
+### Смотрим начальное значение timer.example
+GET http://localhost:8080/actuator/metrics/timer.example
+
+### Изменяем значние таймера
+POST http://localhost:8080/timer
+
+### Смотрим как изменился timer.example
+GET http://localhost:8080/actuator/metrics/timer.example
+
+
+### До вызова аннотированного метода - таймер не создаётся
+GET http://localhost:8080/actuator/metrics/long.timer.example
+
+### Создаём и изменяем таймер
+POST http://localhost:8080/long-timer
+
+### Смотрим как выглядит long.timer.example
+GET http://localhost:8080/actuator/metrics/long.timer.example
+
+
+### Spring Data REST - Single entity
 GET http://localhost:8080/person/40
+
+### Spring Data REST - Collection
+GET http://localhost:8080/person
