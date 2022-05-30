@@ -1,20 +1,25 @@
 package ru.otus.spring.service;
 
-import ru.otus.spring.dto.request.ChangeBookInfoRequestDto;
-import ru.otus.spring.dto.request.CreateFullBookInfoRequestDto;
-import ru.otus.spring.dto.resposne.FullBookInfoResponseDto;
+import ru.otus.spring.dto.request.ChangeBookInfoRequestDtoRequest;
+import ru.otus.spring.dto.request.CreateFullBookInfoRequestRequestDto;
+import ru.otus.spring.dto.response.FullBookInfoResponseDto;
+import ru.otus.spring.dto.response.SimpleBookInfoResponseDto;
 
 import java.util.List;
 
 public interface BookService {
 
-    List<FullBookInfoResponseDto> getAllBooks();
+    List<FullBookInfoResponseDto> getFullBookInfoList();
 
-    FullBookInfoResponseDto getBookById(long id);
+    List<SimpleBookInfoResponseDto> getSimpleBookInfoList();
 
-    FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestDto createFullBookInfoRequestDto);
+    FullBookInfoResponseDto getFullBookInfoById(long id);
 
-    void changeBookName(ChangeBookInfoRequestDto dto);
+    SimpleBookInfoResponseDto getSimpleBookInfoById(long id);
+
+    FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestRequestDto createFullBookInfoRequestDto);
+
+    void changeBookName(ChangeBookInfoRequestDtoRequest dto);
 
     void deleteBookById(long id);
 

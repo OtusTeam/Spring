@@ -3,7 +3,6 @@ package ru.otus.spring.dto.request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.spring.dto.AbstractSimpleBookInfo;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,7 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateFullBookInfoRequestDto extends AbstractSimpleBookInfo {
+public class CreateFullBookInfoRequestRequestDto extends AbstractBookInfoRequest {
 
     @NotBlank(message = "{book-comment-text-field-should-not-be-blank}")
     @Size(min = 5, max = 255, message = "{book-comment-text-field-should-has-expected-size}")

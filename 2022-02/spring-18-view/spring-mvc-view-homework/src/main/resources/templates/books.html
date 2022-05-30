@@ -68,19 +68,13 @@
         <td th:text="${book.id}">1</td>
         <td th:text="${book.name}">Сильмариллион</td>
         <td>
-            <div th:if="${not #lists.isEmpty(book.comments)}">
-                <a th:href="@{/book/comments(id=${book.id})}" href="bookComments.html" th:text="#{comments-look-link}">Перейти к комментариям</a>
-            </div>
+            <a th:href="@{/book/comments(id=${book.id})}" href="bookComments.html" th:text="#{comments-look-link}">Перейти к комментариям</a>
         </td>
         <td>
-            <div th:if="${not #lists.isEmpty(book.authors)}">
-                <a th:href="@{/book/authors(id=${book.id})}" href="bookAuthors.html" th:text="#{authors-look-link}">Перейти к авторам</a>
-            </div>
+            <a th:href="@{/book/authors(id=${book.id})}" href="bookAuthors.html" th:text="#{authors-look-link}">Перейти к авторам</a>
         </td>
         <td>
-            <div th:if="${not #lists.isEmpty(book.genres)}">
-                <a th:href="@{/book/genres(id=${book.id})}" href="bookGenres.html" th:text="#{genres-look-link}">Перейти к жанрам</a>
-            </div>
+            <a th:href="@{/book/genres(id=${book.id})}" href="bookGenres.html" th:text="#{genres-look-link}">Перейти к жанрам</a>
         </td>
         <td>
             <a th:href="@{/book/edit(id=${book.id})}" href="editBook.html" th:text="#{edit-book-name-link}">Изменить название книги</a>

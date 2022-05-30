@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.domain.Author;
+import ru.otus.spring.dto.response.AuthorBookResponseDto;
 import ru.otus.spring.repositories.AuthorRepository;
 import ru.otus.spring.service.AuthorService;
 
@@ -23,7 +24,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Author> getAllAuthorsByBookId(long id) {
-        return repository.getAllAuthorsByBookId(id);
+    public List<AuthorBookResponseDto> getAllAuthorsByBookId(long id) {
+        return repository.getAllAuthorsByBookId(id).stream().map(AuthorBookResponseDto::toDto).toList();
     }
 }

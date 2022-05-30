@@ -7,16 +7,16 @@ import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 import ru.otus.spring.domain.Genre;
-import ru.otus.spring.dto.request.ChangeBookInfoRequestDto;
-import ru.otus.spring.dto.request.CreateFullBookInfoRequestDto;
-import ru.otus.spring.dto.resposne.FullBookInfoResponseDto;
+import ru.otus.spring.dto.request.ChangeBookInfoRequestDtoRequest;
+import ru.otus.spring.dto.request.CreateFullBookInfoRequestRequestDto;
+import ru.otus.spring.dto.response.FullBookInfoResponseDto;
+import ru.otus.spring.dto.response.SimpleBookInfoResponseDto;
 import ru.otus.spring.repositories.BookRepository;
 import ru.otus.spring.service.AuthorService;
 import ru.otus.spring.service.BookService;
 import ru.otus.spring.service.CommentService;
 import ru.otus.spring.service.GenreService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,22 +32,30 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FullBookInfoResponseDto> getAllBooks() {
-        List<FullBookInfoResponseDto> result = new ArrayList<>();
-        bookRepository.findAll().forEach(book -> result.add(new FullBookInfoResponseDto(book)));
-        return result;
+    public List<FullBookInfoResponseDto> getFullBookInfoList() {
+        return bookRepository.findAll().stream().map(FullBookInfoResponseDto::toDto).toList();
+    }
+
+    @Override
+    public List<SimpleBookInfoResponseDto> getSimpleBookInfoList() {
+        return bookRepository.findAll().stream().map(SimpleBookInfoResponseDto::toDto).toList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public FullBookInfoResponseDto getBookById(long id) {
-        return new FullBookInfoResponseDto(bookRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Книга с id=%d не найдена%n", id))));
+    public FullBookInfoResponseDto getFullBookInfoById(long id) {
+        return FullBookInfoResponseDto.toDto(bookRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Книга с id=%d не найдена%n", id))));
+    }
+
+    @Override
+    public SimpleBookInfoResponseDto getSimpleBookInfoById(long id) {
+        return SimpleBookInfoResponseDto.toDto(bookRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Книга с id=%d не найдена%n", id))));
     }
 
     @Override
     @Transactional
-    public FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestDto dto) {
-        return new FullBookInfoResponseDto(bookRepository.findByName(dto.getName())
+    public FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestRequestDto dto) {
+        return FullBookInfoResponseDto.toDto(bookRepository.findByName(dto.getName())
                 .orElseGet(() -> {
                     Book book = bookRepository.save(new Book(dto.getName()));
                     book.setComments(Set.of(commentService.save(new Comment(dto.getCommentText(), book))));
@@ -59,7 +67,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void changeBookName(ChangeBookInfoRequestDto dto) {
+    public void changeBookName(ChangeBookInfoRequestDtoRequest dto) {
         Book book = bookRepository.findById(dto.getId()).orElseThrow(() -> new RuntimeException(String.format("Книга с id=%d не найдена%n", dto.getId())));
         book.setName(dto.getName());
         bookRepository.save(book);

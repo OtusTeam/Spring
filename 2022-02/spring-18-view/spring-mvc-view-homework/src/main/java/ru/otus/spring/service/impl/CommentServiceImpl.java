@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.domain.Comment;
+import ru.otus.spring.dto.response.CommentBookResponseDto;
 import ru.otus.spring.repositories.CommentRepository;
 import ru.otus.spring.service.CommentService;
 
@@ -23,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Comment> getAllCommentsByBookId(long id) {
-        return repository.getAllCommentsByBookId(id);
+    public List<CommentBookResponseDto> getAllCommentsByBookId(long id) {
+        return repository.getAllCommentsByBookId(id).stream().map(CommentBookResponseDto::toDto).toList();
     }
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.domain.Genre;
+import ru.otus.spring.dto.response.GenreBookResponseDto;
 import ru.otus.spring.repositories.GenreRepository;
 import ru.otus.spring.service.GenreService;
 
@@ -23,7 +24,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Genre> getAllGenresByBookId(long id) {
-        return repository.getAllGenresByBookId(id);
+    public List<GenreBookResponseDto> getAllGenresByBookId(long id) {
+        return repository.getAllGenresByBookId(id).stream().map(GenreBookResponseDto::toDto).toList();
     }
 }

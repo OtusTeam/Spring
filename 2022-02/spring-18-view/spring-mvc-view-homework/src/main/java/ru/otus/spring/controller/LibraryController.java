@@ -5,13 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.otus.spring.dto.request.CreateFullBookInfoRequestDto;
-import ru.otus.spring.dto.resposne.FullBookInfoResponseDto;
-import ru.otus.spring.dto.request.ChangeBookInfoRequestDto;
+import org.springframework.web.bind.annotation.*;
+import ru.otus.spring.dto.request.CreateFullBookInfoRequestRequestDto;
+import ru.otus.spring.dto.request.ChangeBookInfoRequestDtoRequest;
+import ru.otus.spring.dto.response.SimpleBookInfoResponseDto;
 import ru.otus.spring.service.AuthorService;
 import ru.otus.spring.service.BookService;
 import ru.otus.spring.service.CommentService;
@@ -31,21 +28,21 @@ public class LibraryController {
 
     @GetMapping("/")
     public String listPage(Model model) {
-        List<FullBookInfoResponseDto> books = bookService.getAllBooks();
+        List<SimpleBookInfoResponseDto> books = bookService.getSimpleBookInfoList();
         model.addAttribute("books", books);
         return "books";
     }
 
     @GetMapping("/book/edit")
     public String editBookPage(@RequestParam("id") int id, Model model) {
-        FullBookInfoResponseDto book = bookService.getBookById(id);
+        SimpleBookInfoResponseDto book = bookService.getSimpleBookInfoById(id);
         model.addAttribute("book", book);
         return "editBook";
     }
 
     @Validated
     @PostMapping("/book/edit")
-    public String changeBookName(@Valid @ModelAttribute("book") ChangeBookInfoRequestDto dto,
+    public String changeBookName(@Valid @ModelAttribute("book") ChangeBookInfoRequestDtoRequest dto,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "editBook";
@@ -57,13 +54,13 @@ public class LibraryController {
 
     @GetMapping("/book/addNew")
     public String addNewBookPage(Model model) {
-        model.addAttribute("book", new CreateFullBookInfoRequestDto());
+        model.addAttribute("book", new CreateFullBookInfoRequestRequestDto());
         return "addNewBook";
     }
 
     @Validated
     @PostMapping("/book/addNew")
-    public String addNewBook(@Valid @ModelAttribute("book") CreateFullBookInfoRequestDto dto,
+    public String addNewBook(@Valid @ModelAttribute("book") CreateFullBookInfoRequestRequestDto dto,
                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "addNewBook";
@@ -74,6 +71,13 @@ public class LibraryController {
     }
 
     @GetMapping("/book/delete")
+    public String deleteBookPage(@RequestParam("id") int id, Model model) {
+        SimpleBookInfoResponseDto book = bookService.getSimpleBookInfoById(id);
+        model.addAttribute("book", book);
+        return "deleteBook";
+    }
+
+    @PostMapping("/book/delete")
     public String deleteBook(@RequestParam("id") int id, Model model) {
         bookService.deleteBookById(id);
         return "redirect:/";

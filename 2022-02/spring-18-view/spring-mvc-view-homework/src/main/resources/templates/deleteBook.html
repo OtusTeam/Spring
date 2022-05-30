@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="#{edit-book-title}">Редактирование книги</title>
+    <title th:text="#{delete-book-title}">Удаление книги</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -44,7 +44,7 @@
 </head>
 <body>
 
-<form id="edit-form" action="editBook.html" th:action="@{/book/edit(id=${book.id})}" th:method="post" th:object="${book}">
+<form id="delete-form" action="deleteBook.html" th:action="@{/book/delete(id=${book.id})}" th:method="post" th:object="${book}">
     <h3 th:text="#{book-form-header}">Книга:</h3>
 
     <div class="row">
@@ -53,13 +53,12 @@
     </div>
 
     <div class="row">
-        <label for="book-name-input" th:text="#{book-new-name-label}">Новое название книги:</label>
-        <input id="book-name-input" name="name" type="text" th:value="*{name}" value="Сильмариллион"/>
-        <div class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка в названии книги</div>
+        <label for="book-name-input" th:text="#{book-name-label}">Название книги:</label>
+        <input id="book-name-input" name="name" type="text" readonly="readonly" th:value="*{name}" value="Сильмариллион"/>
     </div>
 
     <div class="row">
-        <button type="submit" th:text="#{save-button-caption}">Сохранить</button>
+        <button type="submit" th:text="#{delete-button-caption}">Удалить</button>
         <a href="books.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Отмена</button></a>
     </div>
 </form>
