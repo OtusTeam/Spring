@@ -44,7 +44,7 @@
     <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(function () {
-            $.get('/api/getAllBooks').done(function (books) {
+            $.get('/api/books/').done(function (books) {
                 books.forEach(function (book) {
                     $('tbody').append(`
                     <tr>
@@ -84,7 +84,7 @@
     <script>
         function deleteBookById(bookId) {
             $.ajax({
-                url: '/api/deleteBookById?id=' + bookId,
+                url: '/api/books/' + bookId,
                 type: 'DELETE',
             });
         }

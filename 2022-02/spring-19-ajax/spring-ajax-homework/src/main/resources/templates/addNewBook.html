@@ -47,7 +47,7 @@
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "/api/addNewBook",
+                url: "/api/books/",
                 data: JSON.stringify({
                     'name' : $("#book-name-input").val(),
                     'commentText': $("#book-comment-text-input").val(),

@@ -5,39 +5,40 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.spring.rest.dto.request.ChangeBookInfoRequestDto;
 import ru.otus.spring.rest.dto.request.CreateFullBookInfoRequestDto;
 import ru.otus.spring.rest.dto.resposne.FullBookInfoResponseDto;
+import ru.otus.spring.rest.dto.resposne.SimpleBookInfoResponseDto;
 import ru.otus.spring.service.BookService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/books")
 @RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("/getAllBooks")
-    public List<FullBookInfoResponseDto> getAllBooks() {
-        return bookService.getAllBooks();
+    @GetMapping("/")
+    public List<SimpleBookInfoResponseDto> getAllBooks() {
+        return bookService.getSimpleBookInfoList();
     }
 
-    @GetMapping("/getBookById")
-    public FullBookInfoResponseDto getBookById(@RequestParam("id") long id) {
-        return bookService.getBookById(id);
+    @GetMapping("/{id}")
+    public SimpleBookInfoResponseDto getBookById(@PathVariable("id") long id) {
+        return bookService.getSimpleBookInfoById(id);
     }
 
-    @PostMapping("/addNewBook")
+    @PostMapping("/")
     public void addNewBook(@RequestBody CreateFullBookInfoRequestDto dto) {
         bookService.addNewBook(dto);
     }
 
-    @PatchMapping("/changeBookName")
-    public void changeBookName(@RequestBody ChangeBookInfoRequestDto dto) {
+    @PutMapping("/{id}")
+    public void changeBookName(@PathVariable("id") long id, @RequestBody ChangeBookInfoRequestDto dto) {
         bookService.changeBookName(dto);
     }
 
-    @DeleteMapping("/deleteBookById")
-    public void deleteBookById(@RequestParam("id") long id) {
+    @DeleteMapping("/{id}")
+    public void deleteBookById(@PathVariable("id") long id) {
         bookService.deleteBookById(id);
     }
 }

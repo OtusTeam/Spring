@@ -22,7 +22,7 @@ public class Genre {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(targetEntity = Book.class, mappedBy = "genres")
+    @ManyToMany(mappedBy = "genres", fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet<>();
 
     public Genre(String name) {

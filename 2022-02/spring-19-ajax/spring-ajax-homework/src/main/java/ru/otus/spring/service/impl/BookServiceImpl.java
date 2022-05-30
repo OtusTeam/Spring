@@ -11,6 +11,7 @@ import ru.otus.spring.rest.dto.request.ChangeBookInfoRequestDto;
 import ru.otus.spring.rest.dto.request.CreateFullBookInfoRequestDto;
 import ru.otus.spring.rest.dto.resposne.FullBookInfoResponseDto;
 import ru.otus.spring.repositories.BookRepository;
+import ru.otus.spring.rest.dto.resposne.SimpleBookInfoResponseDto;
 import ru.otus.spring.service.AuthorService;
 import ru.otus.spring.service.BookService;
 import ru.otus.spring.service.CommentService;
@@ -32,15 +33,25 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FullBookInfoResponseDto> getAllBooks() {
+    public List<FullBookInfoResponseDto> getFullBookInfoList() {
         return bookRepository.findAll().stream().map(FullBookInfoResponseDto::toDto)
                 .toList();
     }
 
     @Override
+    public List<SimpleBookInfoResponseDto> getSimpleBookInfoList() {
+        return bookRepository.findAll().stream().map(SimpleBookInfoResponseDto::toDto).toList();
+    }
+
+    @Override
     @Transactional(readOnly = true)
-    public FullBookInfoResponseDto getBookById(long id) {
+    public FullBookInfoResponseDto getFullBookInfoById(long id) {
         return FullBookInfoResponseDto.toDto(bookRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Книга с id=%d не найдена%n", id))));
+    }
+
+    @Override
+    public SimpleBookInfoResponseDto getSimpleBookInfoById(long id) {
+        return SimpleBookInfoResponseDto.toDto(bookRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Книга с id=%d не найдена%n", id))));
     }
 
     @Override

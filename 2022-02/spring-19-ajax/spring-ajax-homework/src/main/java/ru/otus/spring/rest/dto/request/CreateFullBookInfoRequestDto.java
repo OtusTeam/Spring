@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CreateFullBookInfoRequestDto extends AbstractSimpleBookInfoRequestDto {
+public class CreateFullBookInfoRequestDto extends AbstractBookInfoRequestDto {
     private String commentText;
     private String authorName;
     private String genreName;

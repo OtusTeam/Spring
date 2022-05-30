@@ -5,6 +5,6 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ChangeBookInfoRequestDto extends AbstractSimpleBookInfoRequestDto {
+public class ChangeBookInfoRequestDto extends AbstractBookInfoRequestDto {
     private long id;
 }

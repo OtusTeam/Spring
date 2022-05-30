@@ -1,4 +1,6 @@
 spring:
+  mvc:
+    static-path-pattern: /public/**
   banner:
     location: classpath:banner.txt
 
