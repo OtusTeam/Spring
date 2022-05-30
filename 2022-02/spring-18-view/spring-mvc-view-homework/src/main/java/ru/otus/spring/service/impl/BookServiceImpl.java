@@ -7,8 +7,8 @@ import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 import ru.otus.spring.domain.Genre;
-import ru.otus.spring.dto.request.ChangeBookInfoRequestDtoRequest;
-import ru.otus.spring.dto.request.CreateFullBookInfoRequestRequestDto;
+import ru.otus.spring.dto.request.ChangeBookInfoRequestDto;
+import ru.otus.spring.dto.request.CreateFullBookInfoRequestDto;
 import ru.otus.spring.dto.response.FullBookInfoResponseDto;
 import ru.otus.spring.dto.response.SimpleBookInfoResponseDto;
 import ru.otus.spring.repositories.BookRepository;
@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestRequestDto dto) {
+    public FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestDto dto) {
         return FullBookInfoResponseDto.toDto(bookRepository.findByName(dto.getName())
                 .orElseGet(() -> {
                     Book book = bookRepository.save(new Book(dto.getName()));
@@ -67,7 +67,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void changeBookName(ChangeBookInfoRequestDtoRequest dto) {
+    public void changeBookName(ChangeBookInfoRequestDto dto) {
         Book book = bookRepository.findById(dto.getId()).orElseThrow(() -> new RuntimeException(String.format("Книга с id=%d не найдена%n", dto.getId())));
         book.setName(dto.getName());
         bookRepository.save(book);

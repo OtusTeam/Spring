@@ -1,7 +1,7 @@
 package ru.otus.spring.service;
 
-import ru.otus.spring.dto.request.ChangeBookInfoRequestDtoRequest;
-import ru.otus.spring.dto.request.CreateFullBookInfoRequestRequestDto;
+import ru.otus.spring.dto.request.ChangeBookInfoRequestDto;
+import ru.otus.spring.dto.request.CreateFullBookInfoRequestDto;
 import ru.otus.spring.dto.response.FullBookInfoResponseDto;
 import ru.otus.spring.dto.response.SimpleBookInfoResponseDto;
 
@@ -17,9 +17,9 @@ public interface BookService {
 
     SimpleBookInfoResponseDto getSimpleBookInfoById(long id);
 
-    FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestRequestDto createFullBookInfoRequestDto);
+    FullBookInfoResponseDto addNewBook(CreateFullBookInfoRequestDto createFullBookInfoRequestDto);
 
-    void changeBookName(ChangeBookInfoRequestDtoRequest dto);
+    void changeBookName(ChangeBookInfoRequestDto dto);
 
     void deleteBookById(long id);
 

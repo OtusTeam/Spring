@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateFullBookInfoRequestRequestDto extends AbstractBookInfoRequest {
+public class CreateFullBookInfoRequestDto extends AbstractBookInfoRequestDto {
 
     @NotBlank(message = "{book-comment-text-field-should-not-be-blank}")
     @Size(min = 5, max = 255, message = "{book-comment-text-field-should-has-expected-size}")

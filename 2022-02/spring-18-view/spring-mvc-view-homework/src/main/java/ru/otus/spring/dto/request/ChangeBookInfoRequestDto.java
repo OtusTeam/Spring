@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
-public class ChangeBookInfoRequestDtoRequest extends AbstractBookInfoRequest {
+public class ChangeBookInfoRequestDto extends AbstractBookInfoRequestDto {
 
     private long id;
 }

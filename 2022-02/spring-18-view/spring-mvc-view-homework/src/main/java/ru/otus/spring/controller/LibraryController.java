@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.spring.dto.request.CreateFullBookInfoRequestRequestDto;
-import ru.otus.spring.dto.request.ChangeBookInfoRequestDtoRequest;
+import ru.otus.spring.dto.request.CreateFullBookInfoRequestDto;
+import ru.otus.spring.dto.request.ChangeBookInfoRequestDto;
 import ru.otus.spring.dto.response.SimpleBookInfoResponseDto;
 import ru.otus.spring.service.AuthorService;
 import ru.otus.spring.service.BookService;
@@ -42,7 +42,7 @@ public class LibraryController {
 
     @Validated
     @PostMapping("/book/edit")
-    public String changeBookName(@Valid @ModelAttribute("book") ChangeBookInfoRequestDtoRequest dto,
+    public String changeBookName(@Valid @ModelAttribute("book") ChangeBookInfoRequestDto dto,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "editBook";
@@ -54,13 +54,13 @@ public class LibraryController {
 
     @GetMapping("/book/addNew")
     public String addNewBookPage(Model model) {
-        model.addAttribute("book", new CreateFullBookInfoRequestRequestDto());
+        model.addAttribute("book", new CreateFullBookInfoRequestDto());
         return "addNewBook";
     }
 
     @Validated
     @PostMapping("/book/addNew")
-    public String addNewBook(@Valid @ModelAttribute("book") CreateFullBookInfoRequestRequestDto dto,
+    public String addNewBook(@Valid @ModelAttribute("book") CreateFullBookInfoRequestDto dto,
                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "addNewBook";
