@@ -27,12 +27,17 @@ public class PagesController {
 
     @GetMapping("/user")
     public String userPage() {
-//        myService.onlyUser();
+        //myService.onlyUser();
         return "user";
     }
 
+    @GetMapping("/manager")
+    public String managerPage() {
+        return "manager";
+    }
+
     @GetMapping("/admin")
-//    @Secured( "ADMIN" )
+    //@Secured( "ADMIN" )
     public String adminPage() {
         myService.onlyUser();
         //myService.onlyAdmin();
