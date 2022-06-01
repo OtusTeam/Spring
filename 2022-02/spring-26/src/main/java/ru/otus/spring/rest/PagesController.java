@@ -1,12 +1,9 @@
 package ru.otus.spring.rest;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.otus.spring.service.MyService;
 
 @Controller
@@ -24,7 +21,7 @@ public class PagesController {
     }
 
     @GetMapping("/public")
-    public String publicPage( ) {
+    public String publicPage() {
         return "public";
     }
 
@@ -36,7 +33,7 @@ public class PagesController {
 
     @GetMapping("/admin")
 //    @Secured( "ADMIN" )
-    public String adminPage(  ) {
+    public String adminPage() {
         myService.onlyUser();
         //myService.onlyAdmin();
         return "admin";
@@ -45,7 +42,7 @@ public class PagesController {
     @GetMapping("/authenticated")
     public String authenticatedPage() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
+            .getContext().getAuthentication().getPrincipal();
         System.out.println(userDetails.getUsername());
         return "authenticated";
     }

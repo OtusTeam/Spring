@@ -11,6 +11,7 @@ public class MyService {
         return "My love";
     }
 
-    @Secured( "ADMIN" )
-    public void onlyAdmin() {}
+    @Secured("ADMIN")
+    public void onlyAdmin() {
+    }
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
 @ControllerAdvice
 public class SecurityControllerAdvice {
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<String> accessError(){
-        return ResponseEntity.of( Optional.of( "Неудачник" ));
+    public ResponseEntity<String> accessError() {
+        return ResponseEntity.of(Optional.of("Неудачник"));
     }
 }
