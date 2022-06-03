@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.otus</groupId>
-    <artifactId>spring-framework-27-acl</artifactId>
+    <artifactId>spring-framework-27-oauth</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
@@ -16,7 +16,6 @@
 
     <properties>
         <ehcache-core.version>2.6.11</ehcache-core.version>
-        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <dependencies>
@@ -34,20 +33,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <!-- Spring Security ACL и зависимости-->
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-acl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <version>${ehcache-core.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
 
         <dependency>
@@ -59,10 +47,26 @@
             <artifactId>h2</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-core</artifactId>
         </dependency>
 
     </dependencies>
