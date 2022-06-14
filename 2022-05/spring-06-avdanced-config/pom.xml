@@ -19,5 +19,6 @@
 		<module>test-configuration-solution-1</module>
 		<module>test-configuration-solution-2</module>
 		<module>test-configuration-solution-3</module>
+		<module>test-caching-demo</module>
     </modules>
 </project>
