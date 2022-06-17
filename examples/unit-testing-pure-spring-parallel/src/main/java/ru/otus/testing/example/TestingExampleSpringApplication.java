@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.testing.example.services.ClosedConsoleIOService;
 import ru.otus.testing.example.services.IOService;
-import ru.otus.testing.example.services.OpenedConsoleIOService;
+import ru.otus.testing.example.services.OpenedStreamsIOService;
 
 @Configuration
 @ComponentScan
@@ -16,7 +16,7 @@ public class TestingExampleSpringApplication {
         ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(TestingExampleSpringApplication.class);
 
         IOService closedConsoleIOService = context.getBean(ClosedConsoleIOService.class);
-        IOService openedConsoleIOService = context.getBean(OpenedConsoleIOService.class);
+        IOService openedConsoleIOService = context.getBean(OpenedStreamsIOService.class);
 
         closedConsoleIOService.out("Hello World");
         openedConsoleIOService.out("Hello World 2");

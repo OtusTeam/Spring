@@ -8,12 +8,12 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 @Service
-public class OpenedConsoleIOService implements IOService {
+public class OpenedStreamsIOService implements IOService {
     private final PrintStream out;
     private final Scanner sc;
 
 
-    public OpenedConsoleIOService(@Value("#{ T(java.lang.System).in}") InputStream in,
+    public OpenedStreamsIOService(@Value("#{ T(java.lang.System).in}") InputStream in,
                                   @Value("#{ T(java.lang.System).out}") PrintStream out) {
         this.out = out;
         this.sc = new Scanner(in);

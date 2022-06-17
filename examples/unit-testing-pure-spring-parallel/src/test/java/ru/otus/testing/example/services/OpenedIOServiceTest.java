@@ -27,7 +27,7 @@ class OpenedIOServiceTest {
         System.out.println(Thread.currentThread().getName());
 
         bos = new ByteArrayOutputStream();
-        ioService = new OpenedConsoleIOService(System.in, new PrintStream(bos));
+        ioService = new OpenedStreamsIOService(System.in, new PrintStream(bos));
     }
 
     @DisplayName("должно печатать \"" + TEXT_TO_PRINT1 + "\"")
