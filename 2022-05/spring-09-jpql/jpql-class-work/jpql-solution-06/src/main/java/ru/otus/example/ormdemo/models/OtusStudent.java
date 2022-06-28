@@ -40,7 +40,7 @@ public class OtusStudent {
     // Все данные талицы будут загружены в память отдельным запросом и соединены с родительской сущностью
     @Fetch(FetchMode.SUBSELECT)
     // Указывает на связь между таблицами "многие ко многим"
-    @ManyToMany(targetEntity = Course.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Course.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     // Задает таблицу связей между таблицами для хранения родительской и связанной сущностью
     @JoinTable(name = "student_courses", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
