@@ -11,7 +11,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>spring-31-exercise</module>
-        <module>spring-31-solution</module>
+        <module>rest-template</module>
+        <module>soap-client</module>
+        <module>soap-server</module>
     </modules>
 </project>
