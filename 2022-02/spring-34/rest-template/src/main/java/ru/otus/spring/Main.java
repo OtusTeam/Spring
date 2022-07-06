@@ -7,10 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.retry.annotation.EnableRetry;
-import ru.otus.spring.dto.Country;
-import ru.otus.spring.service.CountryService;
-
-import java.util.List;
+import ru.otus.spring.dto.CharacterDto;
+import ru.otus.spring.service.CharacterService;
 
 @EnableCaching
 @EnableRetry
@@ -21,11 +19,11 @@ public class Main {
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Main.class, args);
-        CountryService service = ctx.getBean(CountryService.class);
+        CharacterService service = ctx.getBean(CharacterService.class);
 
-        Country country = service.getCountry("col");
+        CharacterDto characterDto = service.getCharacter(1);
 
-        log.info(country.getName());
+        log.info(characterDto.toString());
 
     }
 }
