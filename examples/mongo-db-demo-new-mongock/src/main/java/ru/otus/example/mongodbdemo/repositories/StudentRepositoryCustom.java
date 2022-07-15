@@ -1,5 +1,6 @@
 package ru.otus.example.mongodbdemo.repositories;
 
+import org.bson.Document;
 import ru.otus.example.mongodbdemo.model.Knowledge;
 
 import java.util.List;
@@ -10,5 +11,5 @@ public interface StudentRepositoryCustom {
     long getExperienceArrayLengthByStudentId(String id);
     void removeExperienceArrayElementsById(String id);
 
-    void printGetStudentExperienceByIdAggregationResultForStage(String studentId, int stage);
+    Document getStudentExperienceByIdAggregationRawResultForStage(String studentId, int stage);
 }
