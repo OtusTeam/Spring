@@ -13,7 +13,9 @@ public class Main {
 
         ReactiveProcessingService service = context.getBean(ReactiveProcessingService.class);
 
-        service.printHello("Ivan");
+        for (int i = 0; i < 100000; ++i) {
+            service.printHello("Ivan");
+        }
     }
 }
 

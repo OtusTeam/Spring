@@ -8,6 +8,8 @@ import ru.otus.spring.domain.Person;
 
 public interface PersonRepository extends ReactiveMongoRepository<Person, String> {
 
+    // -ooo---ooo---ooo|---------
+    // --------------------X-----
     Flux<Person> findByName(String name);
 
     @Query("{ 'name': ?0 }")

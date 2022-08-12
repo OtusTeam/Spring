@@ -1,6 +1,5 @@
-package ru.otus.spring;
+package ru.otus.spring.rest;
 
-import io.reactivex.Flowable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,34 +7,28 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
-import java.util.List;
 
 @RestController
-public class ReactorController {
+public class AnnotatedController {
 
     @GetMapping("/flux/one")
     public Mono<String> one() {
-        return Mono.just("one");
-    }
-
-    @GetMapping("/flux/three")
-    public Flux<Integer> three() {
-        return Flux.just(300, 600, 900);
+        return Mono.just("one")
+                .map(String::toUpperCase);
     }
 
     @GetMapping("/flux/ten")
     public Flux<Integer> list() {
-        // 12345678910|------
         return Flux.range(1, 10);
     }
 
-    @GetMapping(path = "/flux/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> stream() {
         return Flux.generate(() -> 0, (state, emitter) -> {
-                    emitter.next(state);
-                    return state + 1;
-                })
+            emitter.next(state);
+            return state + 1;
+        })
                 .delayElements(Duration.ofSeconds(1L))
-                .map(Object::toString);
+                .map(i -> "" + i);
     }
 }

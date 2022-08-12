@@ -21,9 +21,10 @@ public class ReactiveProcessingService {
         // Создаём sink (ранее - процессор)
         // Это reactor-овская реализация reactive-stream интерфейса
         // Обрабатывает данные как простой последовательный вызов методов :)
-        sink = Sinks.many().multicast().directBestEffort();
+        sink = Sinks.many().unicast().onBackpressureBuffer();
         // Здесь мы настраиваем flow
         flow = sink.asFlux()
+                .parallel(2)
                 .map(nonFluxService::nonFluxSayHello)
                 .subscribe(this::printMessage);
         // в идеале в коде выше должен быть doOnNext
@@ -36,7 +37,7 @@ public class ReactiveProcessingService {
      * @param name это имя будет приходить из не-reactor окружения
      */
     public void printHello(String name) {
-        sink.tryEmitNext(new Message(name));
+        if (sink.tryEmitNext(new Message(name)).isFailure()) logger.error("!!!!!!");
     }
 
     /**
