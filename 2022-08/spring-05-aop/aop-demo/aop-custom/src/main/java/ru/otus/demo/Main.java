@@ -21,10 +21,8 @@ public class Main {
     public static void main(String[] args) {
 
         // Как будто Bean Definitions
-        List<Class<?>> beanDefinitions = List.of(PersonDaoSimple.class, BookDaoSimple.class);
-
-        SimpleWeaver weaver = new SimpleWeaver();
-        LoggingAspect aspect = new LoggingAspect();
+        List<Class<?>> beanDefinitions = List.of(SimpleWeaver.class, LoggingAspect.class,
+                PersonDaoSimple.class, BookDaoSimple.class);
 
         // Как будто контекст
         Map<Class<?>, Object> context = new HashMap<>();
@@ -32,8 +30,7 @@ public class Main {
                 // Создание бинов
                 .map(Main::createInstance)
                 // Постобработка, вивинг
-                .forEach(bean -> context.put(bean.getClass().getInterfaces()[0],
-                        weaver.weave(bean, aspect)));
+                .forEach(bean -> putBeanIntoContextAndApplyAspectIfNecessary(bean, context));
 
         // Как будто достаем из контекста дао (уже с примененным аспектом)
         PersonDao personDaoProxy = (PersonDao) context.get(PersonDao.class);
@@ -57,5 +54,25 @@ public class Main {
         }
     }
 
+    private static Class<?> getInterfaceOrClass(Object o) {
+        if (o.getClass().getInterfaces().length > 0) {
+            return o.getClass().getInterfaces()[0];
+        }
+        return o.getClass();
+    }
 
+    private static void putBeanIntoContextAndApplyAspectIfNecessary(Object bean, Map<Class<?>, Object> context) {
+        // Если нет интерфейсов, то это наш вивер и аспект. Просто кладем в контекст
+        // (сам спринг естественно не такие штуки ориентируется, но у нас будет такое допущение)
+        Class<?> key = getInterfaceOrClass(bean);
+        if (!key.isInterface()) {
+            context.put(key, bean);
+            return;
+        }
+
+        // Если интерфейсы есть, то это наши дао и мы их вивим с аспектом. Результат кладем в контекст
+        SimpleWeaver weaver = (SimpleWeaver) context.get(SimpleWeaver.class);
+        LoggingAspect aspect = (LoggingAspect) context.get(LoggingAspect.class);
+        context.put(key, weaver.weave(bean, aspect));
+    }
 }
