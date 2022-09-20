@@ -1,4 +1,4 @@
-package ru.otus.spring.rest;
+package ru.otus.spring.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;

@@ -1,19 +1,12 @@
-package ru.otus.spring.rest;
+package ru.otus.spring.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.otus.spring.service.MyService;
 
 @Controller
 public class PagesController {
-
-    private final MyService myService;
-
-    public PagesController(MyService myService) {
-        this.myService = myService;
-    }
 
     @GetMapping("/")
     public String indexPage() {
@@ -32,7 +25,6 @@ public class PagesController {
 
     @GetMapping("/manager")
     public String managerPage() {
-        myService.onlyAdmin();
         return "manager";
     }
 

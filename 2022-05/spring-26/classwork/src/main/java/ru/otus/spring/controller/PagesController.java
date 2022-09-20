@@ -1,12 +1,19 @@
-package ru.otus.spring.rest;
+package ru.otus.spring.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.otus.spring.service.MyService;
 
 @Controller
 public class PagesController {
+
+    private final MyService myService;
+
+    public PagesController(MyService myService) {
+        this.myService = myService;
+    }
 
     @GetMapping("/")
     public String indexPage() {
@@ -20,6 +27,7 @@ public class PagesController {
 
     @GetMapping("/user")
     public String userPage() {
+        //myService.onlyUser();
         return "user";
     }
 
@@ -29,7 +37,10 @@ public class PagesController {
     }
 
     @GetMapping("/admin")
+    //@Secured( "ADMIN" )
     public String adminPage() {
+        myService.onlyUser();
+        //myService.onlyAdmin();
         return "admin";
     }
 
