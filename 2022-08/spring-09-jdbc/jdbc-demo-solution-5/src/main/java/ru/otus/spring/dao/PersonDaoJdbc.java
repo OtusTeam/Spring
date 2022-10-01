@@ -42,7 +42,7 @@ public class PersonDaoJdbc implements PersonDao {
 
     @Override
     public void deleteById(long id) {
-
+        jdbc.update("delete from persons where id = ?", id);
     }
 
 

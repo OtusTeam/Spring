@@ -21,7 +21,6 @@ class PersonDaoJdbcTest {
     private static final int EXISTING_PERSON_ID = 1;
     private static final String EXISTING_PERSON_NAME = "Ivan";
 
-
     @Autowired
     private PersonDaoJdbc personDao;
 
@@ -35,14 +34,16 @@ class PersonDaoJdbcTest {
     @DisplayName("добавлять пёрсона в БД")
     @Test
     void shouldInsertPerson() {
+        int countBeforeInsert = personDao.count();
+        assertThat(countBeforeInsert).isEqualTo(EXPECTED_PERSONS_COUNT);
+
         Person expectedPerson = new Person(2, "Igor");
         personDao.insert(expectedPerson);
 
         // Ошибка! Сейчас так проверяем т.к. больше нет других способов,
         // когда появится getById, будем использовать его
-        int actualPersonsCount = personDao.count();
-        assertThat(actualPersonsCount).isEqualTo(EXPECTED_PERSONS_COUNT);
-
+        int countAfterInsert = personDao.count();
+        assertThat(countAfterInsert).isEqualTo(countBeforeInsert + 1);
 /*
         Person actualPerson = personDao.getById(expectedPerson.getId());
         assertThat(actualPerson).usingRecursiveComparison().isEqualTo(expectedPerson);
@@ -60,6 +61,17 @@ class PersonDaoJdbcTest {
     @DisplayName("удалять заданного пёрсона по его id")
     @Test
     void shouldCorrectDeletePersonById() {
+        // Ошибка! Сейчас так проверяем т.к. больше нет других способов,
+        // когда появится getById, тест будет выглядеть, как закомментированный блок ниже
+        int countBeforeDelete = personDao.count();
+        assertThat(countBeforeDelete).isEqualTo(EXPECTED_PERSONS_COUNT);
+
+        personDao.deleteById(EXISTING_PERSON_ID);
+
+        int countAfterDelete = personDao.count();
+        assertThat(countAfterDelete).isEqualTo(countBeforeDelete - 1);
+
+        /*
         assertThatCode(() -> personDao.getById(EXISTING_PERSON_ID))
                 .doesNotThrowAnyException();
 
@@ -67,6 +79,7 @@ class PersonDaoJdbcTest {
 
         assertThatThrownBy(() -> personDao.getById(EXISTING_PERSON_ID))
                 .isInstanceOf(EmptyResultDataAccessException.class);
+        */
     }
 
     @DisplayName("возвращать ожидаемый список пёрсонов")
@@ -77,5 +90,4 @@ class PersonDaoJdbcTest {
         assertThat(actualPersonList)
                 .containsExactlyInAnyOrder(expectedPerson);
     }
-
 }

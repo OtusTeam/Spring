@@ -28,7 +28,6 @@ class PersonDaoJdbcTest {
     private static final int EXISTING_PERSON_ID = 1;
     private static final String EXISTING_PERSON_NAME = "Ivan";
 
-
     @Autowired
     private PersonDaoJdbc personDao;
 
@@ -88,5 +87,4 @@ class PersonDaoJdbcTest {
         assertThat(actualPersonList)
                 .containsExactlyInAnyOrder(expectedPerson);
     }
-
 }
