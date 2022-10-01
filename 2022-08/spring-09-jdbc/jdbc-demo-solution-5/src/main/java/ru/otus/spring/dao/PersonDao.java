@@ -5,7 +5,6 @@ import ru.otus.spring.domain.Person;
 import java.util.List;
 
 public interface PersonDao {
-
     int count();
 
     void insert(Person person);
@@ -13,4 +12,6 @@ public interface PersonDao {
     Person getById(long id);
 
     List<Person> getAll();
+
+    void deleteById(long id);
 }

@@ -40,6 +40,11 @@ public class PersonDaoJdbc implements PersonDao {
         return jdbc.query("select id, name from persons", new PersonMapper());
     }
 
+    @Override
+    public void deleteById(long id) {
+
+    }
+
 
     private static class PersonMapper implements RowMapper<Person> {
 
