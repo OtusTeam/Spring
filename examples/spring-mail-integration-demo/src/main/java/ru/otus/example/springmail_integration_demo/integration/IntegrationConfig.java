@@ -71,12 +71,10 @@ public class IntegrationConfig {
                                 .transform(messageTransformer, TRANSFORM_METHOD_NAME)
                                 .handle(m -> {
                                     System.out.println("Как будто посылаем письмо: " + m.getPayload());
-/*
-                                    if (!messageWasSandedOnceFlag.get()) {
+/*                                    if (!messageWasSandedOnceFlag.get()) {
                                         mailSender.send((SimpleMailMessage) m.getPayload());
                                         messageWasSandedOnceFlag.set(true);
-                                    }
-*/
+                                    }*/
                                 })
                         )
                         .subFlowMapping(false, IntegrationFlowDefinition::nullChannel)
