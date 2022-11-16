@@ -33,8 +33,6 @@ public class PublisherExample {
     }
 
     public static Observable<String> magicPublisher() {
-//        Random r = new Random(1);
-//        AtomicInteger i = new AtomicInteger();
         Scheduler scheduler = Schedulers.newThread();
         PublishSubject<String> subject = PublishSubject.create();
         var obs = Observable
@@ -49,21 +47,5 @@ public class PublisherExample {
 
         obs.subscribe(subject);
         return subject;
-
-//        BehaviorSubject<String> subject = BehaviorSubject.create();
-
-//        AsyncSubject<String> subject = AsyncSubject.create();
-//        CompletableFuture.runAsync(() -> {
-//            try {
-//                Thread.sleep(7000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            subject.onComplete();
-//        });
-
-//        ReplaySubject<String> subject = ReplaySubject.create();
-
     }
-
 }
