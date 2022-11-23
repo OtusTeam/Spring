@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.otus</groupId>
-    <artifactId>spring-21</artifactId>
+    <artifactId>spring-21-reactive</artifactId>
     <version>1.0</version>
 
     <packaging>pom</packaging>
