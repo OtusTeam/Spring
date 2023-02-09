@@ -24,7 +24,7 @@ public class PublisherExample {
         Thread.sleep(5000);
 
         logger.info("Second subscribed");
-        var disposable2 = ob.subscribe(item -> logger.info("item: {}", item));
+        var disposable2 = ob.subscribe(item -> logger.info("item second: {}", item));
 
 
         logger.info("disposable2.isDisposed():{}", disposable2.isDisposed());
