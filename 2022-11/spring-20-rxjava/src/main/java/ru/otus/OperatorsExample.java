@@ -1,6 +1,5 @@
 package ru.otus;
 
-import io.reactivex.Emitter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 
