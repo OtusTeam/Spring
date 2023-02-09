@@ -70,11 +70,12 @@ public class IntegrationConfig {
                         , mapping -> mapping.subFlowMapping(true, sub -> sub
                                 .transform(messageTransformer, TRANSFORM_METHOD_NAME)
                                 .handle(m -> {
-                                    System.out.println("Как будто посылаем письмо: " + m.getPayload());
-/*                                    if (!messageWasSandedOnceFlag.get()) {
-                                        mailSender.send((SimpleMailMessage) m.getPayload());
+                                    SimpleMailMessage mailMessage = (SimpleMailMessage) m.getPayload();
+                                    System.out.println("Как будто посылаем письмо: " + mailMessage.getText());
+                                    if (!messageWasSandedOnceFlag.get()) {
+                                        mailSender.send(mailMessage);
                                         messageWasSandedOnceFlag.set(true);
-                                    }*/
+                                    }
                                 })
                         )
                         .subFlowMapping(false, IntegrationFlowDefinition::nullChannel)
