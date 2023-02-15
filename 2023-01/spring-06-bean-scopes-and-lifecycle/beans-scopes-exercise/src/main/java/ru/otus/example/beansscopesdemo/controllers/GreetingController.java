@@ -14,11 +14,13 @@ public class GreetingController {
     private final GreetingService sessionGreetingService;
     private final GreetingService requestGreetingService;
 
-    public GreetingController(@Qualifier("SingletonGreetingService") GreetingService singletonGreetingService,
-                              @Qualifier("PrototypeGreetingService")GreetingService prototypeGreetingService1,
-                              @Qualifier("PrototypeGreetingService")GreetingService prototypeGreetingService2,
-                              @Qualifier("SessionGreetingService")GreetingService sessionGreetingService,
-                              @Qualifier("RequestGreetingService")GreetingService requestGreetingService
+    public GreetingController(GreetingService singletonGreetingService,
+                              @Qualifier("prototypeGreetingService")
+                                      GreetingService prototypeGreetingService1,
+                              @Qualifier("prototypeGreetingService")
+                                      GreetingService prototypeGreetingService2,
+                              GreetingService sessionGreetingService,
+                              GreetingService requestGreetingService
     ) {
         this.singletonGreetingService = singletonGreetingService;
         this.prototypeGreetingService1 = prototypeGreetingService1;

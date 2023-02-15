@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
-@Service("RequestGreetingService")
+@Service("requestGreetingService")
 public class RequestGreetingServiceImpl extends AbstractGreetingServiceImpl {
 }

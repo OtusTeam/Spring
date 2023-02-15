@@ -5,6 +5,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 @Scope(scopeName = "prototype")
-@Service("PrototypeGreetingService")
+@Service("prototypeGreetingService")
 public class PrototypeGreetingServiceImpl extends AbstractGreetingServiceImpl {
 }

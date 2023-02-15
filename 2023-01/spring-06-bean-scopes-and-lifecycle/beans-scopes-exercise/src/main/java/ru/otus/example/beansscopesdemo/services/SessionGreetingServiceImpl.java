@@ -2,6 +2,6 @@ package ru.otus.example.beansscopesdemo.services;
 
 import org.springframework.stereotype.Service;
 
-@Service("SessionGreetingService")
+@Service("sessionGreetingService")
 public class SessionGreetingServiceImpl extends AbstractGreetingServiceImpl {
 }
