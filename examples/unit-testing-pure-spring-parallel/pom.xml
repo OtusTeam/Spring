@@ -10,13 +10,21 @@
     <description>Parallel unit testing example</description>
 
     <properties>
-        <java.version>11</java.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <!--
+                <java.version>11</java.version>
+                <maven.compiler.source>11</maven.compiler.source>
+                <maven.compiler.target>11</maven.compiler.target>
+                <spring.version>5.3.25</spring.version>
+        -->
+
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+        <spring.version>6.0.5</spring.version>
         <lombok.version>1.18.24</lombok.version>
-        <spring.version>5.3.24</spring.version>
-        <junit.jupiter.version>5.9.1</junit.jupiter.version>
-        <mockito.version>4.9.0</mockito.version>
+        <junit.jupiter.version>5.9.2</junit.jupiter.version>
+        <mockito.version>5.1.1</mockito.version>
         <assertj.version>3.23.1</assertj.version>
     </properties>
 
