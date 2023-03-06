@@ -1,6 +1,5 @@
 package ru.otus.testing.example.services;
 
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -39,19 +38,17 @@ class ClosedIOServiceTest {
     }
 
     @DisplayName("должно печатать \"" + TEXT_TO_PRINT1 + "\"")
-    @SneakyThrows
     @Test
-    void shouldPrintOnlyFirstCreedLine() {
+    void shouldPrintOnlyFirstCreedLine() throws InterruptedException {
         ioService.out(TEXT_TO_PRINT1);
         Thread.sleep(1000);
-        assertThat(bos.toString()).isEqualTo(TEXT_TO_PRINT1 + "\r\n");
+        assertThat(bos.toString()).isEqualTo(TEXT_TO_PRINT1 + System.lineSeparator());
     }
 
     @DisplayName("должно печатать \"" + TEXT_TO_PRINT2 + "\"")
-    @SneakyThrows
     @Test
     void shouldPrintOnlySecondCreedLine() {
         ioService.out(TEXT_TO_PRINT2);
-        assertThat(bos.toString()).isEqualTo(TEXT_TO_PRINT2 + "\r\n");
+        assertThat(bos.toString()).isEqualTo(TEXT_TO_PRINT2 + System.lineSeparator());
     }
 }
