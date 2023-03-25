@@ -5,8 +5,8 @@ import ru.otus.springdata.domain.Email;
 
 import java.util.List;
 
-public interface EmailRepository extends JpaRepository<Email, Long> {
+public interface EmailRepository {
 
-    @Override
+    //@Override
     List<Email> findAll();
 }
