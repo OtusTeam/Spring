@@ -1,8 +1,5 @@
 package ru.otus.spring.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.keyvalue.annotation.KeySpace;
-
 public class Person {
 
     private int id;

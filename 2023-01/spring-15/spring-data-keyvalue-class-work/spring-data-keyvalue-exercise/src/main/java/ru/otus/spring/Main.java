@@ -1,20 +1,14 @@
 package ru.otus.spring;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.map.repository.config.EnableMapRepositories;
 import ru.otus.spring.domain.Person;
 import ru.otus.spring.repostory.PersonRepository;
 
-import javax.annotation.PostConstruct;
-
 @SpringBootApplication
 public class Main {
-
-    public static void main(String[] args) {
-        SpringApplication.run(Main.class);
-    }
 
     @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
@@ -25,5 +19,9 @@ public class Main {
         repository.save(new Person(1, "Pushkin"));
 
         repository.findAll();
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class);
     }
 }

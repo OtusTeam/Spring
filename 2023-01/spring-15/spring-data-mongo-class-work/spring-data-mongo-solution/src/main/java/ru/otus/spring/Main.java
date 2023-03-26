@@ -1,7 +1,6 @@
 package ru.otus.spring;
 
 import com.github.cloudyrock.spring.v5.EnableMongock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -13,10 +12,6 @@ import ru.otus.spring.repostory.PersonRepository;
 @EnableMongoRepositories
 @SpringBootApplication
 public class Main {
-
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
-    @Autowired
-    private PersonRepository repository;
 
     public static void main(String[] args) throws InterruptedException {
         ApplicationContext context = SpringApplication.run(Main.class);

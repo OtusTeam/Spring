@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.otus.spring.domain.Email;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Repository
 public class EmailRepositoryImpl implements EmailRepository {
@@ -17,7 +18,8 @@ public class EmailRepositoryImpl implements EmailRepository {
 
     @Override
     public List<Email> findAll() {
-        return (List<Email>) keyValueTemplate.findAll(Email.class);
+        return StreamSupport.stream(keyValueTemplate.findAll(Email.class).spliterator(), false)
+                .toList();
     }
 
     @Override

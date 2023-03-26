@@ -11,29 +11,35 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>3.0.4</version>
         <relativePath />
     </parent>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <mongock.version>4.1.17</mongock.version>
+        <java.version>17</java.version>
+        <maven.compiler.sourcre>17</maven.compiler.sourcre>
+        <maven.compiler.target>17</maven.compiler.target>
+        <mongock.version>4.3.8</mongock.version>
+        <flapdoodle.version>4.6.1</flapdoodle.version>
     </properties>
 
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
+
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>${flapdoodle.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo.spring30x</artifactId>
+            <version>${flapdoodle.version}</version>
         </dependency>
 
         <dependency>
