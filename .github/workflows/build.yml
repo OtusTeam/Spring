@@ -4,9 +4,7 @@ on:
   pull_request:
 
 jobs:
-  build:
-
-    needs: check-repo
+  build-app:
     runs-on: ubuntu-latest
 
     steps:
