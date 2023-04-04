@@ -36,12 +36,12 @@
             <property name="option" value="alone"/>
             <property name="tokens"
                       value="LITERAL_ELSE, METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF,
-                        LITERAL_FOR, LITERAL_WHILE, LITERAL_DO"/>
+                        LITERAL_FOR, LITERAL_WHILE"/>
         </module>
         <module name="RightCurly">
             <property name="option" value="same"/>
             <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH,
-                LITERAL_FINALLY, LITERAL_IF"/>
+                LITERAL_FINALLY, LITERAL_IF, LITERAL_DO"/>
         </module>
         <module name="ThrowsCount">
             <property name="max" value="2"/>
