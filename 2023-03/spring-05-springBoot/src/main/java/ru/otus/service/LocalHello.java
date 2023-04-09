@@ -13,12 +13,10 @@ import ru.otus.configs.AppProps;
 public class LocalHello {
     private static final Logger logger = LoggerFactory.getLogger(LocalHello.class);
 
-    private final MessageSource messageSource;
     private final AppProps props;
     private final String message;
 
-    public LocalHello(MessageSource messageSource, AppProps props, @Value("${application.message}") String message) {
-        this.messageSource = messageSource;
+    public LocalHello(AppProps props, @Value("${application.message}") String message) {
         this.props = props;
         this.message = message;
     }
@@ -26,9 +24,6 @@ public class LocalHello {
     //!!! Вообще, PostConstruct - это плохая практика !!!
     @PostConstruct
     public void printHello() {
-        var messageLocalized = messageSource.getMessage("hello.user", new String[]{"Ivan"}, props.getLocale());
-        logger.info("Localization:{}", messageLocalized);
-
         logger.info("message from props:{}", props.getMessage());
         logger.info("message:{}", message);
     }
