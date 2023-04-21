@@ -11,6 +11,12 @@ Content-Type: application/json
 Cache-Control: no-cache
 
 ###
+GET http://localhost:8080/stream
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
 GET http://localhost:8080/person
 Accept: */*
 Content-Type: application/json
