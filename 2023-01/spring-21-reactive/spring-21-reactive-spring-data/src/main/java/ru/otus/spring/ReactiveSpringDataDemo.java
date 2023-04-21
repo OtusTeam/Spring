@@ -23,7 +23,7 @@ public class ReactiveSpringDataDemo {
 
         logger.info("before save");
         repository.saveAll(persons)
-                        .doOnNext(savedPers -> logger.info("savedPers:{}", savedPers))
+                .doOnNext(savedPers -> logger.info("savedPers:{}", savedPers))
                 .subscribe();
         logger.info("after save");
 
@@ -36,6 +36,14 @@ public class ReactiveSpringDataDemo {
         Flux.merge(repository.findAll(), repository.findAll())
                 .map(Person::getName)
                 .subscribe(name -> logger.info("join name:{}", name));
+
+        Thread.sleep(5_000);
+        logger.info("get all save");
+        var persons2 = List.of(new Person("Pushkin-2"), new Person("Lermontov-2"));
+        repository.saveAll(persons2)
+                .doOnNext(savedPers -> logger.info("double savedPers:{}", savedPers))
+                .thenMany(repository.findAll())
+                .subscribe(name -> logger.info("double person name:{}", name));
 
         Thread.sleep(60_000);
     }
