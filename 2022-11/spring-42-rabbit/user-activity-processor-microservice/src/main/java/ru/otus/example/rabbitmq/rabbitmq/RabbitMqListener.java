@@ -28,14 +28,12 @@ public class RabbitMqListener {
     private final ActivityStatRepository activityStatRepository;
     private final UserActivityToEmailTransformer messageTransformer;
     private final JavaMailSender mailSender;
-    private final ObjectMapper objectMapper;
 
     @RabbitListener(queues = "important-activity-queue")
-    public void processImportantMessages(UserActivity message) throws JsonProcessingException {
+    public void processImportantMessages(UserActivity message) {
+        System.out.println("RECEIVED FROM important-activity-queue: " + message);
 
         try {
-            //val userActivity = objectMapper.readValue(message, UserActivity.class);
-            System.out.println("RECEIVED FROM important-activity-queue: " + message);
             val mailMessage = messageTransformer.transform(message);
             System.out.println("Как будто посылаем письмо: " + mailMessage);
             //mailSender.send(mailMessage);
@@ -45,10 +43,9 @@ public class RabbitMqListener {
     }
 
     @RabbitListener(queues = "all-activity-queue")
-    public void processAllMessages(UserActivity message) throws JsonProcessingException {
+    public void processAllMessages(UserActivity message) {
+        System.out.println("RECEIVED FROM all-activity-queue: " + message);
         try {
-            //val userActivity = objectMapper.readValue(message, UserActivity.class);
-            System.out.println("RECEIVED FROM all-activity-queue: " + message);
             activityRepository.save(message);
         } catch (Exception e) {
             throw new AmqpRejectAndDontRequeueException("Ooops");
