@@ -1,0 +1,14 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+  rabbitmq:
+    addresses: "localhost"

@@ -1,0 +1,40 @@
+app:
+  # адрес почты, через которую сервер отправляет письма
+  server-email: ${server.email}
+  # адрес почты администратора, на которую сервер отправляет письма
+  admin-email: ${admin.email}
+
+spring:
+  datasource:
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  rabbitmq:
+    addresses: "localhost"
+
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    # логин и пароль для почты, через которую сервер отправляет письма
+    username: ${email.server.user}
+    password: ${email.server.password}
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, activity-stat
+  endpoint:
+    health:
+      show-details: always
