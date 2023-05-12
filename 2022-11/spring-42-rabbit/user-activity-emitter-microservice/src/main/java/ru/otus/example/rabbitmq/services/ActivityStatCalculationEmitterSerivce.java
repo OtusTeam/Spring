@@ -13,7 +13,7 @@ public class ActivityStatCalculationEmitterSerivce {
 
     private final RabbitTemplate rabbitTemplate;
 
-    @Scheduled(initialDelay = 3000, fixedRate = 1000)
+    @Scheduled(initialDelay = 3000, fixedRate = 10000)
     public void emitAppUserActivityStatCalculation(){
         rabbitTemplate.convertAndSend(USER_ACTIVITY_STAT_ROUTING_KEY, CALC_STAT_COMMAND);
         System.out.println("Stat calculated!!!");
