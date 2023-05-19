@@ -14,13 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.FileSystemResource;
 
-
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static ru.otus.example.springbatch.config.JobConfig.*;
+import static ru.otus.example.springbatch.config.JobConfig.IMPORT_USER_JOB_NAME;
+import static ru.otus.example.springbatch.config.JobConfig.INPUT_FILE_NAME;
+import static ru.otus.example.springbatch.config.JobConfig.OUTPUT_FILE_NAME;
 
 @SpringBootTest
 @SpringBatchTest

@@ -1,25 +1,19 @@
 package ru.otus.example.springbatch.shell;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.explore.JobExplorer;
-import org.springframework.batch.core.launch.JobInstanceAlreadyExistsException;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.JobOperator;
-import org.springframework.batch.core.launch.NoSuchJobException;
-import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
-import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
-import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import ru.otus.example.springbatch.config.AppProps;
 
-
-import static ru.otus.example.springbatch.config.JobConfig.*;
+import static ru.otus.example.springbatch.config.JobConfig.IMPORT_USER_JOB_NAME;
+import static ru.otus.example.springbatch.config.JobConfig.INPUT_FILE_NAME;
+import static ru.otus.example.springbatch.config.JobConfig.OUTPUT_FILE_NAME;
 
 @RequiredArgsConstructor
 @ShellComponent

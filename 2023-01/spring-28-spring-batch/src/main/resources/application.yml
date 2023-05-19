@@ -5,13 +5,16 @@ spring:
   batch:
     job:
       enabled: false
+
   shell:
     interactive:
       enabled: true
+    noninteractive:
+      enabled: false
 
-  mongodb:
-    embedded:
-      version: 3.4.0
+    command:
+      version:
+        enabled: false
 
   data:
     mongodb:
@@ -29,6 +32,11 @@ spring:
     console:
       enabled: true
       path: /h2-console
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 4.0.2
 
 mongock:
   runner-type: "InitializingBean"

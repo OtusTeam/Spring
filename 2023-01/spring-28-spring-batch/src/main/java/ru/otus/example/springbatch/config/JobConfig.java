@@ -2,12 +2,20 @@ package ru.otus.example.springbatch.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.*;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.ChunkListener;
+import org.springframework.batch.core.ItemProcessListener;
+import org.springframework.batch.core.ItemReadListener;
+import org.springframework.batch.core.ItemWriteListener;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionListener;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.MethodInvokingTaskletAdapter;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
@@ -22,6 +30,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.lang.NonNull;
+import org.springframework.transaction.PlatformTransactionManager;
 import ru.otus.example.springbatch.model.Person;
 import ru.otus.example.springbatch.service.CleanUpService;
 import ru.otus.example.springbatch.service.HappyBirthdayService;
@@ -29,6 +38,7 @@ import ru.otus.example.springbatch.service.HappyBirthdayService;
 import java.util.List;
 
 
+@SuppressWarnings("unused")
 @Configuration
 public class JobConfig {
     private static final int CHUNK_SIZE = 5;
@@ -39,10 +49,11 @@ public class JobConfig {
     public static final String IMPORT_USER_JOB_NAME = "importUserJob";
 
     @Autowired
-    private JobBuilderFactory jobBuilderFactory;
+    private JobRepository jobRepository;
 
     @Autowired
-    private StepBuilderFactory stepBuilderFactory;
+    private PlatformTransactionManager platformTransactionManager;
+
 
     @Autowired
     private CleanUpService cleanUpService;
@@ -101,7 +112,7 @@ public class JobConfig {
 
     @Bean
     public Job importUserJob(Step transformPersonsStep, Step cleanUpStep) {
-        return jobBuilderFactory.get(IMPORT_USER_JOB_NAME)
+        return new JobBuilder(IMPORT_USER_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .flow(transformPersonsStep)
                 .next(cleanUpStep)
@@ -123,8 +134,8 @@ public class JobConfig {
     @Bean
     public Step transformPersonsStep(ItemReader<Person> reader, FlatFileItemWriter<Person> writer,
                                      ItemProcessor<Person, Person> itemProcessor) {
-        return stepBuilderFactory.get("step1")
-                .<Person, Person>chunk(CHUNK_SIZE)
+        return new StepBuilder("transformPersonsStep", jobRepository)
+                .<Person, Person>chunk(CHUNK_SIZE, platformTransactionManager)
                 .reader(reader)
                 .processor(itemProcessor)
                 .writer(writer)
@@ -141,21 +152,21 @@ public class JobConfig {
                         logger.info("Ошибка чтения");
                     }
                 })
-                .listener(new ItemWriteListener<>() {
-                    public void beforeWrite(@NonNull List list) {
+                .listener(new ItemWriteListener<Person>() {
+                    public void beforeWrite(@NonNull List<Person> list) {
                         logger.info("Начало записи");
                     }
 
-                    public void afterWrite(@NonNull List list) {
+                    public void afterWrite(@NonNull List<Person> list) {
                         logger.info("Конец записи");
                     }
 
-                    public void onWriteError(@NonNull Exception e, @NonNull List list) {
+                    public void onWriteError(@NonNull Exception e, @NonNull List<Person> list) {
                         logger.info("Ошибка записи");
                     }
                 })
                 .listener(new ItemProcessListener<>() {
-                    public void beforeProcess(Person o) {
+                    public void beforeProcess(@NonNull Person o) {
                         logger.info("Начало обработки");
                     }
 
@@ -186,8 +197,8 @@ public class JobConfig {
 
     @Bean
     public Step cleanUpStep() {
-        return this.stepBuilderFactory.get("cleanUpStep")
-                .tasklet(cleanUpTasklet())
+        return new StepBuilder("cleanUpStep", jobRepository)
+                .tasklet(cleanUpTasklet(), platformTransactionManager)
                 .build();
     }
 }

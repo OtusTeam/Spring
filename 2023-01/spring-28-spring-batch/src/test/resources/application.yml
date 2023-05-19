@@ -5,9 +5,13 @@ spring:
   batch:
     job:
       enabled: false
+
   shell:
     interactive:
       enabled: false
+    command:
+      version:
+        enabled: false
 
   datasource:
     url: jdbc:h2:mem:testdb
@@ -15,15 +19,19 @@ spring:
     username: sa
     password:
 
-  mongodb:
-    embedded:
-      version: 3.4.0
+
 
   data:
     mongodb:
       host: localhost
       port: 0
       database: SpringBatchTestExampleDB
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 4.0.2
 
 mongock:
   runner-type: "InitializingBean"
