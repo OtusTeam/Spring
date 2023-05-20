@@ -6,14 +6,13 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.test.AssertFile;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.JobRepositoryTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.FileSystemResource;
 
+import java.io.File;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -54,9 +53,6 @@ class ImportUserJobTest {
                 StandardCharsets.UTF_8
         );
 
-        FileSystemResource expectedResult = new FileSystemResource(expectedResultFileName);
-        FileSystemResource actualResult = new FileSystemResource(TEST_OUTPUT_FILE_NAME);
-
         Job job = jobLauncherTestUtils.getJob();
         assertThat(job).isNotNull()
                 .extracting(Job::getName)
@@ -69,6 +65,7 @@ class ImportUserJobTest {
         JobExecution jobExecution = jobLauncherTestUtils.launchJob(parameters);
 
         assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
-        AssertFile.assertFileEquals(expectedResult, actualResult);
+        assertThat(new File(TEST_OUTPUT_FILE_NAME))
+                .hasSameTextualContentAs(new File(expectedResultFileName), StandardCharsets.UTF_8);
     }
 }
