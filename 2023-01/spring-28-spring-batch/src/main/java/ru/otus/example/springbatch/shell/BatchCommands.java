@@ -11,6 +11,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import ru.otus.example.springbatch.config.AppProps;
 
+import java.util.Properties;
+
 import static ru.otus.example.springbatch.config.JobConfig.IMPORT_USER_JOB_NAME;
 import static ru.otus.example.springbatch.config.JobConfig.INPUT_FILE_NAME;
 import static ru.otus.example.springbatch.config.JobConfig.OUTPUT_FILE_NAME;
@@ -28,6 +30,8 @@ public class BatchCommands {
 
     //http://localhost:8080/h2-console/
 
+
+    @SuppressWarnings("unused")
     @ShellMethod(value = "startMigrationJobWithJobLauncher", key = "sm-jl")
     public void startMigrationJobWithJobLauncher() throws Exception {
         JobExecution execution = jobLauncher.run(importUserJob, new JobParametersBuilder()
@@ -37,15 +41,18 @@ public class BatchCommands {
         System.out.println(execution);
     }
 
+    @SuppressWarnings("unused")
     @ShellMethod(value = "startMigrationJobWithJobOperator", key = "sm-jo")
     public void startMigrationJobWithJobOperator() throws Exception {
-        Long executionId = jobOperator.start(IMPORT_USER_JOB_NAME,
-                INPUT_FILE_NAME + "=" + appProps.getInputFile() + "\n" +
-                        OUTPUT_FILE_NAME + "=" + appProps.getOutputFile()
-        );
+        Properties properties = new Properties();
+        properties.put(INPUT_FILE_NAME, appProps.getInputFile());
+        properties.put(OUTPUT_FILE_NAME, appProps.getOutputFile());
+
+        Long executionId = jobOperator.start(IMPORT_USER_JOB_NAME, properties);
         System.out.println(jobOperator.getSummary(executionId));
     }
 
+    @SuppressWarnings("unused")
     @ShellMethod(value = "showInfo", key = "i")
     public void showInfo() {
         System.out.println(jobExplorer.getJobNames());
