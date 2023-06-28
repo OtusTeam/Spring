@@ -28,15 +28,14 @@ public class FunctionalEndpointsConfig {
                 .GET("/func/person",
                         queryParam("name", StringUtils::isNotEmpty),
                         request -> request.queryParam("name")
-                                .map(repository::findAllByLastName)
-                                .map(person -> ok().body(person, Person.class))
+                                .map(name -> ok().body(repository.findAllByLastName(name), Person.class))
                                 .orElse(badRequest().build())
                 )
                 // пример другой реализации - начиная с запроса репозитория
                 .GET("/func/person", queryParam("age", StringUtils::isNotEmpty),
                         req ->
-                                repository
-                                        .findAllByAge(req.queryParam("age").map(Integer::parseInt)
+                                repository.findAllByAge(req.queryParam("age")
+                                                .map(Integer::parseInt)
                                                 .orElseThrow(IllegalArgumentException::new))
                                         .collectList()
                                         .transform(persons -> ok().contentType(APPLICATION_JSON).body(persons, Person.class))
@@ -45,7 +44,7 @@ public class FunctionalEndpointsConfig {
                 .GET("/func/person", accept(APPLICATION_JSON), new PersonHandler(repository)::list)
                 // Обратите внимание на использование pathVariable
                 .GET("/func/person/{id}", accept(APPLICATION_JSON),
-                        request -> repository.findById(request.pathVariable("id"))
+                        request -> repository.findById(Long.parseLong(request.pathVariable("id")))
                                 .flatMap(person -> ok().contentType(APPLICATION_JSON).body(fromValue(person)))
                                 .switchIfEmpty(notFound().build())
                 ).build();

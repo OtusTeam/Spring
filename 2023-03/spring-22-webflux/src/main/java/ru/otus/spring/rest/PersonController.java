@@ -24,7 +24,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/{id}")
-    public Mono<ResponseEntity<PersonDto>> byId(@PathVariable("id") String id) {
+    public Mono<ResponseEntity<PersonDto>> byId(@PathVariable("id") Long id) {
         return repository.findById(id)
                 .map(this::toDto)
                 .map(ResponseEntity::ok)

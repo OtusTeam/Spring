@@ -52,6 +52,11 @@
             <version>42.6.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.0.1</version>
+        </dependency>
 
         <!-- Тестирование -->
         <dependency>

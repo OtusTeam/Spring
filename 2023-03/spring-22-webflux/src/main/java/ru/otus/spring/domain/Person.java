@@ -1,5 +1,6 @@
 package ru.otus.spring.domain;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.Table;
@@ -10,13 +11,14 @@ public class Person {
     @Id
     private final Long id;
 
+    @NotNull
     private final String lastName;
 
     private final int age;
 
 
     @PersistenceCreator
-    private Person(Long id, String lastName, int age) {
+    private Person(Long id, @NotNull String lastName, int age) {
         this.id = id;
         this.lastName = lastName;
         this.age = age;
@@ -31,7 +33,7 @@ public class Person {
     }
 
 
-    public String getLastName() {
+    public @NotNull String getLastName() {
         return lastName;
     }
 

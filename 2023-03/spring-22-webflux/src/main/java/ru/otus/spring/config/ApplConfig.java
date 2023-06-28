@@ -34,6 +34,6 @@ public class ApplConfig {
 
     @Bean
     public Scheduler workerPool() {
-        return Schedulers.newParallel("processor-thread", THREAD_POOL_SIZE);
+        return Schedulers.newParallel("worker-thread", THREAD_POOL_SIZE);
     }
 }

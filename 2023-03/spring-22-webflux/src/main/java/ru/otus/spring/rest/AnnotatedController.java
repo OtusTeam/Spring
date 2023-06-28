@@ -9,11 +9,19 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import reactor.core.scheduler.Scheduler;
 
 
 @RestController
 public class AnnotatedController {
     private static final Logger logger = LoggerFactory.getLogger(AnnotatedController.class);
+
+    private final Scheduler workerPool;
+
+    public AnnotatedController(Scheduler workerPool) {
+        this.workerPool = workerPool;
+    }
+
     @GetMapping("/flux/one")
     public Mono<String> one() {
         return Mono.just("one");
@@ -21,7 +29,10 @@ public class AnnotatedController {
 
     @GetMapping(path ="/flux/ten", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Integer> list() {
-        return Flux.range(1, 10).delayElements(Duration.ofSeconds(1));
+        logger.info("list request");
+        return Flux.range(1, 10)
+                .delayElements(Duration.ofSeconds(1), workerPool)
+                .doOnNext(val -> logger.info("value:{}", val));
     }
 
     @GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
