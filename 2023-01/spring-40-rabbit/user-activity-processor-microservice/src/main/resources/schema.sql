@@ -3,14 +3,16 @@ create table activity_types
     id   bigint auto_increment,
     name varchar(255),
     primary key (id)
-)
+);
+
 create table app_users
 (
     id    bigint auto_increment,
     email varchar(255),
     name  varchar(255),
     primary key (id)
-)
+);
+
 
 create table app_users_activity
 (
@@ -19,11 +21,14 @@ create table app_users_activity
     app_user_id      bigint,
     activity_type_id bigint,
     primary key (id)
-)
+);
+
 alter table app_users_activity
-    add constraint app_users_activity_user_id_fk foreign key (app_user_id) references app_users
+    add constraint app_users_activity_user_id_fk foreign key (app_user_id) references app_users;
+
 alter table app_users_activity
-    add constraint app_users_activity_activity_type_id_fk foreign key (activity_type_id) references activity_types
+    add constraint app_users_activity_activity_type_id_fk foreign key (activity_type_id) references activity_types;
+
 
 create table activity_stat
 (
@@ -32,4 +37,5 @@ create table activity_stat
     activity_type    varchar(255),
     activities_count bigint,
     primary key (id)
-)
+);
+
