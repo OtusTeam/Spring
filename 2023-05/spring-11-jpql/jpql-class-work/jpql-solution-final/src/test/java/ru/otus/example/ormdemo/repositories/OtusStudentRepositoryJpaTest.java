@@ -89,7 +89,7 @@ class OtusStudentRepositoryJpaTest {
 
         var query = em.getEntityManager().createQuery("select s from OtusStudent s ", OtusStudent.class);
         // Так не будет offset + limit из-за того, что студент может занимать больше одной строки набора данных
-        // var query = em.getEntityManager().createQuery("select s from OtusStudent s join fetch s.courses c", OtusStudent.class);
+        // var query = em.getEntityManager().createQuery("select distinct s from OtusStudent s left join fetch s.courses c", OtusStudent.class);
         var students = query.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).getResultList();
 
         assertThat(pagesCount).isEqualTo(4);

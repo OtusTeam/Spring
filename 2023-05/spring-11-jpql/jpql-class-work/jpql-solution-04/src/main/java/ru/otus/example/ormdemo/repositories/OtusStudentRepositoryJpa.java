@@ -12,6 +12,8 @@ import ru.otus.example.ormdemo.models.OtusStudent;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
+
 // @Transactional должна стоять на методе сервиса.
 // Причем, если метод не подразумевает изменения данных в БД то категорически желательно
 // выставить у аннотации параметр readOnly в true.
@@ -47,7 +49,7 @@ public class OtusStudentRepositoryJpa implements OtusStudentRepository {
     public List<OtusStudent> findAll() {
         EntityGraph<?> entityGraph = em.getEntityGraph("otus-student-avatars-entity-graph");
         TypedQuery<OtusStudent> query = em.createQuery("select s from OtusStudent s", OtusStudent.class);
-        query.setHint("javax.persistence.fetchgraph", entityGraph);
+        query.setHint(FETCH.getKey(), entityGraph);
         return query.getResultList();
     }
 
