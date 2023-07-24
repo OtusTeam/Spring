@@ -8,6 +8,7 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.dsl.DirectChannelSpec;
 import org.springframework.integration.dsl.MessageChannels;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -16,6 +17,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 @SpringBootApplication
@@ -33,7 +35,11 @@ public class App {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleWithFixedDelay(() -> {
             System.out.println("I am here!!!");
-            subscribableDirectChannel.send(requireNonNull(queueChannel.receive(5000)));
+            Message<?> receivedMessage = queueChannel.receive(5000);
+            if (isNull(receivedMessage)) {
+                return;
+            }
+            subscribableDirectChannel.send(receivedMessage);
         }, 100, 300, TimeUnit.MILLISECONDS);
 
         queueChannel.send(MessageBuilder.withPayload("Hello").build());
