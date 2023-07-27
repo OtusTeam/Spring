@@ -51,11 +51,13 @@ public class GatewayApp {
 
 	@Bean
 	public IntegrationFlow upcase() {
-		return f -> f
+		return f -> f//.channel("from-input-to-split")
 				.split()
 //				.split(list -> list.get().spliterator())
 //				.split(getCustomSplitter(), "split")
+//				.channel("from-split-to-transformer")
 				.<String, String>transform(String::toUpperCase)
+//				.channel("from-transformer-to-aggregate")
 				.aggregate();
 	}
 
