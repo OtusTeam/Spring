@@ -5,7 +5,7 @@ import ru.otus.spring.dao.PersonDaoSimple;
 
 public class DaoConfig {
 
-    public PersonDao personDao() {
+    public PersonDao personDaoSimple() {
         return new PersonDaoSimple();
     }
 }
