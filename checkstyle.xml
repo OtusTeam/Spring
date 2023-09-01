@@ -17,6 +17,7 @@
         <module name="MemberName"/>
         <module name="MethodName"/>
         <module name="MethodTypeParameterName"/>
+        <module name="ParameterName"/>
 
         <module name="OneTopLevelClass"/>
 
