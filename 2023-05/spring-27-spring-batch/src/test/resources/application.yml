@@ -36,7 +36,7 @@ de:
 mongock:
   runner-type: "InitializingBean"
   change-logs-scan-package:
-    - ru.otus.example.springbatch.chandgelogs
+    - ru.otus.example.springbatch.testchangelogs
   mongo-db:
     write-concern:
       journal: false
