@@ -24,7 +24,7 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 public class StudentRepositoryCustomImpl implements StudentRepositoryCustom {
 
     @Data
-    private class ArraySizeProjection {
+    private static class ArraySizeProjection {
         private int size;
     }
 
@@ -43,7 +43,6 @@ public class StudentRepositoryCustomImpl implements StudentRepositoryCustom {
                 , project().and("experience._id").as("_id").and("experience.name").as("name")
         );
 
-        Document rawResults = mongoTemplate.aggregate(aggregation, Student.class, Knowledge.class).getRawResults();
         return mongoTemplate.aggregate(aggregation, Student.class, Knowledge.class).getMappedResults();
     }
 

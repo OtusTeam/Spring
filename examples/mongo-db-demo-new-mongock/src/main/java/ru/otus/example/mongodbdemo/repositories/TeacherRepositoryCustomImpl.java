@@ -21,7 +21,8 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom {
         val aggregation = newAggregation(
                 match(Criteria.where("id").is(teacherId))
                 , unwind("experience")
-                , project().andExclude("_id").and("experience.id").as("_id").and("experience.name").as("name")
+                , project().andExclude("_id").and("experience.id").as("_id")
+                        .and("experience.name").as("name")
         );
         return mongoTemplate.aggregate(aggregation, Teacher.class, Knowledge.class).getMappedResults();
     }
