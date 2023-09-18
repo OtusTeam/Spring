@@ -7,6 +7,15 @@ spring:
       #port: 27017
       #database: awesomeMongo
 
+  shell:
+    interactive:
+      enabled: true
+    noninteractive:
+      enabled: false
+
+    command:
+      version:
+        enabled: false
 de:
   flapdoodle:
     mongodb:
