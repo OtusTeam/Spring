@@ -14,6 +14,13 @@ public class V3_1__2020_05_26_Add_courses_table extends BaseJavaMigration {
     public void migrate(Context context) throws Exception {
         DataSource ds = new SingleConnectionDataSource(context.getConnection(), true);
         JdbcOperations jdbc = new JdbcTemplate(ds);
-        jdbc.execute("create table courses(id bigserial, name varchar(255))");
+
+        jdbc.execute("""
+                create table courses (
+                    id bigserial,
+                    name varchar(255),
+                    primary key(id)
+                )
+        """);
     }
 }

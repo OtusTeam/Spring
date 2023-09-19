@@ -6,5 +6,5 @@ values (1, 'Разработчик Java'),
 
 insert into users_courses (user_id, course_id)
 values (1, 1), (1, 2), (1, 3), (1, 4),
-       (2, 1), (2, 2), (1, 3),
+       (2, 1), (2, 2), (2, 3),
        (3, 3), (3, 4);

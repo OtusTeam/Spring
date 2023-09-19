@@ -16,8 +16,13 @@ public class AddUsersToCoursesReferenceTable implements JavaMigration {
         DataSource ds = new SingleConnectionDataSource(context.getConnection(), true);
         JdbcOperations jdbc = new JdbcTemplate(ds);
 
-        jdbc.execute("create table users_courses(user_id bigint references users(id), " +
-                "course_id bigint references courses(id))");
+        jdbc.execute("""
+                CREATE TABLE users_courses (
+                    user_id bigint REFERENCES users(id),
+                    course_id bigint REFERENCES courses(id),
+                    PRIMARY KEY(user_id, course_id)
+                )
+        """);
     }
 
     @Override
@@ -33,11 +38,6 @@ public class AddUsersToCoursesReferenceTable implements JavaMigration {
     @Override
     public Integer getChecksum() {
         return null;
-    }
-
-    @Override
-    public boolean isUndo() {
-        return false;
     }
 
     @Override

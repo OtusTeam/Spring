@@ -4,5 +4,6 @@
 create table emails (
     id bigserial,
     user_id bigint references users(id) ON DELETE CASCADE,
-    email varchar(50)
+    email varchar(50),
+    primary key(id)
 )
