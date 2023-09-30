@@ -50,7 +50,7 @@
     <script>
         function getDataByAxios() {
             axios.get('https://rickandmortyapi.com/api/character/3')
-                .then(json => outputCharacter(json.data))
+                .then(response => outputCharacter(response.data))
         }
     </script>
         
