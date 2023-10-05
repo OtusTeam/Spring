@@ -2,7 +2,6 @@ package ru.otus;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 

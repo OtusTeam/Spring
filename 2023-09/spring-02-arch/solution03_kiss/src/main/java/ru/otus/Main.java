@@ -42,7 +42,6 @@ public class Main {
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка при вводе числа");
             }
-
         }
     }
 
@@ -100,5 +99,4 @@ public class Main {
 
         notes.remove(deletedNoteNumber - 1);
     }
-
 }

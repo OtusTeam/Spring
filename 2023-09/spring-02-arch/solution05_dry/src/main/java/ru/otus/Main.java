@@ -114,5 +114,4 @@ public class Main {
         outputString(prompt);
         return userInput.nextLine();
     }
-
 }

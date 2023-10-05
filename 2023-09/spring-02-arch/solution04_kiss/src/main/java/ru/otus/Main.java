@@ -103,5 +103,4 @@ public class Main {
 
         notes.remove(deletedNoteNumber - 1);
     }
-
 }
