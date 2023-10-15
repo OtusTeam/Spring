@@ -1,0 +1,8 @@
+spring:
+  messages:
+    basename: "i18n/appmessages"
+    encoding: "UTF-8"
+
+application:
+  message: "Test Props msg"
+  locale: ru_RU
