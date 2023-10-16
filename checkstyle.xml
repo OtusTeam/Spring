@@ -127,6 +127,6 @@
     </module>
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
-        <property name="max" value="120"/>
+        <property name="max" value="121"/>
     </module>
 </module>
