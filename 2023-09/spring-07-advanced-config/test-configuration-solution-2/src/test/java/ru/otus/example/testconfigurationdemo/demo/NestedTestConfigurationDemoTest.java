@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.TestPropertySource;
 import ru.otus.example.testconfigurationdemo.family.FamilyMember;
 import ru.otus.example.testconfigurationdemo.family.parents.Father;
+import ru.otus.example.testconfigurationdemo.family.pets.Dog;
 
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("В NestedTestConfigurationDemoTest семья должна ")
 @SpringBootTest
+//@TestPropertySource(properties = "spring.main.allow-bean-definition-overriding=true")
 public class NestedTestConfigurationDemoTest {
 
     @TestConfiguration
@@ -23,6 +26,18 @@ public class NestedTestConfigurationDemoTest {
         FamilyMember father() {
             return new Father();
         }
+
+/*
+        @Bean
+        FamilyMember dog() {
+            return new Dog() {
+                @Override
+                public String getName() {
+                    return "Злая собака";
+                }
+            };
+        }
+*/
     }
 
     @Autowired
