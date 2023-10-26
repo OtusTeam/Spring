@@ -8,6 +8,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class IOServiceExampleSpringBootApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(IOServiceExampleSpringBootApplication.class).headless(false).run(args);
+        new SpringApplicationBuilder(IOServiceExampleSpringBootApplication.class)
+                .headless(false)
+                .run(args);
     }
 }
