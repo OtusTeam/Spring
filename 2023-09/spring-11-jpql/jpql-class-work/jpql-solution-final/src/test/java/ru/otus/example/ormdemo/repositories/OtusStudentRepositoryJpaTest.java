@@ -58,7 +58,7 @@ class OtusStudentRepositoryJpaTest {
         assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_STUDENTS)
                 .allMatch(s -> !s.getName().equals(""))
                 .allMatch(s -> s.getCourses() != null && s.getCourses().size() > 0)
-                .allMatch(s -> s.getAvatar() != null)
+                .allMatch(s -> s.getAvatar().getPhotoUrl() != null)
                 .allMatch(s -> s.getEmails() != null && s.getEmails().size() > 0);
         System.out.println("----------------------------------------------------------------------------------------------------------\n\n\n\n");
         assertThat(sessionFactory.getStatistics().getPrepareStatementCount()).isEqualTo(EXPECTED_QUERIES_COUNT);
@@ -88,8 +88,8 @@ class OtusStudentRepositoryJpaTest {
         var pagesCount = (long) Math.ceil(studentsCount * 1d / pageSize);
 
         var query = em.getEntityManager().createQuery("select s from OtusStudent s ", OtusStudent.class);
-        // Так не будет offset + limit из-за того, что студент может занимать больше одной строки набора данных
-        // var query = em.getEntityManager().createQuery("select distinct s from OtusStudent s left join fetch s.courses c", OtusStudent.class);
+        //var query = em.getEntityManager().createQuery("select distinct s from OtusStudent s " +
+        //        "left join fetch s.courses c", OtusStudent.class);
         var students = query.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).getResultList();
 
         assertThat(pagesCount).isEqualTo(4);

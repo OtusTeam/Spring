@@ -32,12 +32,11 @@ public class OtusStudentRepositoryJpa implements OtusStudentRepository {
 
     @Override
     public OtusStudent save(OtusStudent student) {
-        if (student.getId() <= 0) {
+        if (student.getId() == 0) {
             em.persist(student);
             return student;
-        } else {
-            return em.merge(student);
         }
+        return em.merge(student);
     }
 
     @Override
@@ -48,7 +47,8 @@ public class OtusStudentRepositoryJpa implements OtusStudentRepository {
     @Override
     public List<OtusStudent> findAll() {
         EntityGraph<?> entityGraph = em.getEntityGraph("otus-student-avatars-entity-graph");
-        TypedQuery<OtusStudent> query = em.createQuery("select distinct s from OtusStudent s left join fetch s.emails", OtusStudent.class);
+        TypedQuery<OtusStudent> query = em.createQuery("select distinct s from OtusStudent s " +
+                "left join fetch s.emails", OtusStudent.class);
         query.setHint(FETCH.getKey(), entityGraph);
         return query.getResultList();
     }

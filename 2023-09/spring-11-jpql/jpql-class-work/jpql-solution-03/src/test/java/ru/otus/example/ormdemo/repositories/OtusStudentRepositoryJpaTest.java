@@ -62,7 +62,7 @@ class OtusStudentRepositoryJpaTest {
         assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_STUDENTS)
                 .allMatch(s -> !s.getName().equals(""))
                 .allMatch(s -> s.getCourses() != null && s.getCourses().size() > 0)
-                .allMatch(s -> s.getAvatar() != null)
+                .allMatch(s -> s.getAvatar().getPhotoUrl() != null)
                 .allMatch(s -> s.getEmails() != null && s.getEmails().size() > 0);
         System.out.println("----------------------------------------------------------------------------------------------------------\n\n\n\n");
         assertThat(sessionFactory.getStatistics().getPrepareStatementCount()).isEqualTo(EXPECTED_QUERIES_COUNT);
