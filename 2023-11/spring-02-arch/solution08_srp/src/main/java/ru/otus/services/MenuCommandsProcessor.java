@@ -54,5 +54,4 @@ public class MenuCommandsProcessor {
             throw new NoteIndexOutOfBoundsException("Given number of note is out of range");
         }
     }
-    
 }

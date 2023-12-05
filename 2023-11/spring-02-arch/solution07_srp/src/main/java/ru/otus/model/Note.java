@@ -22,5 +22,4 @@ public class Note {
     public String getText() {
         return text;
     }
-
 }

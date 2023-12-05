@@ -72,7 +72,6 @@ public class Main {
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка при вводе числа");
             }
-
         }
     }
 }
