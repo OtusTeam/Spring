@@ -23,7 +23,7 @@
         </dependency>
     </dependencies>
 
-
+<!--    https://stackoverflow.com/questions/74600681/warning-printed-after-migrating-to-spring-boot-3-0-spring-integration-6-0 -->
 <!--    <build>
         <pluginManagement>
             <plugins>
