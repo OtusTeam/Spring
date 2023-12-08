@@ -22,4 +22,19 @@
             <version>6.1.1</version>
         </dependency>
     </dependencies>
+
+
+<!--    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                    <configuration>
+                        <parameters>true</parameters>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>-->
 </project>
