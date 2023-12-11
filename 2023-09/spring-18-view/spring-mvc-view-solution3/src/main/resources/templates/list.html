@@ -36,9 +36,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="person : ${persons}">
-        <td th:text="${person.id}">1</td>
-        <td th:text="${person.name}">John Doe</td>
+    <tr th:each="person : ${persons}" th:object = "${person}">
+        <td th:text="*{id}">1</td>
+        <td th:text="*{name}">John Doe</td>
         <td>
             <a href="edit.html">Edit</a>
         </td>
