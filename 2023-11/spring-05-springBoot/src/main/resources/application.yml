@@ -1,0 +1,15 @@
+spring:
+  messages:
+    basename: "i18n/appmessages"
+    encoding: "UTF-8"
+
+application:
+  message: "Test Props msg"
+  locale: ru_RU
+  data:
+    - "da1"
+    - "da2"
+    - "da3"
+  mapa:
+    key1: 12
+    key2: 34
