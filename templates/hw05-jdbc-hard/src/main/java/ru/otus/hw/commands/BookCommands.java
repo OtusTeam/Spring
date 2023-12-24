@@ -46,8 +46,9 @@ public class BookCommands {
         return bookConverter.bookToString(savedBook);
     }
 
+    // bdel 4
     @ShellMethod(value = "Delete book by id", key = "bdel")
-    public void updateBook(long id) {
+    public void deleteBook(long id) {
         bookService.deleteById(id);
     }
 }

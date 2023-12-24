@@ -11,6 +11,7 @@ import java.util.Map;
 // Сейчас класс соответствует файлу настроек. Чтобы они сюда отобразились нужно только правильно разместить аннотации
 public class AppProperties implements TestConfig, TestFileNameProvider, LocaleConfig {
 
+    @Getter
     private int rightAnswersCountToPass;
 
     @Getter
@@ -20,11 +21,6 @@ public class AppProperties implements TestConfig, TestFileNameProvider, LocaleCo
 
     public void setLocale(String locale) {
         this.locale = Locale.forLanguageTag(locale);
-    }
-
-    @Override
-    public int getRightAnswersCountToPass() {
-        return rightAnswersCountToPass;
     }
 
     @Override
