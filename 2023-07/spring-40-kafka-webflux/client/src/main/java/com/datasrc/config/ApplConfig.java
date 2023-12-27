@@ -13,10 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorResourceFactory;
 
-
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
@@ -96,9 +95,9 @@ public class ApplConfig {
         return new ReactiveSender<>(bootstrapServers, kafkaScheduler, topicRequest);
     }
 
-    @Bean(destroyMethod = "close")
+    @Bean
     public StringValueStorage stringValueStorage() {
-        return new StringValueStorage(new ScheduledThreadPoolExecutor(1));
+        return new StringValueStorage();
     }
 
     @Bean(destroyMethod = "close")
