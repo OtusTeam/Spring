@@ -14,6 +14,7 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorResourceFactory;
 
 
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -22,6 +23,7 @@ import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
 
 @Configuration
+@SuppressWarnings("java:S2095")
 public class ApplConfig {
     private static final int THREAD_POOL_SIZE = 4;
     private static final int RESPONSE_RECEIVER_POOL_SIZE = 1;
@@ -94,12 +96,12 @@ public class ApplConfig {
         return new ReactiveSender<>(bootstrapServers, kafkaScheduler, topicRequest);
     }
 
-    @Bean
+    @Bean(destroyMethod = "close")
     public StringValueStorage stringValueStorage() {
-        return new StringValueStorage();
+        return new StringValueStorage(new ScheduledThreadPoolExecutor(1));
     }
 
-    @Bean
+    @Bean(destroyMethod = "close")
     public ReactiveReceiver<Response> responseReceiver(@Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
                                                        @Value("${application.topic-response}") String topicResponse,
                                                        @Value("${application.kafka-group-id}") String groupId,

@@ -16,6 +16,7 @@ import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
 
 @Configuration
+@SuppressWarnings("java:S2095")
 public class ApplConfig {
     private static final int THREAD_POOL_SIZE = 2;
     private static final int BLOCKING_THREAD_POOL_SIZE = 2;

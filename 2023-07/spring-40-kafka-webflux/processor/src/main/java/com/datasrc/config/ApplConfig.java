@@ -28,6 +28,7 @@ import reactor.util.annotation.NonNull;
 import reactor.util.annotation.Nullable;
 
 @Configuration
+@SuppressWarnings("java:S2095")
 public class ApplConfig {
     private static final Logger log = LoggerFactory.getLogger(ApplConfig.class);
     private static final int THREAD_POOL_SIZE = 2;
