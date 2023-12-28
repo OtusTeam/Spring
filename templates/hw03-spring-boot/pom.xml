@@ -20,7 +20,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <opencsv.version>5.8</opencsv.version>
-        <lombok.version>1.18.28</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <checkstyle-plugin.version>3.2.2</checkstyle-plugin.version>
         <checkstyle.version>10.11.0</checkstyle.version>
         <checkstyle.config.url>

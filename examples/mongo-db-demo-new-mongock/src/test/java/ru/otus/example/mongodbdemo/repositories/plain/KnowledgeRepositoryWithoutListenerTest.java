@@ -51,8 +51,5 @@ class KnowledgeRepositoryWithoutListenerTest extends AbstractRepositoryTest {
         // Загружаем размер массива с помощью агрегаций и проверяем, что на самом деле размер массива в БД не изменился
         val actualExperienceArrayLength = studentRepository.getExperienceArrayLengthByStudentId(student.getId());
         assertThat(actualExperienceArrayLength).isNotEqualTo(expectedExperienceArrayLength);
-
-
-
     }
 }
