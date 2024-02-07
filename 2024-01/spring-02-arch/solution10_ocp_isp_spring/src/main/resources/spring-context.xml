@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="appSettings" class="ru.otus.config.AppSettings">
+        <constructor-arg index="0" value="true"/>
+        <constructor-arg index="1" value="dd.mm.YYYY HH:mm:ss"/>
+    </bean>
+
+    <bean id="ioService" class="ru.otus.services.IOServiceStreams">
+        <constructor-arg index="0" value="#{T(System).out}"/>
+        <constructor-arg index="1" value="#{T(System).in}"/>
+    </bean>
+
+    <bean id="applicationStopService" class="ru.otus.services.ApplicationStopServiceImpl">
+        <constructor-arg index="0" ref="ioService"/>
+        <constructor-arg index="1" ref="appSettings"/>
+    </bean>
+
+    <bean id="notesService" class="ru.otus.services.NotesServiceImpl"/>
+
+    <bean id="noteConverter" class="ru.otus.services.NoteConverterImpl">
+        <constructor-arg index="0" ref="appSettings"/>
+    </bean>
+
+    <bean id="showAllNotesMenuOption" class="ru.otus.services.menu.MenuOption">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="Вывести все заметки"/>
+    </bean>
+    <bean id="addNewNoteMenuOption" class="ru.otus.services.menu.MenuOption">
+        <constructor-arg index="0" value="2"/>
+        <constructor-arg index="1" value="Добавить заметку"/>
+    </bean>
+    <bean id="updateNoteMenuOption" class="ru.otus.services.menu.MenuOption">
+        <constructor-arg index="0" value="3"/>
+        <constructor-arg index="1" value="Изменить заметку"/>
+    </bean>
+    <bean id="deleteNoteMenuOption" class="ru.otus.services.menu.MenuOption">
+        <constructor-arg index="0" value="4"/>
+        <constructor-arg index="1" value="Удалить заметку"/>
+    </bean>
+    <bean id="stopApplicationMenuOption" class="ru.otus.services.menu.MenuOption">
+        <constructor-arg index="0" value="5"/>
+        <constructor-arg index="1" value="Выйти"/>
+    </bean>
+
+    <bean id="menuOptionsRegistry" class="ru.otus.services.menu.MenuOptionsRegistryImpl">
+        <constructor-arg>
+            <list>
+                <ref bean="showAllNotesMenuOption"/>
+                <ref bean="addNewNoteMenuOption"/>
+                <ref bean="updateNoteMenuOption"/>
+                <ref bean="deleteNoteMenuOption"/>
+                <ref bean="stopApplicationMenuOption"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="menuCommandsProcessor" class="ru.otus.services.processors.MenuCommandsProcessorImpl">
+        <constructor-arg>
+            <list>
+                <bean class="ru.otus.services.processors.ShowAllNotesSingleCommandProcessor">
+                    <constructor-arg index="0" ref="ioService"/>
+                    <constructor-arg index="1" ref="notesService"/>
+                    <constructor-arg index="2" ref="noteConverter"/>
+                    <constructor-arg index="3" ref="showAllNotesMenuOption"/>
+                </bean>
+                <bean class="ru.otus.services.processors.AddNewNoteSingleCommandProcessor">
+                    <constructor-arg index="0" ref="ioService"/>
+                    <constructor-arg index="1" ref="notesService"/>
+                    <constructor-arg index="2" ref="addNewNoteMenuOption"/>
+                </bean>
+                <bean class="ru.otus.services.processors.UpdateNoteSingleCommandProcessor">
+                    <constructor-arg index="0" ref="ioService"/>
+                    <constructor-arg index="1" ref="notesService"/>
+                    <constructor-arg index="2" ref="updateNoteMenuOption"/>
+                </bean>
+                <bean class="ru.otus.services.processors.DeleteNoteSingleCommandProcessor">
+                    <constructor-arg index="0" ref="ioService"/>
+                    <constructor-arg index="1" ref="notesService"/>
+                    <constructor-arg index="2" ref="deleteNoteMenuOption"/>
+                </bean>
+                <bean class="ru.otus.services.processors.StopApplicationSingleCommandProcessor">
+                    <constructor-arg index="0" ref="applicationStopService"/>
+                    <constructor-arg index="1" ref="stopApplicationMenuOption"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="applicationRunner" class="ru.otus.services.ApplicationRunner">
+    <constructor-arg index="0" ref="ioService"/>
+    <constructor-arg index="1" ref="applicationStopService"/>
+    <constructor-arg index="2" ref="menuOptionsRegistry"/>
+    <constructor-arg index="3" ref="menuCommandsProcessor"/>
+    </bean>
+</beans>
