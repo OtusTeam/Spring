@@ -21,7 +21,6 @@ public class ApplicationRunner {
         ioService = new ConsoleIOService();
         executionFlag = new AtomicBoolean(true);
         commandsProcessor = new MenuCommandsProcessor();
-
     }
 
     public void run() {
