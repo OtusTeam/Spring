@@ -1,6 +1,5 @@
 package ru.otus.spring.rest;
 
-import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
