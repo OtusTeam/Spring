@@ -11,12 +11,12 @@ import java.util.Scanner;
 
 @ConditionalOnProperty(name = "use.console", havingValue = "true")
 @Service
-public class IOServiceStreams implements IOService {
+public class StreamsIOService implements IOService {
     private final PrintStream out;
     private final Scanner sc;
 
 
-    public IOServiceStreams(@Value("#{T(java.lang.System).out}") PrintStream out,
+    public StreamsIOService(@Value("#{T(java.lang.System).out}") PrintStream out,
                             @Value("#{T(java.lang.System).in}") InputStream in) {
         this.out = out;
         this.sc = new Scanner(in);
