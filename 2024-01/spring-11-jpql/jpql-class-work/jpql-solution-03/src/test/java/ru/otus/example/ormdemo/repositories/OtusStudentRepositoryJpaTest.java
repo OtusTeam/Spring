@@ -107,7 +107,7 @@ class OtusStudentRepositoryJpaTest {
 
         repositoryJpa.updateNameById(FIRST_STUDENT_ID, STUDENT_NAME);
         val updatedStudent = em.find(OtusStudent.class, FIRST_STUDENT_ID);
-        em.refresh(updatedStudent);
+
 
         assertThat(updatedStudent.getName()).isNotEqualTo(oldName).isEqualTo(STUDENT_NAME);
     }
