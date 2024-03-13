@@ -103,7 +103,7 @@ class OtusStudentRepositoryJpaTest {
     void shouldUpdateStudentNameById() {
         val firstStudent = em.find(OtusStudent.class, FIRST_STUDENT_ID);
         String oldName = firstStudent.getName();
-        //em.detach(firstStudent);
+        em.detach(firstStudent);
 
         repositoryJpa.updateNameById(FIRST_STUDENT_ID, STUDENT_NAME);
         val updatedStudent = em.find(OtusStudent.class, FIRST_STUDENT_ID);
@@ -117,7 +117,7 @@ class OtusStudentRepositoryJpaTest {
     void shouldDeleteStudentNameById() {
         val firstStudent = em.find(OtusStudent.class, FIRST_STUDENT_ID);
         assertThat(firstStudent).isNotNull();
-        //em.detach(firstStudent);
+        em.detach(firstStudent);
 
         repositoryJpa.deleteById(FIRST_STUDENT_ID);
         val deletedStudent = em.find(OtusStudent.class, FIRST_STUDENT_ID);
