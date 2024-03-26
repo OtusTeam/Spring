@@ -20,7 +20,7 @@ public class MessagesTest {
 	@Test
 	public void testCreateSimpleGenericMessage() {
 		// TODO: Создайте сообщение с payload-ом "Hello" с помощью конструктора
-		Message<String> message = new GenericMessage<>("Hello");
+		Message<String> message = null;
 
 		assertNotNull(message);
 		assertEquals(GenericMessage.class, message.getClass());
@@ -31,7 +31,7 @@ public class MessagesTest {
 	@Test
 	public void testCreateGenericMessage() {
 		// TODO: Создайте сообщение с пользователем с помощью конструктора
-		Message<User> message = new GenericMessage<>(new User("John", 23));
+		Message<User> message = null;
 
 		assertNotNull(message);
 		assertEquals(GenericMessage.class, message.getClass());
@@ -42,8 +42,8 @@ public class MessagesTest {
 	@Test
 	public void testGenericMessageWithHeaders() {
 		// TODO: Создайте сообщение с payload-ом "Hello" и header-ом "to":"World"
-		Map<String, Object> headers = Map.of("to", "World");
-		Message<String> message = new GenericMessage<>("Hello", headers);
+		Map<String, Object> headers = null;
+		Message<String> message = null;
 
 		assertNotNull(message);
 		assertEquals("Hello", message.getPayload());
@@ -53,8 +53,8 @@ public class MessagesTest {
 	@Test
 	public void testGenericMessageWithMessageHeaders() {
 		// TODO: Создайте сообщение с payload-ом "Hello" и header-ом "to":"World"
-		MessageHeaders headers = new MessageHeaders(Map.of("to", "World"));
-		Message<String> message = new GenericMessage<>("Hello", headers);
+		MessageHeaders headers = null;
+		Message<String> message = null;
 
 		assertNotNull(message);
 		assertEquals("Hello", message.getPayload());
@@ -64,7 +64,7 @@ public class MessagesTest {
 	@Test
 	public void testErrorMessage() {
 		// TODO: Создайте сообщение об ошибки с объектом NullPointerException внутри
-		Message errorMessage = new ErrorMessage(new NullPointerException());
+		Message errorMessage = null;
 
 		assertNotNull(errorMessage);
 		assertEquals(ErrorMessage.class, errorMessage.getClass());
@@ -74,10 +74,7 @@ public class MessagesTest {
 	@Test
 	public void testMessageBuilder() {
 		// TODO: Создайте сообщение с payload-ом "Hello" и header-ом "to":"World" с помощью MessageBuilder
-		Message message = MessageBuilder
-				.withPayload("Hello")
-				.setHeader("to", "World")
-				.build();
+		Message message = null;
 
 		assertNotNull(message);
 		assertEquals("Hello", message.getPayload());
@@ -92,9 +89,7 @@ public class MessagesTest {
 				.build();
 
 		// TODO: Создайте новое сообщение с теми же payload и header-ами c помощью MessageBuilder
-		Message<User> newMessage = MessageBuilder
-				.fromMessage(original)
-				.build();
+		Message<User> newMessage = null;
 
 		assertNotNull(newMessage);
 		assertEquals(original.getPayload(), newMessage.getPayload());
