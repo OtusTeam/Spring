@@ -6,13 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
+import org.springframework.integration.dsl.MessageChannelSpec;
 import org.springframework.integration.dsl.MessageChannels;
+import org.springframework.integration.dsl.PollerSpec;
 import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.PollableChannel;
 import ru.otus.example.springmail_integration_demo.repositories.ActivityRepository;
 import ru.otus.example.springmail_integration_demo.repositories.ActivityStatRepository;
 import ru.otus.example.springmail_integration_demo.services.UserActivityToEmailTransformer;
@@ -48,18 +49,18 @@ public class IntegrationConfig {
     private AtomicBoolean messageWasSandedOnceFlag = new AtomicBoolean(false);
 
     @Bean
-    public PollableChannel appUserActivityInChanel() {
-        return MessageChannels.queue("appUserActivityInChanel", DEFAULT_QUEUE_CAPACITY).get();
+    public MessageChannelSpec<?, ?> appUserActivityInChanel() {
+        return MessageChannels.queue("appUserActivityInChanel", DEFAULT_QUEUE_CAPACITY);
     }
 
     @Bean
-    public PollableChannel activityStatInChanel() {
-        return MessageChannels.queue("activityStatInChanel", DEFAULT_QUEUE_CAPACITY).get();
+    public MessageChannelSpec<?, ?> activityStatInChanel() {
+        return MessageChannels.queue("activityStatInChanel", DEFAULT_QUEUE_CAPACITY);
     }
 
     @Bean(name = PollerMetadata.DEFAULT_POLLER)
-    public PollerMetadata poller() {
-        return Pollers.fixedRate(DEFAULT_POLLER_PERIOD).get();
+    public PollerSpec poller() {
+        return Pollers.fixedRate(DEFAULT_POLLER_PERIOD);
     }
 
     @Bean
@@ -68,17 +69,17 @@ public class IntegrationConfig {
                 .handle(activityRepository, SAVE_METHOD_NAME)
                 .route(Message.class, m -> m.getHeaders().get(IS_IMPORTANT_MESSAGE, Boolean.class)
                         , mapping -> mapping.subFlowMapping(true, sub -> sub
-                                .transform(messageTransformer, TRANSFORM_METHOD_NAME)
-                                .handle(m -> {
-                                    SimpleMailMessage mailMessage = (SimpleMailMessage) m.getPayload();
-                                    System.out.println("Как будто посылаем письмо: " + mailMessage.getText());
-                                    if (!messageWasSandedOnceFlag.get()) {
-                                        mailSender.send(mailMessage);
-                                        messageWasSandedOnceFlag.set(true);
-                                    }
-                                })
-                        )
-                        .subFlowMapping(false, IntegrationFlowDefinition::nullChannel)
+                                        .transform(messageTransformer, TRANSFORM_METHOD_NAME)
+                                        .handle(m -> {
+                                            SimpleMailMessage mailMessage = (SimpleMailMessage) m.getPayload();
+                                            //System.out.println("Как будто посылаем письмо: " + mailMessage.getText());
+                                            if (!messageWasSandedOnceFlag.get()) {
+                                                mailSender.send(mailMessage);
+                                                messageWasSandedOnceFlag.set(true);
+                                            }
+                                        })
+                                )
+                                .subFlowMapping(false, IntegrationFlowDefinition::nullChannel)
                 );
     }
 
