@@ -13,14 +13,14 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>6.1.4</spring.version>
-        <opencsv.version>5.8</opencsv.version>
+        <spring.version>6.1.6</spring.version>
+        <opencsv.version>5.9</opencsv.version>
         <junit.version>5.10.2</junit.version>
-        <mockito.version>5.4.0</mockito.version>
-        <assertj.version>3.24.2</assertj.version>
-        <lombok.version>1.18.30</lombok.version>
-        <checkstyle-plugin.version>3.2.2</checkstyle-plugin.version>
-        <checkstyle.version>10.11.0</checkstyle.version>
+        <mockito.version>5.10.0</mockito.version>
+        <assertj.version>3.25.2</assertj.version>
+        <lombok.version>1.18.32</lombok.version>
+        <checkstyle-plugin.version>3.3.1</checkstyle-plugin.version>
+        <checkstyle.version>10.15.0</checkstyle.version>
         <checkstyle.config.url>
             https://raw.githubusercontent.com/OtusTeam/Spring/master/checkstyle.xml
         </checkstyle.config.url>
