@@ -20,8 +20,8 @@ import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("Репозиторий Employee должен")
 @DataJpaTest
-@Import(EmployeeRepositoryJpa.class)
-class EmployeeRepositoryJpaTest {
+@Import(JpaEmployeeRepository.class)
+class JpaEmployeeRepositoryTest {
 
     private static final long FIRST_EMPLOYEE_ID = 1L;
     private static final long SECOND_EMPLOYEE_ID = 2L;
@@ -51,7 +51,7 @@ class EmployeeRepositoryJpaTest {
     private TestEntityManager em;
 
     @Autowired
-    private EmployeeRepositoryJpa employeeRepository;
+    private JpaEmployeeRepository employeeRepository;
 
 
     @DisplayName("возвращать список всех сотрудников")

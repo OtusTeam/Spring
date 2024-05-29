@@ -21,12 +21,12 @@ import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphTyp
 // Поэтому, для упрощения, пока вешаем над классом репозитория
 @Transactional
 @Repository
-public class OtusStudentRepositoryJpa implements OtusStudentRepository {
+public class JpaOtusStudentRepository implements OtusStudentRepository {
 
     @PersistenceContext
     private final EntityManager em;
 
-    public OtusStudentRepositoryJpa(EntityManager em) {
+    public JpaOtusStudentRepository(EntityManager em) {
         this.em = em;
     }
 
@@ -47,7 +47,7 @@ public class OtusStudentRepositoryJpa implements OtusStudentRepository {
     @Override
     public List<OtusStudent> findAll() {
         EntityGraph<?> entityGraph = em.getEntityGraph("otus-student-avatars-entity-graph");
-        TypedQuery<OtusStudent> query = em.createQuery("select s from OtusStudent s", OtusStudent.class);
+        TypedQuery<OtusStudent> query = em.createQuery("select distinct s from OtusStudent s left join fetch s.emails", OtusStudent.class);
         query.setHint(FETCH.getKey(), entityGraph);
         return query.getResultList();
     }

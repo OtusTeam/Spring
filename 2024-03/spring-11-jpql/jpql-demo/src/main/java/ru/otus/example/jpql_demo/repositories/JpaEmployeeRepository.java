@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class EmployeeRepositoryJpa implements EmployeeRepository {
+public class JpaEmployeeRepository implements EmployeeRepository {
 
     @PersistenceContext
     private final EntityManager em;
 
-    public EmployeeRepositoryJpa(EntityManager em) {
+    public JpaEmployeeRepository(EntityManager em) {
         this.em = em;
     }
 

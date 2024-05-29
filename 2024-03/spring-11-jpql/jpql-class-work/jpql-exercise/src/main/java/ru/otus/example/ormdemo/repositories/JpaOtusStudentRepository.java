@@ -17,12 +17,12 @@ import java.util.Optional;
 // Поэтому, для упрощения, пока вешаем над классом репозитория
 @Transactional
 @Repository
-public class OtusStudentRepositoryJpa implements OtusStudentRepository {
+public class JpaOtusStudentRepository implements OtusStudentRepository {
 
     @PersistenceContext
     private final EntityManager em;
 
-    public OtusStudentRepositoryJpa(EntityManager em) {
+    public JpaOtusStudentRepository(EntityManager em) {
         this.em = em;
     }
 

@@ -6,8 +6,8 @@ import ru.otus.example.ormdemo.models.OtusStudent;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-
-import java.util.Collections;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,14 +18,10 @@ import java.util.Optional;
 // Поэтому, для упрощения, пока вешаем над классом репозитория
 @Transactional
 @Repository
-public class OtusStudentRepositoryJpa implements OtusStudentRepository {
+public class JpaOtusStudentRepository implements OtusStudentRepository {
 
     @PersistenceContext
-    private final EntityManager em;
-
-    public OtusStudentRepositoryJpa(EntityManager em) {
-        this.em = em;
-    }
+    private EntityManager em;
 
     @Override
     public OtusStudent save(OtusStudent student) {
@@ -43,22 +39,39 @@ public class OtusStudentRepositoryJpa implements OtusStudentRepository {
 
     @Override
     public List<OtusStudent> findAll() {
-        return Collections.emptyList();
+        return em.createQuery("select s from OtusStudent s", OtusStudent.class)
+                .getResultList();
     }
 
     @Override
     public List<OtusStudent> findByName(String name) {
-        return Collections.emptyList();
+        TypedQuery<OtusStudent> query = em.createQuery("select s " +
+                        "from OtusStudent s " +
+                        "where s.name = :name",
+                OtusStudent.class);
+        query.setParameter("name", name);
+        return query.getResultList();
     }
 
+    // Только для примера, в реальности JPQL лучше использовать только для массовых операций
     @Override
     public void updateNameById(long id, String name) {
-
+        Query query = em.createQuery("update OtusStudent s " +
+                "set s.name = :name " +
+                "where s.id = :id");
+        query.setParameter("name", name);
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 
+    // Только для примера, в реальности JPQL лучше использовать только для массовых операций
     @Override
     public void deleteById(long id) {
-
+        Query query = em.createQuery("delete " +
+                        "from OtusStudent s " +
+                        "where s.id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 
 }

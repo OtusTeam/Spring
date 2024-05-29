@@ -1,15 +1,18 @@
 package ru.otus.example.ormdemo.repositories;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import ru.otus.example.ormdemo.models.OtusStudent;
-
+import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import ru.otus.example.ormdemo.models.OtusStudent;
+
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
 
 // @Transactional должна стоять на методе сервиса.
 // Причем, если метод не подразумевает изменения данных в БД то категорически желательно
@@ -18,10 +21,14 @@ import java.util.Optional;
 // Поэтому, для упрощения, пока вешаем над классом репозитория
 @Transactional
 @Repository
-public class OtusStudentRepositoryJpa implements OtusStudentRepository {
+public class JpaOtusStudentRepository implements OtusStudentRepository {
 
     @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
+
+    public JpaOtusStudentRepository(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public OtusStudent save(OtusStudent student) {
@@ -39,8 +46,11 @@ public class OtusStudentRepositoryJpa implements OtusStudentRepository {
 
     @Override
     public List<OtusStudent> findAll() {
-        return em.createQuery("select s from OtusStudent s", OtusStudent.class)
-                .getResultList();
+        EntityGraph<?> entityGraph = em.getEntityGraph("otus-student-avatars-entity-graph");
+        TypedQuery<OtusStudent> query = em.createQuery("select distinct s from OtusStudent s " +
+                "left join fetch s.emails", OtusStudent.class);
+        query.setHint(FETCH.getKey(), entityGraph);
+        return query.getResultList();
     }
 
     @Override

@@ -20,8 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы со студентами ")
 @DataJpaTest
-@Import(OtusStudentRepositoryJpa.class)
-class OtusStudentRepositoryJpaTest {
+@Import(JpaOtusStudentRepository.class)
+class JpaOtusStudentRepositoryTest {
 
     private static final int EXPECTED_NUMBER_OF_STUDENTS = 10;
     private static final long FIRST_STUDENT_ID = 1L;
@@ -35,7 +35,7 @@ class OtusStudentRepositoryJpaTest {
     private static final String STUDENT_NAME = "Вася";
 
     @Autowired
-    private OtusStudentRepositoryJpa repositoryJpa;
+    private JpaOtusStudentRepository repositoryJpa;
 
     @Autowired
     private TestEntityManager em;
@@ -107,7 +107,6 @@ class OtusStudentRepositoryJpaTest {
 
         repositoryJpa.updateNameById(FIRST_STUDENT_ID, STUDENT_NAME);
         val updatedStudent = em.find(OtusStudent.class, FIRST_STUDENT_ID);
-
 
         assertThat(updatedStudent.getName()).isNotEqualTo(oldName).isEqualTo(STUDENT_NAME);
     }

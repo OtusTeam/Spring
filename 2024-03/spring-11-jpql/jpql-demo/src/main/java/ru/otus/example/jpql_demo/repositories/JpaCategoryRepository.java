@@ -6,12 +6,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
-public class CategoryRepositoryJpa implements CategoryRepository {
+public class JpaCategoryRepository implements CategoryRepository {
 
     @PersistenceContext
     private final EntityManager em;
 
-    public CategoryRepositoryJpa(EntityManager em) {
+    public JpaCategoryRepository(EntityManager em) {
         this.em = em;
     }
 

@@ -6,7 +6,8 @@ import ru.otus.example.ormdemo.models.OtusStudent;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +18,12 @@ import java.util.Optional;
 // Поэтому, для упрощения, пока вешаем над классом репозитория
 @Transactional
 @Repository
-public class OtusStudentRepositoryJpa implements OtusStudentRepository {
+public class JpaOtusStudentRepository implements OtusStudentRepository {
 
     @PersistenceContext
     private final EntityManager em;
 
-    public OtusStudentRepositoryJpa(EntityManager em) {
+    public JpaOtusStudentRepository(EntityManager em) {
         this.em = em;
     }
 
@@ -42,18 +43,12 @@ public class OtusStudentRepositoryJpa implements OtusStudentRepository {
 
     @Override
     public List<OtusStudent> findAll() {
-        return em.createQuery("select s from OtusStudent s", OtusStudent.class)
-                .getResultList();
+        return Collections.emptyList();
     }
 
     @Override
     public List<OtusStudent> findByName(String name) {
-        TypedQuery<OtusStudent> query = em.createQuery("select s " +
-                        "from OtusStudent s " +
-                        "where s.name = :name",
-                OtusStudent.class);
-        query.setParameter("name", name);
-        return query.getResultList();
+        return Collections.emptyList();
     }
 
     @Override

@@ -17,12 +17,12 @@ import static org.springframework.util.StringUtils.hasLength;
 
 @DisplayName("Репозиторий для Category должен")
 @DataJpaTest
-@Import(CategoryRepositoryJpa.class)
+@Import(JpaCategoryRepository.class)
 @Transactional(propagation = Propagation.NEVER)
-class CategoryRepositoryJpaTest {
+class JpaCategoryRepositoryTest {
 
     @Autowired
-    private CategoryRepositoryJpa categoryRepository;
+    private JpaCategoryRepository categoryRepository;
 
     @DisplayName("возвращать список всех категорий")
     @Test
