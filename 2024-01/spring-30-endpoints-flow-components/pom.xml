@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+    </parent>
+
+    <groupId>ru.otus</groupId>
+    <artifactId>endpoints-flow-components</artifactId>
+    <version>1.0</version>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>endpoints-flow-components-exercise</module>
+        <module>endpoints-flow-components-solution</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
+        <checkstyle.version>10.9.1</checkstyle.version>
+        <checkstyle.config.url>https://raw.githubusercontent.com/OtusTeam/Spring/master/checkstyle.xml
+        </checkstyle.config.url>
+    </properties>
+</project>
