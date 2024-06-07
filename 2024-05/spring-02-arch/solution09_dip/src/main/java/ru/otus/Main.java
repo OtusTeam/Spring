@@ -7,7 +7,7 @@ import ru.otus.services.*;
 public class Main {
     public static void main(String[] args) {
         var appSettings = new AppSettings(true, "dd.mm.YYYY HH:mm:ss");
-        var ioService = new IOServiceStreams(System.out, System.in);
+        var ioService = new StreamsIOService(System.out, System.in);
         var applicationStopService = new ApplicationStopServiceImpl(ioService, appSettings);
         var notesService = new NotesServiceImpl();
         var noteConverter = new NoteConverterImpl(appSettings);
