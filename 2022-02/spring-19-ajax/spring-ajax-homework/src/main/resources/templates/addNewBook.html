@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{add-new-book-title}">Добавление новой книги</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        h3 {
+            background-image: url("../static/book-stack.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/book-stack.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function addNewBook() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/api/books/",
+                data: JSON.stringify({
+                    'name' : $("#book-name-input").val(),
+                    'commentText': $("#book-comment-text-input").val(),
+                    'authorName': $("#book-author-name-input").val(),
+                    'genreName': $("#book-genre-name-input").val()
+                }),
+                success: (function () {
+                    window.location.replace("/");
+                })
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <h3 th:text="#{book-form-header}">Книга:</h3>
+    <div class="row">
+        <label for="book-name-input" th:text="#{book-name-label}">Название книги:</label>
+        <input id="book-name-input" name="name" type="text" required="true"/>
+    </div>
+
+    <div class="row">
+        <label for="book-comment-text-input" th:text="#{book-comment-text-label}">Комментарий:</label>
+        <input id="book-comment-text-input" name="commentText" type="text" required="true"/>
+    </div>
+
+    <div class="row">
+        <label for="book-author-name-input" th:text="#{book-author-name-label}">Автор книги:</label>
+        <input id="book-author-name-input" name="authorName" type="text" required="true"/>
+    </div>
+
+    <div class="row">
+        <label for="book-genre-name-input" th:text="#{book-genre-name-label}">Жанр книги:</label>
+        <input id="book-genre-name-input" name="genreName" type="text" required="true"/>
+    </div>
+
+    <div class="row">
+        <button type="submit" onclick="addNewBook()" th:text="#{save-button-caption}">Сохранить</button>
+        <a href="/"><button type="button" th:text="#{cancel-button-caption}">Отмена</button></a>
+    </div>
+</body>
+</html>
