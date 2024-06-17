@@ -25,7 +25,8 @@
 <body>
 
 <!-- Person edition -->
-<form id="edit-form" action="edit.html" th:method="post" th:action="@{/edit(id=${person.id})}" th:object="${person}">
+<form id="edit-form" action="edit.html" th:method="post" th:action="@{/edit(id=${person.id})}"
+      th:object="${person}">
     <h3>Person Info:</h3>
 
     <div class="row">

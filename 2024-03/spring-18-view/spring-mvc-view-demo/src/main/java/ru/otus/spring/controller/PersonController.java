@@ -36,7 +36,7 @@ public class PersonController {
     }
 
     @PostMapping("/edit")
-    public String savePerson(@Valid @ModelAttribute("person") PersonDto person,
+    public String savePerson(@Valid PersonDto person,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "edit";
