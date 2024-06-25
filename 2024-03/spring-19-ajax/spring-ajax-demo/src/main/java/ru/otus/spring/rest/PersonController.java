@@ -1,5 +1,6 @@
 package ru.otus.spring.rest;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,7 @@ public class PersonController {
     }
 
     @PostMapping("/api/persons")
-    public PersonDto addPerson(@RequestBody PersonDto personDto) {
+    public PersonDto addPerson(@Valid @RequestBody PersonDto personDto) {
         var savedPerson = repository.save(personDto.toDomainObject());
         return PersonDto.toDto(savedPerson);
     }

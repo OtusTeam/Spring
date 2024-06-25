@@ -11,6 +11,7 @@ package ru.otus.spring.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 import ru.otus.spring.domain.Person;
 
 @Data
@@ -18,6 +19,7 @@ import ru.otus.spring.domain.Person;
 public class PersonDto {
 
     private long id;
+    @Length(min = 3)
     private String name;
 
     public static PersonDto toDto(Person person) {
