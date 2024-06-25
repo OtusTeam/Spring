@@ -14,6 +14,7 @@ public class Party {
 
     public void printPartyMembers() {
         System.out.println("Участники вечеринки:");
-        System.out.println(partyMembers.stream().map(Friend::getName).collect(Collectors.joining("\n")));
+        System.out.println(partyMembers.stream().map(Friend::getName)
+                .collect(Collectors.joining("\n")));
     }
 }
