@@ -23,7 +23,8 @@ import java.util.ArrayList;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http)
+            throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement((session) -> session
@@ -34,10 +35,15 @@ public class SecurityConfiguration {
                         .requestMatchers("/authenticated", "/success").authenticated()
                         .anyRequest().permitAll()
                 )
-                //.addFilterAfter(new MyOwnFilter(), AuthorizationFilter.class)
-                //.httpBasic(Customizer.withDefaults())
+//                .addFilterAfter(new MyOwnFilter(), AuthorizationFilter.class)
+//                .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
-                //.rememberMe(rm -> rm.tokenValiditySeconds(600))
+/*
+                .formLogin(fm -> fm.defaultSuccessUrl("/success")
+                        .failureForwardUrl("/fail")
+                )
+*/
+//                .rememberMe(rm -> rm.tokenValiditySeconds(600))
         ;
         return http.build();
     }
