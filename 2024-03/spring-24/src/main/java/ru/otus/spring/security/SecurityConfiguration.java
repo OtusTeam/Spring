@@ -35,7 +35,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/authenticated", "/success").authenticated()
                         .anyRequest().permitAll()
                 )
-//                .anonymous(a -> a.principal("anonymous").authorities("ROLE_ANONYMOUS"))
+//                .anonymous(a -> a.principal(new AnonimusUD()).authorities("ROLE_ANONYMOUS"))
 //                .addFilterAfter(new MyOwnFilter(), AuthorizationFilter.class)
 //                .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
