@@ -15,8 +15,8 @@ public class PagesController {
     }
 
     @GetMapping("/public")
-    public String publicPage(@RequestParam(name = "SpecialValue") String specialValue) {
-        System.out.println(specialValue);
+    public String publicPage(/*@RequestParam(name = "SpecialValue") String specialValue*/) {
+//        System.out.println(specialValue);
 //        SecurityContext securityContext = SecurityContextHolder.getContext();
 //        Authentication authentication = securityContext.getAuthentication();
 //        System.out.println(authentication.getPrincipal());

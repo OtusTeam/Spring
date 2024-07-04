@@ -23,19 +23,22 @@ import java.util.ArrayList;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain( HttpSecurity http ) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf( AbstractHttpConfigurer::disable )
-                .sessionManagement( ( session ) -> session
-                        .sessionCreationPolicy( SessionCreationPolicy.ALWAYS ) )
-                .authorizeHttpRequests( ( authorize ) -> authorize
-                        .requestMatchers( "/" ).permitAll()
-                        .requestMatchers( "/public" ).permitAll()
-                        .requestMatchers( "/authenticated", "/success" ).authenticated()
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/public").permitAll()
+                        .requestMatchers("/authenticated", "/success").authenticated()
                         .anyRequest().permitAll()
                 )
-                .addFilterAfter(new MyOwnFilter(), AuthorizationFilter.class)
-                .formLogin( Customizer.withDefaults() );
+                //.addFilterAfter(new MyOwnFilter(), AuthorizationFilter.class)
+                //.httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
+                //.rememberMe(rm -> rm.tokenValiditySeconds(600))
+        ;
         return http.build();
     }
 
@@ -49,11 +52,11 @@ public class SecurityConfiguration {
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User
                 .builder()
-                .username( "user" )
-                .password( "password" )
-                .roles( "USER" )
+                .username("user")
+                .password("password")
+                .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager( user );
+        return new InMemoryUserDetailsManager(user);
 
     }
 }
