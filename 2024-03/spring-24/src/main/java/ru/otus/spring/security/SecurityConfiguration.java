@@ -35,6 +35,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/authenticated", "/success").authenticated()
                         .anyRequest().permitAll()
                 )
+//                .anonymous(a -> a.principal("anonymous").authorities("ROLE_ANONYMOUS"))
 //                .addFilterAfter(new MyOwnFilter(), AuthorizationFilter.class)
 //                .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
@@ -43,7 +44,10 @@ public class SecurityConfiguration {
                         .failureForwardUrl("/fail")
                 )
 */
-//                .rememberMe(rm -> rm.tokenValiditySeconds(600))
+/*
+                .rememberMe(rm -> rm.key("AnyKey")
+                        .tokenValiditySeconds(600))
+*/
         ;
         return http.build();
     }
