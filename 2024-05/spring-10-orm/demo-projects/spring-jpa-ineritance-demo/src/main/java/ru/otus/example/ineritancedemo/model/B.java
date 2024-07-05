@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "B")
+//@Table(name = "B")
 @DiscriminatorValue("LeafB")
 public class B extends A {
     private String b;
