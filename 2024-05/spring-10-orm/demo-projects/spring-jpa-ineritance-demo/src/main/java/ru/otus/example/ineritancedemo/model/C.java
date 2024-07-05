@@ -3,11 +3,9 @@ package ru.otus.example.ineritancedemo.model;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 
 @Entity
-//@Table(name = "C")
 @DiscriminatorValue("LeafC")
 public class C extends A{
     private String c;
