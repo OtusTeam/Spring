@@ -72,11 +72,11 @@ class JpaOtusStudentRepositoryTest {
         applyCustomSqlStatementLogger(new SqlStatementLogger(true, false, false, 0) {
             @Override
             public void logStatement(String statement) {
+                super.logStatement(statement);
                 if (!statement.contains("count") && statement.contains("from otus_students")) {
                     studentsSelectionsCount.incrementAndGet();
                     assertThat(statement).contains("offset").contains("rows only");
                 }
-                super.logStatement(statement);
             }
         });
 
