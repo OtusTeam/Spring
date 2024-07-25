@@ -11,19 +11,24 @@
     </parent>
 
     <groupId>ru.otus</groupId>
-    <artifactId>integrations-channels</artifactId>
+    <artifactId>endpoints-flow-components</artifactId>
     <version>1.0</version>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>integrations-channels-exercise</module>
-        <module>integrations-channels-solution</module>
+        <module>endpoints-flow-components-exercise</module>
+        <module>endpoints-flow-components-solution</module>
     </modules>
 
     <properties>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
+        <checkstyle.version>10.9.1</checkstyle.version>
+        <checkstyle.config.url>https://raw.githubusercontent.com/OtusTeam/Spring/master/checkstyle.xml
+        </checkstyle.config.url>
     </properties>
 </project>
