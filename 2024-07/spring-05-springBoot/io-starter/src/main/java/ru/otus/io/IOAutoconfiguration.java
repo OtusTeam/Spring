@@ -21,9 +21,6 @@ import ru.otus.io.services.StreamsIOService;
 @Configuration
 public class IOAutoconfiguration {
 
-    @Autowired
-    private ApplicationContext ctx;
-
     @ConditionalOnMissingBean(IOService.class)
     @Bean
     public IOService ioService() {
