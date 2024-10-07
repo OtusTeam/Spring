@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: testing-demo
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    open-in-view: false
+    mapping-resources:
+      - orm.xml
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+weather:
+  service:
+    baseUrl: https://api.openweathermap.org/
+    apiKey: your_openweathermap_api_key
+

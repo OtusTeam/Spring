@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Weather</title>
+    <style>
+        body {
+            padding: 50px;
+        }
+
+        .weather {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .weather tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+    </style>
+    <script>
+        let currentWeather;
+        let currentCityLatinName;
+        function getWeather() {
+            const citySelect = document.getElementById('citySelect')
+            const weatherTabBody = document.getElementById('weatherTabBody')
+            currentCityLatinName = citySelect.value;
+
+            fetch(`/api/weather/${currentCityLatinName}`)
+            .then(resp => resp.json())
+            .then(weather => {
+                currentWeather = weather;
+                weatherTabBody.innerHTML = `
+                    <tr><td>Температура</td><td>${weather.temp}</td></tr>
+                    <tr><td>Температура (мин)</td><td>${weather.tempMin}</td></tr>
+                    <tr><td>Температура (макс)</td><td>${weather.tempMax}</td></tr>
+                    <tr><td>Ощущается как</td><td>${weather.feelsLike}</td></tr>
+                    <tr><td>Давление</td><td>${weather.pressure}</td></tr>
+                    <tr><td>Влажность</td><td>${weather.humidity}</td></tr>
+                    <tr><td>Скорость ветра</td><td>${weather.windSpeed}</td></tr>
+                    <tr><td>Направление ветра</td><td>${weather.windDirection}(${weather.windDegree})</td></tr>
+                    <tr><td><button type="button" onclick="saveWeather()">Сохранить</button></tr>
+                `
+            })
+        }
+
+        function getWeatherMeasurements() {
+            const weatherMeasurementTabBody = document.getElementById('weatherMeasurementTabBody')
+            fetch(`/api/measurement`)
+            .then(resp => resp.json())
+            .then(measurements => {
+                weatherMeasurementTabBody.innerHTML = ''
+                measurements.forEach(item => {
+                        var newRow = weatherMeasurementTabBody.insertRow()
+                        newRow.insertCell().appendChild(document.createTextNode(item.time))
+                        newRow.insertCell().appendChild(document.createTextNode(item.cityName))
+                        newRow.insertCell().appendChild(document.createTextNode(item.temp))
+                        newRow.insertCell().appendChild(document.createTextNode(item.tempMin))
+                        newRow.insertCell().appendChild(document.createTextNode(item.tempMax))
+                        newRow.insertCell().appendChild(document.createTextNode(item.feelsLike))
+                        newRow.insertCell().appendChild(document.createTextNode(item.pressure))
+                        newRow.insertCell().appendChild(document.createTextNode(item.humidity))
+                        newRow.insertCell().appendChild(document.createTextNode(item.windSpeed))
+                        newRow.insertCell().appendChild(document.createTextNode(item.windDirection + '(' + item.windDegree + ')'))
+                })
+            })
+        }
+
+        function saveWeather() {
+            const measurementToSave = {...currentWeather, cityLatinName:currentCityLatinName}
+            fetch(`/api/measurement`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(measurementToSave)})
+            .then(resp => getWeatherMeasurements())
+        }
+    </script>
+</head>
+<body onload="getWeatherMeasurements()">
+<h3>Погода:</h3>
+
+<label for="citySelect">
+    Город
+    <select id="citySelect">
+        <option th:each="city : ${cities}" th:value="${city.latinName}" th:text="${city.name}">
+            Город
+        </option>
+    </select>
+    <br/><br/>
+    <button type="button" onclick="getWeather()">Загрузить</button>
+</label>
+<table class="weather">
+    <tbody id="weatherTabBody">
+
+    </tbody>
+</table>
+
+<h3>Сохраненные измерения:</h3>
+<table class="weather">
+    <thead>
+        <tr>
+            <td>Время</td>
+            <td>Город</td>
+            <td>Температура</td>
+            <td>Температура (мин)</td>
+            <td>Температура (макс)</td>
+            <td>Ощущается как</td>
+            <td>Давление</td>
+            <td>Влажность</td>
+            <td>Скорость ветра</td>
+            <td>Направление ветра</td>
+        </tr>
+    </thead>
+    <tbody id="weatherMeasurementTabBody">
+
+    </tbody>
+</table>
+</body>
+</html>

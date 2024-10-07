@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+        xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+        http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+        version="2.0">
+
+    <entity class="ru.otus.testingdemo.model.City" access="FIELD" name="City">
+        <table name="cities"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="name"/>
+            <basic name="latinName"/>
+        </attributes>
+    </entity>
+
+    <entity class="ru.otus.testingdemo.model.WeatherMeasurement" access="FIELD" name="WeatherMeasurement">
+        <table name="weather_measurements"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="time">
+                <column name="measurement_time"/>
+            </basic>
+            <many-to-one name="city" fetch="EAGER">
+                <join-column name="city_id"/>
+            </many-to-one>
+            <embedded name="weather" access="FIELD"/>
+        </attributes>
+    </entity>
+
+    <embeddable class="ru.otus.testingdemo.model.Weather" access="FIELD"/>
+</entity-mappings>
