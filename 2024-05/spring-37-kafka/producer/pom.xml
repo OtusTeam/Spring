@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>ru.otus</groupId>
-        <artifactId>spring-39-kafka</artifactId>
+        <artifactId>spring-37-kafka</artifactId>
         <version>1.0</version>
     </parent>
 
