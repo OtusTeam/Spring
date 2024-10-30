@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.security.SecurityConfiguration;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -18,13 +20,14 @@ public class PagesControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @WithMockUser(
+/*    @WithMockUser(
             username = "admin",
             authorities = {"ROLE_ADMIN"}
-    )
+    )*/
     @Test
     public void testAuthenticatedOnAdmin() throws Exception {
-        mockMvc.perform(get("/authenticated"))
+        mockMvc.perform(get("/authenticated")
+                        .with(user("admin").authorities(new SimpleGrantedAuthority("ROLE_ADMIN"))))
                 .andExpect(status().isOk());
     }
 }
