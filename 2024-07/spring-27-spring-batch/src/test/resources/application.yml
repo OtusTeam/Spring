@@ -1,0 +1,43 @@
+spring:
+  main:
+    allow-circular-references: true
+
+  batch:
+    job:
+      enabled: false
+
+  shell:
+    interactive:
+      enabled: false
+    command:
+      version:
+        enabled: false
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+
+
+  data:
+    mongodb:
+      host: localhost
+      port: 0
+      database: SpringBatchTestExampleDB
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 4.0.2
+
+mongock:
+  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.example.springbatch.testchangelogs
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
