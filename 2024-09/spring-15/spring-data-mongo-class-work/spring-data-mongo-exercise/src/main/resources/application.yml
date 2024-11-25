@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      port: 0 # when flapdoodle using
+      database: company
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 4.0.2
