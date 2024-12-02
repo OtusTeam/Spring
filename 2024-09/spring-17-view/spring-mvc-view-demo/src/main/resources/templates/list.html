@@ -57,6 +57,7 @@
     <tr>
         <th th:text="#{person-field-id}">ID</th>
         <th th:text="#{person-field-name}">Name</th>
+        <th th:text="#{person-field-hobby}">Hobby</th>
         <th th:text="#{persons-table-column-action}">Action</th>
     </tr>
     </thead>
@@ -64,6 +65,7 @@
     <tr th:each="person : ${persons}">
         <td th:text="${person.id}">1</td>
         <td th:text="${person.name}">John Doe</td>
+        <td th:text="${person.hobbyAsString()}">Hobby1, hobby2</td>
         <td>
             <a th:href="@{/edit(id=${person.id})}" href="edit.html" th:text="#{edit-button-caption}">Edit</a>
         </td>

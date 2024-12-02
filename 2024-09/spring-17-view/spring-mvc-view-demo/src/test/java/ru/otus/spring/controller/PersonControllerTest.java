@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.domain.Person;
+import ru.otus.spring.dto.PersonDto;
 import ru.otus.spring.repostory.PersonRepository;
 
 import java.util.List;
@@ -29,22 +30,26 @@ class PersonControllerTest {
     @MockBean
     private PersonRepository personRepository;
 
-    private List<Person> persons = List.of(new Person(1L, "Vasya"), new Person(2L, "Dima"));
+    private List<Person> persons = List.of(new Person(1L, "Vasya", List.of()),
+            new Person(2L, "Dima", List.of()));
 
     @Test
     void shouldRenderListPageWithCorrectViewAndModelAttributes() throws Exception {
         when(personRepository.findAll()).thenReturn(persons);
+        List<PersonDto> expectedPersons = persons.stream()
+                .map(PersonDto::fromDomainObject).toList();
         mvc.perform(get("/"))
                 .andExpect(view().name("list"))
-                .andExpect(model().attribute("persons", persons));
+                .andExpect(model().attribute("persons", expectedPersons));
     }
 
     @Test
     void shouldRenderEditPageWithCorrectViewAndModelAttributes() throws Exception {
         when(personRepository.findById(1L)).thenReturn(Optional.of(persons.get(0)));
+        PersonDto expectedPerson = PersonDto.fromDomainObject(persons.get(0));
         mvc.perform(get("/edit").param("id", "1"))
                 .andExpect(view().name("edit"))
-                .andExpect(model().attribute("person", persons.get(0)));
+                .andExpect(model().attribute("person", expectedPerson));
     }
 
     @Test

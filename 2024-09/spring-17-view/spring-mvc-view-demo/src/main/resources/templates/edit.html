@@ -60,6 +60,15 @@
     </div>
 
     <div class="row">
+        <label for="person-hobby-select" th:text="#{person-field-hobby} + ':'">Hobby:</label>
+        <select id="person-hobby-select" name="hobby" multiple>
+            <option value="Fishing" th:selected="*{hobby.contains('Fishing')}">Fishing</option>
+            <option value="Poetry" th:selected="*{hobby.contains('Poetry')}">Poetry</option>
+            <option value="Traveling" th:selected="*{hobby.contains('Traveling')}">Traveling</option>
+        </select>
+    </div>
+
+    <div class="row">
         <button type="submit" th:text="#{save-button-caption}">Save</button>
         <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
     </div>

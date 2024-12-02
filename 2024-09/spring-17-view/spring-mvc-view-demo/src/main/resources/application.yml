@@ -20,3 +20,4 @@ spring:
 logging:
   level:
     ROOT: ERROR
+    ru.otus.spring.controller: DEBUG
