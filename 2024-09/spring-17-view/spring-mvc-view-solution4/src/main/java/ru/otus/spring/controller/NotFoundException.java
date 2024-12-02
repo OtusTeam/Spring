@@ -1,6 +1,6 @@
 package ru.otus.spring.controller;
 
-class NotFoundException extends RuntimeException{
+public class NotFoundException extends RuntimeException{
 
     NotFoundException() {
     }
