@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="resource" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg name="path" value="/question.csv"/>
+    </bean>
+    <bean id="questionDao" class="ru.otus.spring.dao.QuestionDaoImpl">
+        <constructor-arg name="resource" ref="resource"/>
+    </bean>
+    <bean id="questionService" class="ru.otus.spring.service.QuestionServiceImpl">
+    </bean>
+    <bean id="examinatorService" class="ru.otus.spring.service.ExaminatorServiceImpl">
+        <constructor-arg ref="questionService"/>
+        <constructor-arg ref="questionDao"/>
+    </bean>
+
+</beans>
