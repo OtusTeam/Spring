@@ -1,8 +1,0 @@
-logging:
-  level:
-    root: ERROR
-
-
-spring:
-  main:
-    allow-circular-references: true

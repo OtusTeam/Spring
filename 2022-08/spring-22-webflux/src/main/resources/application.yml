@@ -1,4 +1,0 @@
-spring:
-  mongodb:
-    embedded:
-      version: "3.5.5"

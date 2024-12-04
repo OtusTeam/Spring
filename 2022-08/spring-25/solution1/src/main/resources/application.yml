@@ -1,4 +1,0 @@
-logging:
-  level:
-    root: error
-    org.springframework: error

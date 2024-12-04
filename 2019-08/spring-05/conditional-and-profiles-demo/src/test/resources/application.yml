@@ -1,7 +1,0 @@
-spring:
-  shell:
-    interactive:
-      enabled: false
-logging:
-  level:
-    root: ERROR

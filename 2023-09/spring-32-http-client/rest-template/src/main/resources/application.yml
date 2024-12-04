@@ -1,8 +1,0 @@
-server:
-  port: 8081
-
-logging:
-  level:
-    org:
-      springframework:
-        web: debug

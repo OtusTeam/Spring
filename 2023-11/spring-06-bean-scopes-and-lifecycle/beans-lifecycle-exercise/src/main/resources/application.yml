@@ -1,7 +1,0 @@
-logging:
-  level:
-    root: ERROR
-
-lifecycle:
-  print:
-    enabled: true

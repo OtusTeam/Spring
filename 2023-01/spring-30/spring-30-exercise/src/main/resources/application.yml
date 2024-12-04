@@ -1,5 +1,0 @@
-logging:
-  level:
-    root: debug
-    sun: error
-    javax: error
