@@ -6,12 +6,13 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+import ru.otus.spring.BaseContainerTest;
 import ru.otus.spring.domain.Person;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-class PersonRepositoryTest {
+class PersonRepositoryTest extends BaseContainerTest {
 
     @Autowired
     private PersonRepository repository;

@@ -6,9 +6,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import ru.otus.spring.BaseContainerTest;
 
 @SpringBootTest
-class PersonControllerTest {
+class PersonControllerTest extends BaseContainerTest {
 
     @Autowired
     private RouterFunction<ServerResponse> route;
