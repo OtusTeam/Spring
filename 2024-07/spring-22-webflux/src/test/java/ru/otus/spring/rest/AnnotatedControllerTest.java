@@ -18,7 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
 class AnnotatedControllerTest extends BaseContainerTest {
 
     @Autowired
