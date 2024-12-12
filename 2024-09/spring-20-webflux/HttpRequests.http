@@ -1,0 +1,47 @@
+###
+GET http://localhost:8080/flux/one
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/flux/ten
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/stream
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/person
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET curl
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/func/person?name=Lermontov
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/func/person?age=22
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/func/person/1
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
