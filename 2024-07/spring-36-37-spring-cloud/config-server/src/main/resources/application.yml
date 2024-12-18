@@ -8,8 +8,8 @@ spring:
     config:
       server:
         git:
-          uri: "git@github.com:petrelevich/jvm-digging.git"
-          search-paths: "spring-cloud/git-config"
+          uri: "git@github.com:OtusTeam/Spring.git"
+          search-paths: "2024-07/spring-36-37-spring-cloud/git-config"
           ignoreLocalSshSettings: false
           strictHostKeyChecking: false
 management:
