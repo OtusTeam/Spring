@@ -52,4 +52,9 @@ app:
   input-file: entries.csv
   output-file: output.dat
 
-#debug: true
+logging:
+  level:
+    root: ERROR
+    Batch: INFO
+    ru.otus.example.springbatch: INFO
+
