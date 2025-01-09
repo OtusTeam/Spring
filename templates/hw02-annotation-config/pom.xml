@@ -13,7 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>6.1.6</spring.version>
+        <spring.version>6.2.1</spring.version>
         <opencsv.version>5.9</opencsv.version>
         <junit.version>5.10.2</junit.version>
         <mockito.version>5.10.0</mockito.version>
