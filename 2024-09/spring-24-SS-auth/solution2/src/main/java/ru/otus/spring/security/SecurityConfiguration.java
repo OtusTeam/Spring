@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests( ( authorize ) -> authorize
                         .antMatchers( "/public", "/" ).permitAll()
                         .antMatchers( "/authenticated", "/success" ).authenticated()
-                        .antMatchers( "/manager" ).hasAnyRole( "MANAGER" )
+                        .antMatchers( "/manager" ).authenticated()
                         .antMatchers( "/user" ).hasAnyRole( "ADMIN", "USER" )
                         .anyRequest().denyAll()
                 )

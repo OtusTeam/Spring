@@ -14,6 +14,7 @@ import org.springframework.security.acls.model.Sid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.model.NoticeMessage;
 import ru.otus.spring.repository.NoticeMessageRepository;
 
@@ -32,6 +33,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
+    //@Transactional
     public NoticeMessage create(NoticeMessage message) {
         NoticeMessage savedMessage = repository.save(message);
         aclServiceWrapperService.createPermission(savedMessage, BasePermission.READ);

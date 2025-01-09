@@ -20,7 +20,7 @@ public class AnonimusUD implements UserDetails {
 
     @Override
     public String getUsername() {
-        return "anonymous";
+        return "Vasya";
     }
 
     @Override

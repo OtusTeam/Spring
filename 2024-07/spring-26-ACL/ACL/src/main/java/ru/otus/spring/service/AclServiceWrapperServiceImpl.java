@@ -28,7 +28,7 @@ public class AclServiceWrapperServiceImpl implements AclServiceWrapperService {
 
         MutableAcl acl = mutableAclService.createAcl(oid);
         acl.insertAce(acl.getEntries().size(), permission, owner, true);
-        //acl.insertAce(acl.getEntries().size(), permission, admin, true);
+        acl.insertAce(acl.getEntries().size(), permission, admin, true);
         mutableAclService.updateAcl(acl);
     }
 }
