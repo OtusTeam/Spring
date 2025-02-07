@@ -3,7 +3,7 @@ package ru.otus.spring.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.domain.Person;
 import ru.otus.spring.dto.PersonDto;
@@ -27,7 +27,7 @@ class PersonControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
+    @MockitoBean
     private PersonRepository personRepository;
 
     private List<Person> persons = List.of(new Person(1L, "Vasya", List.of()),
