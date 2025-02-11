@@ -1,1 +1,2 @@
-INSERT INTO persons (name) VALUES ('Pushkin'), ('Lermontov')
+INSERT INTO persons (name) VALUES ('Pushkin'), ('Lermontov');
+select * from persons;
