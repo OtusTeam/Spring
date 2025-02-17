@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: service-order
+    instance_id: i0
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        initial-interval: 5000
+        max-attempts: 10
+        max-interval: 5000
+        multiplier: 1.2
+  config:
+    import: optional:configserver:http://localhost:8888
+  codec:
+    max-in-memory-size: 10MB
+
+eureka:
+  client:
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:9999/eureka/
+  instance:
+    instance-id: service-order:${spring.application.instance_id:0}
+    lease-renewal-interval-in-seconds: 30
+    metadataMap:
+      zone: zone1
+

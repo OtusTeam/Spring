@@ -1,0 +1,38 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: "git@github.com:OtusTeam/Spring.git"
+          search-paths: "2024-09/spring-34-35-spring-cloud/git-config"
+          ignoreLocalSshSettings: false
+          strictHostKeyChecking: false
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+    health:
+      enabled: true
+      probes:
+        enabled: true
+    refresh:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus
+          - health
+          - metrics
+          - refresh
+    enabled-by-default: false

@@ -1,0 +1,28 @@
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+    health:
+      enabled: true
+      probes:
+        enabled: true
+    refresh:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus
+          - health
+          - metrics
+          - refresh
+    enabled-by-default: false
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
