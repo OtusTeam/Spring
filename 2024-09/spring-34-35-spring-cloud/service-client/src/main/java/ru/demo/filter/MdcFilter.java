@@ -20,7 +20,7 @@ public class MdcFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         var xRequestId = request.getHeader(HEADER_X_REQUEST_ID);
-        log.info("xRequestId:{}", xRequestId);
+        log.debug("xRequestId:{}", xRequestId);
         if (xRequestId != null) {
             MDC.put(MDC_REQUEST_ID, xRequestId);
         }
@@ -29,10 +29,10 @@ public class MdcFilter extends OncePerRequestFilter {
         while (headerIterator.hasNext()) {
             headers.add(headerIterator.next());
         }
-        log.info("request headers:{}", headers);
+        log.debug("request headers:{}", headers);
         response.addHeader(HEADER_X_REQUEST_ID, xRequestId);
         filterChain.doFilter(request, response);
         MDC.remove(MDC_REQUEST_ID);
-        log.info("response headers:{}", response.getHeaderNames());
+        log.debug("response headers:{}", response.getHeaderNames());
     }
 }
