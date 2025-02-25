@@ -32,6 +32,7 @@ public class TokenController {
                 .expiresAt(now.plusSeconds(expiry))
                 .subject(authentication.getName())
                 .claim("scope", scope)
+                .claim("claimTest", "123")
                 .build();
         // @formatter:on
         return this.encoder.encode( JwtEncoderParameters.from(claims)).getTokenValue();

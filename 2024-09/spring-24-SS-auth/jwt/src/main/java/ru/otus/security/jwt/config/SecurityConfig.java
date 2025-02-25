@@ -46,7 +46,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .csrf( AbstractHttpConfigurer::disable )
-                .httpBasic( Customizer.withDefaults() )
+                //.httpBasic( Customizer.withDefaults() )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement( ( session ) -> session.sessionCreationPolicy( SessionCreationPolicy.STATELESS ) )
                 .exceptionHandling( ( exceptions ) -> exceptions

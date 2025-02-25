@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                 .withDefaultPasswordEncoder().username( "user" ).password( "password" ).roles( "USER" )
                 .build() );
         users.add( User
-                .withDefaultPasswordEncoder().username( "manager" ).password( "password" ).roles( "MANAGER", "USER" )
+                .withDefaultPasswordEncoder().username( "manager" ).password( "password" ).roles( "MANAGER" )
                 .build() );
         return new InMemoryUserDetailsManager( users );
 
