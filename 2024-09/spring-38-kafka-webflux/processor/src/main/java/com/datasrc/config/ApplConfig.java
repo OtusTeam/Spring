@@ -25,7 +25,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
-import reactor.util.annotation.Nullable;
 
 @Configuration
 @SuppressWarnings("java:S2095")

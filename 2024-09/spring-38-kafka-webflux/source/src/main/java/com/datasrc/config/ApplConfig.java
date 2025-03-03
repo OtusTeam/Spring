@@ -1,7 +1,7 @@
 package com.datasrc.config;
 
 import io.netty.channel.nio.NioEventLoopGroup;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,7 +43,7 @@ public class ApplConfig {
     }
 
     @Bean(name= "blockingExecutor", destroyMethod = "close")
-    public Executor blockingExecutor() {
+    public ExecutorService blockingExecutor() {
         var id = new AtomicLong(0);
         return Executors.newFixedThreadPool(BLOCKING_THREAD_POOL_SIZE,
                 task -> new Thread(task, String.format("blocking-thread-%d", id.incrementAndGet())));
