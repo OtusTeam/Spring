@@ -19,7 +19,7 @@
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<spring.shell.version>3.2.1</spring.shell.version>
+		<spring.shell.version>3.4.0</spring.shell.version>
 		<snakeyaml.version>2.0</snakeyaml.version>
 	</properties>
 
