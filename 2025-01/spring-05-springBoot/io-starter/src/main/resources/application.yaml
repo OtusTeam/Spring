@@ -1,4 +1,4 @@
 otus:
   custom:
-    io-enabled: false
+    io-enabled: true
     locale: en-US
