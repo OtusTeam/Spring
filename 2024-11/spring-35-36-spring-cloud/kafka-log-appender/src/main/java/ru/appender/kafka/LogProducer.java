@@ -38,8 +38,7 @@ public class LogProducer {
 
         kafkaProducer = new KafkaProducer<>(props);
 
-        var shutdownHook = new Thread(this::close);
-        Runtime.getRuntime().addShutdownHook(shutdownHook);
+        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
     }
 
     public void send(String value, Consumer<String> errorCallback) {

@@ -18,7 +18,7 @@ public class ErrorHandler implements ErrorWebExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(ErrorHandler.class);
 
     @Override
-    public Mono<Void> handle(@NonNull ServerWebExchange serverWebExchange, @NonNull Throwable thr) {
+    public @NonNull Mono<Void> handle(@NonNull ServerWebExchange serverWebExchange, @NonNull Throwable thr) {
         var bufferFactory = serverWebExchange.getResponse().bufferFactory();
         var response = serverWebExchange.getResponse();
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
