@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: api-gateway
+
+
+server:
+  port: 7777
+
+application:
+  api-routes:
+    - id: "service-client"
+      from: "client"
+      to: "lb://SERVICE-CLIENT"
+    - id: "service-order"
+      from: "order"
+      to: "lb://SERVICE-ORDER"
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9999/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 30
+    metadataMap:
+      zone: zone1
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+    health:
+      enabled: true
+      probes:
+        enabled: true
+    refresh:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus
+          - health
+          - metrics
+          - refresh
+    enabled-by-default: false

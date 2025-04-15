@@ -1,0 +1,11 @@
+# JVM (Micrometer) Grafana dashboard: 4701
+global:
+  scrape_interval:     10s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: service-client
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:8081']
