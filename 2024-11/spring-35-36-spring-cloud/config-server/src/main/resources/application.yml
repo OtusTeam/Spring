@@ -9,7 +9,7 @@ spring:
       server:
         git:
           uri: "git@github.com:OtusTeam/Spring.git"
-          search-paths: "2024-11/spring-34-35-spring-cloud/git-config"
+          search-paths: "2024-11/spring-35-36-spring-cloud/git-config"
           ignoreLocalSshSettings: false
           strictHostKeyChecking: false
 management:
