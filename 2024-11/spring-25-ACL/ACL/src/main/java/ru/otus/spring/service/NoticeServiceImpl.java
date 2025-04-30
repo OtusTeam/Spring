@@ -33,6 +33,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
+    @Transactional
     public NoticeMessage create(NoticeMessage message) {
         NoticeMessage savedMessage = repository.save(message);
         aclServiceWrapperService.createPermission(savedMessage, BasePermission.READ);
