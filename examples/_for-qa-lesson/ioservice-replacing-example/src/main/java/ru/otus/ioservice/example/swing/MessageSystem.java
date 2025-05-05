@@ -1,39 +1,45 @@
 package ru.otus.ioservice.example.swing;
 
-import lombok.SneakyThrows;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 @ConditionalOnBean(SwingIOService.class)
 @Service
 public class MessageSystem {
-    private final LinkedBlockingQueue<String> inputQueue;
-    private final LinkedBlockingQueue<String> outputQueue;
+    private final BlockingQueue<String> inputQueue;
+    private final BlockingQueue<String> outputQueue;
 
     public MessageSystem() {
         inputQueue = new LinkedBlockingQueue<>();
         outputQueue = new LinkedBlockingQueue<>();
     }
 
-    @SneakyThrows
     public void putToInputQueue(String message) {
-        inputQueue.put(message);
+        //noinspection ResultOfMethodCallIgnored
+        inputQueue.offer(message);
     }
 
-    @SneakyThrows
     public void putToOutputQueue(String message) {
-        outputQueue.put(message);
+        //noinspection ResultOfMethodCallIgnored
+        outputQueue.offer(message);
     }
 
-    @SneakyThrows
     public String takeFromInputQueue() {
-        return inputQueue.take();
+        return takeFromQueue(inputQueue);
     }
 
-    @SneakyThrows
     public String takeFromOutputQueue() {
-        return outputQueue.take();
+        return takeFromQueue(outputQueue);
+    }
+
+    private String takeFromQueue(BlockingQueue<String> queue) {
+        try {
+            return queue.take();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

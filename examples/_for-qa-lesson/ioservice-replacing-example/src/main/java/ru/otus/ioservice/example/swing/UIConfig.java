@@ -1,5 +1,6 @@
 package ru.otus.ioservice.example.swing;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,7 @@ import ru.otus.ioservice.example.poll.PollService;
 
 import java.awt.*;
 
+@Slf4j
 @ConditionalOnProperty(name = "use.console", havingValue = "false")
 @Configuration
 public class UIConfig {
@@ -20,7 +22,7 @@ public class UIConfig {
                     PollMainForm mainForm = new PollMainForm(ms);
                     mainForm.init();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error("Error during main form initialization", e);
                 }
             });
             pollService.poll();

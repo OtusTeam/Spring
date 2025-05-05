@@ -19,7 +19,6 @@ class CommonHwTest {
 
     private static final String CONFIGURATION_ANNOTATION_NAME = "org.springframework.context.annotation.Configuration";
 
-    @DisplayName("")
     @Test
     void shouldNotContainConfigurationAnnotationAboveItSelf() {
         assertThat(AppProperties.class.isAnnotationPresent(Configuration.class))
