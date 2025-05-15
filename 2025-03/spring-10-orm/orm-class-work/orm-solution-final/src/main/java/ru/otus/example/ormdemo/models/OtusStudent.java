@@ -47,7 +47,7 @@ public class OtusStudent {
     // Указывает на связь между таблицами "многие ко многим"
     @ManyToMany(fetch = FetchType.LAZY /*, cascade = CascadeType.PERSIST*/)
     // Задает таблицу связей между таблицами для хранения родительской и связанной сущностью
-    @JoinTable(name = "student_courses", joinColumns = @JoinColumn(name = "student_id"),
+    @JoinTable(name = "students_courses", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
 }
