@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    # Эти свойства будут перегружены свойствами в docker-compose.yml
+    url: jdbc:postgresql://localhost:5432/db
+    username: postgres
+    password: postgres
+  jpa:
+    generate-ddl: true
