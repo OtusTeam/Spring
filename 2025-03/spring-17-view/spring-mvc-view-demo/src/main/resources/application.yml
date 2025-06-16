@@ -1,0 +1,23 @@
+spring:
+  messages:
+    encoding: UTF-8
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
+
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+logging:
+  level:
+    ROOT: ERROR
+    ru.otus.spring.controller: DEBUG
