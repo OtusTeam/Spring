@@ -26,3 +26,11 @@ management:
     tags:
       application: ${spring.application.name}
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9999/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 30
+    metadataMap:
+      zone: zone1

@@ -1,2 +1,8 @@
 server:
   port: 8082
+
+eureka:
+  client:
+    fetchRegistry: false
+  instance:
+    instance-id: service-order:${spring.application.instance_id:0}
