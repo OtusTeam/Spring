@@ -6,8 +6,8 @@ services:
     environment:
       - cluster.name=opensearch-cluster # Name the cluster
       - node.name=opensearch-node1 # Name the node that will run in this container
-      - discovery.seed_hosts=opensearch-node1,opensearch-node2 # Nodes to look for when discovering the cluster
-      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2 # Nodes eligibile to serve as cluster manager
+      - discovery.seed_hosts=opensearch-node1 # Nodes to look for when discovering the cluster
+      - cluster.initial_cluster_manager_nodes=opensearch-node1 # Nodes eligibile to serve as cluster manager
       - bootstrap.memory_lock=true # Disable JVM heap memory swapping
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
@@ -26,29 +26,6 @@ services:
       - 9600:9600 # Performance Analyzer
     networks:
       - opensearch-net # All of the containers will join the same Docker bridge network
-  opensearch-node2:
-    image: opensearchproject/opensearch:2.18.0
-    container_name: opensearch-node2
-    environment:
-      - cluster.name=opensearch-cluster # Name the cluster
-      - node.name=opensearch-node2 # Name the node that will run in this container
-      - discovery.seed_hosts=opensearch-node1,opensearch-node2 # Nodes to look for when discovering the cluster
-      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2 # Nodes eligibile to serve as cluster manager
-      - bootstrap.memory_lock=true # Disable JVM heap memory swapping
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
-      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
-      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
-    ulimits:
-      memlock:
-        soft: -1 # Set memlock to unlimited (no soft or hard limit)
-        hard: -1
-      nofile:
-        soft: 65536 # Maximum number of open files for the opensearch user - set to at least 65536
-        hard: 65536
-    volumes:
-      - opensearch-data2:/usr/share/opensearch/data # Creates volume called opensearch-data2 and mounts it to the container
-    networks:
-      - opensearch-net # All of the containers will join the same Docker bridge network
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.18.0
     container_name: opensearch-dashboards
@@ -63,7 +40,6 @@ services:
       - opensearch-net
 
 #logstash
-
   logstash:
     image: opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.2
     container_name: logstash
@@ -105,6 +81,8 @@ services:
     network_mode: "host"
     environment:
       DYNAMIC_CONFIG_ENABLED: 'true'
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: localhost:9092
 
   zipkin:
     container_name: zipkin
@@ -113,31 +91,8 @@ services:
     expose:
       - "9411"
 
-  prometheus:
-    image: bitnami/prometheus:3.0.1
-    container_name: prometheus
-    network_mode: "host"
-    expose:
-      - "9090"
-    volumes:
-      - type: bind
-        source: ./prometheus.yml
-        target: /etc/prometheus/prometheus.yml
-
-  grafana:
-    image: grafana/grafana-enterprise:11.4.0
-    container_name: grafana
-    network_mode: "host"
-    expose:
-      - "3000"
-    environment:
-      GF_SECURITY_ADMIN_USER: "grafana"
-      GF_SECURITY_ADMIN_PASSWORD: "grafana"
-
-
 volumes:
   opensearch-data1:
-  opensearch-data2:
 
 networks:
   opensearch-net:

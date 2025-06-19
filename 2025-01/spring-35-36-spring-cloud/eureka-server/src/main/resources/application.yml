@@ -1,42 +1,17 @@
 spring:
   application:
     name: eureka-server
-server:
-  port: 9999
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        initial-interval: 5000
+        max-attempts: 10
+        max-interval: 5000
+        multiplier: 1.2
+  config:
+    import: optional:configserver:http://localhost:8888
+  codec:
+    max-in-memory-size: 10MB
 
-eureka:
-  server:
-    renewal-percent-threshold: 0.5
-  instance:
-    hostname: localhost
-    lease-expiration-duration-in-seconds: 90
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
-management:
-  tracing:
-    sampling:
-      probability: 1.0
-  endpoint:
-    prometheus:
-      enabled: true
-    metrics:
-      enabled: true
-    health:
-      enabled: true
-      probes:
-        enabled: true
-    refresh:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include:
-          - prometheus
-          - health
-          - metrics
-          - refresh
-    enabled-by-default: false

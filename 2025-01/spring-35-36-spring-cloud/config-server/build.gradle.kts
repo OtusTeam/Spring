@@ -1,3 +1,7 @@
+plugins {
+    id("com.google.cloud.tools.jib")
+}
+
 dependencies {
     implementation(project(":kafka-log-appender"))
     implementation("net.logstash.logback:logstash-logback-encoder")
@@ -9,4 +13,25 @@ dependencies {
 
     implementation("io.micrometer:micrometer-tracing-bridge-otel") // bridges the Micrometer Observation API to OpenTelemetry.
     implementation("io.opentelemetry:opentelemetry-exporter-zipkin") // reports traces to Zipkin.
+}
+
+jib {
+    container {
+        creationTime.set("USE_CURRENT_TIMESTAMP")
+    }
+    from {
+        image = "bellsoft/liberica-openjdk-alpine-musl:21.0.1"
+    }
+
+    to {
+        image = "localrun/config-server"
+        tags = setOf(project.version.toString())
+    }
+}
+
+tasks {
+    build {
+        dependsOn(spotlessApply)
+        dependsOn(jibBuildTar)
+    }
 }
