@@ -4,6 +4,7 @@ package ru.otus.io;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
@@ -18,6 +19,7 @@ import ru.otus.io.services.LocalizationServiceImpl;
 import ru.otus.io.services.StreamsIOService;
 
 @ConditionalOnProperty(value = "otus.custom.io-enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnClass(MessageSource.class)
 @Configuration
 public class IOAutoconfiguration {
 
