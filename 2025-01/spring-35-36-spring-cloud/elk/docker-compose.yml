@@ -8,7 +8,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: "512M"
+          memory: "1024M"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:6.2.0
