@@ -6,6 +6,7 @@
     <property name="charset" value="UTF-8"/>
     <module name="TreeWalker">
         <module name="AbstractClassName"/>
+        <module name="TypeName"/>
         <module name="AvoidStarImport"/>
         <module name="CatchParameterName"/>
         <module name="ClassTypeParameterName"/>
