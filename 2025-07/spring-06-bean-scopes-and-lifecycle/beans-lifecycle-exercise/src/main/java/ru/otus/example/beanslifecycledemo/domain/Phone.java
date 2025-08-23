@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 public class Phone {
 	private final String greeting = "Погнали к родителям";
 
-	private final PhoneNumber favoriteNumber;
+	private PhoneNumber favoriteNumber;
 
 	public void callFavoriteNumber() {
 		System.out.println(favoriteNumber.getOwnerName() + " " + greeting);
