@@ -1,0 +1,10 @@
+management:
+  server:
+    port: 8090
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
