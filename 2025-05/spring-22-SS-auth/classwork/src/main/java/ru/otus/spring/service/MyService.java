@@ -6,12 +6,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MyService {
+
     @PreAuthorize("hasRole('ROLE_USER') && {new java.util.Random().nextInt()%2 == 0}")
     public String onlyUser() {
         return "My love";
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public void onlyAdmin() {
     }
 }

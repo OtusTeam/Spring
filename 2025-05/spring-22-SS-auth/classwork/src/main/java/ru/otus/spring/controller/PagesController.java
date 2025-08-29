@@ -1,5 +1,6 @@
 package ru.otus.spring.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -37,10 +38,10 @@ public class PagesController {
     }
 
     @GetMapping("/admin")
-    //@Secured( "ADMIN" )
+    @Secured("ROLE_ADMIN")
     public String adminPage() {
-        myService.onlyUser();
-        //myService.onlyAdmin();
+        //myService.onlyUser();
+        myService.onlyAdmin();
         return "admin";
     }
 
