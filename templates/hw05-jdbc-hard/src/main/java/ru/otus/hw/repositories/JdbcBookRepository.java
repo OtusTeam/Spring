@@ -29,8 +29,8 @@ public class JdbcBookRepository implements BookRepository {
     @Override
     public List<Book> findAll() {
         var genres = genreRepository.findAll();
-        var relations = getAllGenreRelations();
         var books = getAllBooksWithoutGenres();
+        var relations = getAllGenreRelations();
         mergeBooksInfo(books, genres, relations);
         return books;
     }
