@@ -28,6 +28,7 @@ class ImportUserJobTest {
 
     private static final String TEST_INPUT_FILE_NAME = "test-entries.csv";
     private static final String EXPECTED_OUTPUT_FILE_NAME = "expected-test-output.dat";
+    private static final String EXPECTED_MONGO_OUTPUT_FILE_NAME = "expected-mongo-test-output.dat";
     private static final String TEST_OUTPUT_FILE_NAME = "test-output.dat";
 
     @Autowired
