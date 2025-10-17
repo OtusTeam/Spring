@@ -58,6 +58,7 @@ public class ApplicationConfig {
 
     @Bean
     public NewTopic topic() {
+        // Создание топика с указанным количеством партиций и реплик
         return TopicBuilder.name(topicName).partitions(1).replicas(1).build();
     }
 

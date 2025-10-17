@@ -9,4 +9,5 @@ spring:
       group-id: "test-group"
       bootstrap-servers: "localhost:9092"
       client-id: "demo-consumer"
+      # auto-offset-reset - стратегия чтения при отсутствии сохраненного offset: earliest (с начала), latest (с конца)
       auto-offset-reset: earliest

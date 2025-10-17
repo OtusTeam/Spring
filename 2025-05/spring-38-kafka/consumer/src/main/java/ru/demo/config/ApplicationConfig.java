@@ -50,7 +50,9 @@ public class ApplicationConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         props.put(TYPE_MAPPINGS, "ru.demo.model.StringValue:ru.demo.model.StringValue");
+        // Максимальное количество записей, возвращаемых за один вызов poll()
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 3);
+        // Максимальный интервал в миллисекундах между вызовами poll() (после превышения consumer считается неактивным)
         props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 3_000);
 
         var kafkaConsumerFactory = new DefaultKafkaConsumerFactory<String, StringValue>(props);
@@ -65,7 +67,9 @@ public class ApplicationConfig {
         factory.setConsumerFactory(consumerFactory);
         factory.setBatchListener(true);
         factory.setConcurrency(1);
+        // Время в миллисекундах между вызовами poll() к Kafka брокеру
         factory.getContainerProperties().setIdleBetweenPolls(1_000);
+        // Таймаут в миллисекундах для операции poll() (время ожидания новых сообщений)
         factory.getContainerProperties().setPollTimeout(1_000);
 
         var executor = new SimpleAsyncTaskExecutor("k-consumer-");
