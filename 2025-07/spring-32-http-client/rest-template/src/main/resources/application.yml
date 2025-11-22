@@ -1,0 +1,19 @@
+spring.main.web-application-type: none
+
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          countrylayer:
+            url: http://api.countrylayer.com/v2
+
+client:
+  url: http://api.countrylayer.com/v2
+  key: [ !!!Your key!!! ]
+
+logging:
+  level:
+    org:
+      springframework:
+        web: debug
