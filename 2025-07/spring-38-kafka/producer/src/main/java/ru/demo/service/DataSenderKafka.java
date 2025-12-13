@@ -28,7 +28,8 @@ public class DataSenderKafka implements DataSender {
     public void send(StringValue value) {
         try {
             log.info("value:{}", value);
-            template.send(topic, value)
+            var key = String.valueOf(value.id());
+            template.send(topic, key, value)
                     .whenComplete(
                             (result, ex) -> {
                                 if (ex == null) {
