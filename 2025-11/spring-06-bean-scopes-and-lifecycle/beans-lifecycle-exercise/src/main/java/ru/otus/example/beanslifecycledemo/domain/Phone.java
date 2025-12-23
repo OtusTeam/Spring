@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 @ConditionalOnProperty(name = "lifecycle.print.enabled", havingValue = "false")
 @RequiredArgsConstructor
 public class Phone {
-	private final String greeting = "Погнали к родителям";
+	private String greeting = "Погнали к родителям";
 
-	private PhoneNumber favoriteNumber;
+	private final PhoneNumber favoriteNumber;
 
 	public void callFavoriteNumber() {
 		System.out.println(favoriteNumber.getOwnerName() + " " + greeting);
