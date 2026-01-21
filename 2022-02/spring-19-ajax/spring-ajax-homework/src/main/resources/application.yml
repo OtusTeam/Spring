@@ -1,0 +1,25 @@
+spring:
+  mvc:
+    static-path-pattern: /public/**
+  banner:
+    location: classpath:banner.txt
+
+  messages:
+    encoding: UTF-8
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+logging:
+  level:
+    ROOT: ERROR
