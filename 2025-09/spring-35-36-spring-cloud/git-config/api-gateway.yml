@@ -1,0 +1,16 @@
+server:
+  port: 7777
+
+application:
+  api-routes:
+    - id: "service-client"
+      from: "client"
+      to: "lb://SERVICE-CLIENT"
+    - id: "service-order"
+      from: "order"
+      to: "lb://SERVICE-ORDER"
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
