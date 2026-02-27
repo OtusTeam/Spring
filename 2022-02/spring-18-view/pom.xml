@@ -17,5 +17,6 @@
         <module>spring-mvc-view-solution2</module>
         <module>spring-mvc-view-solution3</module>
         <module>spring-mvc-view-solution4</module>
+        <module>spring-mvc-view-homework</module>
     </modules>
 </project>
