@@ -1,2 +1,2 @@
-insert into persons (id, ` name `)
+insert into persons (id, name)
 values (1, 'Ivan');
