@@ -1,0 +1,34 @@
+###
+GET http://localhost:8080/hi?name=Ivan
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+POST http://localhost:8080/response/Ivan
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+{
+  "param1": "pa1",
+  "param2": "pa2"
+}
+
+###
+GET http://localhost:8090/actuator/health
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8090/actuator/health/liveness
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+###
+GET http://localhost:8090/actuator/health/readiness
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
