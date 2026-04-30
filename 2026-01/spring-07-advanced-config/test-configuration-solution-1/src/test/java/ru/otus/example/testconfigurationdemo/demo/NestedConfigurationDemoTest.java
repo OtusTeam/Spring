@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import ru.otus.example.testconfigurationdemo.family.FamilyMember;
+import ru.otus.example.testconfigurationdemo.family.parents.Mother;
 import ru.otus.example.testconfigurationdemo.family.pets.Dog;
 
 import java.util.Map;
@@ -16,21 +17,11 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("В NestedConfigurationDemoTest семья должна ")
-@SpringBootTest
-//@SpringBootTest(classes = Dog.class)
-//@ContextConfiguration(classes = Dog.class)
+@SpringBootTest(classes = {
+        Dog.class, Mother.class
+})
 public class NestedConfigurationDemoTest {
 
-    @ComponentScan("ru.otus.example.testconfigurationdemo.family.pets")
-    @Configuration
-    static class NestedConfiguration {
-/*
-        @Bean
-        FamilyMember dog() {
-            return new Dog();
-        }
-*/
-    }
 
     @Autowired
     private Map<String, FamilyMember> family;

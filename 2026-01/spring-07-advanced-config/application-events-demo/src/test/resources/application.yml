@@ -1,6 +1,6 @@
 spring:
   shell:
     interactive:
-      enabled: false
+      enabled: true
   main:
     allow-circular-references: true

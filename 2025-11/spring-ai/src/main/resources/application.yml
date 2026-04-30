@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: agile-story-generator
+  datasource:
+    url: jdbc:postgresql://localhost:5437/agiledb?reWriteBatchedInserts=true&currentSchema=public
+    username: agile_user
+    password: agile_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        types:
+          print:
+            banner: false
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: mistral:latest
+        options:
+          temperature: 0.3
+          tool-choice: auto
+      embedding:
+        model: nomic-embed-text:latest
+
+story:
+  similarity:
+    threshold: 0.85
+
+logging:
+  level:
+    org.springframework.ai: DEBUG

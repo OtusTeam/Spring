@@ -5,12 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-//@SpringBootTest(classes = {Service1.class, Service2.class})
-//@TestPropertySource("classpath:test.properties")
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
+@TestPropertySource("classpath:test.properties")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @SpringBootTest
 class IntegrationTest1 {
 
@@ -32,6 +30,7 @@ class IntegrationTest1 {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void test2() {
         System.out.println(service1.getName() + ": " + service1.getState());
         System.out.println(service2.getName() + ": " + service2.getState());
