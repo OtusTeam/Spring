@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb
+    username: sa
+    password: password
+    pool:
+      enabled: true
+  sql:
+    init:
+      mode: always
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: TRACE

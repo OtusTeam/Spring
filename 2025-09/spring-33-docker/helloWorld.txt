@@ -1,0 +1,20 @@
+docker image ls
+docker pull hello-world
+docker image ls
+docker image rm hello-world
+docker ps
+docker run hello-world
+docker ps
+docker run hello-world
+docker ps -all
+docker run --rm hello-world
+
+docker run -it --name=ubuntu-run ubuntu bash
+docker start ubuntu-run
+docker exec -it ubuntu-run bash
+
+docker run -d -p:8080:80 --name=my-nginx nginx
+docker ps -a
+curl http://localhost:8080
+docker kill my-nginx
+docker rm my-nginx
