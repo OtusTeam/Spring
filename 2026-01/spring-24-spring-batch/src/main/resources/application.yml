@@ -53,6 +53,8 @@ app:
   output-file: output.dat
 
 logging:
+  charset:
+    console: UTF-8
   level:
     root: ERROR
     Batch: INFO
