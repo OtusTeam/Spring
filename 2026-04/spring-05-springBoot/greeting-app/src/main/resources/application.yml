@@ -1,0 +1,9 @@
+#spring:
+  #messages:
+    #basename: messages
+    #fallback-to-system-locale: false
+
+#otus:
+  #custom:
+    #io-enabled: true
+    #locale: ru-RU
