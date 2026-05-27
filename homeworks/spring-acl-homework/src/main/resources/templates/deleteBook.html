@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{delete-book-title}">Удаление книги</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        h3 {
+            background-image: url("../static/book-stack.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/book-stack.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    <script>
+        function deleteBook() {
+            var bookId = getUrlParameter('id');
+            $.ajax({
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                url: "/api/books/" + bookId,
+                success: (function () {
+                    window.location.replace("/");
+                })
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            document.getElementById('id-input').value = getUrlParameter('id');
+            document.getElementById('book-name-input').value = getUrlParameter('name');
+        }
+    </script>
+</head>
+<body>
+
+    <h3 th:text="#{book-form-header}">Книга:</h3>
+
+    <div class="row">
+        <label for="id-input">Id:</label>
+        <input id="id-input" type="text" readonly="readonly" value=""/>
+    </div>
+
+    <div class="row">
+        <label for="book-name-input" th:text="#{book-name-label}">Название книги:</label>
+        <input id="book-name-input" name="name" type="text" readonly="readonly" value=""/>
+    </div>
+
+    <div class="row">
+        <button type="submit" onclick="deleteBook()" th:text="#{delete-button-caption}">Сохранить</button>
+        <a href="/"><button type="button" th:text="#{cancel-button-caption}">Отмена</button></a>
+    </div>
+
+</body>
+</html>
