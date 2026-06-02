@@ -1,0 +1,41 @@
+package ru.otus.example.testconfigurationdemo.statefulservices;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+
+@TestPropertySource("classpath:test.properties")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@SpringBootTest
+class IntegrationTest1 {
+
+    @Autowired
+    private Service1 service1;
+
+    //@MockBean
+    //@MockitoBean
+    @Autowired
+    private Service2 service2;
+
+    @Test
+    void test1() {
+        System.out.println(service1.getName() + ": " + service1.getState());
+        System.out.println(service2.getName() + ": " + service2.getState());
+
+        service1.setState("State7");
+        service2.setState("State8");
+    }
+
+    @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+    void test2() {
+        System.out.println(service1.getName() + ": " + service1.getState());
+        System.out.println(service2.getName() + ": " + service2.getState());
+
+        service1.setState("State9");
+        service2.setState("State10");
+    }
+}

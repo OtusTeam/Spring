@@ -1,0 +1,6 @@
+spring:
+  shell:
+    interactive:
+      enabled: true
+  main:
+    allow-circular-references: true
