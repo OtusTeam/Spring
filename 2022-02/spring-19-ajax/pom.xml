@@ -13,5 +13,6 @@
     <modules>
         <module>spring-ajax-demo</module>
         <module>spring-boot-and-react-demo</module>
+        <module>spring-ajax-homework</module>
     </modules>
 </project>
