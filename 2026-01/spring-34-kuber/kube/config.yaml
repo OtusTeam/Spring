@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rest-service-config
+data:
+  JAVA_TOOL_OPTIONS: -XX:InitialRAMPercentage=80 -XX:MaxRAMPercentage=80
