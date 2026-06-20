@@ -13,5 +13,6 @@
     <modules>
         <module>spring-data-mongo-exercise</module>
         <module>spring-data-mongo-solution</module>
+        <module>spring-data-mongo-homework</module>
     </modules>
 </project>
