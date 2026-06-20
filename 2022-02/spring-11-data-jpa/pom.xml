@@ -17,5 +17,6 @@
         <module>solution-03</module>
         <module>solution-04</module>
         <module>demo</module>
+        <module>data-jpa-homework</module>
     </modules>
 </project>
