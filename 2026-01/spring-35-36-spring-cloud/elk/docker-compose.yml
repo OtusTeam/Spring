@@ -120,7 +120,7 @@ services:
       - "9411"
 
   prometheus:
-    image: bitnami/prometheus:3.0.1
+    image: soldevelo/prometheus:3.0.1
     container_name: prometheus
     network_mode: "host"
     expose:
