@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit person</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        h3 {
+            background-image: url("../static/listmark.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/listmark.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Person edition -->
+<form id="edit-form" action="edit.html" th:action="@{/edit(id=${person.id})}" th:method="post" th:object="${person}">
+    <h3 th:text = "#{person-form-header}">Person Info:</h3>
+
+    <div class="row">
+        <label for="id-input" th:text="#{person-field-id} + ':'">ID:</label>
+        <input id="id-input" type="text" readonly="readonly" name="id" th:value="*{id}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="person-name-input" th:text="#{person-field-name} + ':'">Name:</label>
+        <input id="person-name-input" name="name" type="text" th:value="*{name}" value="John Doe"/>
+        <div class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Wrong person name error</div>
+    </div>
+
+    <div class="row">
+        <label for="person-hobby-select" th:text="#{person-field-hobby} + ':'">Hobby:</label>
+        <select id="person-hobby-select" name="hobby" multiple>
+            <option value="Fishing" th:selected="*{hobby.contains('Fishing')}">Fishing</option>
+            <option value="Poetry" th:selected="*{hobby.contains('Poetry')}">Poetry</option>
+            <option value="Traveling" th:selected="*{hobby.contains('Traveling')}">Traveling</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <button type="submit" th:text="#{save-button-caption}">Save</button>
+        <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
+    </div>
+</form>
+
+</body>
+</html>
