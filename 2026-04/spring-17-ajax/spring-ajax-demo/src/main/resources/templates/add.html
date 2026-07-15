@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit person</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        h3 {
+            background-image: url("../static/listmark.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/listmark.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+    <script>
+        function savePerson() {
+            const savedPersonContainer = document.getElementById("saved-person")
+            const nameInput = document.getElementById("person-name-input")
+            const person = { name: nameInput.value}
+            fetch("api/persons", {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(person)})
+            .then(rawResponse => rawResponse.json())
+            .then(json => savedPersonContainer.innerHTML = JSON.stringify(json, null, 4))
+        }
+    </script>
+</head>
+<body>
+
+<h3>Form for new person creation:</h3>
+<form id="edit-form" action="add.html" th:method="post">
+    <div class="row">
+        <label for="person-name-input">Name:</label>
+        <input id="person-name-input" name="name" type="text" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <button type="button" onclick="savePerson()" >Save</button>
+        <a href="list.html" th:href="@{/}"><button type="button">Go Back</button></a>
+    </div>
+</form>
+
+<h3>Saved person:</h3>
+<pre id = "saved-person"></pre>
+
+</body>
+</html>
