@@ -1,0 +1,13 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+springdoc:
+  packages-to-scan: ru.otus.spring.rest
+  paths-to-match: /**
