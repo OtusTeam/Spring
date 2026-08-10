@@ -16,7 +16,7 @@ public class Main {
 
         PersonService service = context.getBean(PersonService.class);
 
-        Person ivan = service.getByName("Ivan");
+        Person ivan = service.save("Ivan");
         System.out.println("name: " + ivan.name() + " age: " + ivan.age());
     }
 }

@@ -5,4 +5,6 @@ import ru.otus.spring.domain.Person;
 public interface PersonDao {
 
     Person findByName(String name);
+
+    Person save(String name);
 }

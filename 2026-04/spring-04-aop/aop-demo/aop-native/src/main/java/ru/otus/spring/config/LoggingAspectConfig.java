@@ -27,7 +27,12 @@ public class LoggingAspectConfig {
     }
 
     MethodBeforeAdvice personDaoSimpleLoggingAspectBeforeAdvice() {
-        return (method, objects, o) -> System.out.println("Ура! Вызов метода : " + method.getName());
+        return (method, objects, o) -> {
+            System.out.println("Класс : " + o.getClass().getName());
+            System.out.println("Вызов метода : " + method.getName());
+            System.out.println("Аргументы метода : " + objects);
+
+        };
     }
 
 

@@ -17,4 +17,9 @@ public class PersonServiceImpl implements PersonService {
     public Person getByName(String name) {
         return dao.findByName(name);
     }
+
+    @Override
+    public Person save(String name) {
+        return dao.save(name);
+    }
 }
