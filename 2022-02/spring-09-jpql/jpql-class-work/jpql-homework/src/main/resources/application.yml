@@ -1,0 +1,23 @@
+spring:
+  main:
+    allow-circular-references: true
+
+  banner:
+    location: classpath:banner.txt
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+logging:
+  level:
+    ROOT: ERROR
