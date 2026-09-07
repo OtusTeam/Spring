@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{books-title}">Список книг</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books {
+            border: 1px solid steelblue;
+            width: 1100px;
+            border-collapse: collapse;
+        }
+
+        .books tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .books td:last-child {
+            width: 100px;
+        }
+
+        h3 {
+            background-image: url("../static/book-stack.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/book-stack.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+    </style>
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    <script>
+        $(function () {
+            $.get('/api/books/').done(function (books) {
+                books.forEach(function (book) {
+                    $('tbody').append(`
+                    <tr>
+                        <td>${book.id}</td>
+                        <td>${book.name}</td>
+                        <td>
+                            <div>
+                                <a href="/book/comments?id=${book.id}">Перейти к комментариям</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <a href="/book/authors?id=${book.id}">Перейти к авторам</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <a href="/book/genres?id=${book.id}">Перейти к жанрам</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <a href="/book/edit?id=${book.id}">Изменить название книги</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <a href="/book/delete?id=${book.id}&name=${book.name}">Удалить книгу</a>
+                            </div>
+                        </td>
+                    </tr>
+                `)
+                });
+            })
+        });
+    </script>
+    <script>
+        function logout() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/logout",
+                success: (function () {
+                    window.location.replace("/");
+                })
+            });
+        }
+    </script>
+</head>
+<body>
+<div><button style="float: right" type="submit" onclick="logout()">Выход</button></div>
+<div><a href="#" th:href="@{/(lang=en)}" th:text="#{en-lang-switch-button-caption}">Language - EN</a></div>
+<div><a href="#" th:href="@{/(lang=ru)}" th:text="#{ru-lang-switch-button-caption}">Language - RU</a></div>
+
+<h3 th:text="#{books-table-header}">Книги:</h3>
+<h4>
+    <a href="/book/addNew" th:text="#{add-new-book-link}">Добавить новую книгу</a>
+</h4>
+<table class="books">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th th:text="#{book-name-header}">Название</th>
+        <th th:text="#{book-comments-header}">Комментарии</th>
+        <th th:text="#{book-authors-header}">Авторы</th>
+        <th th:text="#{book-genres-header}">Жанры</th>
+        <th th:text="#{book-change-header}">Изменить</th>
+        <th th:text="#{book-delete-header}">Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</body>
+</html>
