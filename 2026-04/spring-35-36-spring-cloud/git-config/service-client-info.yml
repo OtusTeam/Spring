@@ -1,0 +1,6 @@
+server:
+  port: 8083
+
+eureka:
+  client:
+    fetchRegistry: false

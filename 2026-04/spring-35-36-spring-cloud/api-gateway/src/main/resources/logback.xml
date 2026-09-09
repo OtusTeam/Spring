@@ -1,0 +1,25 @@
+<configuration scan="true" scanPeriod="10 seconds">
+    <jmxConfigurator />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="kafka" class="ru.appender.kafka.LogAppender">
+        <bootstrapServers>localhost:9092</bootstrapServers>
+        <topicName>applLogs</topicName>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames>
+                <version>[ignore]</version>
+            </fieldNames>
+            <customFields>{"appname":"api-gateway"}</customFields>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="kafka" />
+    </root>
+</configuration>
