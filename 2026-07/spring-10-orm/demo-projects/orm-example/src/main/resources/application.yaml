@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: orm-example
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategySnakeCaseImpl
+    show-sql: true
