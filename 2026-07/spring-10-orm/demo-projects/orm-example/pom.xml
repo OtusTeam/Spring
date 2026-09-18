@@ -8,7 +8,7 @@
         <version>4.1.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.e.davidenko</groupId>
+    <groupId>ru.otus</groupId>
     <artifactId>orm-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>orm-example</name>

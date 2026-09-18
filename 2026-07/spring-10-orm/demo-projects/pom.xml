@@ -14,5 +14,6 @@
         <module>spring-jdbc-demo</module>
         <module>spring-jpa-ineritance-demo</module>
         <module>mybatis-demo</module>
+        <module>orm-example</module>
     </modules>
 </project>

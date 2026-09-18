@@ -1,8 +1,10 @@
-package com.e.davidenko.ormexample.entity;
+package ru.otus.ormexample.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.UuidGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

@@ -1,6 +1,9 @@
-package com.e.davidenko.ormexample.entity;
+package ru.otus.ormexample.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 import java.util.List;

@@ -1,13 +1,13 @@
-package com.e.davidenko.ormexample.runner;
+package ru.otus.ormexample.runner;
 
-import com.e.davidenko.ormexample.entity.EmailEntity;
-import com.e.davidenko.ormexample.entity.UserEntity;
-import com.e.davidenko.ormexample.entity.UserId;
-import com.e.davidenko.ormexample.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import ru.otus.ormexample.entity.EmailEntity;
+import ru.otus.ormexample.entity.UserEntity;
+import ru.otus.ormexample.entity.UserId;
+import ru.otus.ormexample.repository.UserRepository;
 
 import java.util.List;
 

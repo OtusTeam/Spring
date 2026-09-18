@@ -1,4 +1,4 @@
-package com.e.davidenko.ormexample;
+package ru.otus.ormexample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

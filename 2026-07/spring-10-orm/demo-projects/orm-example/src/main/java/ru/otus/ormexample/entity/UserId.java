@@ -1,4 +1,4 @@
-package com.e.davidenko.ormexample.entity;
+package ru.otus.ormexample.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

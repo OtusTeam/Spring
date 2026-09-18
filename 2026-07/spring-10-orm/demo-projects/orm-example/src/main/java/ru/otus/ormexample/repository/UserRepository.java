@@ -1,10 +1,10 @@
-package com.e.davidenko.ormexample.repository;
+package ru.otus.ormexample.repository;
 
 
-import com.e.davidenko.ormexample.entity.UserEntity;
-import com.e.davidenko.ormexample.entity.UserId;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import ru.otus.ormexample.entity.UserEntity;
+import ru.otus.ormexample.entity.UserId;
 
 import java.util.Optional;
 
