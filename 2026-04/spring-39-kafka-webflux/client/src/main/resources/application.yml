@@ -1,0 +1,10 @@
+server:
+  port: 8082
+
+application:
+  processor:
+    url: http://localhost:8081
+  kafka-bootstrap-servers: localhost:9092
+  kafka-group-id: clientConsumerGroup
+  topic-request: request
+  topic-response: response
