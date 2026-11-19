@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{book-genres-title}">Список жанров книги</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .genres {
+            border: 1px solid steelblue;
+            width: 500px;
+            border-collapse: collapse;
+        }
+
+        .genres tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .genres td:last-child, td:first-child {
+            width: 50px;
+        }
+
+        h3 {
+            background-image: url("../static/theater.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/theater.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+    </style>
+    <script src="../public/js/main.js"></script>
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $.get('/api/genres/' + getUrlParameter('id')).done(function (genres) {
+                genres.forEach(function (genre) {
+                    $('tbody').append(`
+                    <tr>
+                        <td>${genre.id}</td>
+                        <td>${genre.name}</td>
+                    </tr>
+                `)
+                });
+            })
+        });
+    </script>
+</head>
+<body>
+
+<h3 th:text="#{book-genres-table-header}">Жанры книги:</h3>
+
+<table class="genres">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th th:text="#{genre-name-table-header}">Название</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="genre : ${genres}">
+        <td th:text="${genre.id}">1</td>
+        <td th:text="${genre.name}">Фэнтези</td>
+    </tr>
+    </tbody>
+</table>
+<p/>
+<a href="/"  th:text="#{return-link}">К списку книг</a>
+</body>
+</html>
