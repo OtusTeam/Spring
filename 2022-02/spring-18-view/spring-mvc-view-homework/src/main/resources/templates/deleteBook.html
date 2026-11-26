@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{delete-book-title}">Удаление книги</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        h3 {
+            background-image: url("../static/book-stack.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/book-stack.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="delete-form" action="deleteBook.html" th:action="@{/book/delete(id=${book.id})}" th:method="post" th:object="${book}">
+    <h3 th:text="#{book-form-header}">Книга:</h3>
+
+    <div class="row">
+        <label for="id-input">Id:</label>
+        <input id="id-input" type="text" readonly="readonly" th:value="*{id}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="book-name-input" th:text="#{book-name-label}">Название книги:</label>
+        <input id="book-name-input" name="name" type="text" readonly="readonly" th:value="*{name}" value="Сильмариллион"/>
+    </div>
+
+    <div class="row">
+        <button type="submit" th:text="#{delete-button-caption}">Удалить</button>
+        <a href="books.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Отмена</button></a>
+    </div>
+</form>
+
+</body>
+</html>
